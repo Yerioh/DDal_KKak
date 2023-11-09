@@ -9,6 +9,8 @@ const Join = () => {
   const idRef = useRef(); // 아이디
   const pwRef = useRef(); // 비밀번호
   const pw2Ref = useRef(); // 비밀번호 확인
+  const nameRef = useRef() // 이름
+  const numberRef = useRef() // 휴대전화
   const spanRef = useRef(); // ?
   const span2Ref = useRef(); // ?
   const userAdd = useRef(); // 주소
@@ -27,8 +29,8 @@ const Join = () => {
   
   // 2023-11-09 17:05 임휘훈 작성
   const join_btn = () => {
-    console.log("dfsfd");
-  }
+    console.log("회원가입 axios 작성하기");
+  };
   // 임휘훈 작성 끝
 
   //중복체크 함수
@@ -111,7 +113,6 @@ const Join = () => {
             <Form.Group>
               <h2>회원가입</h2>
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formBasicId">
               <Form.Label>* ID</Form.Label>
               <Row>
@@ -120,6 +121,7 @@ const Join = () => {
                     type="text"
                     placeholder="Enter Id"
                     ref={idRef}
+                    required
                   />
                 </Col>
                 <Col md={3}>
@@ -133,14 +135,13 @@ const Join = () => {
                 </Col>
               </Row>
             </Form.Group>
-          </Form>
 
           <div className="d-grid gap mb-3">
             <span ref={spanRef}> {text}</span>
           </div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>* 이메일</Form.Label>
-            <Form.Control type="text" placeholder="Enter Email Address" />
+            <Form.Control type="text" placeholder="Enter Email Address" required />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword1">
             <Form.Label>* 비밀번호</Form.Label>
@@ -148,6 +149,7 @@ const Join = () => {
               type="password"
               placeholder="Enter Password"
               ref={pwRef}
+              required
             />
             <span ref={span2Ref}></span>
           </Form.Group>
@@ -157,19 +159,20 @@ const Join = () => {
               type="password"
               placeholder="Confirm Password"
               ref={pw2Ref}
+              required
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>* 이름</Form.Label>
-            <Form.Control type="text" placeholder="Enter Name" />
+            <Form.Control type="text" placeholder="Enter Name" required/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicNum">
             <Form.Label>* 휴대전화</Form.Label>
-            <Form.Control type="text" placeholder="Enter Phone Number" />
+            <Form.Control type="text" placeholder="Enter Phone Number" required />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicAdressNum">
             <Row>
-              <Form.Label>주소</Form.Label>
+              <Form.Label onClick={(e) => e.preventDefault()}>주소</Form.Label>
               <Col>
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
@@ -183,7 +186,7 @@ const Join = () => {
                           autoClose
                           onComplete={onCompletePost}
                           key="postcode"
-                        />
+                          />
                       </div>
                     ) : null}
                   </Modal.Body>
@@ -192,7 +195,7 @@ const Join = () => {
                       className="Button"
                       variant="secondary"
                       onClick={handleClose}
-                    >
+                      >
                       닫기
                     </Button>
                   </Modal.Footer>
@@ -216,7 +219,7 @@ const Join = () => {
                     handleShow();
                     onChangeOpenPost();
                   }}
-                />
+                  />
               </Col>
             </Row>
           </Form.Group>
@@ -230,10 +233,11 @@ const Join = () => {
               variant="outline-info"
               type="submit"
               onClick={join_btn}
-            >
+              >
               회원가입
             </Button>
           </div>
+          </Form>
         </div>
       </Container>
     </div>
