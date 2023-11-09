@@ -15,11 +15,11 @@ const Login = () => {
               <h2>딸깍</h2>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGroupEmail">
+            <Form.Group className="mb-3 email-input" controlId="formGroupEmail">
               {/* <Form.Label>Email address</Form.Label> */}
               <Form.Control type="email" placeholder="Enter email" />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formGroupPassword">
+            <Form.Group className="mb-3 email-input" controlId="formGroupPassword">
               {/* <Form.Label>Password</Form.Label> */}
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
