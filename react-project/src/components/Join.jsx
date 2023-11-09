@@ -11,8 +11,7 @@ const Join = () => {
   const pw2Ref = useRef(); // 비밀번호 확인
   const nameRef = useRef() // 이름
   const numberRef = useRef() // 휴대전화
-  const spanRef = useRef(); // ?
-  const span2Ref = useRef(); // ?
+  const spanRef = useRef(); // 중복체크 text
   const userAdd = useRef(); // 주소
   const postNum = useRef(); // 우편번호
   const addDetail = useRef(); // 상세주소
@@ -151,7 +150,6 @@ const Join = () => {
               ref={pwRef}
               required
             />
-            <span ref={span2Ref}></span>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword2">
             <Form.Label>* 비밀번호 확인</Form.Label>
