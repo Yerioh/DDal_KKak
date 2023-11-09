@@ -33,7 +33,7 @@ a{
     font-size: 14px;
     color: rgb(96, 96, 101);
 }
-.form-control{
+.email-input > .form-control{
     height: 60px;
     font-weight: bold;
 }
