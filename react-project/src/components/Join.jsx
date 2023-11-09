@@ -27,7 +27,7 @@ const Join = () => {
   const handleShow = () => setShow(true);
   const [text, setText] = useState("");
   
-  // 2023-11-09 17:05 임휘훈 작성
+  // 2023-11-09 17:36 임휘훈 작성
   const join_btn = () => {
     console.log("회원가입 axios 작성하기");
   };
