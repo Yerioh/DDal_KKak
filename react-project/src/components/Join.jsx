@@ -6,22 +6,30 @@ import DaumPostcode from "react-daum-postcode";
 import "../css/Join.css";
 
 const Join = () => {
-  const idRef = useRef();
-  const pwRef = useRef();
-  const pw2Ref = useRef();
-  const spanRef = useRef();
-  const span2Ref = useRef();
-  const userAdd = useRef();
-  const postNum = useRef();
-  const addDetail = useRef();
-  const [show, setShow] = useState(false);
+  const idRef = useRef(); // 아이디
+  const pwRef = useRef(); // 비밀번호
+  const pw2Ref = useRef(); // 비밀번호 확인
+  const spanRef = useRef(); // ?
+  const span2Ref = useRef(); // ?
+  const userAdd = useRef(); // 주소
+  const postNum = useRef(); // 우편번호
+  const addDetail = useRef(); // 상세주소
+  const [show, setShow] = useState(false); // true : 모달보임 / false : 모달 안보임
 
+  /** 모달 닫는 함수 */
   const handleClose = () => {
     setShow(false);
     addDetail.current.focus();
   };
+  /** 모달 보여지게 하는 함수 */
   const handleShow = () => setShow(true);
   const [text, setText] = useState("");
+  
+  // 2023-11-09 17:05 임휘훈 작성
+  const join_btn = () => {
+    console.log("dfsfd");
+  }
+  // 임휘훈 작성 끝
 
   //중복체크 함수
   // const checkId = () => {
@@ -64,11 +72,12 @@ const Join = () => {
     padding: "7px",
   };
 
+
   const onChangeOpenPost = () => {
     setIsOpenPost(true);
   };
 
-  //주소 API 함수 및 로직
+  /** 주소 API 함수 및 로직 */
   const onCompletePost = (data) => {
     let fullAddr = data.address;
     let extraAddr = "";
@@ -220,6 +229,7 @@ const Join = () => {
               className="Button-search"
               variant="outline-info"
               type="submit"
+              onClick={join_btn}
             >
               회원가입
             </Button>
