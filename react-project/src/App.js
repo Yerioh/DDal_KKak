@@ -1,9 +1,11 @@
-import './App.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Body from "./components/Body";
 
 function App() {
   return (
     <div>
-      HI
+     <Body/>
     </div>
   );
 }

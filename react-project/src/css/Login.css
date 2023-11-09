@@ -1,0 +1,43 @@
+.login-logo{
+    width: 20px;
+    height: 20px;
+    border-radius:90%;
+    border: none;
+    margin-right: 20px;
+}
+.login-box{
+    border : 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+}
+.list-group-item:hover{
+    background-color:rgba(200, 200, 200, 0.3);
+}
+.list-group-item{
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.login-btn:hover{
+    background-color: #3492ff;
+    border-color: #3492ff;
+}
+.text-btn:hover{
+    color: #3492ff;
+    transition: all .30s linear;
+}
+.text-btn{
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    color: rgb(96, 96, 101);
+}
+.form-control{
+    height: 60px;
+    font-weight: bold;
+}
+h2{
+    text-align: center;
+    font-weight: bold;
+}

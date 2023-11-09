@@ -1,0 +1,41 @@
+
+/* 모든 Navbar 브랜드 및 링크에 대한 일반 스타일 */
+.navbar-brand,
+.nav-link {
+  margin-right: 1rem; /* 오른쪽에 여백을 추가 */
+}
+
+/* 오른쪽에 위치할 버튼 및 이미지에 대한 스타일 */
+.navbar .navbar-nav .nav-link {
+  display: flex;
+  align-items: center; /* 버튼과 이미지를 수직 중앙 정렬 */
+}
+
+/* 버튼에 대한 스타일 */
+.navbar .navbar-nav .btn {
+  margin-right: 0.5rem; /* 버튼 사이의 여백을 추가 */
+}
+
+/* 장바구니 아이콘 이미지에 대한 스타일 */
+.basket{
+  width: 30px; /* 아이콘의 너비 */
+  height: 30px; /* 아이콘의 높이 */
+  margin-left: 0.5rem; /* 이미지와 다른 요소 사이의 여백을 추가 */
+}
+
+@media (max-width: 768px) {
+    .navbar-brand,
+    .nav-link {
+      margin-right: 0.5rem; /* 모바일에서 여백 줄임 */
+    }
+  
+    .navbar .navbar-nav .btn {
+      margin-right: 0.25rem; /* 모바일에서 버튼 사이 여백 줄임 */
+    }
+  
+    .basket {
+      width: 15px; /* 모바일에서 아이콘 크기 줄임 */
+      height: 15px; /* 모바일에서 아이콘 높이 줄임 */
+      margin-left: 0.25rem; /* 모바일에서 여백 줄임 */
+    }
+  }

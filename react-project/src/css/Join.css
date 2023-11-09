@@ -1,0 +1,13 @@
+.FormControl{
+    width: 300px;
+}
+.Button{
+    width: 130px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.Button-search{
+    width: 130px;
+    margin-left: auto;
+    margin-right: auto;
+}

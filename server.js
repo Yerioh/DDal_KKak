@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // session 사용
 app.use(session({
   httpOnly:true,
-  secret : process.env.SECRET_KEY,
+  secret : process.env.SECRET_KEY || 'SECRET_KEY',
   resave:false,
 }))
 

@@ -5,9 +5,9 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 
-// DB 연결
-const db = require("../config/database")
-let conn = db.init()
+// // DB 연결
+// const db = require("../config/database")
+// let conn = db.init()
 
 // 회원가입 라우터
 router.post("/join", (req, res)=> {
