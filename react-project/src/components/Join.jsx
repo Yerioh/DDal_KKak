@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import axios from "../axios";
 import DaumPostcode from "react-daum-postcode";
 import "../css/Join.css";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const idRef = useRef(); // 아이디
@@ -27,21 +28,38 @@ const Join = () => {
   const handleShow = () => setShow(true);
   const [text, setText] = useState("");
 
-  // 2023-11-10 12:31 임휘훈 작성
-  const join_btn = () => {
+  // 2023-11-10 16:20 임휘훈 작성
+  const navigate = useNavigate();
+  const [isCheck, setIsCheck] = useState(false);
+  /** 회원가입 버튼 */
+  const join_btn = (e) => {
     console.log("회원가입 axios 작성하기");
-    if (pwRef.current.value == pw2Ref.current.value) {
-      axios.post("/user/join", {
-        userId: idRef.current.value, // 아이디
-        userPw: pwRef.current.value, // 비밀번호
-        checkPw: pw2Ref.current.value, // 비밀번호 확인
-        userName: nameRef.current.value, // 이름
-        useremail: emailRef.current.value, // 이메일
-        phone: numberRef.current.value, // 전화번호
-        postNumber: postNum.current.value, // 우편번호
-        doro: userAdd.current.value, // 도로명주소
-        detailAddress: addDetail.current.value, // 상세주소
-      });
+    e.preventDefault();
+    if (isCheck) {
+      if (pwRef.current.value == pw2Ref.current.value) {
+        console.log("회원가입 라우터로 이동");
+        axios
+          .post("/user/join", {
+            userId: idRef.current.value, // 아이디
+            userPw: pwRef.current.value, // 비밀번호
+            checkPw: pw2Ref.current.value, // 비밀번호 확인
+            userName: nameRef.current.value, // 이름
+            useremail: emailRef.current.value, // 이메일
+            phone: numberRef.current.value, // 전화번호
+            postNumber: postNum.current.value, // 우편번호
+            doro: userAdd.current.value, // 도로명주소
+            detailAddress: addDetail.current.value, // 상세주소
+          })
+          .then((res) => {
+            let data = res.data;
+            if (data) {
+              // data == true 회원가입 성공시
+              navigate("/");
+            }
+          });
+      }
+    } else {
+      console.log("중복체크해주세요");
     }
   };
   // 임휘훈 작성 끝
@@ -63,6 +81,7 @@ const Join = () => {
             idRef.current.disabled = true;
             spanRef.current.style = "color:gray";
             setText("※ 사용 가능한 아이디 입니다.");
+            setIsCheck(true);
           } else {
             idRef.current.value = "";
             idRef.current.focus();
@@ -70,6 +89,7 @@ const Join = () => {
             setText(
               "※ 사용 불가능한 아이디 입니다. 다른 아이디를 입력해주세요."
             );
+            setIsCheck(false);
           }
         });
     } else {

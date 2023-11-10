@@ -1,5 +1,5 @@
 // user 라우터
-// 2023-11-10 13:00 임휘훈 작성
+// 2023-11-10 16:20 임휘훈 작성
 
 const express = require("express");
 const router = express.Router();
@@ -22,7 +22,7 @@ router.post("/join", (req, res) => {
   let detailAddress = req.body.detailAddress; // 상세주소 add2
   // 회원가입 쿼리문
   let joinQuery =
-    'INSERT INTO TB_USER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "M", NOW())';
+    'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
 
   // 비밀번호 확인 조건문
   if (pw == checkPw) {
@@ -33,14 +33,17 @@ router.post("/join", (req, res) => {
       [id, pw, userName, email, phone, postNumber, doro, detailAddress],
       (err, result) => {
         if (err) {
-          console.log("ID 중복");
+          console.log("회원가입 쿼리문 오류", err);
+          res.send(JSON.stringify(false));
         } else {
           console.log("회원가입 성공");
+          res.send(JSON.stringify(true));
         }
       }
     );
   } else {
     console.log("비밀번호 확인 오류");
+    res.send(JSON.stringify(false));
   }
 });
 
@@ -56,7 +59,7 @@ router.post("/checkId", (req, res) => {
     } else {
       if (result.length == 0) {
         // 아이디 조회결과 0개
-        console.log("회원가입 가능");
+        console.log("사용할 수 있는 ID");
         res.send(JSON.stringify(true));
       } else {
         console.log("이미 존재하는 ID");
