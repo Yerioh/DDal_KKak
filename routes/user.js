@@ -1,9 +1,11 @@
 // user 라우터
-// 2023-11-10 16:20 임휘훈 작성
+// 2023-11-13 09:24 임휘훈 작성
 
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const crypto = require('crypto')
+const hash = crypto.createHash('sha1')
 
 // DB 연결
 const db = require("../config/database");
@@ -21,8 +23,9 @@ router.post("/join", (req, res) => {
   let doro = req.body.doro; // 도로명 주소 add1
   let detailAddress = req.body.detailAddress; // 상세주소 add2
   // 회원가입 쿼리문
+  // SHA() : 비밀번호 암호화
   let joinQuery =
-    'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
+    'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, SHA(?), ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
 
   // 비밀번호 확인 조건문
   if (pw == checkPw) {
@@ -73,12 +76,17 @@ router.post("/checkId", (req, res) => {
 router.post("/login", (req, res) => {
   let id = req.body.userId; // 입력한 아이디
   let pw = req.body.userPw; // 입력한 비밀번호
+  const hash = crypto.createHash('sha1')
+                   .update(pw)
+                   .digest('hex');
+
+  console.log("hash", hash);
   // 로그인 쿼리문
-  let loginQuery =
-    "SELECT USER_ID, USER_PW, USER_NAME FROM TB_USER WHERE USER_ID = ?";
+  let idQuery =
+    "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME FROM TB_MEMBER WHERE MEMBER_ID = ?";
   // DB 연결
   conn.connect();
-  conn.query(loginQuery, [id], (err, result) => {
+  conn.query(idQuery, [id], (err, result) => {
     if (err) {
       console.log("로그인 쿼리문 에러");
     } else {
@@ -86,13 +94,16 @@ router.post("/login", (req, res) => {
       if (result.length == 0) {
         console.log("아이디가 존재하지 않습니다.");
       } else {
-        if (result[0].USER_ID == id && result[0].USER_PW == pw) {
-          console.log(result[0].USER_ID, "님 로그인 성공");
-
+        if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
+          console.log(result[0].MEMBER_ID, "님 로그인 성공");
+          
           // 로그인 성공 후 사용자 세션 생성
-          let userName = result[0].USER_NAME;
-          let seName = (req.session.name = userName);
-          let seLogin = (req.session.login = true);
+          let userName = result[0].MEMBER_NAME;
+          req.session.Name = userName;
+          req.session.isLogin = true;
+          
+          req.session.save() // 세션 저장
+          res.redirect('/')
         } else {
           console.log("로그인 실패");
         }

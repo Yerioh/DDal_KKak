@@ -28,12 +28,11 @@ const Join = () => {
   const handleShow = () => setShow(true);
   const [text, setText] = useState("");
 
-  // 2023-11-10 16:20 임휘훈 작성
+  // 2023-11-13 09:20 임휘훈 작성
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(false);
   /** 회원가입 버튼 */
   const join_btn = (e) => {
-    console.log("회원가입 axios 작성하기");
     e.preventDefault();
     if (isCheck) {
       if (pwRef.current.value == pw2Ref.current.value) {
@@ -59,7 +58,8 @@ const Join = () => {
           });
       }
     } else {
-      console.log("중복체크해주세요");
+      spanRef.current.style = "color:red";
+      setText("※ 중복체크 하시길바랍니다.");
     }
   };
   // 임휘훈 작성 끝

@@ -8,6 +8,7 @@ const axios = require("axios");
 const path = require("path");
 const session = require('express-session')
 
+
 // Flask 서버 라우터
 const flaskData = require("./routes/flaskData");
 // 소셜로그인 라우터
@@ -35,6 +36,7 @@ app.use(session({
   httpOnly:true,
   secret : process.env.SECRET_KEY || 'SECRET_KEY',
   resave:false,
+  saveUninitialized : true
 }))
 
 // flask 서버 라우터
