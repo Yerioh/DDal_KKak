@@ -4,10 +4,10 @@ import { Button, Card, ListGroup, Form, Container } from "react-bootstrap";
 import google from "../img/google-icon.png";
 import naver from "../img/naver-icon.jpg";
 import kakao from "../img/kakao-icon.png";
-import "../css/Login.css";
 import axios from "../axios";
-const Login = () => {
+import "../css/Login.css";
 
+const Login = () => {
   // 2023-11-13 09:22 임휘훈 작성
   const idRef = useRef()
   const pwRef = useRef()
@@ -15,19 +15,26 @@ const Login = () => {
   /** 로그인 버튼 함수 */
   const login_btn = () => {
     console.log("로그인 버튼 기능 활성화");
-    axios.post("http://localhost:3001//user/login", {
+    axios.post("/user/login", {
       userId : idRef.current.value, // 아이디
       userPw : pwRef.current.value // 비밀번호
     })
   }
-
-  const test_btn = () => {
-    console.log("테스트 버튼");
-    axios.post('http://localhost:3001//user/getuserinfo').then((res) => {
-      console.log("프론트 세션", res.data);
-    })
-  }
   // 임휘훈 작성 끝
+
+  // 카카오 로그인 클릭
+  // 23-11-13 오전 9:45 박지훈 작성
+  const kakaoLoginClick = ()=>{
+    let REST_API_KEY = process.env.REACT_APP_KAKAO_REST_KEY;  
+    let REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+    const kakaoToken = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+    window.location.href = kakaoToken
+  }
+
+  // 네이버 로그인 클릭
+  const naverLoginClick = ()=>{
+    console.log('naver')
+  }
 
   return (
     <div>
@@ -73,13 +80,13 @@ const Login = () => {
                 </ListGroup.Item>
               </ListGroup>
               <ListGroup className="login-box mb-3" variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item onClick={naverLoginClick}>
                   <img className="login-logo naver" src={naver} alt="" />
                   <span>Naver 계정으로 로그인</span>
                 </ListGroup.Item>
               </ListGroup>
               <ListGroup className="login-box mb-3" variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item onClick={kakaoLoginClick}>
                   <img className="login-logo" src={kakao} alt="" />
                   <span>Kakao 계정으로 로그인</span>
                 </ListGroup.Item>
