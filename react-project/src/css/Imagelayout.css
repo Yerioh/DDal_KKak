@@ -1,0 +1,189 @@
+/* 생성페이지 몸통 */
+.creImg_body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #b4c8bb;
+  background-color: #fcfcfc;
+  margin: 0 15%;
+   
+}
+/* 개인 버튼 커스텀  */
+.btnmy {
+  background-color: #2cbdc2;
+  color: #ffffff;
+  border-color: #2cbdc2;
+  transition: all 0.2s
+}
+.btnmy:hover {
+  background: #01939a;
+  color: black;
+}
+
+/* 프롬포트 구역 */
+.prompt_container {
+  display: flex;
+  gap: 10%;
+  padding: 5% 5% 0% 5%;
+}
+.prompt {
+    margin-bottom: 15%;
+    width: 500px;
+  }
+ 
+.Control {
+  width: 800px;
+}
+
+
+/* 가이드 키워드부분 전체 구역*/
+.guide-keyword {
+  width: 500px;
+}
+
+/* 키워드 버튼 구역  */
+.creImg_opt {
+  gap: 10%;
+  flex-direction: column;
+  border-radius: 15px;
+  width: 100vh;
+
+}
+.creImg_opt > h2{
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
+
+#creImgButton {
+  margin-top: 10%;
+  margin-left: 70%;
+  height: 90px;
+}
+
+/* 키워드 체크박스 부분 */
+.creImg_chkbox {
+  display: flex;
+  justify-content: space-evenly;
+  width:100%;
+}
+/* 체크박스 호버링 애니메이션 */
+.keyWord-button {
+  display: none;
+}
+#showKeywordCheckbox {
+  width: 20px;
+  height: 20px;
+  background: url('https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png')
+    0 -438px no-repeat;
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+.keyWord-button:checked + #showKeywordCheckbox {
+  background-position: -75px -438px;
+}
+
+/* 모달창 관련 */
+.modal-open-button,
+.modal-close-btn {
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.modal-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  width: 70%;
+  height: 80%;
+  padding: 15px;
+}
+
+.modal-img {
+  display: flex;
+}
+.modal-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-body2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 가이드 모달창 관련 */
+.guide-manual {
+  margin-top: 15%;
+  font-size: 25px;
+}
+
+.guide-button {
+  width: 120px;
+  text-align: center;
+  transition: all 0.2s;
+  font-size: 20px;
+  margin: 0 0 0 6%;
+  color: #fff;
+}
+
+/* 전체 키워드 모달창  */
+.keyWordmodal-container {
+  border: 1px solid;
+  border-radius: 15px;
+  width: 35%;
+  height: 50%;
+  position: fixed;
+  top: 9%;
+  right: 17%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.keyWordmodal-content {
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+}
+
+/* 페이지 부가옵션 구역 */
+.creImg_side {
+  margin-top: 5%;
+  margin: 0 auto;
+}
+
+/* 페이지 개수 출력 */
+.pageCountOption {
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    border-radius: 10px;
+    color: black;
+    background-color: #b4c8bb;
+    margin: 0 auto;
+    
+  }
+/* 이미지 생성버튼 */
+.creImg_gotobutton {
+    background: #2cbdc2;
+    margin-top: 2%;
+    width: 100%;
+    color: #ffffff;
+  }
+  .creImg_gotobutton:hover {
+    background-color: #01939a;
+  }
