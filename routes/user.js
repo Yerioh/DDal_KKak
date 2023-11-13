@@ -101,4 +101,16 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.post('/getUserInfo', (req,res)=>{
+  if (req.session.isLogin){
+    res.json({
+      isLogin : req.session.isLogin,
+      userName : req.session.Name,
+      // accessToken : req.session.accessToken,
+      userNumber : req.session.userNumber
+    })
+  }
+})
+
+
 module.exports = router;

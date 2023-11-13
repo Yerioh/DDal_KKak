@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const axios = require("axios");
 const path = require("path");
 const session = require('express-session')
+// env 사용
+require('dotenv').config()
 
 // Flask 서버 라우터
 const flaskData = require("./routes/flaskData");

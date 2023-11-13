@@ -5,7 +5,23 @@ import google from "../img/google-icon.png";
 import naver from "../img/naver-icon.jpg";
 import kakao from "../img/kakao-icon.png";
 import "../css/Login.css";
+
 const Login = () => {
+  
+  // 카카오 로그인 클릭
+  // 23-11-13 오전 9:45 박지훈 작성
+  const kakaoLoginClick = ()=>{
+    let REST_API_KEY = process.env.REACT_APP_KAKAO_REST_KEY;  
+    let REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+    const kakaoToken = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+    window.location.href = kakaoToken
+  }
+
+  // 네이버 로그인 클릭
+  const naverLoginClick = ()=>{
+    console.log('naver')
+  }
+
   return (
     <div>
       <Container className="d-flex justify-content-center align-items-center vh-100">
@@ -50,13 +66,13 @@ const Login = () => {
                 </ListGroup.Item>
               </ListGroup>
               <ListGroup className="login-box mb-3" variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item onClick={naverLoginClick}>
                   <img className="login-logo naver" src={naver} alt="" />
                   <span>Naver 계정으로 로그인</span>
                 </ListGroup.Item>
               </ListGroup>
               <ListGroup className="login-box mb-3" variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item onClick={kakaoLoginClick}>
                   <img className="login-logo" src={kakao} alt="" />
                   <span>Kakao 계정으로 로그인</span>
                 </ListGroup.Item>
