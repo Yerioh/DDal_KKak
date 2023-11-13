@@ -94,12 +94,36 @@ router.get('/googleLogin', (req,res)=>{
     "grant_type" : 'authorization_code'
   }
 })
-.then(res=>{
-  let accessToken = res.data.access_token
-  console.log(accessToken)
-  axios.get(`https://www.googleapis.com/drive/v2/files?access_token=${accessToken}`)
-  .then(res=>{
-    console.log(res.data)
+.then(response=>{
+  let accessToken = response.data.access_token
+  // https://developers.google.com/oauthplayground/ 참고
+  axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
+  .then(response=>{
+    let data = response.data
+    let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA(?)`
+    let joinSQL = `INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_LOGIN_TYPE, JOINED_AT, MEMBER_NAME) VALUES (?, SHA(?), ?,?, DATE_ADD(NOW(), INTERVAL 9 HOUR), ?);`
+    conn.connect()
+    conn.query(selectSQL, [data.sub, data.sub], (err,result)=>{
+      if(err){
+        console.log('구글 로그인 select 에러', err)
+      }
+      else{
+        if(result[0].CNT == 0){
+          conn.query(joinSQL, [data.sub, data.sub, data.email, 'G', data.name], (err,result)=>{
+            if(err){
+              console.log('구글 회원가입 에러', err)
+            }
+            else{
+              console.log('구글 회원가입 성공')
+            }
+          })
+        }
+        else{
+          console.log('이미 가입되어있는 계정 : 바로 로그인')
+        }
+      }      
+    })
+    res.redirect('/')
   })
 })
 })
@@ -149,7 +173,6 @@ router.get('/naverLogin',(req,res)=>{
       })
       .then(response=>{
         let data = response.data.response
-        console.log(data)
         let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA(?)`
         let joinSQL = `INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_LOGIN_TYPE, JOINED_AT, MEMBER_NAME) VALUES (?, SHA(?),?,?,?,DATE_ADD(NOW(), INTERVAL 9 HOUR),?);`
         conn.connect()

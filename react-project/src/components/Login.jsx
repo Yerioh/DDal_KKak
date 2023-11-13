@@ -42,10 +42,10 @@ const Login = () => {
   }
 
   // 구글 로그인 클릭
+  // 23-11-13 오후 17:00 박지훈 작성
   const googleLoginClick = ()=>{
     let client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID
     let redirect_uri = process.env.REACT_APP_GOOGLE_REDIRECT_URI
-    console.log(redirect_uri)
     let scope = process.env.REACT_APP_GOOGLE_SCOPE
     let api_url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&include_granted_scopes=true`
     window.location.href = api_url
