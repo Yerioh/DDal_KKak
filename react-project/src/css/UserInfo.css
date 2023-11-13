@@ -1,0 +1,27 @@
+.UserInfo {
+    width: 100%;
+    height: 100vh;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.UserInfo>h1 {
+    text-align: center;
+}
+
+.UserInfo-elementbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 600px; /* 가로 크기 설정 */
+
+}
+
+.Change-Btn{
+    width: 130px;
+    margin-left: auto;
+    margin-right: auto;
+}
