@@ -32,8 +32,23 @@ const Login = () => {
   }
 
   // 네이버 로그인 클릭
+  // 23-11-13 오후 15:30 박지훈 작성
   const naverLoginClick = ()=>{
-    console.log('naver')
+    let client_id = process.env.REACT_APP_NAVER_CLIENT_ID
+    let state = process.env.REACT_APP_NAVER_RANDOM_STATE;
+    let redirectURI = encodeURI(process.env.REACT_APP_NAVER_REDIRECT_URI);
+    const api_url = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
+    window.location.href = api_url
+  }
+
+  // 구글 로그인 클릭
+  const googleLoginClick = ()=>{
+    let client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID
+    let redirect_uri = process.env.REACT_APP_GOOGLE_REDIRECT_URI
+    console.log(redirect_uri)
+    let scope = process.env.REACT_APP_GOOGLE_SCOPE
+    let api_url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&include_granted_scopes=true`
+    window.location.href = api_url
   }
 
   return (
@@ -74,7 +89,7 @@ const Login = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <ListGroup className="login-box mb-3" variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item onClick={googleLoginClick}>
                   <img className="login-logo" src={google} alt="" />
                   <span>Google 계정으로 로그인</span>
                 </ListGroup.Item>
