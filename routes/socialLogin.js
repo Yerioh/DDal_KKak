@@ -9,6 +9,7 @@ const db = require("../config/database");
 let conn = db.init();
 
 // 카카오 로그인 RIDIRECT
+// 2023-11-13 오후 14:30 박지훈 작성
 router.get("/kakaoLogin",  async(req, res) => {
   let REST_API_KEY = process.env.KAKAO_REST_KEY;
   let REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
@@ -38,11 +39,11 @@ router.get("/kakaoLogin",  async(req, res) => {
         })
         .then((response) => {          
           let userData = response.data
-          let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ?`
+          let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA('?')`
 
           conn.connect()
           // 카카오 계정으로 회원가입 여부 쿼리문
-          conn.query(selectSQL, [userData.id], (err,result)=>{
+          conn.query(selectSQL, [userData.id, userData.id], (err,result)=>{
             if(err){
               console.log('KAKAO 로그인 SELECT 에러 발생', err)
             } else{
@@ -68,7 +69,7 @@ router.get("/kakaoLogin",  async(req, res) => {
           req.session.isLogin = true
           req.session.Name = userData.properties.nickname
           req.session.accessToken = accessToken
-          req.session.userNumber = userData.id
+          // req.session.userNumber = userData.id
           res.redirect('/')
         });
     });
@@ -76,17 +77,69 @@ router.get("/kakaoLogin",  async(req, res) => {
 
 // 구글 로그인
 router.get('/googleLogin', (req,res)=>{
-  console.log('구글')
+  let code = req.query.code
+  let clientId = process.env.GOOGLE_CLIENT_ID
+  let clientSecret = process.env.GOOGLE_SECRET
+  let redirect_uri = process.env.GOOGLE_REDIRECT_URI
+
+  axios.post('https://oauth2.googleapis.com/token', null,
+  {headers : {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  params : {
+    'code' : code,
+    'client_id' : clientId,
+    'client_secret' : clientSecret,
+    'redirect_uri' : redirect_uri,
+    "grant_type" : 'authorization_code'
+  }
+})
+.then(response=>{
+  let accessToken = response.data.access_token
+  // https://developers.google.com/oauthplayground/ 참고
+  axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
+  .then(response=>{
+    let data = response.data
+    let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA(?)`
+    let joinSQL = `INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_LOGIN_TYPE, JOINED_AT, MEMBER_NAME) VALUES (?, SHA(?), ?,?, DATE_ADD(NOW(), INTERVAL 9 HOUR), ?);`
+    conn.connect()
+    conn.query(selectSQL, [data.sub, data.sub], (err,result)=>{
+      if(err){
+        console.log('구글 로그인 select 에러', err)
+      }
+      else{
+        if(result[0].CNT == 0){
+          conn.query(joinSQL, [data.sub, data.sub, data.email, 'G', data.name], (err,result)=>{
+            if(err){
+              console.log('구글 회원가입 에러', err)
+            }
+            else{
+              console.log('구글 회원가입 성공')
+            }
+          })
+        }
+        else{
+          console.log('이미 가입되어있는 계정 : 바로 로그인')
+        }
+      }      
+    })
+    res.redirect('/')
+  })
+})
 })
 
 
 // 네이버-------------------------------------
-let client_id = 'yWWcGYFsZflbTPfJz26r';
-let client_secret = 'NLFgMYoK1N';
-let redirectURI = encodeURI("http://localhost:3001/user/naverLogin");
+
 
 // 네이버 로그인 Redirect
 router.get('/naverLogin',(req,res)=>{
+    // 네이버 환경변수
+    let client_id = process.env.NAVER_CLIENT_ID
+    let client_secret = process.env.NAVER_CLIENT_SECRET
+    let redirectURI = encodeURI(process.env.NAVER_REDIRECT_URI);
+
+    // 네이버에서 반환받은 코드
     let code = req.query.code;
     let state = req.query.state;
     let api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
@@ -110,16 +163,42 @@ router.get('/naverLogin',(req,res)=>{
         'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret
       }
     })
-    .then(res=>{
-      let acToken = res.data.access_token
-      console.log(res.data.access_token)
+    .then(response=>{
+      let acToken = response.data.access_token
+      // 엑세스 토큰으로 사용자 데이터 반환받기
       axios.post('https://openapi.naver.com/v1/nid/me', null, {
         headers : {
           'Authorization' : `Bearer ${acToken}`,
         }
       })
-      .then(res=>{
-        console.log(res.data)
+      .then(response=>{
+        let data = response.data.response
+        let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA(?)`
+        let joinSQL = `INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_LOGIN_TYPE, JOINED_AT, MEMBER_NAME) VALUES (?, SHA(?),?,?,?,DATE_ADD(NOW(), INTERVAL 9 HOUR),?);`
+        conn.connect()
+        conn.query(selectSQL, [data.id, data.id], (err,result)=>{
+          if(err){
+            console.log('Naver select 쿼리문 에러', err)
+          }
+          else{
+            if(result[0].CNT == 0){
+              conn.query(joinSQL, [data.id, data.id, data.email, data.mobile.replace(/-/g,''), 'N', data.name], (err,result)=>{
+                if(err){
+                  console.log('Naver Insert 에러', err)
+                }
+                else{
+                  console.log('Naver 회원가입 성공')
+                  res.redirect('/')
+                }
+              })
+            }
+            else{
+              console.log('이미 가입되어있는 계정 : 바로 로그인')
+              res.redirect('/')
+            }
+          }
+        })
+
       })
       
     })
