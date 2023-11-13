@@ -23,6 +23,7 @@
   margin-left: 0.5rem; /* 이미지와 다른 요소 사이의 여백을 추가 */
 }
 
+
 @media (max-width: 768px) {
     .navbar-brand,
     .nav-link {
