@@ -101,9 +101,12 @@ router.post("/login", (req, res) => {
           let userName = result[0].MEMBER_NAME;
           req.session.Name = userName;
           req.session.isLogin = true;
-          
-          req.session.save() // 세션 저장
-          res.redirect('/')
+
+          req.session.save(() => {
+            console.log("로그인 완료 후 페이지 이동");
+            res.send(JSON.stringify(true))
+          });
+
         } else {
           console.log("로그인 실패");
         }
