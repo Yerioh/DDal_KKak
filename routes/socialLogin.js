@@ -89,8 +89,8 @@ router.get('/googleLogin', (req,res)=>{
   let clientSecret = process.env.GOOGLE_SECRET
   let redirect_uri = process.env.GOOGLE_REDIRECT_URI
 
-  axios.post('https://oauth2.googleapis.com/token', null,
-  {headers : {
+  axios.post('https://oauth2.googleapis.com/token', null,{
+  headers : {
     'Content-Type': 'application/x-www-form-urlencoded'
   },
   params : {
@@ -103,14 +103,13 @@ router.get('/googleLogin', (req,res)=>{
 })
 .then(response=>{
   let accessToken = response.data.access_token
-  // https://developers.google.com/oauthplayground/ 참고
-  axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
+  axios.get(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${accessToken}`)
   .then(response=>{
     let data = response.data
     let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA(?)`
     let joinSQL = `INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_EMAIL, MEMBER_LOGIN_TYPE, JOINED_AT, MEMBER_NAME) VALUES (?, SHA(?), ?,?, DATE_ADD(NOW(), INTERVAL 9 HOUR), ?);`
     conn.connect()
-    conn.query(selectSQL, [data.sub, data.sub], (err,result)=>{
+    conn.query(selectSQL, [data.id, data.id], (err,result)=>{
       if(err){
         console.log('구글 로그인 select 에러', err)
       }
@@ -140,7 +139,7 @@ router.get('/googleLogin', (req,res)=>{
     // 로그인 타입
     req.session.loginType = 'G'
     // 사용자 아이디
-    req.session.userId = data.sub
+    req.session.userId = data.id
     res.redirect('/')
   })
 })
