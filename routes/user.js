@@ -150,6 +150,88 @@ router.post('/getUserInfo', (req,res)=>{
   }
 })
 
+// 회원 탈퇴--------------------------------------------------------------------------
+// 23-11-14 오후 16:15 박지훈 작성
+router.post('/deleteUser',(req,res)=>{
+  let accessToken = req.session.accessToken
+  let loginType = req.session.loginType
+  let userId = req.session.userId
+  let deleteUserSQL = `DELETE FROM TB_MEMBER WHERE MEMBER_ID = ?`
+  // 로그인 타입이 Google 이라면
+  if(loginType === 'G'){
+    axios.post(`https://oauth2.googleapis.com/revoke?token=${accessToken}`, null, {
+      headers : {
+        'Content-type' : 'application/x-www-form-urlencoded'
+      }
+    })
+      .then((response) => {
+        // 정상적으로 토큰이 삭제됬다면, 데이터 베이스에서 사용자 정보 삭제
+        if(response.status === 200){          
+          conn.connect()
+          conn.query(deleteUserSQL, [userId], (err,result)=>{
+            if(err){
+              console.log('구글 회원 탈퇴 쿼리문 에러',err)
+            }
+            else{
+              console.log('구글 회원 탈퇴 성공')
+              req.session.destroy()
+              res.json({deleteStatus : true})
+            }
+          })
+        }
+      });
+  }
+  // 로그인 타입이 Naver 라면
+  else if(loginType === 'N'){
+    let client_id = process.env.NAVER_CLIENT_ID
+    let client_secret = process.env.NAVER_CLIENT_SECRET
+    // 네이버 토큰 삭제 엔드포인트
+    axios.post(`https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=${client_id}&client_secret=${client_secret}&access_token=${accessToken}&service_provider=NAVER`)
+      .then(response=>{
+        // 정상적으로 토큰이 삭제 되었다면, 데이터베이스에서 사용자 정보 삭제
+        if(response.data.result === 'success'){
+          conn.connect()
+          conn.query(deleteUserSQL, [userId], (err,result)=>{
+            if(err){
+              console.log('네이버 회원 탈퇴 쿼리문 에러',err)
+            }
+            else{
+              console.log('네이버 회원 탈퇴 성공')
+              req.session.destroy()
+              res.json({deleteStatus : true})
+            }
+          })
+        }
+      })
+  }
+  // 로그인 타입이 카카오 일 때
+  else if(loginType === 'K'){
+    // 토큰 삭제 엔드포인트
+    axios.post(`https://kapi.kakao.com/v1/user/unlink`, null, {
+      headers :{
+        "Authorization": `Bearer ${accessToken}`
+      }
+    })
+    .then(response=>{
+      // 정상적으로 토큰이 삭제 되었다면, 데이터베이스에서 유저 정보 삭제
+      if(response.data.id === userId){
+        conn.connect()
+          conn.query(deleteUserSQL, [userId], (err,result)=>{
+            if(err){
+              console.log('카카오 회원 탈퇴 쿼리문 에러',err)
+            }
+            else{
+              console.log('카카오 회원 탈퇴 성공')
+              req.session.destroy()
+              res.json({deleteStatus : true})
+            }
+          })
+      }
+    })
+  }
+})
+
+
 // Session 삭제
 router.post('/Logout', (req,res)=>{
   req.session.destroy()

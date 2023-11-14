@@ -207,7 +207,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             >
               회원탈퇴
             </Button>
-            <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal} />
+            <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
           </div>
         </Form>
       </div>

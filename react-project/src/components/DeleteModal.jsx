@@ -1,19 +1,27 @@
 import React from "react";
 import axios from "../axios";
 import "../css/DeleteModal.css";
+import { useNavigate } from "react-router-dom";
+
 const DeleteModal = ({
   delete_user, // 모달창 활성화 state
   delete_Modal, // 모달창 함수
 }) => {
+
+
+// 23-11-14 오후 16:00 박지훈 작성
   //회원탈퇴함수
-  const Drop_user = () => {
-    axios.post("", {}).then((res) => {});
+  const Drop_user = (e) => {
+    e.preventDefault()
+    axios.post('/user/deleteUser')
+      .then(res=>{
+        if(res.data.deleteStatus){
+          alert('정상적으로 탈퇴 되었습니다.')
+          window.location.href='/'
+        }
+      })
   };
-    /*
-        회원탈퇴
-        delete_user => 모달창 활성화 state
-        delete_Modal = > 모달창 활성화 함수
-    */
+
   return (
     <div>
       {delete_user ? (
@@ -31,7 +39,7 @@ const DeleteModal = ({
               </div>
               <hr />
               <div className="delete-btn">
-                <button className="deleteUser-Btn" type="submit">
+                <button className="deleteUser-Btn" onClick={Drop_user}>
                   회원탈퇴
                 </button>
                 <button className="close-Btn" onClick={delete_Modal}>
