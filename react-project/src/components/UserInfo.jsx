@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
 import ImgModal from "./ImgModal";
+
 const UserInfo = ({ userName, loginType, id, email, phone }) => {
-  const pwRef = useRef(); //유저가 변경할 비밀번호
-  const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
-  const userAdd = useRef(); // 유저 주소 불러오기
-  const postNum = useRef(); // 유저 우편번호 불러오기
-  const addDetail = useRef(); // 사용자 상세주소 불러오기
+  const idRef = useRef() // 유저 아이디
   const nameRef = useRef(); // 사용자 이름
   const emailRef = useRef(); // 사용자 이메일
   const phoneRef = useRef(); // 사용자 전화번호
   const C_pwRef = useRef(); // 현재 비밀번호
+  const pwRef = useRef(); //유저가 변경할 비밀번호
+  const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
+  const postNum = useRef(); // 유저 우편번호 불러오기
+  const userAdd = useRef(); // 유저 주소 불러오기
+  const addDetail = useRef(); // 사용자 상세주소 불러오기
+
   const [show, setShow] = useState(false); //모달창 활성화 state
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
@@ -80,16 +82,24 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
     console.log(email, phone);
+    if(loginType == "M"){
+      idRef.current.value = id
+    }
+    else if(loginType == "G"){
+      idRef.current.value = "Google Account"
+    }
+    else if(loginType == "N"){
+      idRef.current.value = "Naver Account"
+    }
+    else if(loginType == "K"){
+      idRef.current.value = "Kakao Account"
+    }
+    
+    idRef.current.disabled = true;
     nameRef.current.value = userName;
     nameRef.current.disabled = true;
-    
-    // 소셜로그인마다 달라서 
-    if(email !== null){
-      emailRef.current.value = email;
-    }
-    if(phone !== phone){
-      phoneRef.current.value = phone;
-    }
+    emailRef.current.value = email;
+    phoneRef.current.value = phone;
 
   }, [email, phone]);
   // 임휘훈 작성 끝
@@ -101,7 +111,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>ID</Form.Label>
-            <Form.Control type="text" placeholder="Enter ID" />
+            <Form.Control type="text" placeholder="Enter ID" ref={idRef}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이름</Form.Label>
