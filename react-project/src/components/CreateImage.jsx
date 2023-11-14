@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import '../CSS/Imagelayout.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -43,7 +43,8 @@ const CreateImage = () => {
   const closeGuideModal = () => setguideModalOpen(false)
 
   return (
-    <div className="creImg_body">
+  // 이미지 생성페이지 전체
+    <div className="creImg_body">      
       <div className="prompt_container">
         <div className="keyword">
           <h1>
@@ -54,27 +55,25 @@ const CreateImage = () => {
           </h1>
           <Form.Label></Form.Label>
           <Form.Control
-            type="text"
-            className="prompt"
-            value={inputData}
+            type="text"    // 키워드 프롬포트 입력창
+            className="prompt" 
+            value={inputData}  // 적용되는 키워드 
             onChange={(e) => setInputData(e.target.value)}
             id='inputPrompt' // 입력 값으로 사용될 state
-            style={{'height':'60px'}}
+            style={{'height':'60px'}} // 입력창 높이
           />
           <h1>제외 키워드 입력</h1>
           <Form.Label htmlFor="inputPassword5"></Form.Label>
           <Form.Control 
-          type="text" 
-          className="prompt" 
-          id='exPrompt'
+          type="text"     // 제외되는 키워드 프롬포트 입력창
+          className="prompt"  
+          id='exceptPrompt'  // 제외되는 키워드 입력창
           style={{'height':'60px'}}/>
 
           {/* 키워드 버튼 창 */}
         </div>
         <div className="creImg_opt">
-          
-          <h2>넣고 싶은 키워드를 입력해주세요!</h2>
-          
+          <h2>넣고 싶은 키워드를 클릭해주세요!</h2>
           <Keyword
             handleCheckboxChange={handleCheckboxChange}
             onModalChange={handleKeyWordModalChange}
@@ -92,7 +91,8 @@ const CreateImage = () => {
             }}
           >
             <div className={'modal-content'}>
-              <div className={'modal-guide'}>
+              <div className={'modal-guide'}> 
+              {/* // 이미지 작성가이드 모달창 */}
                 <Button
                   variant="light"
                   style={{

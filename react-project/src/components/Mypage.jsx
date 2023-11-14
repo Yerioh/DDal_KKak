@@ -2,11 +2,20 @@ import React, { useEffect, useState } from "react";
 import "../css/Mypage.css";
 import "../css/UserInfo.css";
 import UserInfo from "./UserInfo";
-
+import { useSelector } from "react-redux";
 import SaveImage from "./SaveImage";
 
 const Mypage = () => {
+  const name = useSelector((state) => state.session.name)
+  const isLogin = useSelector((state) => state.session.isLogin)
   const [pageState, setpageState] = useState("user_info");
+
+  useEffect(() => {
+    if(isLogin){
+      console.log("mypage의 name", name);
+      console.log("mypage의 isLogin", isLogin);
+    }
+  }, [])
 
   //내 정보 컴포넌트 호출
   const user_infoPage = () => {

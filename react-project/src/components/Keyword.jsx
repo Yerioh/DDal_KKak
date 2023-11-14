@@ -15,6 +15,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
  
     <div className="creImg_chkbox">
       {/*체크박스 리스트*/ }
+
       <label>
         <input className='keyWord-button'
           type="checkbox"
@@ -25,6 +26,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
         <div id='showKeywordCheckbox'></div>
         흑백
       </label>
+
       <label>
         <input className='keyWord-button'
           type="checkbox"
@@ -35,6 +37,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
         <div id='showKeywordCheckbox'></div>
         컬러만
       </label>
+
       <label>
         <input className='keyWord-button'
           type="checkbox"
@@ -45,6 +48,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
         <div id='showKeywordCheckbox'></div>
           밝은
       </label>
+
       <label>
         <input className='keyWord-button'
           type="checkbox"
@@ -55,6 +59,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
         <div id='showKeywordCheckbox'></div>
         어두운
       </label>
+      
       <label>
         <input className='keyWord-button'
           type="checkbox"
@@ -65,6 +70,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
         <div id='showKeywordCheckbox'></div>
         즐거운
       </label>
+      
       <label>
         <input className='keyWord-button'
           type="checkbox"
