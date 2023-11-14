@@ -18,6 +18,8 @@
     height: 80%;
     padding: 20px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
   }
 
   /* 모달 Img css */
