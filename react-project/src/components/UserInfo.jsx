@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
-const UserInfo = ({userName, loginType, id}) => {
+const UserInfo = ({userName, loginType, id, email, phone}) => {
   const pwRef = useRef();  //유저가 변경할 비밀번호
   const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
   const userAdd = useRef(); // 유저 주소 불러오기
   const postNum = useRef(); // 유저 우편번호 불러오기
   const addDetail = useRef(); // 사용자 상세주소 불러오기
   const nameRef = useRef(); // 사용자 이름 
+  const emailRef = useRef() // 사용자 이메일
+  const phoneRef = useRef() // 사용자 전화번호
 
   
   const [show, setShow] = useState(false); //모달창 활성화 state
@@ -70,11 +72,16 @@ const UserInfo = ({userName, loginType, id}) => {
     
   }
 
+  // 23-11-14 14:20 임휘훈 작성
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
     nameRef.current.value = userName
     nameRef.current.disabled = true;
+    emailRef.current.value = email
+    phoneRef.current.value = phone
+    
   }, [])
+  // 임휘훈 작성 끝
 
   return (
     <div className="UserInfo">
@@ -87,11 +94,11 @@ const UserInfo = ({userName, loginType, id}) => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이메일</Form.Label>
-            <Form.Control type="text" placeholder="Enter Email" />
+            <Form.Control type="text" placeholder="Enter Email" ref={emailRef} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicNum">
             <Form.Label>휴대전화</Form.Label>
-            <Form.Control type="text" placeholder="Enter Phone Number" />
+            <Form.Control type="text" placeholder="Enter Phone Number" ref={phoneRef} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword1">
             <Form.Label>비밀번호</Form.Label>
