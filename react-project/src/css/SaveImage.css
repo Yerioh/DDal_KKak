@@ -1,6 +1,29 @@
 .saveImage{
     width: 90%;
-    height: 100vh;
     margin-top: 30px;
-    background-color: rgb(170, 96, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Save-Image{
+    width: 248px;
+    height: 335px;
+    display: flex;
+    justify-content: center;   
+}
+.Image-box{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin : 10px 0 20px 0;
+}
+
+.Save-Image > img{
+    border: solid 1px rgb(200, 200, 200);
+    border-radius: 5px;
+    width: 90%;
+    height: 80%;
+    cursor: pointer;
 }

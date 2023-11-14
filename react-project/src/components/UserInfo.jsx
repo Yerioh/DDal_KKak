@@ -2,22 +2,29 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
-const UserInfo = ({userName, loginType, id, email, phone}) => {
-  const pwRef = useRef();  //유저가 변경할 비밀번호
+import ImgModal from "./ImgModal";
+const UserInfo = ({ userName, loginType, id, email, phone }) => {
+  const pwRef = useRef(); //유저가 변경할 비밀번호
   const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
   const userAdd = useRef(); // 유저 주소 불러오기
   const postNum = useRef(); // 유저 우편번호 불러오기
   const addDetail = useRef(); // 사용자 상세주소 불러오기
-  const nameRef = useRef(); // 사용자 이름 
-  const emailRef = useRef() // 사용자 이메일
-  const phoneRef = useRef() // 사용자 전화번호
-
-  
+  const nameRef = useRef(); // 사용자 이름
+  const emailRef = useRef(); // 사용자 이메일
+  const phoneRef = useRef(); // 사용자 전화번호
+  const C_pwRef = useRef(); // 현재 비밀번호
   const [show, setShow] = useState(false); //모달창 활성화 state
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
-  const [isOpenPost, setIsOpenPost] = useState(false); 
-
+  const [isOpenPost, setIsOpenPost] = useState(false);
+  const [delete_user, setdelete_user] = useState(false); // 회원탈퇴 모달창 활성화 state
+  
+  //회원 탈퇴 모달창
+  const delete_Modal = () => {
+    // setdelete_user의 상태를 변경하는 메소드를 구현
+    // !false -> !true -> !false
+    setdelete_user(!delete_user);
+  };
   // 모달 show 함수
   const handleShow = () => setShow(true);
   // 모달 닫기 함수
@@ -68,19 +75,16 @@ const UserInfo = ({userName, loginType, id, email, phone}) => {
   console.log(address, addressDetail);
 
   /**개인정보 수정 함수*/
-  const changeUserData = () =>{
-    
-  }
+  const changeUserData = () => {};
 
   // 23-11-14 14:20 임휘훈 작성
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
-    nameRef.current.value = userName
+    nameRef.current.value = userName;
     nameRef.current.disabled = true;
-    emailRef.current.value = email
-    phoneRef.current.value = phone
-    
-  }, [])
+    emailRef.current.value = email;
+    phoneRef.current.value = phone;
+  }, []);
   // 임휘훈 작성 끝
 
   return (
@@ -89,16 +93,36 @@ const UserInfo = ({userName, loginType, id, email, phone}) => {
       <div className="UserInfo-elementbox">
         <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Label>ID</Form.Label>
+            <Form.Control type="text" placeholder="Enter ID" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이름</Form.Label>
             <Form.Control type="text" placeholder="Enter Name" ref={nameRef} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이메일</Form.Label>
-            <Form.Control type="text" placeholder="Enter Email" ref={emailRef} />
+            <Form.Control
+              type="text"
+              placeholder="Enter Email"
+              ref={emailRef}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicNum">
             <Form.Label>휴대전화</Form.Label>
-            <Form.Control type="text" placeholder="Enter Phone Number" ref={phoneRef} />
+            <Form.Control
+              type="text"
+              placeholder="Enter Phone Number"
+              ref={phoneRef}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword1">
+            <Form.Label>현재 비밀번호</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Enter Password"
+              ref={C_pwRef}    
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword1">
             <Form.Label>비밀번호</Form.Label>
@@ -107,7 +131,6 @@ const UserInfo = ({userName, loginType, id, email, phone}) => {
               placeholder="Enter Password"
               ref={pwRef}
             />
-           
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword2">
             <Form.Label>비밀번호 확인</Form.Label>
@@ -173,14 +196,18 @@ const UserInfo = ({userName, loginType, id, email, phone}) => {
           <Form.Group className="mb-3" controlId="formBasicAdressDetail">
             <Form.Control type="text" placeholder="상세주소" ref={addDetail} />
           </Form.Group>
-          <div className="d-grid gap mb-3">
-            <Button
-              className="Change-Btn"
-              variant="outline-info"
-              type="submit"
-            >
+          <div className="mb-3 userInfo-btn">
+            <Button className="Change-Btn" variant="outline-info" type="submit">
               수정완료
             </Button>
+            <Button
+              className="userDelete-btn"
+              variant="outline-danger"
+              onClick={delete_Modal}
+            >
+              회원탈퇴
+            </Button>
+            <ImgModal delete_user={delete_user} delete_Modal={delete_Modal} />
           </div>
         </Form>
       </div>

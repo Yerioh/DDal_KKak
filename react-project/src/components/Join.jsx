@@ -146,7 +146,7 @@ const Join = () => {
   console.log(address, addressDetail);
   return (
     <div>
-      <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Container className="d-flex justify-content-center align-items-center join-container">
         <div style={{ width: "500px" }}>
           <Form>
             <Form.Group>
