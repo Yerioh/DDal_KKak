@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
-import ImgModal from "./ImgModal";
+import DeleteModal from "./DeleteModal";
 const UserInfo = ({ userName, loginType, id, email, phone }) => {
   const pwRef = useRef(); //유저가 변경할 비밀번호
   const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
@@ -18,7 +18,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [delete_user, setdelete_user] = useState(false); // 회원탈퇴 모달창 활성화 state
-  
+
   //회원 탈퇴 모달창
   const delete_Modal = () => {
     // setdelete_user의 상태를 변경하는 메소드를 구현
@@ -207,7 +207,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             >
               회원탈퇴
             </Button>
-            <ImgModal delete_user={delete_user} delete_Modal={delete_Modal} />
+            <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal} />
           </div>
         </Form>
       </div>

@@ -12,13 +12,7 @@ const SaveImage = () => {
     // !false -> !true -> !false
     setIsOpen(!isOpen);
   };
-  const testImgUrl = [
-    "img/test1.png",
-    "img/test2.png",
-    "img/test3.png",
-    "img/test4.png",
-    "img/test5.png",
-  ];
+  const testImgUrl = [""];
 
   // 내 저장 이미지 불러오기 함수
   const CallImg = () => {
