@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
-const UserInfo = () => {
+const UserInfo = ({userName, loginType, id}) => {
   const pwRef = useRef();  //유저가 변경할 비밀번호
   const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
   const userAdd = useRef(); // 유저 주소 불러오기
   const postNum = useRef(); // 유저 우편번호 불러오기
   const addDetail = useRef(); // 사용자 상세주소 불러오기
+  const nameRef = useRef(); // 사용자 이름 
 
   
   const [show, setShow] = useState(false); //모달창 활성화 state
@@ -64,10 +65,17 @@ const UserInfo = () => {
   };
   console.log(address, addressDetail);
 
-  // 개인정보 수정 함수
+  /**개인정보 수정 함수*/
   const changeUserData = () =>{
     
   }
+
+  /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
+  useEffect(() => {
+    nameRef.current.value = userName
+    nameRef.current.disabled = true;
+  }, [])
+
   return (
     <div className="UserInfo">
       <h1>내 정보 수정</h1>
@@ -75,7 +83,7 @@ const UserInfo = () => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이름</Form.Label>
-            <Form.Control type="text" placeholder="Enter Name" />
+            <Form.Control type="text" placeholder="Enter Name" ref={nameRef} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이메일</Form.Label>
