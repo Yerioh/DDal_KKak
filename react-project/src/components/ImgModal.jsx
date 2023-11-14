@@ -48,7 +48,6 @@ const ImgModal = ({
           </div>
         </div>
       ) : null}
-      
     </div>
   );
 };

@@ -26,7 +26,7 @@ const DeleteModal = ({
     <div>
       {delete_user ? (
         <div>
-          <div className="modal-backdrop" onClick={delete_Modal}>
+          <div className="modal-backdrop" onClick={delete_Modal}> 
             <div className="delete-Modal" onClick={(e) => e.stopPropagation()}>
               <div>
                 <h3>회원탈퇴</h3>

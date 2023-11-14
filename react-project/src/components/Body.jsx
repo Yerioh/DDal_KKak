@@ -28,8 +28,8 @@ const Body = () => {
       <Routes>
         <Route path="/join" element={<Join />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/mypage" element={<PrivateRouteMypage />}></Route>
-        <Route path="/image-create" element={<PrivateRouteCreateImage />} />
+        <Route path="/mypage" element={<Mypage />}></Route>
+        <Route path="/image-create" element={<CreateImage />} />
         </Routes>
       <Footer />
     </div>
