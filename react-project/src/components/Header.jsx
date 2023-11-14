@@ -1,23 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import basket from "../img/basket.png";
+import axios from "../axios";
 import "../css/Header.css";
 
 import { Link } from "react-router-dom";
 const Header = () => {
-  // 임시 Header 변경 조건 State
-  const [testHeader, settestHeader] = useState(true);
+  // 23-11-14 10:20 임휘훈 작성 useEffect, session, redux
+  const name = useSelector((state) => state.session.name) // redux에 저장된 회원 이름
+  const isLogin = useSelector((state) => state.session.isLogin) // redux에 저장된 로그인 유무
+  const [changeHeader, setChangeHeader] = useState(false)
+  const [userName, setUserName] = useState(null)
 
-  //임시 Header 변경 함수
-  const THeader = () => {
-    settestHeader(!testHeader);
-  };
+  useEffect(() => {
+    console.log("헤더 유즈이펙트", isLogin, name);
+  if(name !== null){
+    console.log("로그인 됐으니 헤더를 바꿔라");
+    console.log("dasfdafs", isLogin, name);
+    setChangeHeader(isLogin)
+    setUserName(name)
+  }
+  }, [name])
+
+  const logoutClick = () => {
+    axios.post("/user/Logout")
+    .then((res) => {
+      setChangeHeader(res.data.isLogin)
+      window.location.href = "/"
+    })
+  }
 
   return (
     <div>
       <Navbar bg="light" expand="lg" className="justify-content-between">
         <Container>
-          <Navbar.Brand href="#" className="navbar-brand" onClick={THeader}>
+          <Navbar.Brand href="/" className="navbar-brand">
             딸깍
           </Navbar.Brand>
           <Nav className="me-auto">
@@ -29,7 +47,7 @@ const Header = () => {
             </Link>
           </Nav>
 
-          {testHeader ? (
+          {!changeHeader ? (
             // testHeader가 true일 때 표시할 요소들
             <Nav>
               <Link className="nav-link" to="login">
@@ -43,9 +61,9 @@ const Header = () => {
             // testHeader가 false일 때 표시할 요소들
             <Nav>
               <Link className="nav-link" to="mypage">
-                <span>마이 페이지</span>
+                <span>{userName} 님</span>
               </Link>
-              <Link className="nav-link" to="login">
+              <Link className="nav-link" onClick={logoutClick}>
                 <span>로그아웃</span>
               </Link>
               <Link className="nav-link" to="#">

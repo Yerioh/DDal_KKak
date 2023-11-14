@@ -6,14 +6,19 @@ import { useSelector } from "react-redux";
 import SaveImage from "./SaveImage";
 
 const Mypage = () => {
-  const name = useSelector((state) => state.session.name)
-  const isLogin = useSelector((state) => state.session.isLogin)
+  // 231114 10:05 임휘훈 작성
+  const name = useSelector((state) => state.session.name) // redux에 저장된 회원 이름
+  const isLogin = useSelector((state) => state.session.isLogin) // redux에 저장된 로그인 유무
+  const loginType = useSelector((state) => state.session.loginType) // redux에 저장된 로그인 타입
+  const id = useSelector((state) => state.session.id) // redux에 저장된 회원 아이디
+  
   const [pageState, setpageState] = useState("user_info");
 
   useEffect(() => {
     if(isLogin){
       console.log("mypage의 name", name);
       console.log("mypage의 isLogin", isLogin);
+      console.log("mypage의 loginType", loginType);
     }
   }, [])
 

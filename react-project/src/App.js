@@ -19,6 +19,8 @@ function App() {
         console.log(res.data)
         if (res.data.isLogin){ // 세션에 저장된 isLogin이 true일 때 => 로그인 했을 때
           dispatch(SessionReducerActions.sessionName(res.data.userName)) // 세션에 저장된 회원 이름으로 변경
+          dispatch(SessionReducerActions.sessionLoginType(res.data.loginType)) // 세션에 저장된 로그인타입으로 변경
+          dispatch(SessionReducerActions.sessionID(res.data.userId)) // 세션에 저장된 로그인타입으로 변경
           dispatch(SessionReducerActions.login()) // 로그인 
         }
       })

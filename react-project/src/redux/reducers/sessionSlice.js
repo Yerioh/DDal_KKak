@@ -4,10 +4,10 @@ import { createSlice } from "@reduxjs/toolkit"
 export const sessionSlice = createSlice({
     name : "session",
     initialState : {
-        name : "",
+        name : null,
         isLogin : false,
-        loginType : "",
-        id : ""
+        loginType : null,
+        id : null
     },
     reducers : {
         login : (state) => { // 로그인 함

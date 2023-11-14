@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../CSS/Imagelayout.css'
+import '../css/Imagelayout.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Sample from '../img/guideSample_dog.jpeg'
