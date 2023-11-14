@@ -13,6 +13,7 @@ const Mypage = () => {
   useEffect(() => {
     if(isLogin){
       console.log("mypage의 name", name);
+      console.log("mypage의 isLogin", isLogin);
     }
   }, [])
 
