@@ -12,8 +12,9 @@ const Mypage = () => {
   const isLogin = useSelector((state) => state.session.isLogin) // redux에 저장된 로그인 유무
   const loginType = useSelector((state) => state.session.loginType) // redux에 저장된 로그인 타입
   const id = useSelector((state) => state.session.id) // redux에 저장된 회원 아이디
-  const [email, setEmail] = useState()
-  const [phone, setPhone] = useState()
+
+  const [email, setEmail] = useState(null)
+  const [phone, setPhone] = useState(null)
 
   const [pageState, setpageState] = useState("user_info");
 
@@ -21,9 +22,13 @@ const Mypage = () => {
     if(isLogin){
       axios.post("/user/mypage", {userID : id})
       .then((res) => {
-        console.log("마이페이지 DB에서 온 유저 정보", res.data);
-        setEmail(res.data.member_email) // DB에서 가져온 Email을 state에 저장
-        setPhone(res.data.member_phone) // DB에서 가져온 전화번호를 state에 저장
+        console.log("마이페이지 DB에서 온 유저 정보", res.data.member_email, res.data.member_phone);
+        if (res.data.member_email !== '0'){
+          setEmail(res.data.member_email) // DB에서 가져온 Email을 state에 저장
+        }
+        if (res.data.member_phone !== '0') {
+          setPhone(res.data.member_phone) // DB에서 가져온 전화번호를 state에 저장
+        }
       })
     }
   }, [])
