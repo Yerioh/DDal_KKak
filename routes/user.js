@@ -112,15 +112,23 @@ router.post("/login", (req, res) => {
   });
 });
 
+// 페이지 로딩 시 Session 값 요청
 router.post('/getUserInfo', (req,res)=>{
   if (req.session.isLogin){
     res.json({
       isLogin : req.session.isLogin,
       userName : req.session.Name,
+      userId : req.session.userId,
+      loginType : req.session.loginType,
       // accessToken : req.session.accessToken,
-      userNumber : req.session.userNumber
     })
   }
+})
+
+// Session 삭제
+router.post('/Logout', (req,res)=>{
+  req.session.destroy()
+  res.json({isLogin : false})
 })
 
 

@@ -65,15 +65,22 @@ router.get("/kakaoLogin",  async(req, res) => {
             }
           })          
           // 사용자 정보 세션 저장          
-          console.log(userData)
+          // 로그인 유무
           req.session.isLogin = true
+          // 사용자 이름
           req.session.Name = userData.properties.nickname
+          // 엑세스 토큰
           req.session.accessToken = accessToken
-          // req.session.userNumber = userData.id
+          // 로그인 타입
+          req.session.loginType = 'K'
+          // 사용자 아이디
+          req.session.userId = userData.id
           res.redirect('/')
         });
     });
 });
+
+// 구글 ---------------------------------------------------------------
 
 // 구글 로그인
 router.get('/googleLogin', (req,res)=>{
@@ -123,6 +130,17 @@ router.get('/googleLogin', (req,res)=>{
         }
       }      
     })
+    console.log(data)
+    // 로그인 유무
+    req.session.isLogin = true
+    // 사용자 이름
+    req.session.Name = data.name
+    // 엑세스 토큰
+    req.session.accessToken = accessToken
+    // 로그인 타입
+    req.session.loginType = 'G'
+    // 사용자 아이디
+    req.session.userId = data.sub
     res.redirect('/')
   })
 })
@@ -164,11 +182,11 @@ router.get('/naverLogin',(req,res)=>{
       }
     })
     .then(response=>{
-      let acToken = response.data.access_token
+      let accessToken = response.data.access_token
       // 엑세스 토큰으로 사용자 데이터 반환받기
       axios.post('https://openapi.naver.com/v1/nid/me', null, {
         headers : {
-          'Authorization' : `Bearer ${acToken}`,
+          'Authorization' : `Bearer ${accessToken}`,
         }
       })
       .then(response=>{
@@ -188,27 +206,33 @@ router.get('/naverLogin',(req,res)=>{
                 }
                 else{
                   console.log('Naver 회원가입 성공')
-                  res.redirect('/')
                 }
               })
             }
             else{
               console.log('이미 가입되어있는 계정 : 바로 로그인')
-              res.redirect('/')
+              
             }
           }
         })
-
+        console.log(data)
+        // 로그인 유무
+        req.session.isLogin = true
+        // 사용자 이름
+        req.session.Name = data.name
+        // 엑세스 토큰
+        req.session.accessToken = accessToken
+        // 로그인 타입
+        req.session.loginType = 'N'
+        // 사용자 아이디
+        req.session.userId = data.id
+        res.redirect('/')
       })
       
     })
 })
 
 
-router.post('/Logout', (req,res)=>{
-  req.session.destroy()
-  res.json({isLogin : false})
-})
 
 
 
