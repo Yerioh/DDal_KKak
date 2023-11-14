@@ -165,7 +165,7 @@ router.post('/deleteUser',(req,res)=>{
       }
     })
       .then((response) => {
-        // 정상적으로 토큰이 삭제됬다면, 데이터 베이스에서 사용자 정보 삭제
+        // 정상적으로 토큰이 삭제 되었다면, 데이터베이스에서 사용자 정보 삭제
         if(response.status === 200){          
           conn.connect()
           conn.query(deleteUserSQL, [userId], (err,result)=>{
@@ -213,7 +213,7 @@ router.post('/deleteUser',(req,res)=>{
       }
     })
     .then(response=>{
-      // 정상적으로 토큰이 삭제 되었다면, 데이터베이스에서 유저 정보 삭제
+      // 정상적으로 토큰이 삭제 되었다면, 데이터베이스에서 사용자 정보 삭제
       if(response.data.id === userId){
         conn.connect()
           conn.query(deleteUserSQL, [userId], (err,result)=>{
