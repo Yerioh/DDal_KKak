@@ -41,7 +41,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
     display: "block",
     position: "relative",
     top: "0%",
-    width: "400px",
+    width: "450px",
     height: "400px",
     padding: "7px",
   };
@@ -161,32 +161,35 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             <Row>
               <Form.Label>주소</Form.Label>
               <Col>
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>주소</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {isOpenPost ? (
-                      <div>
-                        <DaumPostcode
-                          style={postCodeStyle}
-                          autoClose
-                          onComplete={onCompletePost}
-                          key="postcode"
-                        />
-                      </div>
-                    ) : null}
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button
-                      className="Button"
-                      variant="secondary"
-                      onClick={handleClose}
-                    >
-                      닫기
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
+              <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>주소</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {isOpenPost ? (
+                        <div
+                          className="Add-api"
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <DaumPostcode
+                            style={postCodeStyle}
+                            autoClose
+                            onComplete={onCompletePost}
+                            key="postcode"
+                          />
+                        </div>
+                      ) : null}
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button
+                        className="Button"
+                        variant="secondary"
+                        onClick={handleClose}
+                      >
+                        닫기
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 <Form.Control
                   type="text"
                   placeholder="우편번호"

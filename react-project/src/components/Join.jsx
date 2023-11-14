@@ -109,7 +109,7 @@ const Join = () => {
     display: "block",
     position: "relative",
     top: "0%",
-    width: "400px",
+    width: "450px",
     height: "400px",
     padding: "7px",
   };
@@ -146,7 +146,7 @@ const Join = () => {
   console.log(address, addressDetail);
   return (
     <div>
-      <Container className="d-flex justify-content-center align-items-center join-container">
+      <Container className="d-flex justify-content-center align-items-center ">
         <div style={{ width: "500px" }}>
           <Form>
             <Form.Group>
@@ -235,7 +235,10 @@ const Join = () => {
                     </Modal.Header>
                     <Modal.Body>
                       {isOpenPost ? (
-                        <div>
+                        <div
+                          className="Add-api"
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
                           <DaumPostcode
                             style={postCodeStyle}
                             autoClose

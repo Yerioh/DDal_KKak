@@ -20,18 +20,18 @@ const SaveImage = () => {
   };
 
   return (
-    <div className="saveImage">
+    <div className="SaveImage">
       <h1>내 저장 이미지</h1>
-      <div className="Image-box">
+      <div className="S-Ibox">
         {testImgUrl.map((image, index) => (
-          <div className="Save-Image" key={index} onClick={openModalHandler}>
+          <div className="SImage-Card" key={index} onClick={openModalHandler}>
             <img className="img-thumb" src={image} alt={`Image ${index}`} />
             
           </div>
         ))}
         
         {testImgUrl.map((image, index) => (
-          <div className="Save-Image" key={index} onClick={openModalHandler}>
+          <div className="SImage-Card" key={index} onClick={openModalHandler}>
             <img className="img-thumb" src={image} alt={`Image ${index}`} />
           </div>
         ))}

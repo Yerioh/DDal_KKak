@@ -90,7 +90,7 @@ const CreateImage = () => {
               }
             }}
           >
-            <div className={'modal-content'}>
+            <div className={'guideModal'}>
               <div className={'modal-guide'}> 
               {/* // 이미지 작성가이드 모달창 */}
                 <Button

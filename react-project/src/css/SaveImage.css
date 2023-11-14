@@ -1,4 +1,4 @@
-.saveImage{
+.SaveImage{
     width: 90%;
     margin-top: 30px;
     display: flex;
@@ -6,13 +6,13 @@
     align-items: center;
 }
 
-.Save-Image{
+.SImage-Card{
     width: 248px;
     height: 335px;
     display: flex;
     justify-content: center;   
 }
-.Image-box{
+.S-Ibox{
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -20,7 +20,7 @@
     margin : 10px 0 20px 0;
 }
 
-.Save-Image > img{
+.SImage-Card > img{
     border: solid 1px rgb(200, 200, 200);
     border-radius: 5px;
     width: 90%;

@@ -23,8 +23,8 @@ const ImgModal = ({
       {isOpen ? (
         <div className="modal-backdrop" onClick={openModalHandler}>
           {/* 버블링 중지 함수 */}
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="Modal-Img">
+          <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
+            <div className="S-ImgPic">
               <img src={Eximage[0]} alt="Ex_image" />
             </div>
             <hr />
