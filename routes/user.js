@@ -115,6 +115,9 @@ router.post("/login", (req, res) => {
   });
 });
 
+
+// 23-11-14 오전 10:00 박지훈 작성
+
 // 페이지 로딩 시 Session 값 요청
 router.post('/getUserInfo', (req,res)=>{
   if (req.session.isLogin){
