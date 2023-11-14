@@ -7,12 +7,13 @@ import "../css/Header.css";
 
 import { Link } from "react-router-dom";
 const Header = () => {
-  // 23-11-14 10:20 임휘훈 작성 useEffect, session, redux
+  // 23-11-14 10:20 임휘훈 작성 useEffect, session, redux, Private Route
   const name = useSelector((state) => state.session.name) // redux에 저장된 회원 이름
   const isLogin = useSelector((state) => state.session.isLogin) // redux에 저장된 로그인 유무
   const [changeHeader, setChangeHeader] = useState(false)
   const [userName, setUserName] = useState(null)
 
+  // 로그인 됐을 때 헤더 변경
   useEffect(() => {
   if(name !== null){
     setChangeHeader(isLogin)
@@ -20,6 +21,7 @@ const Header = () => {
   }
   }, [name])
 
+  /** 로그아웃 함수 */
   const logoutClick = () => {
     axios.post("/user/Logout")
     .then((res) => {

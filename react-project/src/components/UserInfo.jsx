@@ -1,3 +1,4 @@
+// 내 정보 수정 페이지
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
@@ -94,12 +95,11 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
     else if(loginType == "K"){
       idRef.current.value = "Kakao Account"
     }
-    
-    idRef.current.disabled = true;
-    nameRef.current.value = userName;
-    nameRef.current.disabled = true;
-    emailRef.current.value = email;
-    phoneRef.current.value = phone;
+    idRef.current.disabled = true; // 입력란 비활성화
+    nameRef.current.value = userName; // 이름
+    nameRef.current.disabled = true; // 입력란 비활성화
+    emailRef.current.value = email; // 이메일
+    phoneRef.current.value = phone; // 전화번호
 
   }, [email, phone]);
   // 임휘훈 작성 끝

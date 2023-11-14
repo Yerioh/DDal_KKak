@@ -1,4 +1,4 @@
-// user 라우터
+// user 정보 라우터
 // 2023-11-14 12:45 임휘훈 작성
 
 const express = require("express");
@@ -80,7 +80,6 @@ router.post("/login", (req, res) => {
                    .update(pw)
                    .digest('hex');
 
-  console.log("hash", hash);
   // 로그인 쿼리문
   let idQuery =
     "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_LOGIN_TYPE FROM TB_MEMBER WHERE MEMBER_ID = ?";
@@ -126,9 +125,8 @@ router.post("/mypage", (req, res) => {
   // DB 연결
   conn.connect();
   conn.query(idQuery, [id], (err, result) => {
-    let userEmail = result[0].MEMBER_EMAIL
-    let userPhone = result[0].MEMBER_PHONE
-    console.log("보낼 거",userEmail, userPhone);
+    let userEmail = result[0].MEMBER_EMAIL // DB에 저장된 회원 이메일
+    let userPhone = result[0].MEMBER_PHONE // DB에 저장된 회원 전화번호
     res.json({member_email : userEmail,
               member_phone : userPhone})
   })
