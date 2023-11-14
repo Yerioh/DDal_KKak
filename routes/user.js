@@ -120,7 +120,6 @@ router.post("/login", (req, res) => {
 // 내 정보 수정란에 필요한 사용자 정보 가져오는 라우터
 router.post("/mypage", (req, res) => {
   let id = req.body.userID
-  console.log("마이페이지 라우터 활성화", id);
   // 고유한 아이디로 사용자 정보 가져오기
   let idQuery =
   "SELECT MEMBER_EMAIL, MEMBER_PHONE FROM TB_MEMBER WHERE MEMBER_ID = ?";
@@ -129,6 +128,7 @@ router.post("/mypage", (req, res) => {
   conn.query(idQuery, [id], (err, result) => {
     let userEmail = result[0].MEMBER_EMAIL
     let userPhone = result[0].MEMBER_PHONE
+    console.log("보낼 거",userEmail, userPhone);
     res.json({member_email : userEmail,
               member_phone : userPhone})
   })

@@ -72,7 +72,6 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
     userAdd.current.value = fullAddr; // 주소 입력창
     userAdd.current.disabled = true;
   };
-  console.log(address, addressDetail);
 
   /**개인정보 수정 함수*/
   const changeUserData = () => {};
@@ -80,11 +79,19 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   // 23-11-14 14:20 임휘훈 작성
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
+    console.log(email, phone);
     nameRef.current.value = userName;
     nameRef.current.disabled = true;
-    emailRef.current.value = email;
-    phoneRef.current.value = phone;
-  }, []);
+    
+    // 소셜로그인마다 달라서 
+    if(email !== null){
+      emailRef.current.value = email;
+    }
+    if(phone !== phone){
+      phoneRef.current.value = phone;
+    }
+
+  }, [email, phone]);
   // 임휘훈 작성 끝
 
   return (
