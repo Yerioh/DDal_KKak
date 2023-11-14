@@ -8,7 +8,7 @@ import axios from "../axios";
 import "../css/Login.css";
 
 const Login = () => {
-  // 2023-11-13 09:22 임휘훈 작성
+  // 2023-11-14 09:25 임휘훈 작성
   const idRef = useRef()
   const pwRef = useRef()
 
