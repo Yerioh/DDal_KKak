@@ -7,6 +7,8 @@ import Arrow from '../img/rightArrow.png'
 import ImageCreateButton from './PageSizeButton'
 import PageCountButton from './PageCountButton'
 import Keyword from './Keyword'
+import { Link } from 'react-router-dom'
+
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
@@ -156,7 +158,9 @@ const CreateImage = () => {
         </div>
       </div>
       <div>
+      <Link to='/image-edit'>
         <button className="creImg_gotobutton btn">이미지 만들러가기!</button>{' '}
+        </Link>
       </div>
     </div>
   )

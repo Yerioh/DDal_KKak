@@ -1,0 +1,19 @@
+.displayKeyword{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputarea{
+    width: 30%;
+    height: 100px;
+    border:1px solid black;
+    border-radius: 5px;
+    margin : 1% 35%;
+}
+.exceptarea{
+    width:30%;
+    height: 50px;
+    border:1px solid black;
+    border-radius: 5px;
+    margin : 1% 35%;}
+

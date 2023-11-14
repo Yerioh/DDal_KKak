@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Header";
 import CreateImage from './CreateImage'
+import EditImage from "./EditImage";
 
 const Body = () => {
   // // 23-11-14 16:21 임휘훈 작성 Private Route
@@ -30,6 +31,7 @@ const Body = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/mypage" element={<Mypage />}></Route>
         <Route path="/image-create" element={<CreateImage />} />
+        <Route path="/image-edit" element = {<EditImage/>}/>
         </Routes>
       <Footer />
     </div>
