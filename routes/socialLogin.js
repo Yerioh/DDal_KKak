@@ -139,7 +139,7 @@ router.get('/googleLogin', (req,res)=>{
     // 로그인 타입
     req.session.loginType = 'G'
     // 사용자 아이디
-    req.session.userId = data.sub
+    req.session.userId = data.id
     res.redirect('/')
   })
 })
