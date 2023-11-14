@@ -9,7 +9,7 @@ import Header from "./Header";
 import CreateImage from './CreateImage'
 
 const Body = () => {
-  // 23-11-14 16:20 임휘훈 작성 Private Route
+  // 23-11-14 16:21 임휘훈 작성 Private Route
   const isLogin = useSelector((state) => state.session.isLogin) // redux에 저장된 로그인 유무
 
   /** mypage의 PrivateRoute 함수 */
