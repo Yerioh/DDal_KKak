@@ -14,10 +14,7 @@ const Header = () => {
   const [userName, setUserName] = useState(null)
 
   useEffect(() => {
-    console.log("헤더 유즈이펙트", isLogin, name);
   if(name !== null){
-    console.log("로그인 됐으니 헤더를 바꿔라");
-    console.log("dasfdafs", isLogin, name);
     setChangeHeader(isLogin)
     setUserName(name)
   }

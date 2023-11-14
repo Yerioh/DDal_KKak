@@ -1,0 +1,101 @@
+
+
+/* 모달 바깥쪽 요소 */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 모달 구성 content (Container)*/
+  .modal-content {
+    background-color: white;
+    width: 50%;
+    height: 80%;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  /* 모달 Img css */
+  .Modal-Img{
+    display: flex;
+    justify-content: center;
+    height: 60%;
+  }
+
+  /* 유저 프롬프트부분 css */
+  .user-Prompt{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 모달 버튼 CSS */
+  .Modal-Btn{
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .Modal-Btn > button{
+    border-radius: 5px;
+  }
+  .Modal-Btn > a > button {
+    border-radius: 5px;
+  }
+
+  /* 회원탈퇴 모달 */
+  .delete-Modal{
+    background-color: white;
+    width: 60%;
+    height: 20%;
+    min-width: 450px;
+    min-height: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    
+  }
+  .delete-text{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+  }
+.delete-btn{
+    display: flex;
+    justify-content: right;
+}
+
+  .delete-btn > button{
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+  }
+  .deleteUser-Btn{
+    color: #dc3545;
+    background-color: white;
+    border : 1px solid red;
+    margin-right: 10px;
+}
+
+  .deleteUser-Btn:hover{
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+    transition: all .10s linear;
+  }
+
+  .close-Btn{
+    background-color: white;
+    border: 1px solid rgb(200, 200, 200);
+    color : rgb(80, 77, 77)
+  }
+
+  .close-Btn:hover{
+    background-color: rgb(80, 77, 77);
+    color: white;
+    transition: all .10s linear;
+  }

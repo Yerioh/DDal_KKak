@@ -1,5 +1,5 @@
 // user 라우터
-// 2023-11-13 09:24 임휘훈 작성
+// 2023-11-14 12:45 임휘훈 작성
 
 const express = require("express");
 const router = express.Router();
@@ -83,7 +83,7 @@ router.post("/login", (req, res) => {
   console.log("hash", hash);
   // 로그인 쿼리문
   let idQuery =
-    "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME FROM TB_MEMBER WHERE MEMBER_ID = ?";
+    "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_LOGIN_TYPE FROM TB_MEMBER WHERE MEMBER_ID = ?";
   // DB 연결
   conn.connect();
   conn.query(idQuery, [id], (err, result) => {
@@ -101,6 +101,8 @@ router.post("/login", (req, res) => {
           let userName = result[0].MEMBER_NAME;
           req.session.Name = userName;
           req.session.isLogin = true;
+          req.session.userId = result[0].MEMBER_ID
+          req.session.loginType = result[0].MEMBER_LOGIN_TYPE
 
           req.session.save(() => {
             console.log("로그인 완료 후 페이지 이동");
@@ -115,6 +117,23 @@ router.post("/login", (req, res) => {
   });
 });
 
+// 내 정보 수정란에 필요한 사용자 정보 가져오는 라우터
+router.post("/mypage", (req, res) => {
+  let id = req.body.userID
+  console.log("마이페이지 라우터 활성화", id);
+  // 고유한 아이디로 사용자 정보 가져오기
+  let idQuery =
+  "SELECT MEMBER_EMAIL, MEMBER_PHONE FROM TB_MEMBER WHERE MEMBER_ID = ?";
+  // DB 연결
+  conn.connect();
+  conn.query(idQuery, [id], (err, result) => {
+    let userEmail = result[0].MEMBER_EMAIL
+    let userPhone = result[0].MEMBER_PHONE
+    res.json({member_email : userEmail,
+              member_phone : userPhone})
+  })
+  
+})
 
 // 23-11-14 오전 10:00 박지훈 작성
 

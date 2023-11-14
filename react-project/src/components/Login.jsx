@@ -27,6 +27,12 @@ const Login = () => {
     })
   }
 
+  /** Enter 함수 */
+  const enter = (e) => {
+    if(e.key === "Enter"){
+      login_btn()
+    }
+  }
   // 임휘훈 작성 끝
 
   // 카카오 로그인 클릭
@@ -73,7 +79,7 @@ const Login = () => {
             </Form.Group>
             <Form.Group className="mb-3 email-input" controlId="formGroupPassword">
               {/* <Form.Label>Password</Form.Label> */}
-              <Form.Control type="password" placeholder="Password" ref={pwRef} />
+              <Form.Control type="password" placeholder="Password" ref={pwRef} onKeyDown={enter} />
             </Form.Group>
 
             <Form.Group className="mb-3">
