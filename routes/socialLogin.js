@@ -2,13 +2,12 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const path = require('path')
 
 // DB 연결
 const db = require("../config/database");
 let conn = db.init();
 
-// 카카오 로그인 RIDIRECT
+// 카카오 ------------------------------------------------------------------------------------
 // 2023-11-13 오후 14:30 박지훈 작성
 router.get("/kakaoLogin",  async(req, res) => {
   let REST_API_KEY = process.env.KAKAO_REST_KEY;
@@ -115,7 +114,7 @@ router.get('/googleLogin', (req,res)=>{
       }
       else{
         if(result[0].CNT == 0){
-          conn.query(joinSQL, [data.sub, data.sub, data.email, 'G', data.name], (err,result)=>{
+          conn.query(joinSQL, [data.id, data.id, data.email, 'G', data.name], (err,result)=>{
             if(err){
               console.log('구글 회원가입 에러', err)
             }
@@ -146,7 +145,7 @@ router.get('/googleLogin', (req,res)=>{
 })
 
 
-// 네이버-------------------------------------
+// 네이버-------------------------------------------------
 
 
 // 네이버 로그인 Redirect
