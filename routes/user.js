@@ -227,6 +227,20 @@ router.post('/deleteUser',(req,res)=>{
       }
     })
   }
+  // 로그인 타입이 일반 회원일 때
+  else if(loginType == "M"){
+    conn.connect()
+    conn.query(deleteUserSQL, [userId], (err,result)=>{
+      if(err){
+        console.log('일반 회원 탈퇴 쿼리문 에러',err)
+      }
+      else{
+        console.log('일반 회원 탈퇴 성공')
+        req.session.destroy()
+        res.json({deleteStatus : true})
+      }
+    })
+  }
 })
 
 

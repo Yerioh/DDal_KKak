@@ -69,14 +69,12 @@ const Join = () => {
     console.log("사용자 입력 아이디", idRef.current.value);
     // 데이터 전송
     if (idRef.current.value !== "") {
-      console.log("아이디 뭐임?", idRef.current.value);
       axios
         .post("/user/checkId", {
           id: idRef.current.value,
         })
         .then((res) => {
           console.log("중복체크 결과", res.data);
-
           if (res.data === true) {
             idRef.current.disabled = true;
             spanRef.current.style = "color:gray";
