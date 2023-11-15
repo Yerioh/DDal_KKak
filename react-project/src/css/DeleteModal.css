@@ -17,6 +17,16 @@
     align-items: center;
     gap: 4px;
   }
+  .delete-Modal-try{
+    background-color: white;
+    width: 60%;
+    height: 30%;
+    min-width: 450px;
+    min-height: 250px;
+    padding: 20px;
+    border-radius: 5px;
+    
+  }
   
   .delete-text-box > div > input{
     width: 150px;
@@ -62,3 +72,4 @@
     color: white;
     transition: all .10s linear;
   }
+

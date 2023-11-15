@@ -7,33 +7,36 @@ const DeleteModal = ({
   delete_user, // 모달창 활성화 state
   delete_Modal, // 모달창 함수
 }) => {
-  const[deleteText, setDeleteText] = useState("")
-  const inputRef = useRef()
-  
+  const [deleteText, setDeleteText] = useState("");
+  const [understanText, setUnderstanText] = useState("");
+  const inputRef = useRef();
+
   // 23-11-14 오후 16:00 박지훈 작성
   //회원탈퇴함수
   const Drop_user = (e) => {
     e.preventDefault();
-    if(inputRef.current.value === "이해했습니다."){
+    if (inputRef.current.value === "이해했습니다.") {
       axios.post("/user/deleteUser").then((res) => {
         if (res.data.deleteStatus) {
           alert("정상적으로 탈퇴 되었습니다.");
           window.location.href = "/";
         }
       });
-    }
-    else{
-      setDeleteText("똑바로 써라")
+    } else {
+      setDeleteText("다시 입력해주세요.");
+      setUnderstanText("-try");
     }
   };
-
 
   return (
     <div>
       {delete_user ? (
         <div>
           <div className="modal-backdrop" onClick={delete_Modal}>
-            <div className="delete-Modal" onClick={(e) => e.stopPropagation()}>
+            <div
+              className={`delete-Modal${understanText}`}
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="delete-Title">
                 <h3>회원탈퇴</h3>
               </div>
@@ -53,7 +56,14 @@ const DeleteModal = ({
                 <button className="deleteUser-Btn" onClick={Drop_user}>
                   회원탈퇴
                 </button>
-                <button className="close-Btn" onClick={delete_Modal}>
+                <button
+                  className="close-Btn"
+                  onClick={() => {
+                    setDeleteText("")
+                    delete_Modal();
+                    setUnderstanText("");
+                  }}
+                >
                   닫기
                 </button>
               </div>

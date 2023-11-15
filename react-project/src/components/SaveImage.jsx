@@ -12,7 +12,7 @@ const SaveImage = () => {
     // !false -> !true -> !false
     setIsOpen(!isOpen);
   };
-  const testImgUrl = [""];
+  const testImgUrl = ["","","","","","","","","",""];
 
   // 내 저장 이미지 불러오기 함수
   const CallImg = () => {

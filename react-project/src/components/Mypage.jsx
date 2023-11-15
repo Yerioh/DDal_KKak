@@ -6,6 +6,12 @@ import { useSelector } from "react-redux";
 import SaveImage from "./SaveImage";
 import axios from "../axios";
 import DeleteModal from "./DeleteModal";
+import delete_user_icon from "../img/delete-user.png"
+import image_icon from "../img/image-icon.png"
+import order_icon from "../img/order-list.png"
+import user_icon from "../img/user-icon.png"
+
+
 
 const Mypage = () => {
   // 231114 14:05 임휘훈 작성 redux, props, useEffect
@@ -60,15 +66,19 @@ const Mypage = () => {
           {/* 삼항 연산자로 className을 변경하여 css 적용 및 컴포넌트 호출 */}
           <div className={`user-box ${pageState==='user_info'? 'box-current' : null}`} onClick={ user_infoPage }>
             <span className="Side-text">내 정보</span>
+            <img src={user_icon} alt="user_icon" />
           </div>
           <div className={`user-box ${pageState==='Save_Image'? 'box-current' : null}`} onClick={ Save_Image }>
             <span>내 저장 이미지</span>
+            <img src={image_icon} alt="image_icon" />
           </div>
           <div className="user-box">
             <span>주문 내역</span>
+            <img src={order_icon} alt="order_icon" />
           </div>
           <div className="user-box">
             <span  onClick={delete_Modal}>회원탈퇴</span>
+            <img className="delete-icon-img" src={delete_user_icon} alt="delete_user_icon" />
           </div>
         </div>
       </div>
