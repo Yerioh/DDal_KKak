@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import axios from "../axios";
 import "../css/DeleteModal.css";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +7,26 @@ const DeleteModal = ({
   delete_user, // 모달창 활성화 state
   delete_Modal, // 모달창 함수
 }) => {
+  const[deleteText, setDeleteText] = useState("")
+  const inputRef = useRef()
+  
   // 23-11-14 오후 16:00 박지훈 작성
   //회원탈퇴함수
   const Drop_user = (e) => {
     e.preventDefault();
-    axios.post("/user/deleteUser").then((res) => {
-      if (res.data.deleteStatus) {
-        alert("정상적으로 탈퇴 되었습니다.");
-        window.location.href = "/";
-      }
-    });
+    if(inputRef.current.value === "이해했습니다."){
+      axios.post("/user/deleteUser").then((res) => {
+        if (res.data.deleteStatus) {
+          alert("정상적으로 탈퇴 되었습니다.");
+          window.location.href = "/";
+        }
+      });
+    }
+    else{
+      setDeleteText("똑바로 써라")
+    }
   };
+
 
   return (
     <div>
@@ -33,11 +42,11 @@ const DeleteModal = ({
                 <span>
                   탈퇴 버튼 클릭 시, 계정은 삭제되며 복구되지 않습니다.
                 </span>
-
+                <span>계속하시려면 '이해했습니다.'를 입력해 주세요.</span>
                 <div>
-                  <input type="text" />
+                  <input type="text" ref={inputRef} />
                 </div>
-                <span>계속하시려면 '이해했습니다'를 직접 입력해 주세요.</span>
+                <span>{deleteText}</span>
               </div>
               <hr />
               <div className="delete-btn">
