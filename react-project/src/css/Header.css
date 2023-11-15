@@ -1,5 +1,20 @@
+/* Body */
+.Web-Container{
+  position: relative;
+  min-height: 100vh; /* 전체 높이를 화면에 맞춤 */
+  padding-bottom: 60px; /* 푸터 높이만큼 여백을 줌 */
+}
 
+/* Header */
 /* 모든 Navbar 브랜드 및 링크에 대한 일반 스타일 */
+.Header-Container {
+  width: 100%; /* 헤더의 너비를 화면 전체로 설정 */
+}
+
+.navbar {
+  min-height: 50px; /* 네비게이션 바의 최소 높이 설정 */
+}
+
 .navbar-brand,
 .nav-link {
   margin-right: 1rem; /* 오른쪽에 여백을 추가 */
@@ -40,3 +55,31 @@
       margin-left: 0.25rem; /* 모바일에서 여백 줄임 */
     }
   }
+  @media (max-width: 401px) {
+    .navbar-expand-lg {
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .navbar-expand-lg .navbar-nav {
+      flex-direction: column;
+    }
+    .navbar-expand-lg .navbar-collapse {
+      position: absolute;
+      top: 56px; /* 네비게이션 바의 높이에 맞게 조정 */
+      left: 0;
+      right: 0;
+    }
+  }
+
+  /* Footer */
+  .Web-Container > footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* 푸터 높이 설정 */
+}
+@media (max-width: 768px) {
+  .MDBFooter {
+      height: auto; /* 모바일 화면에서는 푸터 높이를 자동으로 조절 */
+  }
+}

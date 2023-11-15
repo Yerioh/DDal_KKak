@@ -143,14 +143,14 @@ const Join = () => {
   };
   console.log(address, addressDetail);
   return (
-    <div>
-      <Container className="d-flex justify-content-center align-items-center ">
+    <div  className="JoinInfo">
+      <Container className="d-flex justify-content-center align-items-center mt-5">
         <div style={{ width: "500px" }}>
           <Form>
-            <Form.Group>
+            <Form.Group  className="mb-4 join-title">
               <h2>회원가입</h2>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicId">
+            <Form.Group className="mb-3 mt-5" controlId="formBasicId">
               <Form.Label>* ID</Form.Label>
               <Row>
                 <Col>
@@ -228,7 +228,7 @@ const Join = () => {
                 </Form.Label>
                 <Col>
                   <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                       <Modal.Title>주소</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -283,14 +283,14 @@ const Join = () => {
               className="mb-3"
               controlId="formBasicAdress"
             ></Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicAdressDetail">
+            <Form.Group className="mb-4" controlId="formBasicAdressDetail">
               <Form.Control
                 type="text"
                 placeholder="상세주소"
                 ref={addDetail}
               />
             </Form.Group>
-            <div className="d-grid gap mb-3">
+            <div className="d-grid gap mb-5">
               <Button
                 className="Button-search"
                 variant="outline-info"

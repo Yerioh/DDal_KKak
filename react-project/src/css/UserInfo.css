@@ -19,13 +19,14 @@
 
 }
 
+
 /* 버튼 css */
 
 .userInfo-btn{
     display: flex;
+    justify-content: center;
 }
 .userInfo-btn >button{
-    width: 130px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 150px;
+    
 }

@@ -31,7 +31,7 @@ const Header = () => {
   }
 
   return (
-    <div>
+    <div className="Header-Container">
       <Navbar bg="light" expand="lg" className="justify-content-between">
         <Container>
           <Navbar.Brand href="/" className="navbar-brand">
