@@ -13,8 +13,12 @@ import axios from '../axios'
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
+  // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState('')
+  // 부정 프롬프트
   const [negativePrompt, setNegativePrompt] = useState('')
+  // 출력할 사진 개수
+  const [countImg, setCountImg] = useState('1')
   const [guideModalOpen, setguideModalOpen] = useState(false)  
 
 
@@ -52,7 +56,11 @@ const CreateImage = () => {
   const createImg = ()=>{
     // 긍정 프롬프트 공백 아닐 때 실행
     if(positivePrompt !== ''){
-      axios.post('/imgCreate/stable', {positivePrompt : positivePrompt, negativePrompt : negativePrompt})
+      axios.post('/imgCreate/stable', {
+        positivePrompt : positivePrompt, 
+        negativePrompt : negativePrompt,
+        countImg : countImg,      
+      })
         .then(res=>{
           console.log(res.data)
         })
@@ -177,7 +185,7 @@ const CreateImage = () => {
           <ImageCreateButton />
         </div>
         <div id='pageCount'>
-          <PageCountButton />
+          <PageCountButton setCountImg={setCountImg} />
         </div>
       </div>
       <div>

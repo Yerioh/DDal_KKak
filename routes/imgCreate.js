@@ -14,12 +14,17 @@ const axios = require("axios");
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://7925-104-199-112-114.ngrok.io"
+const flaskServer = "http://40e6-104-199-112-114.ngrok.io"
 
+// stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
+  // 긍정, 부정 프롬프트
   let data = req.body;
-  console.log(data)
-  axios.post(`${flaskServer}/stable`, { data })
+  let userId = req.session.userId
+  axios.post(`${flaskServer}/stable`, { 
+    data, 
+    userId : userId,
+   })
     .then((response) => {
       let imgData = response.data;
       // console.log(imgData);
