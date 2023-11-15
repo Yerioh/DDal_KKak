@@ -9,7 +9,9 @@ import PageCountButton from './PageCountButton'
 import Keyword from './Keyword'
 import { Link } from 'react-router-dom'
 import axios from '../axios'
-import Progress from 'react-circle-progress-bar'
+import axiosProgress from '../axiosProgress'
+import { useSelector } from 'react-redux'
+import ProgressBar from "@ramonak/react-progress-bar";
 
 
 // CreateImage 컴포넌트 정의
@@ -22,8 +24,15 @@ const CreateImage = () => {
   const [countImg, setCountImg] = useState('1')
   const [guideModalOpen, setguideModalOpen] = useState(false)  
 
-  const [progress, setProgress] = useState(0)
-  const [loading, setLoading] = useState(false)
+  // const [progress, setProgress] = useState(0)
+  // const [loading, setLoading] = useState(false)
+
+  // axios 진행률(0~100)
+  const progress = useSelector((state)=>state.progress.progress)
+  // 이미지 생성 진행상황 (true, false)
+  const isLoading = useSelector((state)=>state.progress.isLoading)
+
+
 
   // 키워드 모달 상태 변경을 처리하는 함수
   const handleKeyWordModalChange = () => {
@@ -57,33 +66,28 @@ const CreateImage = () => {
 
   // 이미지 생성 버튼 클릭
   const createImg = ()=>{
-    let config = {
-      onUploadProgress : (ProgressEvent) => {
-        let percentCompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
-        setProgress(percentCompleted)
-        console.log(percentCompleted);
-      }
-    }
     // 긍정 프롬프트 공백 아닐 때 실행
     if(positivePrompt !== ''){
-      axios.post('/imgCreate/stable', {
+      axiosProgress.post('/imgCreate/stable', {
         positivePrompt : positivePrompt, 
         negativePrompt : negativePrompt,
         countImg : countImg,      
-      }, config)
+      })
         .then(res=>{
           console.log(res.data)
-          setLoading(false)
-          console.log("then", progress);
-          
+          console.log("then", progress);          
         })
 
     }
   }
 
-  useEffect(() => {
-    console.log("adfaf", progress);
-  }, [progress])
+
+  useEffect(()=>{
+    if(progress === 100){
+      console.log('이미지 생성 완료')
+    }
+  },[progress])
+
 
   return (
   // 이미지 생성페이지 전체
@@ -207,10 +211,12 @@ const CreateImage = () => {
         </div>
       </div>
       <div>
+      <ProgressBar className='progress-bar' completed={progress} maxCompleted={100}/>
       {/* <Link to='/image-edit'> */}
         <button className="creImg_gotobutton btn" onClick={createImg}>이미지 만들러가기!</button>
         {/* </Link> */}
       </div>
+      
     </div>
   )
 }
