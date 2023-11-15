@@ -4,16 +4,29 @@
     width: 60%;
     height: 20%;
     min-width: 450px;
-    min-height: 200px;
+    min-height: 250px;
     padding: 20px;
     border-radius: 5px;
     
   }
-  .delete-text{
+  .delete-text-box{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     font-weight: bold;
+    align-items: center;
+    gap: 4px;
   }
+  
+  .delete-text-box > div > input{
+    width: 150px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    border: none;
+    text-align: center;
+    outline: none;
+  }
+
 .delete-btn{
     display: flex;
     justify-content: right;

@@ -5,6 +5,7 @@ import UserInfo from "./UserInfo";
 import { useSelector } from "react-redux";
 import SaveImage from "./SaveImage";
 import axios from "../axios";
+import DeleteModal from "./DeleteModal";
 
 const Mypage = () => {
   // 231114 14:05 임휘훈 작성 redux, props, useEffect
@@ -12,6 +13,7 @@ const Mypage = () => {
   const isLogin = useSelector((state) => state.session.isLogin) // redux에 저장된 로그인 유무
   const loginType = useSelector((state) => state.session.loginType) // redux에 저장된 로그인 타입
   const id = useSelector((state) => state.session.id) // redux에 저장된 회원 아이디
+  const [delete_user, setdelete_user] = useState(false); // 회원탈퇴 모달창 활성화 state
 
   const [email, setEmail] = useState(null)
   const [phone, setPhone] = useState(null)
@@ -44,10 +46,17 @@ const Mypage = () => {
     setpageState("Save_Image");
   };
 
+  //회원 탈퇴 모달창 11.15 11:40
+  const delete_Modal = () => {
+    // setdelete_user의 상태를 변경하는 메소드를 구현
+    // !false -> !true -> !false
+    setdelete_user(!delete_user);
+  };
+
   return (
     <div className="MyConatainer">
       <div className="Container">
-        <div className="user">
+        <div className="user-side">
           {/* 삼항 연산자로 className을 변경하여 css 적용 및 컴포넌트 호출 */}
           <div className={`user-box ${pageState==='user_info'? 'box-current' : null}`} onClick={ user_infoPage }>
             <span className="Side-text">내 정보</span>
@@ -58,10 +67,14 @@ const Mypage = () => {
           <div className="user-box">
             <span>주문 내역</span>
           </div>
+          <div className="user-box">
+            <span  onClick={delete_Modal}>회원탈퇴</span>
+          </div>
         </div>
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} />}
       {pageState === "Save_Image" && <SaveImage />}
+      <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
     </div>
   );
 };

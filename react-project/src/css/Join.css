@@ -14,6 +14,9 @@
 .join-container{
     margin-top: 20px;
 }
+.join-title > h2{
+    margin: 0;
+}
 
 .Add-Modal{
    

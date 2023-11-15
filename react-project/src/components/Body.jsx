@@ -24,7 +24,7 @@ const Body = () => {
   // }
 
   return (
-    <div>
+    <div className="Web-Container">
       <Header/>
       <Routes>
         <Route path="/join" element={<Join />}></Route>

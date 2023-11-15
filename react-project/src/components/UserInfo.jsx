@@ -2,10 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
-import DeleteModal from "./DeleteModal";
 
 const UserInfo = ({ userName, loginType, id, email, phone }) => {
-  const idRef = useRef() // 유저 아이디
+  const idRef = useRef(); // 유저 아이디
   const nameRef = useRef(); // 사용자 이름
   const emailRef = useRef(); // 사용자 이메일
   const phoneRef = useRef(); // 사용자 전화번호
@@ -20,14 +19,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
   const [isOpenPost, setIsOpenPost] = useState(false);
-  const [delete_user, setdelete_user] = useState(false); // 회원탈퇴 모달창 활성화 state
 
-  //회원 탈퇴 모달창
-  const delete_Modal = () => {
-    // setdelete_user의 상태를 변경하는 메소드를 구현
-    // !false -> !true -> !false
-    setdelete_user(!delete_user);
-  };
   // 모달 show 함수
   const handleShow = () => setShow(true);
   // 모달 닫기 함수
@@ -83,24 +75,20 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
     console.log(email, phone);
-    if(loginType == "M"){
-      idRef.current.value = id
-    }
-    else if(loginType == "G"){
-      idRef.current.value = "Google Account"
-    }
-    else if(loginType == "N"){
-      idRef.current.value = "Naver Account"
-    }
-    else if(loginType == "K"){
-      idRef.current.value = "Kakao Account"
+    if (loginType == "M") {
+      idRef.current.value = id;
+    } else if (loginType == "G") {
+      idRef.current.value = "Google Account";
+    } else if (loginType == "N") {
+      idRef.current.value = "Naver Account";
+    } else if (loginType == "K") {
+      idRef.current.value = "Kakao Account";
     }
     idRef.current.disabled = true; // 입력란 비활성화
     nameRef.current.value = userName; // 이름
     nameRef.current.disabled = true; // 입력란 비활성화
     emailRef.current.value = email; // 이메일
     phoneRef.current.value = phone; // 전화번호
-
   }, [email, phone]);
   // 임휘훈 작성 끝
 
@@ -111,7 +99,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>ID</Form.Label>
-            <Form.Control type="text" placeholder="Enter ID" ref={idRef}/>
+            <Form.Control type="text" placeholder="Enter ID" ref={idRef} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>이름</Form.Label>
@@ -138,7 +126,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             <Form.Control
               type="password"
               placeholder="Enter Password"
-              ref={C_pwRef}    
+              ref={C_pwRef}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword1">
@@ -161,35 +149,35 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             <Row>
               <Form.Label>주소</Form.Label>
               <Col>
-              <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>주소</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      {isOpenPost ? (
-                        <div
-                          className="Add-api"
-                          style={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <DaumPostcode
-                            style={postCodeStyle}
-                            autoClose
-                            onComplete={onCompletePost}
-                            key="postcode"
-                          />
-                        </div>
-                      ) : null}
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        className="Button"
-                        variant="secondary"
-                        onClick={handleClose}
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header>
+                    <Modal.Title>주소</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    {isOpenPost ? (
+                      <div
+                        className="Add-api"
+                        style={{ display: "flex", justifyContent: "center" }}
                       >
-                        닫기
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                        <DaumPostcode
+                          style={postCodeStyle}
+                          autoClose
+                          onComplete={onCompletePost}
+                          key="postcode"
+                        />
+                      </div>
+                    ) : null}
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      className="Button"
+                      variant="secondary"
+                      onClick={handleClose}
+                    >
+                      닫기
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
                 <Form.Control
                   type="text"
                   placeholder="우편번호"
@@ -220,14 +208,6 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             <Button className="Change-Btn" variant="outline-info" type="submit">
               수정완료
             </Button>
-            <Button
-              className="userDelete-btn"
-              variant="outline-danger"
-              onClick={delete_Modal}
-            >
-              회원탈퇴
-            </Button>
-            <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
           </div>
         </Form>
       </div>
