@@ -16,10 +16,15 @@ const axios = require("axios");
 
 const flaskServer = "http://728f-34-91-132-46.ngrok.io"
 
+// stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
+  // 긍정, 부정 프롬프트
   let data = req.body;
-  console.log(data)
-  axios.post(`${flaskServer}/stable`, { data })
+  let userId = req.session.userId
+  axios.post(`${flaskServer}/stable`, { 
+    data, 
+    userId : userId,
+   })
     .then((response) => {
       let imgData = response.data;
       // console.log(imgData);

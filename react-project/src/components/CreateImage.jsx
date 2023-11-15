@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import '../css/Imagelayout.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -14,8 +14,12 @@ import Progress from 'react-circle-progress-bar'
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
+  // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState('')
+  // 부정 프롬프트
   const [negativePrompt, setNegativePrompt] = useState('')
+  // 출력할 사진 개수
+  const [countImg, setCountImg] = useState('1')
   const [guideModalOpen, setguideModalOpen] = useState(false)  
 
   const [progress, setProgress] = useState(0)
@@ -57,20 +61,29 @@ const CreateImage = () => {
       onUploadProgress : (ProgressEvent) => {
         let percentCompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
         setProgress(percentCompleted)
-        console.log(progress);
+        console.log(percentCompleted);
       }
     }
     // 긍정 프롬프트 공백 아닐 때 실행
     if(positivePrompt !== ''){
-      setLoading(true)
-      axios.post('/imgCreate/stable', {positivePrompt : positivePrompt, negativePrompt : negativePrompt}, config)
+      axios.post('/imgCreate/stable', {
+        positivePrompt : positivePrompt, 
+        negativePrompt : negativePrompt,
+        countImg : countImg,      
+      }, config)
         .then(res=>{
           console.log(res.data)
           setLoading(false)
+          console.log("then", progress);
+          
         })
 
     }
   }
+
+  useEffect(() => {
+    console.log("adfaf", progress);
+  }, [progress])
 
   return (
   // 이미지 생성페이지 전체
@@ -190,7 +203,7 @@ const CreateImage = () => {
           <ImageCreateButton />
         </div>
         <div id='pageCount'>
-          <PageCountButton />
+          <PageCountButton setCountImg={setCountImg} />
         </div>
       </div>
       <div>
