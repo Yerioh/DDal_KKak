@@ -12,7 +12,7 @@ require('dotenv').config()
 
 
 // Flask 서버 라우터
-const flaskData = require("./routes/flaskData");
+const imgCreate = require("./routes/imgCreate");
 // 소셜로그인 라우터
 const socialLogin = require("./routes/socialLogin");
 // user 라우터
@@ -42,7 +42,7 @@ app.use(session({
 }))
 
 // flask 서버 라우터
-app.use("/flask", flaskData);
+app.use("/imgCreate", imgCreate);
 // socialLogin 라우터
 app.use("/socialLogin", socialLogin);
 // user 라우터
