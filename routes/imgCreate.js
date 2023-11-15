@@ -14,12 +14,12 @@ const axios = require("axios");
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://be5e-35-197-152-147.ngrok.io"
+const flaskServer = "http://7925-104-199-112-114.ngrok.io"
 
-router.post("/data", (req, res) => {
+router.post("/stable", (req, res) => {
   let data = req.body;
- 
-  axios.post(`${flaskServer}/stable`, null, { data })
+  console.log(data)
+  axios.post(`${flaskServer}/stable`, { data })
     .then((response) => {
       let imgData = response.data;
       // console.log(imgData);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import '../css/Imagelayout.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -8,12 +8,15 @@ import ImageCreateButton from './PageSizeButton'
 import PageCountButton from './PageCountButton'
 import Keyword from './Keyword'
 import { Link } from 'react-router-dom'
+import axios from '../axios'
 
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
-  const [inputData, setInputData] = useState('')
-  const [guideModalOpen, setguideModalOpen] = useState(false)
+  const [positivePrompt, setPositivePrompt] = useState('')
+  const [negativePrompt, setNegativePrompt] = useState('')
+  const [guideModalOpen, setguideModalOpen] = useState(false)  
+
 
   // 키워드 모달 상태 변경을 처리하는 함수
   const handleKeyWordModalChange = () => {
@@ -25,7 +28,7 @@ const CreateImage = () => {
     const value = e.target.value
     const checked = e.target.checked
     // 선택되면 값 추가, 아니면 제거
-    setInputData((prev) => {
+    setPositivePrompt((prev) => {
       // 공백으로 분리된 단어 배열로 변환
       const valuesArray = prev.split(' ').filter((v) => v)
       if (checked) {
@@ -44,6 +47,19 @@ const CreateImage = () => {
   // 모달을 닫기 위한 함수
   const closeGuideModal = () => setguideModalOpen(false)
 
+
+  // 이미지 생성 버튼 클릭
+  const createImg = ()=>{
+    // 긍정 프롬프트 공백 아닐 때 실행
+    if(positivePrompt !== ''){
+      axios.post('/imgCreate/stable', {positivePrompt : positivePrompt, negativePrompt : negativePrompt})
+        .then(res=>{
+          console.log(res.data)
+        })
+
+    }
+  }
+
   return (
   // 이미지 생성페이지 전체
     <div className="creImg_body">      
@@ -59,10 +75,11 @@ const CreateImage = () => {
           <Form.Control
             type="text"    // 키워드 프롬포트 입력창
             className="prompt" 
-            value={inputData}  // 적용되는 키워드 
-            onChange={(e) => setInputData(e.target.value)}
+            value={positivePrompt}  // 적용되는 키워드 
+            onChange={(e) => setPositivePrompt(e.target.value)}
             id='inputPrompt' // 입력 값으로 사용될 state
             style={{'height':'60px'}} // 입력창 높이
+
           />
           <h1>제외 키워드 입력</h1>
           <Form.Label htmlFor="inputPassword5"></Form.Label>
@@ -70,7 +87,11 @@ const CreateImage = () => {
           type="text"     // 제외되는 키워드 프롬포트 입력창
           className="prompt"  
           id='exceptPrompt'  // 제외되는 키워드 입력창
-          style={{'height':'60px'}}/>
+          style={{'height':'60px'}}
+          value={negativePrompt}  // 적용되는 키워드 
+          onChange={(e) => setNegativePrompt(e.target.value)}
+
+          />          
 
           {/* 키워드 버튼 창 */}
         </div>
@@ -115,6 +136,7 @@ const CreateImage = () => {
                       type="text"
                       value={'강아지,실사체,귀접힘'}
                       readOnly={true}
+                      
                     />
                     <h1 style={{ 'margin-top': '10%' }}>제외 키워드 입력</h1>
                     <Form.Control
@@ -122,6 +144,7 @@ const CreateImage = () => {
                       value={'컬러, 몸통'}
                       readOnly={true}
                       style={{ 'margin-bottom': '10%' }}
+                      
                     />
                     <div className="guide-manual">
                       <p>1. 생성키워드에 만들고 싶은 단어를 입력하세요!</p>
@@ -158,9 +181,9 @@ const CreateImage = () => {
         </div>
       </div>
       <div>
-      <Link to='/image-edit'>
-        <button className="creImg_gotobutton btn">이미지 만들러가기!</button>{' '}
-        </Link>
+      {/* <Link to='/image-edit'> */}
+        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 만들러가기!</button>
+        {/* </Link> */}
       </div>
     </div>
   )
