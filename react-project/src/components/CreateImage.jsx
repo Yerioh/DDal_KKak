@@ -16,6 +16,8 @@ import ProgressBar from "@ramonak/react-progress-bar";
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
+
+  // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState('')
   // 부정 프롬프트
@@ -23,9 +25,6 @@ const CreateImage = () => {
   // 출력할 사진 개수
   const [countImg, setCountImg] = useState('1')
   const [guideModalOpen, setguideModalOpen] = useState(false)  
-
-  // const [progress, setProgress] = useState(0)
-  // const [loading, setLoading] = useState(false)
 
   // axios 진행률(0~100)
   const progress = useSelector((state)=>state.progress.progress)
@@ -64,6 +63,7 @@ const CreateImage = () => {
   const closeGuideModal = () => setguideModalOpen(false)
 
 
+  // 23-11-15 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
   const createImg = ()=>{
     // 긍정 프롬프트 공백 아닐 때 실행
@@ -80,7 +80,6 @@ const CreateImage = () => {
 
     }
   }
-
 
   useEffect(()=>{
     if(progress === 100){
