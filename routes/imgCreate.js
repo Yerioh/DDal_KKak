@@ -14,7 +14,7 @@ const axios = require("axios");
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://7925-104-199-112-114.ngrok.io"
+const flaskServer = "http://728f-34-91-132-46.ngrok.io"
 
 router.post("/stable", (req, res) => {
   let data = req.body;

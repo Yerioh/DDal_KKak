@@ -9,6 +9,7 @@ import PageCountButton from './PageCountButton'
 import Keyword from './Keyword'
 import { Link } from 'react-router-dom'
 import axios from '../axios'
+import Progress from 'react-circle-progress-bar'
 
 
 // CreateImage 컴포넌트 정의
@@ -17,6 +18,8 @@ const CreateImage = () => {
   const [negativePrompt, setNegativePrompt] = useState('')
   const [guideModalOpen, setguideModalOpen] = useState(false)  
 
+  const [progress, setProgress] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   // 키워드 모달 상태 변경을 처리하는 함수
   const handleKeyWordModalChange = () => {
@@ -50,11 +53,20 @@ const CreateImage = () => {
 
   // 이미지 생성 버튼 클릭
   const createImg = ()=>{
+    let config = {
+      onUploadProgress : (ProgressEvent) => {
+        let percentCompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
+        setProgress(percentCompleted)
+        console.log(progress);
+      }
+    }
     // 긍정 프롬프트 공백 아닐 때 실행
     if(positivePrompt !== ''){
-      axios.post('/imgCreate/stable', {positivePrompt : positivePrompt, negativePrompt : negativePrompt})
+      setLoading(true)
+      axios.post('/imgCreate/stable', {positivePrompt : positivePrompt, negativePrompt : negativePrompt}, config)
         .then(res=>{
           console.log(res.data)
+          setLoading(false)
         })
 
     }
@@ -71,6 +83,7 @@ const CreateImage = () => {
               가이드
             </button>{' '}
           </h1>
+          {/* <Progress progress={75} /> */}
           <Form.Label></Form.Label>
           <Form.Control
             type="text"    // 키워드 프롬포트 입력창
