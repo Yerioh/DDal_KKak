@@ -15,7 +15,7 @@ const ResultImage = ({ imgSrc }) => {
     return Array.from({ length: countImg }, (_, index) => {
       console.log(`Rendering image ${index + 1}: ${imgSrc}`); // 이미지 렌더링 정보 출력
       return (
-        <li key={index}>
+        <li key={index} className="imageresult">
           <div className="card">
             <img src={imgSrc} alt={`Image ${index + 1}`} />
           </div>

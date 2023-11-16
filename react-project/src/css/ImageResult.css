@@ -15,7 +15,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top:10%
+      margin-top:10%;
+      margin-left:15%;
+      gap : 10%;
+      
     }
   
   .four-images .image-list {
@@ -45,14 +48,14 @@
   .five-images .image-list li:nth-child(4) { grid-area: img4; }
   .five-images .image-list li:nth-child(5) { grid-area: img5; }
   
-  .card{
+  .imageresult .card{
       height: fit-content;
       padding:15%;
       width:30vh;
       margin : 25px;
   }
   
-  .card:hover{
+  .imageresult .card:hover{
       box-shadow: 0px 5px 5px 0px;
   }
   
@@ -60,16 +63,17 @@
   .keywrod-area{
       border: 1px solid #C0C0C0;
       border-radius: 5px;
-      width: 70vh;
-      height: 15vh;
-      margin: 3% auto;
-      padding:5px
+      width: 50vh;
+      height: 10vh;
+      margin: auto;
+      padding:5px;
+      margin-bottom: 50%;
   }
   
   .except-area {
       border: 1px solid #C0C0C0;
       border-radius: 5px;
-      width: 70vh;
+      width: 50vh;
       height: 10vh;
       margin: 2% auto;
       padding:5px
