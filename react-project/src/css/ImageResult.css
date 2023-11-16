@@ -1,0 +1,93 @@
+.result-body{
+    display: flex;
+
+  }
+  
+  ul{
+      list-style: none;
+  }
+  
+  li{
+      float: left;
+  }
+  
+  .result-containor {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top:10%
+    }
+  
+  .four-images .image-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
+      gap: 10px;
+  }
+  
+  .four-images .image-list li {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+  }
+  
+  .five-images .image-list {
+      display: flex;
+      flex-wrap : wrap;
+      align-content : space-around;
+      justify-content : center;
+      gap: 10px;
+      width:60%;
+  }
+  
+  .five-images .image-list li:nth-child(1) { grid-area: img1; }
+  .five-images .image-list li:nth-child(2) { grid-area: img2; }
+  .five-images .image-list li:nth-child(3) { grid-area: img3; }
+  .five-images .image-list li:nth-child(4) { grid-area: img4; }
+  .five-images .image-list li:nth-child(5) { grid-area: img5; }
+  
+  .card{
+      height: fit-content;
+      padding:15%;
+      width:30vh;
+      margin : 25px;
+  }
+  
+  .card:hover{
+      box-shadow: 0px 5px 5px 0px;
+  }
+  
+  
+  .keywrod-area{
+      border: 1px solid #C0C0C0;
+      border-radius: 5px;
+      width: 70vh;
+      height: 15vh;
+      margin: 3% auto;
+      padding:5px
+  }
+  
+  .except-area {
+      border: 1px solid #C0C0C0;
+      border-radius: 5px;
+      width: 70vh;
+      height: 10vh;
+      margin: 2% auto;
+      padding:5px
+  }
+  
+  
+  
+  #keywordbox{
+
+      border-radius: 10px;
+      width: 20%;
+      text-align : center;
+  }
+  
+  #excptbox{
+      border-radius: 10px;
+      width: 20%;
+      text-align : center;
+  }
+  
+  
