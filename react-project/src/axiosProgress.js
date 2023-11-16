@@ -25,7 +25,6 @@ const setProgress = (value)=>{
     // 5초 후에 resetProgress() action 실행
     if(value === 100){
         setTimeout(()=>store.dispatch(ProgressReducerActions.endProgress()), 1000)
-        setTimeout(()=>store.dispatch(ProgressReducerActions.resetProgress()), 5000)
     }
 }
 
