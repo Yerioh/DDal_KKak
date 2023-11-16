@@ -19,7 +19,6 @@ import { useNavigate } from 'react-router-dom'
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
 
-
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState('')
@@ -102,7 +101,12 @@ const CreateImage = () => {
   // 2023.11.16 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가
   const goToResultPage = () => {
     console.log("Navigating with imageCount:", countImg);
-    setTimeout(navigate('/image-result', { state : {countImg : countImg, imgData : imgData}}), 3000);
+    setTimeout(navigate('/image-result', { state : {
+      countImg : countImg,
+      imgData : imgData,
+      positivePrompt : positivePrompt,
+      negativePrompt : negativePrompt
+      }}), 3000);
   };
 
   const handleImageCountChange = (count) => {
@@ -125,7 +129,7 @@ const CreateImage = () => {
       <div className="prompt_container">
         <div className="keyword">
           <h1>
-            생성 키워드 입력
+            긍정 프롬프트 입력
             <button className="guide-button btnmy" onClick={openGuideModal}>
               가이드
             </button>{' '}
@@ -140,7 +144,7 @@ const CreateImage = () => {
             id='inputPrompt' // 입력 값으로 사용될 state
           />
 
-          <h1>제외 키워드 입력</h1>
+          <h1>부정 프롬프트 입력</h1>
           <Form.Label htmlFor="inputPassword5"></Form.Label>
           <textarea 
          className="prompt"  

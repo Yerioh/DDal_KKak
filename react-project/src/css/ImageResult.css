@@ -64,7 +64,7 @@
       border: 1px solid #C0C0C0;
       border-radius: 5px;
       width: 50vh;
-      height: 10vh;
+      /* height: 10vh; */
       margin: auto;
       padding:5px;
       margin-bottom: 50%;
@@ -74,7 +74,7 @@
       border: 1px solid #C0C0C0;
       border-radius: 5px;
       width: 50vh;
-      height: 10vh;
+      /* height: 10vh; */
       margin: 2% auto;
       padding:5px
   }
@@ -84,14 +84,14 @@
   #keywordbox{
 
       border-radius: 10px;
-      width: 20%;
-      text-align : center;
+      /* width: 20%; */
+      /* text-align : center; */
   }
   
   #excptbox{
       border-radius: 10px;
-      width: 20%;
-      text-align : center;
+      /* width: 20%; */
+      /* text-align : center; */
   }
   
   
