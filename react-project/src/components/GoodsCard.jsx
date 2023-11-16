@@ -20,10 +20,10 @@ const GoodsCard = ({name,src,price}) => {
         </Card.Title> 
     </Card.Body>
     
-    <ListGroup className="list-group-flush">
+    <ListGroup>
         {/* 제품 가격 */}
         <div style={{display:"flex", broder:"none"}}>
-      <p style={{width:"50%" , }}>20,000원</p>
+      <p style={{width:"50%" , }}>{price}</p>
       <p style={{width:"50%" , }}>별점 0.00점</p>
       </div>
     </ListGroup>

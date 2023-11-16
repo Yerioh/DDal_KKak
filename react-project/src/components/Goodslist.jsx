@@ -27,10 +27,10 @@ const Goodslist = () => {
     <div style={{margin:"0% 10%"}}>
         <div style={{width:"100%",textAlign:"center"}}>
           {/* useState에 누르는 버튼에 따라 카테고리명이 업데이트됨 */}
-        <Button variant="outline-dark" type="button" className='goods-btn' onClick={()=>setFilter('all')}>전체</Button> 
-        <Button variant="outline-dark" type="button" className='goods-btn' onClick={()=>setFilter('clothes')}>의류</Button> 
-        <Button variant="outline-dark" type="button" className='goods-btn' onClick={()=>setFilter('living')}>생활용품</Button>
-        <Button variant="outline-dark" type="button" className='goods-btn' onClick={()=>setFilter('phone_acc')}>모바일 악세서리</Button>
+        <Button variant="outline-dark" type="button" style={{margin: "10px 20px"}} onClick={()=>setFilter('all')}>전체</Button> 
+        <Button variant="outline-dark" type="button" style={{margin: "10px 20px"}}  onClick={()=>setFilter('clothes')}>의류</Button> 
+        <Button variant="outline-dark" type="button" style={{margin: "10px 20px"}}  onClick={()=>setFilter('living')}>생활용품</Button>
+        <Button variant="outline-dark" type="button" style={{margin: "10px 20px"}}  onClick={()=>setFilter('phone_acc')}>모바일 악세서리</Button>
         </div>
         <div style={{display:"flex",flexFlow:"row wrap",justifyContent:'space-evenly'}}>
           {/* 제품필터링을 위한 함수 */}
