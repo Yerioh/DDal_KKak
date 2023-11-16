@@ -1,12 +1,16 @@
 .MyConatainer{
     display: flex;
+    padding-left: 170px; /* 사이드바 너비만큼 여백 추가 */
     
 }
-.Container{
+.MyConatainer > .Container{
+    position: fixed;
+    top: 50px; /* 헤더 높이에 따라 조절 */
+    left: 0; /* 화면 왼쪽에 고정 */
     width: 15%;
     height: 100vh;
-    margin-top: 30px;
     min-width: 170px;
+    z-index: 1000; /* 다른 요소들 위에 레이어링 */
 }
 .user-side{
     display: flex;
@@ -53,7 +57,7 @@
         padding: 10px 16px 10px 15px;
     }
    
-    .Container{
+    .MyConatainer > .Container{
         min-width: 50px;
     }
    

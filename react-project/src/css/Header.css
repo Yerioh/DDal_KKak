@@ -3,12 +3,19 @@
   position: relative;
   min-height: 100vh; /* 전체 높이를 화면에 맞춤 */
   padding-bottom: 60px; /* 푸터 높이만큼 여백을 줌 */
+  padding-top: 50px; /* 헤더의 높이만큼 상단 여백 추가 */
 }
 
 /* Header */
 /* 모든 Navbar 브랜드 및 링크에 대한 일반 스타일 */
 .Header-Container {
+  position: fixed; /* 고정 위치 설정 */
+  top: 0; /* 화면 상단에 고정 */
+  left: 0; /* 화면 왼쪽에 고정 */
   width: 100%; /* 헤더의 너비를 화면 전체로 설정 */
+  z-index: 1000; /* 다른 요소들 위에 레이어링 */
+  background: white; /* 배경 색상 설정 */
+  min-width: 1000px;
 }
 
 .justify-content-between{
@@ -41,6 +48,40 @@
   height: 30px; /* 아이콘의 높이 */
   margin-left: 0.5rem; /* 이미지와 다른 요소 사이의 여백을 추가 */
 }
+@media (max-width: 768px) {
+  .Header-Container {
+    min-width: unset; /* 작은 화면에서는 최소 너비 제한 해제 */
+  }
+
+  .navbar-brand, .nav-link {
+    margin-right: 0.5rem; /* 작은 화면에서 여백 감소 */
+  }
+
+  .basket {
+    width: 25px; /* 작은 화면에서 아이콘 크기 감소 */
+    height: 25px;
+  }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+  .Header-Container {
+    min-width: 500px; /* 중간 크기의 화면에서 적당한 최소 너비 설정 */
+  }
+
+  .navbar-brand, .nav-link {
+    margin-right: 0.75rem; /* 중간 크기의 화면에서 여백 조정 */
+  }
+
+  .basket {
+    width: 28px; /* 중간 크기의 화면에서 아이콘 크기 조정 */
+    height: 28px;
+  }
+}
+@media (max-width: 768px) {
+  .Web-Container {
+    padding-top: 60px; /* 작은 화면에서 상단 여백 증가 */
+  }
+}
+
 
 
 
