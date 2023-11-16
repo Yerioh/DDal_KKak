@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../css/ImageResult.css";
 
-const ResultImage = ({ imgSrc }) => {
+const ResultImage = () => {
   const location = useLocation();
   console.log("결과 이미지를 받았습니다.", location.state);
   const countImg = location.state?.countImg || 1;
@@ -13,7 +13,6 @@ const ResultImage = ({ imgSrc }) => {
   // imageCount 만큼의 <li> 요소를 생성하는 함수
   const renderImageList = () => {
     return Array.from({ length: countImg }, (_, index) => {
-      console.log(`Rendering image ${index + 1}: ${imgSrc}`); // 이미지 렌더링 정보 출력
       return (
         <li key={index} className="imageresult">
           <div className="card">

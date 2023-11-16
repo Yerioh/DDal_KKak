@@ -104,10 +104,11 @@ const CreateImage = () => {
   };
 
   useEffect(()=>{
-    if(progress === 100){
+    if(progress === 100 && isLoading){
       console.log('이미지 생성 완료')
+      goToResultPage()
     }
-  },[progress])
+  },[progress, isLoading])
 
 
   return (
@@ -226,7 +227,7 @@ const CreateImage = () => {
       <div>
       <ProgressBar className='progress-bar' completed={progress} maxCompleted={100}/>
       {/* <Link to='/image-edit'> */}
-        <button className="creImg_gotobutton btn" onClick={goToResultPage}>이미지 만들러가기!</button>
+        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 만들러가기!</button>
         {/* </Link> */}
       </div>
       
