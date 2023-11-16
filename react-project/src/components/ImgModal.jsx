@@ -11,6 +11,8 @@ const ImgModal = ({
   Prompt,
   NPrompt,
 }) => {
+
+ console.log("props",index)
   /* 
         Props로 받아야할 Data
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
@@ -25,7 +27,7 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img src={Eximage[0]} alt="Ex_image" />
+              <img src={Eximage[index]} alt="Ex_image" />
             </div>
             <hr />
             <div className="user-Prompt">
@@ -37,12 +39,12 @@ const ImgModal = ({
             <hr />
             <div className="Modal-Btn">
               <Link to="#">
-                <button>이미지 재편집하기</button>
+                <button>이미지 재편집</button>
               </Link>
               <Link to="#">
-                <button>굿즈 만들러 가기</button>
+                <button>굿즈 선택</button>
               </Link>
-
+              <button>다운로드</button>
               <button onClick={openModalHandler}>닫기</button>
             </div>
           </div>
