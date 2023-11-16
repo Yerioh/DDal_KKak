@@ -36,7 +36,7 @@ const timer = ()=>{
 
 instance.interceptors.request.use((config)=>{
     setProgress(0)
-    timer()
+    setTimeout(timer(), 3000)
     return config
 },
 (err)=>{
@@ -49,6 +49,10 @@ instance.interceptors.response.use((response)=>{
     if(timerId){
         clearTimeout(timerId)
         timerId = null
+    }
+    // axios 에러 발생시 응답 interceptors 정지
+    if(response.data.createError){
+        return response
     }
     setProgress(100)
     return response

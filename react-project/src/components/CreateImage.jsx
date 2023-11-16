@@ -10,8 +10,9 @@ import Keyword from './Keyword'
 import { Link } from 'react-router-dom'
 import axios from '../axios'
 import axiosProgress from '../axiosProgress'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ProgressBar from "@ramonak/react-progress-bar";
+import {ProgressReducerActions} from '../redux/reducers/progressSlice'
 
 
 // CreateImage 컴포넌트 정의
@@ -30,6 +31,7 @@ const CreateImage = () => {
   const progress = useSelector((state)=>state.progress.progress)
   // 이미지 생성 진행상황 (true, false)
   const isLoading = useSelector((state)=>state.progress.isLoading)
+  const dispatch = useDispatch()
 
 
 
@@ -74,7 +76,11 @@ const CreateImage = () => {
         countImg : countImg,      
       })
         .then(res=>{
-          console.log(res.data)
+          let data = res.data
+          if(data.createError){
+            dispatch(ProgressReducerActions.resetProgress())
+            alert('이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.')
+          }
           console.log("then", progress);          
         })
 
