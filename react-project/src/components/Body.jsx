@@ -9,6 +9,7 @@ import Header from "./Header";
 import CreateImage from './CreateImage'
 import EditImage from "./EditImage";
 import ResultImage from './ResultImage'
+import Goodslist from "./Goodslist";
 
 const Body = () => {
   // // 23-11-14 16:21 임휘훈 작성 Private Route
@@ -40,6 +41,8 @@ const Body = () => {
         <Route path="/image-edit" element = {<EditImage/>}/>
         {/* 출력 이미지  */}
         <Route path="/image-result" element={<ResultImage/>}/>
+        {/* 굿즈 상품 페이지 */}
+        <Route path="/goodslist" element={<Goodslist/>}/>
         </Routes>
       <Footer />
     </div>
