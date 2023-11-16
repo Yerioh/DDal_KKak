@@ -39,9 +39,9 @@ const Header = () => {
           </Navbar.Brand>
           <Nav className="me-auto">
             <Link className="nav-link" to="/image-create">
-              <span>이미지 생성</span>
+              <span>이미지 생성</span>          
             </Link>
-            <Link className="nav-link" to="/merch">
+            <Link className="nav-link" to="/goodslist">
               <span>굿즈 페이지</span>
             </Link>
           </Nav>

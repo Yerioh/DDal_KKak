@@ -10,12 +10,15 @@ import Keyword from './Keyword'
 import { Link } from 'react-router-dom'
 import axios from '../axios'
 import axiosProgress from '../axiosProgress'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ProgressBar from "@ramonak/react-progress-bar";
+import {ProgressReducerActions} from '../redux/reducers/progressSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
+
 
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
@@ -30,6 +33,7 @@ const CreateImage = () => {
   const progress = useSelector((state)=>state.progress.progress)
   // 이미지 생성 진행상황 (true, false)
   const isLoading = useSelector((state)=>state.progress.isLoading)
+  const dispatch = useDispatch()
 
 
 
@@ -74,12 +78,30 @@ const CreateImage = () => {
         countImg : countImg,      
       })
         .then(res=>{
-          console.log(res.data)
+          let data = res.data
+          if(data.createError){
+            dispatch(ProgressReducerActions.resetProgress())
+            alert('이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.')
+          }
           console.log("then", progress);          
         })
 
     }
   }
+
+  
+  //23-11-16 오전 9:36 나범수 navigate 추가 -> 페이지 개수 전달 위함.
+  const navigate = useNavigate();
+
+  // 2023.11.16 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가
+  const goToResultPage = () => {
+    console.log("Navigating with imageCount:", countImg);
+    navigate('/image-result', { state : {countImg}});
+  };
+
+  const handleImageCountChange = (count) => {
+    setCountImg(count);
+  };
 
   useEffect(()=>{
     if(progress === 100){
@@ -101,25 +123,21 @@ const CreateImage = () => {
           </h1>
           {/* <Progress progress={75} /> */}
           <Form.Label></Form.Label>
-          <Form.Control
-            type="text"    // 키워드 프롬포트 입력창
+          <textarea
+               // 키워드 프롬포트 입력창
             className="prompt" 
             value={positivePrompt}  // 적용되는 키워드 
             onChange={(e) => setPositivePrompt(e.target.value)}
             id='inputPrompt' // 입력 값으로 사용될 state
-            style={{'height':'60px'}} // 입력창 높이
-
           />
+
           <h1>제외 키워드 입력</h1>
           <Form.Label htmlFor="inputPassword5"></Form.Label>
-          <Form.Control 
-          type="text"     // 제외되는 키워드 프롬포트 입력창
-          className="prompt"  
+          <textarea 
+         className="prompt"  
           id='exceptPrompt'  // 제외되는 키워드 입력창
-          style={{'height':'60px'}}
           value={negativePrompt}  // 적용되는 키워드 
           onChange={(e) => setNegativePrompt(e.target.value)}
-
           />          
 
           {/* 키워드 버튼 창 */}
@@ -135,14 +153,14 @@ const CreateImage = () => {
         {/*가이드 모달 창*/}
         {guideModalOpen && (
           <div
-            className={'modal-container'}
+            className={'guidemodal-container'}
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 closeGuideModal()
               }
             }}
           >
-            <div className={'guideModal'}>
+            <div className={'gguidemodal-content`'}>
               <div className={'modal-guide'}> 
               {/* // 이미지 작성가이드 모달창 */}
                 <Button
@@ -157,15 +175,14 @@ const CreateImage = () => {
                   이미지를 생성하는 방법
                 </Button>{' '}
               </div>
-              <div className={'modal-body'}>
-                <div className="modal-body2">
+              <div className={'guidemodal-body'}>
+                <div className="guidemodal-body2">
                   <div className="guide-keyword">
                     <h1>생성 키워드 입력</h1>
                     <Form.Control
                       type="text"
                       value={'강아지,실사체,귀접힘'}
                       readOnly={true}
-                      
                     />
                     <h1 style={{ 'margin-top': '10%' }}>제외 키워드 입력</h1>
                     <Form.Control
@@ -200,19 +217,16 @@ const CreateImage = () => {
         )}
       </div>
 
-      {/* 페이지 옵션 선택 창 페이지 크기, 페이지 출력 갯수, */}
+      {/* 페이지 옵션 선택 창, 페이지 출력 갯수, */}
       <div className="creImg_side">
-        <div >
-          <ImageCreateButton />
-        </div>
         <div id='pageCount'>
-          <PageCountButton setCountImg={setCountImg} />
+          <PageCountButton setCountImg={setCountImg} handleImageCountChange={handleImageCountChange}/>
         </div>
       </div>
       <div>
       <ProgressBar className='progress-bar' completed={progress} maxCompleted={100}/>
       {/* <Link to='/image-edit'> */}
-        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 만들러가기!</button>
+        <button className="creImg_gotobutton btn" onClick={goToResultPage}>이미지 만들러가기!</button>
         {/* </Link> */}
       </div>
       

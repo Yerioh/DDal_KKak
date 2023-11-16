@@ -14,7 +14,7 @@ const axios = require("axios");
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://9644-34-91-132-46.ngrok.io"
+const flaskServer = "http://730b-34-91-132-46.ngrok.io"
 
 // stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
@@ -31,7 +31,8 @@ router.post("/stable", (req, res) => {
       res.json({ imgData });
     })
     .catch((error) => {
-      console.error("err", error);
+      console.error("이미지 생성 에러 발생");
+      res.json({createError : true})
     });
 });
 

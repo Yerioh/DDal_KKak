@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import Header from "./Header";
 import CreateImage from './CreateImage'
 import EditImage from "./EditImage";
+import ResultImage from './ResultImage'
+import Goodslist from "./Goodslist";
 
 const Body = () => {
   // // 23-11-14 16:21 임휘훈 작성 Private Route
@@ -27,11 +29,20 @@ const Body = () => {
     <div className="Web-Container">
       <Header/>
       <Routes>
-        <Route path="/join" element={<Join />}></Route>
+        {/* 회원가입 */}
+        <Route path="/join" element={<Join />}></Route>  
+        {/* 로그인 */}
         <Route path="/login" element={<Login />}></Route>
+        {/*  마이페이지 */}
         <Route path="/mypage" element={<Mypage />}></Route>
-        <Route path="/image-create" element={<CreateImage />} />
+        {/* 이미지 생성 */}
+        <Route path="/image-create" element={<CreateImage />} /> 
+        {/* 이미지 편집 */}
         <Route path="/image-edit" element = {<EditImage/>}/>
+        {/* 출력 이미지  */}
+        <Route path="/image-result" element={<ResultImage/>}/>
+        {/* 굿즈 상품 페이지 */}
+        <Route path="/goodslist" element={<Goodslist/>}/>
         </Routes>
       <Footer />
     </div>

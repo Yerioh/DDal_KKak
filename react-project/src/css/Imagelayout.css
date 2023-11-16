@@ -2,12 +2,8 @@
 .creImg_body {
   display: flex;
   flex-direction: column;
-  border: 1px solid #b4c8bb;
-  background-color: #fcfcfc;
   margin: 0 15%;
-
 }
-
 /* 개인 버튼 커스텀  */
 .btnmy {
   background-color: #2cbdc2;
@@ -15,7 +11,6 @@
   border-color: #2cbdc2;
   transition: all 0.2s
 }
-
 .btnmy:hover {
   background: #01939a;
   color: black;
@@ -27,12 +22,15 @@
   gap: 10%;
   padding: 5% 5% 0% 5%;
 }
-
 .prompt {
-  margin-bottom: 15%;
-  width: 500px;
-}
-
+    margin-bottom: 15%;
+    width: 500px;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 5px;
+    resize: none;
+  }
+ 
 .Control {
   width: 800px;
 }
@@ -51,10 +49,9 @@
   width: 100vh;
 
 }
-
-.creImg_opt>h2 {
-  margin-bottom: 20px;
-  margin-left: 30px;
+.creImg_opt > h2{
+    margin-bottom: 20px;
+    margin-left: 30px;
 }
 
 #creImgButton {
@@ -67,23 +64,22 @@
 .creImg_chkbox {
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width:100%;
 }
-
 /* 체크박스 호버링 애니메이션 */
 .keyWord-button {
   display: none;
 }
-
 #showKeywordCheckbox {
   width: 20px;
   height: 20px;
-  background: url('https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png') 0 -438px no-repeat;
+  background: url('https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png')
+    0 -438px no-repeat;
   vertical-align: top;
   margin: 0 auto;
 }
 
-.keyWord-button:checked+#showKeywordCheckbox {
+.keyWord-button:checked + #showKeywordCheckbox {
   background-position: -75px -438px;
 }
 
@@ -94,7 +90,7 @@
   margin-left: auto;
 }
 
-.modal-container {
+.guidemodal-container {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -107,23 +103,22 @@
   z-index: 1000;
 }
 
-.guideModal {
+.guidemodal-content {
   background-color: #ffffff;
   width: 70%;
   height: 80%;
   padding: 15px;
 }
 
-.modal-img {
+.guidemodal-img {
   display: flex;
 }
-
-.modal-body {
+.guidemodal-body {
   display: flex;
   justify-content: space-between;
 }
 
-.modal-body2 {
+.guidemodal-body2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,7 +153,6 @@
   align-items: center;
   z-index: 1000;
 }
-
 .keyWordmodal-content {
   background-color: #ffffff;
   border-radius: 15px;
@@ -175,27 +169,25 @@
 
 /* 페이지 개수 출력 */
 .pageCountOption {
-  display: flex;
-  flex-direction: column;
-  border: 0;
-  border-radius: 10px;
-  color: black;
-  background-color: #b4c8bb;
-  margin: 0 auto;
-
-}
-
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    border-radius: 10px;
+    color: black;
+    background-color: #b4c8bb;
+    margin: 0 auto;
+    width:80px;
+    padding-left:28px;
+  }
 /* 이미지 생성버튼 */
 .creImg_gotobutton {
-  background: #2cbdc2;
-  width: 100%;
-  color: #ffffff;
-}
+    background: #2cbdc2;
+    margin-top: 2%;
+    margin-left : 19%;
+    width: 60%;
+    color: #ffffff;
+  }
+  .creImg_gotobutton:hover {
+    background-color: #01939a;
+  }
 
-.creImg_gotobutton:hover {
-  background-color: #01939a;
-}
-
-.progress-bar {
-  margin-top: 2%;
-}

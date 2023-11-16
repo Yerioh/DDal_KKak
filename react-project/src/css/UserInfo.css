@@ -1,3 +1,5 @@
+
+
 .UserInfo {
     width: 100%;
     margin-top: 30px;
@@ -15,7 +17,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 600px; /* 가로 크기 설정 */
+    width: 70%; /* 가로 크기 설정 */
 
 }
 
@@ -27,6 +29,24 @@
     justify-content: center;
 }
 .userInfo-btn >button{
-    width: 150px;
+    width: 30%;
+    
+}
+
+@media (max-width: 768px) {
+    .UserInfo{
+
+    }
+    .UserInfo-elementbox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+ 
+    }
+    .userInfo-btn >button{
+        width: 130px;
+        
+    }
     
 }
