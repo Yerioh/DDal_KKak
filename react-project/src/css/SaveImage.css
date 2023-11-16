@@ -12,7 +12,8 @@
     /* width: 700px;
     height: 700px; */
     display: flex;
-    justify-content: center;   
+    justify-content: center;
+    overflow: hidden;   
 }
 .S-Ibox{
     justify-content: center;
@@ -27,6 +28,7 @@
     width: 90%;
     height: 80%;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .loading-indicator {
