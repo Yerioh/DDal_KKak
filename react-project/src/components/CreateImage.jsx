@@ -33,6 +33,9 @@ const CreateImage = () => {
   const progress = useSelector((state)=>state.progress.progress)
   // 이미지 생성 진행상황 (true, false)
   const isLoading = useSelector((state)=>state.progress.isLoading)
+
+  const [imgData , setImgData] = useState([])
+
   const dispatch = useDispatch()
 
 
@@ -79,6 +82,9 @@ const CreateImage = () => {
       })
         .then(res=>{
           let data = res.data
+          console.log('생성된 이미지', data)
+          setImgData(data.imgData.img_data)
+          // axios 통신 중, 에러 발생 시
           if(data.createError){
             dispatch(ProgressReducerActions.resetProgress())
             alert('이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.')
@@ -96,7 +102,7 @@ const CreateImage = () => {
   // 2023.11.16 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가
   const goToResultPage = () => {
     console.log("Navigating with imageCount:", countImg);
-    navigate('/image-result', { state : {countImg}});
+    setTimeout(navigate('/image-result', { state : {countImg : countImg, imgData : imgData}}), 3000);
   };
 
   const handleImageCountChange = (count) => {
@@ -105,7 +111,7 @@ const CreateImage = () => {
 
   // progressBar 100%, 로딩 완료시 이미지 생성 결과 사이트로 이동
   useEffect(()=>{
-    if(progress === 100 && isLoading){
+    if(progress === 100 && !isLoading){
       console.log('이미지 생성 완료')
       // 이미지 생성 결과 사이트로 이동
       goToResultPage()

@@ -3,8 +3,10 @@ import { useLocation } from "react-router-dom";
 import "../css/ImageResult.css";
 
 const ResultImage = () => {
+  const s3Url = 'https://final-project-s3bucket.s3.ap-northeast-2.amazonaws.com/'
   const location = useLocation();
-  console.log("결과 이미지를 받았습니다.", location.state);
+  const imgData = location.state.imgData
+  console.log("결과 이미지를 받았습니다.", location);
   const countImg = location.state?.countImg || 1;
   const containerClass =
     countImg === 4 ? "four-images" : countImg === 5 ? "five-images" : "";
@@ -12,11 +14,11 @@ const ResultImage = () => {
 
   // imageCount 만큼의 <li> 요소를 생성하는 함수
   const renderImageList = () => {
-    return Array.from({ length: countImg }, (_, index) => {
+    return Array.from(imgData, (img, index) => {
       return (
         <li key={index} className="imageresult">
           <div className="card">
-            <img src={imgSrc} alt={`Image ${index + 1}`} />
+            <img src={`${s3Url}${img}`} alt={`Image ${index + 1}`} />
           </div>
           {/* 받은 이미지 개수 만큼 이미지 추가  */}
           {/* 추가적인 내용이 필요하다면 여기에 넣을 수 있습니다. */}
