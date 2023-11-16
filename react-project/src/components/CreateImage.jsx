@@ -103,9 +103,11 @@ const CreateImage = () => {
     setCountImg(count);
   };
 
+  // progressBar 100%, 로딩 완료시 이미지 생성 결과 사이트로 이동
   useEffect(()=>{
     if(progress === 100 && isLoading){
       console.log('이미지 생성 완료')
+      // 이미지 생성 결과 사이트로 이동
       goToResultPage()
     }
   },[progress, isLoading])
