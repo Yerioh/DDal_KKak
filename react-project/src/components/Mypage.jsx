@@ -30,7 +30,6 @@ const Mypage = () => {
     if(isLogin){
       axios.post("/user/mypage", {userID : id})
       .then((res) => {
-        console.log("마이페이지 DB에서 온 유저 정보", res.data.member_email, res.data.member_phone);
         if (res.data.member_email !== '0'){
           setEmail(res.data.member_email) // DB에서 가져온 Email을 state에 저장
         }

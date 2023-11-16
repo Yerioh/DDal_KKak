@@ -54,7 +54,6 @@ router.post("/join", (req, res) => {
 router.post("/checkId", (req, res) => {
   let id = req.body.id;
   let query = "SELECT MEMBER_ID FROM TB_MEMBER WHERE MEMBER_ID = ?";
-  console.log("아이디 머임", id);
   conn.connect();
   conn.query(query, [id], (err, result) => {
     if (err) {
@@ -230,7 +229,7 @@ router.post('/deleteUser',(req,res)=>{
   // 로그인 타입이 일반 회원일 때
   else if(loginType == "M"){
     conn.connect()
-    conn.query(deleteUserSQL, [userId], (err,result)=>{
+    conn.query(deleteUserSQL, [userId], (err, result)=>{
       if(err){
         console.log('일반 회원 탈퇴 쿼리문 에러',err)
       }

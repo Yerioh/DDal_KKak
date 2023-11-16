@@ -14,14 +14,12 @@ const Login = () => {
 
   /** 로그인 버튼 함수 */
   const login_btn = () => {
-    console.log("로그인 버튼 기능 활성화");
     axios.post("/user/login", {
       userId : idRef.current.value, // 아이디
       userPw : pwRef.current.value // 비밀번호
     }).then((res) => {
       console.log(res.data);
       if(res.data == true){
-        console.log("프론트 페이지이동");
         window.location.href = "/"
       }
     })

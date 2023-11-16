@@ -14,7 +14,7 @@ const axios = require("axios");
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://730b-34-91-132-46.ngrok.io"
+const flaskServer = "http://ea24-35-222-102-242.ngrok.io"
 
 // stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
