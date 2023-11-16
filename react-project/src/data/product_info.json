@@ -1,0 +1,50 @@
+[
+  {
+    "PROD_ID": "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+    "PROD_NAME": "후드 집업",
+    "PROD_INFO": "다양한 색상으로 제작되어 선택의 폭이 넓으며 캐주얼하게 착용하기 좋습니다.",
+    "PROD_CATEGORY": "clothes",
+    "PROD_PRICE": 30000,
+    "PROD_THUMB": "https://drive.google.com/uc?id=16rTg99i9dD9YajFB4rTQ8obKXfLmx3yj"
+  },
+  {
+    "PROD_ID": "1bb25a87-81cf-11ee-be11-0242ac130002",
+    "PROD_NAME": "티셔츠",
+    "PROD_INFO": "30수 원단으로 부드러우면서 베이직한 핏에 다양한 사이즈 선택이 가능하며 기본 아이템으로 활용도가 높습니다.",
+    "PROD_CATEGORY": "clothes",
+    "PROD_PRICE": 5000,
+    "PROD_THUMB": "https://drive.google.com/uc?id=1lRYPCQQjad7MiJnBB5vW8SSxoQQB4Myh"
+  },
+  {
+    "PROD_ID": "1bbe686a-81cf-11ee-be11-0242ac130002",
+    "PROD_NAME": "오버핏 티셔츠",
+    "PROD_INFO": "도톰한 17수 라운드 티셔츠 입니다. 오래입어도 쉽게 모양이 변하지 않는 상품입니다.",
+    "PROD_CATEGORY": "clothes",
+    "PROD_PRICE": 10000,
+    "PROD_THUMB": "https://drive.google.com/uc?id=1v8BQk3hsfOrYZHsEeq63lWO4qVQ--Cwn"
+  },
+  {
+    "PROD_ID": "1bc99c5b-81cf-11ee-be11-0242ac130002",
+    "PROD_NAME": "맨투맨",
+    "PROD_INFO": "부드럽고 착용감이 좋은 특양면 기본 맨투맨 입니다. 넥라인에 헤리테잎작업이 되어서 목늘어남이 적으며 형태변형이 없는 제품 입니다",
+    "PROD_CATEGORY": "clothes",
+    "PROD_PRICE": 15000,
+    "PROD_THUMB": "https://drive.google.com/uc?id=1PCoolrIrJPaJNsVh4quqfmom6imXs8yN"
+  },
+  {
+    "PROD_ID": "1bf00382-81cf-11ee-be11-0242ac130002",
+    "PROD_NAME": "머그컵",
+    "PROD_INFO": "머그컵 입니다. 깔끔히 마감된 바닥면과 둥그런 손잡이로 안정감 있게 사용 가능합니다. MSDS(물질안전보건자료) 검사를 통과하여 안전하게 사용 가능합니다.",
+    "PROD_CATEGORY": "living",
+    "PROD_PRICE": 15000,
+    "PROD_THUMB": "https://drive.google.com/uc?id=1xK2DMUdzyGdSzU534tNKijlb-Gs9wEHT"
+  },
+  {
+    "PROD_ID": "1eaf5516-81cf-11ee-be11-0242ac130002",
+    "PROD_NAME": "스마트톡",
+    "PROD_INFO": "스마트폰에 부착하는 액세서리로 안정적인 그립감과 뛰어난 고정력으로 스마트폰을 더욱 안전하고 편리하게 사용할 수 있습니다. 3단계로 높이 조절이 가능하여 이어폰 줄을 감아 보관하거나 거치대로 사용 가능합니다",
+    "PROD_CATEGORY": "phone_acc",
+    "PROD_PRICE": 10000,
+    "PROD_THUMB": "https://drive.google.com/uc?id=1SIV3qHnPG9QC6BBVOMCDABXDm-u5zW6M"
+  }
+]
