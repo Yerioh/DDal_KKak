@@ -1,3 +1,13 @@
+.editimagebody{
+    width:60%;
+    margin: auto;
+    margin-top : 7%;
+}
+
+.imageedittool{
+    width:100%;
+}
+
 .displayKeyword{
     display: flex;
     flex-direction: column;

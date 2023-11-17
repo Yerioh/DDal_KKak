@@ -62,7 +62,7 @@ const ResultImage = () => {
   return (
     <div className={`result-body ${containerClass}`}>
       <div className="result-containor">
-        <div>
+        <div className="input-area">
           <div className="keywrod-area">
           {/* <div id="keywordbox">
           </div> */}
