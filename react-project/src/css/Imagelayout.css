@@ -1,15 +1,16 @@
 /* 생성페이지 몸통 */
-.creImg_body {
+button .creImg_body {
   display: flex;
   flex-direction: column;
   margin: 0 15%;
+  gap: 49px;
 }
 /* 개인 버튼 커스텀  */
 .btnmy {
-  background-color: #2cbdc2;
-  color: #ffffff;
-  border-color: #2cbdc2;
-  transition: all 0.2s
+  border-style: none;
+  color: black;
+  transition: all 0.2s;
+  border-radius: 15px;
 }
 .btnmy:hover {
   background: #01939a;
@@ -17,54 +18,62 @@
 }
 
 /* 프롬포트 구역 */
-.prompt_container {
+
+.postive_head {
   display: flex;
-  gap: 10%;
-  padding: 5% 5% 0% 5%;
+  justify-content: space-between;
+  align-items: center;
 }
 .prompt {
-    margin-bottom: 15%;
-    width: 500px;
-    height: 150px;
-    border: 1px solid black;
-    border-radius: 5px;
-    resize: none;
-  }
- 
+  width: 450px;
+  height: 30px;
+  border: 1px solid #c3c3c3;
+  border-radius: 10px;
+  resize: none;
+}
+.prompt_container {
+  display: flex;
+  flex-direction: column;
+  gap: 11vh;
+  padding: 3% 0 0% 10%;
+  align-items: flex-start;
+  
+}
+
 .Control {
   width: 800px;
 }
 
 
-/* 가이드 키워드부분 전체 구역*/
-.guide-keyword {
-  width: 500px;
+.negative_keyword {
+  display: flex;
+  flex-direction: column;
+
 }
 
 /* 키워드 버튼 구역  */
 .creImg_opt {
+  display: flex;
   gap: 10%;
   flex-direction: column;
   border-radius: 15px;
-  width: 100vh;
+  align-items: flex-start;
+}
 
-}
-.creImg_opt > h2{
-    margin-bottom: 20px;
-    margin-left: 30px;
-}
 
 #creImgButton {
   margin-top: 10%;
   margin-left: 70%;
   height: 90px;
+  border-radius: 5px;
+  border-color: #c3c3c3;
 }
 
 /* 키워드 체크박스 부분 */
 .creImg_chkbox {
   display: flex;
   justify-content: space-evenly;
-  width:100%;
+  width: 500px;
 }
 /* 체크박스 호버링 애니메이션 */
 .keyWord-button {
@@ -73,7 +82,7 @@
 #showKeywordCheckbox {
   width: 20px;
   height: 20px;
-  background: url('https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png')
+  background: url("https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png")
     0 -438px no-repeat;
   vertical-align: top;
   margin: 0 auto;
@@ -86,8 +95,9 @@
 /* 모달창 관련 */
 .modal-open-button,
 .modal-close-btn {
-  cursor: pointer;
-  margin-left: auto;
+  position: relative;
+  border-radius: 10px;
+  left: 85%;
 }
 
 .guidemodal-container {
@@ -100,7 +110,6 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
 }
 
 .guidemodal-content {
@@ -124,6 +133,10 @@
   justify-content: center;
 }
 
+/* 가이드 키워드부분 전체 구역*/
+.guide-keyword {
+  width: 500px;
+}
 /* 가이드 모달창 관련 */
 .guide-manual {
   margin-top: 15%;
@@ -136,58 +149,86 @@
   transition: all 0.2s;
   font-size: 20px;
   margin: 0 0 0 6%;
-  color: #fff;
+  border-radius: 5px;
 }
 
 /* 전체 키워드 모달창  */
 .keyWordmodal-container {
+  background-color: #ffffff;
   border: 1px solid;
   border-radius: 15px;
-  width: 35%;
+  width: 40%;
   height: 50%;
   position: fixed;
-  top: 9%;
-  right: 17%;
-  display: flex;
+  bottom: 12%;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 .keyWordmodal-content {
+  display: flex;
   background-color: #ffffff;
   border-radius: 15px;
   width: 100%;
-  height: 100%;
+  height: 90%;
   padding: 15px;
 }
 
 /* 페이지 부가옵션 구역 */
 .creImg_side {
-  margin-top: 5%;
+  margin-top: 20px;
   margin: 0 auto;
 }
 
 /* 페이지 개수 출력 */
 .pageCountOption {
-    display: flex;
-    flex-direction: column;
-    border: 0;
-    border-radius: 10px;
-    color: black;
-    background-color: #b4c8bb;
-    margin: 0 auto;
-    width:80px;
-    padding-left:28px;
-  }
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 10px;
+  color: black;
+  background-color: #b4c8bb;
+  margin: 0 auto;
+  width: 80px;
+  padding-left: 28px;
+  margin-bottom: 10%;
+}
 /* 이미지 생성버튼 */
 .creImg_gotobutton {
-    background: #2cbdc2;
-    margin-top: 2%;
-    margin-left : 19%;
-    width: 60%;
-    color: #ffffff;
-  }
-  .creImg_gotobutton:hover {
-    background-color: #01939a;
-  }
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #c3c3c3;
+}
+.creImg_gotobutton:hover {
+  background-color: #01939a;
+}
 
+.imgtopbody {
+  display: flex;
+  justify-content: center;
+}
+
+.previewimage {
+  width: 50%;
+  padding: 3% 3% 3% 3%;
+}
+
+.previewimage h3{
+  margin-left:60px;
+}
+
+.aisampleimage {
+  display: flex;
+  gap: 10px;
+  flex-direction : row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-evenly;
+  
+}
+
+.gotoeditpage{
+  width:50%;
+  margin:0 auto;
+  margin-bottom:20px;
+}

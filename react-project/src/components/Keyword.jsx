@@ -97,11 +97,11 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           }}
         >
           <div className={'keyWordmodal-content'}>
+          </div>
             {/* 모달 내용 */}
             <button className={'modal-close-btn'} onClick={closeKeyWrodModal}>
               모달 닫기
-            </button>
-          </div>
+            </button>  
         </div>
       )}
     </div>

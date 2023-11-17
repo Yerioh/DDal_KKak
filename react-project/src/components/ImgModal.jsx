@@ -15,7 +15,6 @@ const ImgModal = ({
         이미지 URL, 사용자 Prompt, NPrompt
     */
 
-        console.log(Img_data)
   return (
     <div>
       {isOpen ? (
@@ -23,14 +22,14 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img src={Img_data[index].url} alt="Ex_image" />
+              <img src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`} alt="Ex_image" />
             </div>
             <hr />
             <div className="user-Prompt">
-              <h5>Prompt</h5>
-              <span>사자 닮은 사람</span>
+              <h5>Positive Prompt</h5>
+              <span>{ImgArray[index].IMG_PROMPT}</span>
               <h5>Negative Prompt </h5>
-              <span>코뿔소 닮은 사람</span>
+              <span>{ImgArray[index].IMG_NE_PROMPT}</span>
             </div>
             <hr />
             <div className="Modal-Btn">

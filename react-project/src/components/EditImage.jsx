@@ -46,12 +46,12 @@ function EditImage() {
       { label: "TAEBAEKmilkyway", value: "TAEBAEKmilkyway" },
       { label: "JalnanGothic", value: "JalnanGothic" },
       { label: "IAMAPLAYER", value: "IAMAPLAYER" },
-      { label: "Roboto", value: "Rovoto"},
-      { label: "Pretendard", value : "Pretendard"},
-      { label: 'PuradakGentleGothicR', value:'PuradakGentleGothicR'},
-      { label: '필승고딕', value:'PilseungGothic'},
-      { label: '도스고딕', value:'DOSGothic'},
-      {label:'신라고딕', value:'Shilla_Gothic-Bold'},
+      { label: "Roboto", value: "Rovoto" },
+      { label: "Pretendard", value: "Pretendard" },
+      { label: "PuradakGentleGothicR", value: "PuradakGentleGothicR" },
+      { label: "필승고딕", value: "PilseungGothic" },
+      { label: "도스고딕", value: "DOSGothic" },
+      { label: "신라고딕", value: "Shilla_Gothic-Bold" },
     ],
     fontSize: 28,
     letterSpacing: 0,
@@ -65,12 +65,7 @@ function EditImage() {
 
 
   return (
-    <div>
-      <div className="inputarea">{positive}</div>  
-      {/* 입력된 키워드 출력창 */}
-      <div className="exceptarea">{negative}</div>
-      {/* 제외된 키워드 출력창 */}
-
+    <div className="editimagebody">
       {/* 이미지 편집창 */}
       <FilerobotImageEditor
         source={imgUrl}

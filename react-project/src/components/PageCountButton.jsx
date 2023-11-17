@@ -6,7 +6,7 @@ const PageCountButton = ({handleImageCountChange}) => {  //CreateImage에게 페
   };
   return (
     <div>
-      <h2>출력할 사진 갯수를 선택해주세요!</h2>
+      <h3>출력할 사진 갯수를 선택해주세요!</h3>
       <p>
         *개수를 많이 생성할 수록 이미지가 만들어지는 데 시간이 더 소모됩니다.
       </p>

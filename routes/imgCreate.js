@@ -77,7 +77,8 @@ router.post("/myimg", (req, res) => {
   console.log("내 저장 이미지", req.body.id);
   let userId = req.body.id // 유저 아이디
 
-  let selectQuery = "SELECT IMG_PROMPT, IMG_NE_PROMPT, IMG_URL FROM TB_GEN_IMG WHERE MEMBER_ID = ?"
+  let selectQuery = "SELECT IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT"
+  let descSelectQuery = "SELECT IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC"
   conn.connect()
   conn.query(selectQuery, [userId], (err, result) => {
     if(err){
