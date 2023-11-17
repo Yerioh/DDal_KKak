@@ -6,20 +6,18 @@ import axios from "../axios";
 const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
-  Eximage, //예시 이미지
+  Img_data, //예시 이미지
   index,
   Prompt,
   NPrompt,
 }) => {
-
- console.log("props",index)
   /* 
         Props로 받아야할 Data
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
         이미지 URL, 사용자 Prompt, NPrompt
-
-       
     */
+
+        console.log(Img_data)
   return (
     <div>
       {isOpen ? (
@@ -27,7 +25,7 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img src={Eximage[index]} alt="Ex_image" />
+              <img src={Img_data[index].url} alt="Ex_image" />
             </div>
             <hr />
             <div className="user-Prompt">

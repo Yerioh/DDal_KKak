@@ -80,11 +80,13 @@ const Mypage = () => {
             <img onClick={delete_Modal} className="delete-icon-img" src={delete_user_icon} alt="delete_user_icon" />
           </div>
         </div>
+        
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} />}
       {pageState === "Save_Image" && <SaveImage />}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
-    </div>
+
+          </div>
   );
 };
 

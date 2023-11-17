@@ -8,9 +8,6 @@
     align-items: center;
 }
 
-.UserInfo>h1 {
-    text-align: center;
-}
 
 .UserInfo-elementbox {
     display: flex;
@@ -18,7 +15,11 @@
     align-items: center;
     justify-content: center;
     width: 70%; /* 가로 크기 설정 */
-
+    
+    margin-top: 10px;
+}
+.UserInfo-elementbox > form{
+    border-top: 1px solid gray;
 }
 
 
