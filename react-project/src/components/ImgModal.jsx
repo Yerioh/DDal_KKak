@@ -12,7 +12,14 @@ const ImgModal = ({
   // 23-11-17 17:00 임휘훈 작성
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
-    createElement
+    console.log("다운로드 버튼 활성화");
+    const imgDownload = document.createElement('a')
+    console.log("경로", `${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`);
+    imgDownload.href = `/${ImgArray[index].IMG_URL}` // 절대경로를 넣으면 다운로드 안됨
+    console.log("다운로드", `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`);
+    imgDownload.download = `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`
+    console.log("dafdfa",imgDownload);
+    imgDownload.click()
   }
 
   /* 
