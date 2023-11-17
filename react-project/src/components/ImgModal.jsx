@@ -6,13 +6,10 @@ import axios from "../axios";
 const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
-  Eximage, //예시 이미지
+  ImgArray, // 이미지 배열
   index,
-  Prompt,
-  NPrompt,
 }) => {
 
- console.log("props",index)
   /* 
         Props로 받아야할 Data
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기

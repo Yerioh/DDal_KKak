@@ -74,7 +74,6 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   // 23-11-14 14:20 임휘훈 작성
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
-    console.log(email, phone);
     if (loginType == "M") {
       idRef.current.value = id;
     } else if (loginType == "G") {

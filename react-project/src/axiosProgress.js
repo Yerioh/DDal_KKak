@@ -59,6 +59,7 @@ instance.interceptors.response.use((response)=>{
     }
     // axios 에러 발생시 응답 interceptors 정지
     if(response.data.createError){
+        store.dispatch(ProgressReducerActions.resetProgress())
         return response
     }
     setProgress(100)
