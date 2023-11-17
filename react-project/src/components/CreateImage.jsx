@@ -37,8 +37,6 @@ const CreateImage = () => {
 
   const dispatch = useDispatch()
 
-
-
   // 키워드 모달 상태 변경을 처리하는 함수
   const handleKeyWordModalChange = () => {
     // 모달 상태에 따른 추가적인 작업 (예: 모달 상태를 다른 state에 저장하는 등)
@@ -197,7 +195,7 @@ const CreateImage = () => {
                       value={'강아지,실사체,귀접힘'}
                       readOnly={true}
                     />
-                    <h1 style={{ 'margin-top': '10%' }}>제외 키워드 입력</h1>
+                    <h1 style={{ 'margin-top': '10%' }}>부정 프롬프트 입력</h1>
                     <Form.Control
                       type="text"
                       value={'컬러, 몸통'}
@@ -206,9 +204,9 @@ const CreateImage = () => {
                       
                     />
                     <div className="guide-manual">
-                      <p>1. 생성키워드에 만들고 싶은 단어를 입력하세요!</p>
-                      <p>2. 제외키워드에 빼고 싶은 단어를 입력하세요!</p>
-                      <p>3. 이미지생성! 버튼을 클릭하면 이미지가 생성됩니다.</p>
+                      <p>1. 긍정프롬프트에는 이미지에 포함하고 싶은 단어를 입력하세요.</p>
+                      <p>2. 부정프롬프트에는 이미지에 제외하고 싶은 단어를 입력하세요.</p>
+                      <p>3. '이미지 생성' 버튼을 클릭하면 이미지가 생성됩니다.</p>
                     </div>
                   </div>
                 </div>
@@ -239,7 +237,7 @@ const CreateImage = () => {
       <div>
       <ProgressBar className='progress-bar' completed={progress} maxCompleted={100}/>
       {/* <Link to='/image-edit'> */}
-        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 만들러가기!</button>
+        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 생성</button>
         {/* </Link> */}
       </div>
       

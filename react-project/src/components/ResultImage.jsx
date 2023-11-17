@@ -16,17 +16,17 @@ const ResultImage = () => {
 
   // imageCount 만큼의 <li> 요소를 생성하는 함수
   const renderImageList = () => {
-    // return Array.from(imgData, (img, index) => {
-    //   return (
-    //     <li key={index} className="imageresult">
-    //       <div className="card">
-    //         <img src={`${s3Url}${img}`} alt={`Image ${index + 1}`} />
-    //       </div>
-    //       {/* 받은 이미지 개수 만큼 이미지 추가  */}
-    //       {/* 추가적인 내용이 필요하다면 여기에 넣을 수 있습니다. */}
-    //     </li>
-    //   );
-    // });
+    return Array.from(imgData, (img, index) => {
+      return (
+        <li key={index} className="imageresult">
+          <div className="card">
+            <img src={`${s3Url}${img}`} alt={`Image ${index + 1}`} />
+          </div>
+          {/* 받은 이미지 개수 만큼 이미지 추가  */}
+          {/* 추가적인 내용이 필요하다면 여기에 넣을 수 있습니다. */}
+        </li>
+      );
+    });
   };
 
   return (
