@@ -13,10 +13,7 @@ import { ProgressReducerActions } from "../redux/reducers/progressSlice";
 import { useNavigate } from "react-router-dom";
 import Sample from "../img/guideSample_dog.jpeg";
 import Arrow from "../img/rightArrow.png";
-import sampleimg1 from "../img/hyper-deta.png";
-import sampleimg2 from "../img/eyes.png";
-import sampleimg3 from "../img/realistic_pic.png";
-import sampleimg4 from "../img/kissing.png";
+
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
   // 23-11-15 오후 17:00 박지훈 작성
@@ -44,20 +41,16 @@ const CreateImage = () => {
 
   // 체크박스 입력 버튼
   const handleCheckboxChange = (e) => {
-    const value = e.target.value;
-    const checked = e.target.checked;
-    // 선택되면 값 추가, 아니면 제거
-    setPositivePrompt((prev) => {
-      // 공백으로 분리된 단어 배열로 변환
-      const valuesArray = prev.split(" ").filter((v) => v);
-      if (checked) {
-        // 체크된 경우 값 추가
-        return [...valuesArray, value].join(" ");
-      } else {
-        // 체크 해제된 경우 값 제거
-        return valuesArray.filter((v) => v !== value).join(" ");
-      }
-    });
+    const { value, checked } = e.target;
+
+    // 체크된 경우 값 추가
+    if (checked) {
+      setPositivePrompt((prev) => [...prev, value]);
+    }
+    // 체크 해제된 경우 값 제거
+    else {
+      setPositivePrompt((prev) => prev.filter((item) => item !== value));
+    }
   };
 
   // 모달을 열기 위한 함수
@@ -70,23 +63,26 @@ const CreateImage = () => {
   // 이미지 생성 버튼 클릭
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
-    if(positivePrompt !== ''){
-      axiosProgress.post('/imgCreate/stable', {
-        positivePrompt : positivePrompt, 
-        negativePrompt : negativePrompt,
-        countImg : countImg,      
-      })
-        .then(res=>{
-          let data = res.data
-          console.log('생성된 이미지', data)
-          
+    if (positivePrompt !== "") {
+      axiosProgress
+        .post("/imgCreate/stable", {
+          positivePrompt: positivePrompt,
+          negativePrompt: negativePrompt,
+          countImg: countImg,
+        })
+        .then((res) => {
+          let data = res.data;
+          console.log("생성된 이미지", data);
+
           // axios 통신 중, 에러 발생 시
-          if(data.createError){
-            dispatch(ProgressReducerActions.resetProgress())
-            alert('이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.')
+          if (data.createError) {
+            dispatch(ProgressReducerActions.resetProgress());
+            alert(
+              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
+            );
           }
-          if(data.imgData.img_data !== undefined){
-            setImgData(data.imgData.img_data)
+          if (data.imgData.img_data !== undefined) {
+            setImgData(data.imgData.img_data);
           }
         })
         .then((res) => {
@@ -145,7 +141,7 @@ const CreateImage = () => {
           {/* 긍정 키워드 입력 구역  */}
           <div className="keyword">
             <h3 className="postive_head">
-              키워드 입력
+              넣을 단어{" "}
               <button className="guide-button btnmy" onClick={openGuideModal}>
                 가이드
               </button>{" "}
@@ -153,32 +149,31 @@ const CreateImage = () => {
             {/* <Progress progress={75} /> */}
 
             <Form.Label></Form.Label>
-            <input
+            <textarea
               type="text"
               // 키워드 프롬포트 입력창
-              className="prompt"
+              className="prompt-input"
               value={positivePrompt} // 적용되는 키워드
               onChange={(e) => setPositivePrompt(e.target.value)}
               id="inputPrompt" // 입력 값으로 사용될 state
               placeholder="키워드를 입력해주세요"
+              spellCheck="false"
             />
 
             {/* 키워드 버튼 창 */}
-          </div>
-          <div className="creImg_opt">
-            <h3>넣고 싶은 키워드를 클릭해주세요!</h3>
             <Keyword
               handleCheckboxChange={handleCheckboxChange}
               onModalChange={handleKeyWordModalChange}
             />
           </div>
+
           {/* 부정 키워드 입력  */}
           <div className="negative_keyword">
-            <h3>부정 프롬프트 입력</h3>
+            <h3>뺄 단어</h3>
             <Form.Label></Form.Label>
-            <input
+            <textarea
               type="text"
-              className="prompt"
+              className="prompt-input"
               id="exceptPrompt" // 제외되는 키워드 입력창
               value={negativePrompt} // 적용되는 키워드
               onChange={(e) => setNegativePrompt(e.target.value)}
@@ -194,6 +189,18 @@ const CreateImage = () => {
                 handleImageCountChange={handleImageCountChange}
               />
             </div>
+          </div>
+          <div className="gotoeditpage">
+            <ProgressBar
+              className="progress-bar"
+              completed={progress}
+              maxCompleted={100}
+            />
+            {/* <Link to='/image-edit'> */}
+            <button className="creImg_gotobutton btn" onClick={createImg}>
+              딸-깍!
+            </button>
+            {/* </Link> */}
           </div>
           {/*가이드 모달 창*/}
           {guideModalOpen && (
@@ -266,44 +273,6 @@ const CreateImage = () => {
             </div>
           )}
         </div>
-        <div className="previewimage">
-          <h3>이미지 예시</h3>
-          <div className="aisampleimage">
-            <img
-              src={sampleimg1}
-              style={{ width: "35%", height: "25%" }}
-              alt=""
-            />
-            <img
-              src={sampleimg4}
-              style={{ width: "35%", height: "25%" }}
-              alt=""
-            />
-            <img
-              src={sampleimg3}
-              style={{ width: "35%", height: "25%" }}
-              alt=""
-            />
-            <img
-              src={sampleimg2}
-              style={{ width: "35%", height: "25%" }}
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="gotoeditpage">
-        <ProgressBar
-          className="progress-bar"
-          completed={progress}
-          maxCompleted={100}
-        />
-        {/* <Link to='/image-edit'> */}
-        <button className="creImg_gotobutton btn" onClick={createImg}>
-          이미지 만들러가기!
-        </button>
-        {/* </Link> */}
       </div>
     </div>
   );

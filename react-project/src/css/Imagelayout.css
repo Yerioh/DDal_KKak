@@ -7,10 +7,11 @@ button .creImg_body {
 }
 /* 개인 버튼 커스텀  */
 .btnmy {
+  width:20%;
   border-style: none;
   color: black;
   transition: all 0.2s;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 .btnmy:hover {
   background: #01939a;
@@ -24,20 +25,24 @@ button .creImg_body {
   justify-content: space-between;
   align-items: center;
 }
-.prompt {
-  width: 450px;
-  height: 30px;
+.prompt-input {
+  width: 100%;
   border: 1px solid #c3c3c3;
-  border-radius: 10px;
+  border-radius: 5px;
   resize: none;
+  height: 100px;
 }
 .prompt_container {
   display: flex;
   flex-direction: column;
-  gap: 11vh;
-  padding: 3% 0 0% 10%;
+  gap: 7vh;
   align-items: flex-start;
+  padding: 4% 2% 2% 2%; 
   
+}
+
+.prompt_container > .keyword{
+  width:100%;
 }
 
 .Control {
@@ -46,16 +51,14 @@ button .creImg_body {
 
 
 .negative_keyword {
+  width:100%;
   display: flex;
   flex-direction: column;
-
 }
 
 /* 키워드 버튼 구역  */
 .creImg_opt {
   display: flex;
-  gap: 10%;
-  flex-direction: column;
   border-radius: 15px;
   align-items: flex-start;
 }
@@ -73,7 +76,7 @@ button .creImg_body {
 .creImg_chkbox {
   display: flex;
   justify-content: space-evenly;
-  width: 500px;
+  width: 90%;
 }
 /* 체크박스 호버링 애니메이션 */
 .keyWord-button {
@@ -190,17 +193,23 @@ button .creImg_body {
   background-color: #b4c8bb;
   margin: 0 auto;
   width: 80px;
+  height: 30px;
   padding-left: 28px;
-  margin-bottom: 10%;
+}
+.pagecountbutton>.counthead{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 /* 이미지 생성버튼 */
 .creImg_gotobutton {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #c3c3c3;
+  margin-top: 3%;
 }
 .creImg_gotobutton:hover {
-  background-color: #01939a;
+  border: solid 2px
 }
 
 .imgtopbody {
@@ -224,11 +233,15 @@ button .creImg_body {
   flex-wrap: wrap;
   align-content: center;
   justify-content: space-evenly;
-  
 }
 
 .gotoeditpage{
-  width:50%;
+  width:100%;
   margin:0 auto;
   margin-bottom:20px;
 }
+
+.counthead{
+  display: flex;
+}
+
