@@ -190,7 +190,7 @@ const SaveImage = () => {
         <ImgModal
           isOpen={isOpen}
           openModalHandler={openModalHandler}
-          imgArray={imgArray}
+          ImgArray={imgArray}
           index={testIndex}
         />
       </div>

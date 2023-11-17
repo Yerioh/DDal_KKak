@@ -18,7 +18,7 @@ let conn = db.init();
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://5aa9-35-198-236-203.ngrok.io"
+const flaskServer = "https://f79c-34-126-70-79.ngrok.io"
 
 // stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {

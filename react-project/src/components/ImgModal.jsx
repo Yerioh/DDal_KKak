@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createElement, useState } from "react";
 import "../css/ImgModal.css";
 import { Link } from "react-router-dom";
 import axios from "../axios";
@@ -9,6 +9,12 @@ const ImgModal = ({
   ImgArray, // 이미지 배열
   index,
 }) => {
+  // 23-11-17 17:00 임휘훈 작성
+  /** 내 저장 이미지 다운로드 함수 */
+  const downLoadBtn = () => {
+    createElement
+  }
+
   /* 
         Props로 받아야할 Data
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
@@ -39,7 +45,7 @@ const ImgModal = ({
               <Link to="#">
                 <button>굿즈 선택</button>
               </Link>
-              <button>다운로드</button>
+              <button onClick={downLoadBtn}>다운로드</button>
               <button onClick={openModalHandler}>닫기</button>
             </div>
           </div>
