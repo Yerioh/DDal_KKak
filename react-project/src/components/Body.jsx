@@ -10,6 +10,8 @@ import CreateImage from './CreateImage'
 import EditImage from "./EditImage";
 import ResultImage from './ResultImage'
 import Goodslist from "./Goodslist";
+import GoodsDetail from "./GoodsDetail";
+import Basket from "./Basket";
 
 const Body = () => {
   // // 23-11-14 16:21 임휘훈 작성 Private Route
@@ -43,6 +45,10 @@ const Body = () => {
         <Route path="/image-result" element={<ResultImage/>}/>
         {/* 굿즈 상품 페이지 */}
         <Route path="/goodslist" element={<Goodslist/>}/>
+        {/* 굿즈 상세 페이지 */}
+        <Route path="/goodsdetail/:PROD_ID" element={<GoodsDetail/>}/>
+        {/* 장바구니 */}
+        <Route path="/basket" element={<Basket/>}/>
         </Routes>
       <Footer />
     </div>
