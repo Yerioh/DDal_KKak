@@ -12,7 +12,7 @@ const ImgModal = ({
   // 23-11-17 17:00 임휘훈 작성
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
-    createElement
+    
   }
 
   /* 
@@ -20,7 +20,7 @@ const ImgModal = ({
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
         이미지 URL, 사용자 Prompt, NPrompt
     */
-
+  console.log(ImgArray)
   return (
     <div>
       {isOpen ? (
@@ -28,7 +28,7 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`} alt="Ex_image" />
+              <img  src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`} alt="Ex_image" />
             </div>
             <hr />
             <div className="user-Prompt">
