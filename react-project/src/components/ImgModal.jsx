@@ -9,14 +9,13 @@ const ImgModal = ({
   ImgArray, // 이미지 배열
   index,
 }) => {
-
   /* 
         Props로 받아야할 Data
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
         이미지 URL, 사용자 Prompt, NPrompt
-
-       
     */
+
+        console.log(Img_data)
   return (
     <div>
       {isOpen ? (
@@ -24,7 +23,7 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img src={Eximage[index]} alt="Ex_image" />
+              <img src={Img_data[index].url} alt="Ex_image" />
             </div>
             <hr />
             <div className="user-Prompt">

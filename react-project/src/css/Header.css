@@ -48,6 +48,12 @@
   height: 30px; /* 아이콘의 높이 */
   margin-left: 0.5rem; /* 이미지와 다른 요소 사이의 여백을 추가 */
 }
+
+@media (max-width: 768px) {
+  .Web-Container {
+    padding-top: 60px; /* 작은 화면에서 상단 여백 증가 */
+  }
+}
 @media (max-width: 768px) {
   .Header-Container {
     min-width: unset; /* 작은 화면에서는 최소 너비 제한 해제 */
@@ -76,12 +82,6 @@
     height: 28px;
   }
 }
-@media (max-width: 768px) {
-  .Web-Container {
-    padding-top: 60px; /* 작은 화면에서 상단 여백 증가 */
-  }
-}
-
 
 
 
