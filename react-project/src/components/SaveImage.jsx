@@ -65,7 +65,7 @@ const SaveImage = () => {
   console.log("체크표시 요소", selectedImages);
 
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
-  // 23-11-17 15:15 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
+  // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
   useEffect(() => {
     axios.post("/imgCreate/myimg", {id : useId})
     .then((res) => {
