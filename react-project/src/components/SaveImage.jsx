@@ -67,7 +67,7 @@ const SaveImage = () => {
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
   // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
   useEffect(() => {
-    axios.post("/imgCreate/myimg", {id : useId})
+    axios.post("/imgCreate/myimg", {id : useId, sort : "a"})
     .then((res) => {
       console.log("DB 이미지 프론트로", res.data.imgArray)
       setImgArray(res.data.imgArray)
@@ -119,17 +119,20 @@ const SaveImage = () => {
 
   /**최신순 정렬 함수*/
   const date_Order = () => {
-
-    // 정렬된 데이터로 상태 업데이트
-    // setImgArray(sortedImages);
+    axios.post("/imgCreate/myimg", {id : useId, sort : "a"})
+    .then((res) => {
+      console.log("DB 이미지 프론트로", res.data.imgArray)
+      setImgArray(res.data.imgArray)
+    })
   };
 
   /**오래된순 정렬 함수*/
   const old_Order = () => {
-
-    // 정렬된 데이터로 상태 업데이트
-    // setImgArray(sortedImages);
-    // console.log(sortedImages);
+    axios.post("/imgCreate/myimg", {id : useId, sort : "d"})
+    .then((res) => {
+      console.log("DB 이미지 프론트로", res.data.imgArray)
+      setImgArray(res.data.imgArray)
+    })
   };
 
   return (

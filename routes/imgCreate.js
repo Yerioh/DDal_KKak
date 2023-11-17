@@ -80,15 +80,28 @@ router.post("/myimg", (req, res) => {
   let selectQuery = "SELECT IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT"
   let descSelectQuery = "SELECT IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC"
   conn.connect()
-  conn.query(selectQuery, [userId], (err, result) => {
-    if(err){
-      console.log("내 저장 이미지 쿼리문 오류", err);
-    }
-    else{
-      console.log("내 저장 이미지 불러오기 성공", result);
-      res.json({imgArray : result})
-    }
-  })
+  if(req.body.sort === "a"){
+    conn.query(selectQuery, [userId], (err, result) => {
+      if(err){
+        console.log("내 저장 이미지 쿼리문 오류", err);
+      }
+      else{
+        console.log("내 저장 이미지 불러오기 성공", result);
+        res.json({imgArray : result})
+      }
+    })
+  }
+  else if(req.body.sort === "d"){
+    conn.query(descSelectQuery, [userId], (err, result) => {
+      if(err){
+        console.log("내 저장 이미지 쿼리문 오류", err);
+      }
+      else{
+        console.log("내 저장 이미지 불러오기 성공", result);
+        res.json({imgArray : result})
+      }
+    })
+  }
 })
 
 module.exports = router;
