@@ -14,7 +14,7 @@ const axios = require("axios");
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "http://ea24-35-222-102-242.ngrok.io"
+const flaskServer = "http://2ebe-34-124-243-4.ngrok.io"
 
 // stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
@@ -39,11 +39,17 @@ router.post("/stable", (req, res) => {
 
 router.post('/choiceImg', (req,res)=>{
   let data = req.body
-  axios.post(`${flaskServer}/imageChoice`, {data})
+  axios.post(`${flaskServer}/imageChoice`, {data : data, id : req.session.userId})
     .then((response)=>{
       let data = response.data
       console.log(data)
+      res.json({choiceImg : true})
     })
+})
+
+
+router.post('/saveImg', (req,res)=>{
+  console.log(req.body)
 })
 
 module.exports = router;

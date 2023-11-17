@@ -5,8 +5,30 @@ import FilerobotImageEditor, {
 } from "react-filerobot-image-editor";
 import "../css/fonts.css";
 import '../css/ImageEdit.css'
+import aws  from 'aws-sdk'
+import {Buffer} from 'buffer';
+import { useSelector } from "react-redux";
+import uuid from 'react-uuid'
+import { useSearchParams } from "react-router-dom";
 
 function EditImage() {
+
+  // 23-11-17 오전 09:40 박지훈 작성
+  // aws 연동을 위한 config
+  aws.config.update({
+    region : process.env.REACT_APP_AWS_DEFAULT_REGION,
+    accessKeyId : process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey : process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
+  })
+
+  // s3 bucket 폴더명으로 사용할 사용자 아이디
+  const userId = useSelector((state)=>state.session.id)
+  // 쿼리스트링으로 이미지 경로 추출
+  const [ query, setQuery] = useSearchParams()
+  const img_id = query.get('img')
+  // 이미지 경로
+  const imgUrl = `${process.env.REACT_APP_AWS_BUCKET_URL}/${img_id}`
+
   const fontAnnotationsConfig = {
     text: "예시용 글입니다.",
     fontFamily: "Arial",
@@ -36,9 +58,6 @@ function EditImage() {
     },
   };
 
-  const img_save=()=>{
-
-  }
 
   return (
     <div>
@@ -49,10 +68,45 @@ function EditImage() {
 
       {/* 이미지 편집창 */}
       <FilerobotImageEditor
-        source="https://scaleflex.airstore.io/demo/stephen-walker-unsplash.jpg"
+        source={imgUrl}
         // 생성된 이미지 주소
-        onSave={(editedImageObject, designState) =>
+        onSave={(editedImageObject, designState) =>{
           console.log("saved", editedImageObject, designState)
+          // 편집된 base64 이미지
+          const base64 = editedImageObject.imageBase64
+          // base64 이미지 데이터에서 데이터URI 스키마부분 제거 (data:[<미디어타입>];base64) 
+          const base64Data = new Buffer.from(base64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+          // 데이터 URI 스키마 부분에서 파일 형식 추출
+          const type = base64.split(';')[0].split('/')[1];
+          
+          // s3 버킷에 저장될 경로, 파일명
+            // 사용자이름(폴더)/랜덤값.파일형식
+          const img_info = `${userId}/${uuid()}.${type}`
+
+          // aws s3 이미지 업로드 함수
+          const upload = new aws.S3.ManagedUpload({
+            params: {
+              Bucket : process.env.REACT_APP_AWS_BUCKET,              
+              Key : img_info,
+              Body : base64Data,
+              ContentEncoding : 'base64',
+              ContentType : `image/${type}`
+            }
+          })
+
+          // 이미지 업로드 실행
+          const promise = upload.promise()
+          promise.then(
+            ()=>{
+              console.log('이미지 업로드 성공')
+              
+            },
+            (err)=>{
+              console.log('이미지 업로드 실패', err)
+            }
+          )
+
+        }
           
         }
         // 세이브 버튼 시 연관되는 함수. 현재는 편집된 사진이 원본+편집한 효과로 나뉘어져 파라미터로 별도 저장됨.

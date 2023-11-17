@@ -83,13 +83,15 @@ const CreateImage = () => {
         .then(res=>{
           let data = res.data
           console.log('생성된 이미지', data)
-          setImgData(data.imgData.img_data)
+          
           // axios 통신 중, 에러 발생 시
           if(data.createError){
             dispatch(ProgressReducerActions.resetProgress())
             alert('이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.')
           }
-          console.log("then", progress);          
+          if(data.imgData.img_data !== undefined){
+            setImgData(data.imgData.img_data)
+          }
         })
 
     }
@@ -102,6 +104,7 @@ const CreateImage = () => {
   // 2023.11.16 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가
   const goToResultPage = () => {
     console.log("Navigating with imageCount:", countImg);
+    dispatch(()=>ProgressReducerActions.resetProgress())
     setTimeout(navigate('/image-result', { state : {countImg : countImg, imgData : imgData}}), 3000);
   };
 
