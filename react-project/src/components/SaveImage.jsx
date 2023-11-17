@@ -5,7 +5,7 @@ import ImgModal from "./ImgModal";
 import { useSelector } from "react-redux";
 
 const SaveImage = () => {
-  const [imgArray, setImgArray] = useState([]) // DB에서 온 이미지 배열
+  const [imgArray, setImgArray] = useState([]); // DB에서 온 이미지 배열
   const [check_Img, setcheck_Img] = useState([]); // 삭제할 이미지를 담는 state
   const [isOpen, setIsOpen] = useState(false); // 모달 상태 State
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태 state
@@ -14,7 +14,7 @@ const SaveImage = () => {
   const [selectedImages, setSelectedImages] = useState({}); //체크표시 요소관리 state
   const [delImg, setDelImg] = useState(false); //삭제 모달 상태 state
 
-  const useId = useSelector((state) => state.session.id)
+  const useId = useSelector((state) => state.session.id);
 
   const observer = useRef(
     new IntersectionObserver(
@@ -67,11 +67,10 @@ const SaveImage = () => {
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
   // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
   useEffect(() => {
-    axios.post("/imgCreate/myimg", {id : useId, sort : "a"})
-    .then((res) => {
-      console.log("DB 이미지 프론트로", res.data.imgArray)
-      setImgArray(res.data.imgArray)
-    })
+    axios.post("/imgCreate/myimg", { id: useId, sort: "a" }).then((res) => {
+      console.log("DB 이미지 프론트로", res.data.imgArray);
+      setImgArray(res.data.imgArray);
+    });
     // 임휘훈 작성 끝
     const currentObserver = observer.current;
     const cards = document.querySelectorAll(".SImage-Card");
@@ -87,13 +86,24 @@ const SaveImage = () => {
   const openModalHandler = (index) => {
     // isOpen의 상태를 변경하는 메소드를 구현
     // !false -> !true -> !false
-    setIsOpen(!isOpen);
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+    console.log("이미지 모달", isOpen);
     setTestindex(index);
+    console.log("인덱스", index);
   };
 
   /**삭제하시겠습니까? 모달 호출*/
   const delImg_Btn = () => {
-    setDelImg(!delImg);
+    const isSelected = Object.values(selectedImages).some(
+      (value) => value === true
+    );
+
+    if (isSelected) {
+      setDelImg(!delImg);
+      console.log("삭제 모달", delImg);
+    } else {
+      alert("삭제할 이미지 선택해주세요");
+    }
   };
 
   /**체크된 이미지 URL 업데이트 함수*/
@@ -105,9 +115,10 @@ const SaveImage = () => {
   };
 
   /** 전체 선택 함수 */
-  const handleSelectAllChange = () => {
+  const handleSelectAllChange = (e) => {
     console.log("전체 선택 함수 작성 필요");
-  }
+    setSelectAll(e.target.checked);
+  };
 
   /**삭제 버튼 클릭 시 체크된 이미지 URL 변수 업데이트*/
   const handleDeleteClick = () => {
@@ -115,24 +126,23 @@ const SaveImage = () => {
     console.log("삭제될 데이터", check_Img);
     // 이후 삭제 로직 구현
     // -------------------------------------
+    // (임휘훈 여기에 삭제 로직을 적어라 - 임휘훈 -)
   };
 
   /**최신순 정렬 함수*/
   const date_Order = () => {
-    axios.post("/imgCreate/myimg", {id : useId, sort : "a"})
-    .then((res) => {
-      console.log("DB 이미지 프론트로", res.data.imgArray)
-      setImgArray(res.data.imgArray)
-    })
+    axios.post("/imgCreate/myimg", { id: useId, sort: "a" }).then((res) => {
+      console.log("DB 이미지 프론트로", res.data.imgArray);
+      setImgArray(res.data.imgArray);
+    });
   };
 
   /**오래된순 정렬 함수*/
   const old_Order = () => {
-    axios.post("/imgCreate/myimg", {id : useId, sort : "d"})
-    .then((res) => {
-      console.log("DB 이미지 프론트로", res.data.imgArray)
-      setImgArray(res.data.imgArray)
-    })
+    axios.post("/imgCreate/myimg", { id: useId, sort: "d" }).then((res) => {
+      console.log("DB 이미지 프론트로", res.data.imgArray);
+      setImgArray(res.data.imgArray);
+    });
   };
 
   return (
@@ -156,23 +166,27 @@ const SaveImage = () => {
           {/* 삭제 모달 호출 */}
         </div>
         <div className="order-box">
-          <span className="old-text" onClick={date_Order}>최신순</span>
-          <span className="order-text" onClick={old_Order}>오래된순</span>
+          <span className="old-text" onClick={date_Order}>
+            최신순
+          </span>
+          <span className="order-text" onClick={old_Order}>
+            오래된순
+          </span>
         </div>
       </div>
 
       <div className="S-Ibox">
         {imgArray.map((image, index) => (
           <div
-            className="SImage-Card"
+            className="SImage-Card me-4"
             key={index}
             onClick={() => openModalHandler(index)}
           >
             {/* data-src 속성에 실제 이미지 URL을 지정 */}
             <img
               className="img-thumb"
-              data-src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image.IMG_URL}`}
-              src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image.IMG_URL}`}
+              data-src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image?.IMG_URL}`}
+              src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image?.IMG_URL}`}
               alt={`Image ${index}`}
             />
             <div className="SI-At">
@@ -183,17 +197,20 @@ const SaveImage = () => {
                 onChange={(e) => handleCheckboxChange(index, e.target.checked)}
               />
               <label className="check_label" htmlFor={`check${index}`}></label>
-              <span>{image.DATE}</span>
+              <span>{image?.DATE}</span>
             </div>
           </div>
         ))}
-        <ImgModal
-          isOpen={isOpen}
-          openModalHandler={openModalHandler}
-          ImgArray={imgArray}
-          index={testIndex}
-        />
+        {isOpen && (
+          <ImgModal
+            isOpen={isOpen}
+            openModalHandler={openModalHandler}
+            ImgArray={imgArray}
+            index={testIndex}
+          />
+        )}
       </div>
+
       {delImg ? (
         <div className="modal-backdrop">
           <div className="Img-Del-box">
@@ -202,8 +219,12 @@ const SaveImage = () => {
               <span>하시겠습니까?</span>
             </div>
             <div className="Img-Del-Btn">
-              <button className="del-Btn" onClick={handleDeleteClick}>삭제</button>
-              <button className="del-close-btn" onClick={delImg_Btn}>닫기</button>
+              <button className="del-Btn" onClick={handleDeleteClick}>
+                삭제
+              </button>
+              <button className="del-close-btn" onClick={delImg_Btn}>
+                닫기
+              </button>
             </div>
           </div>
         </div>

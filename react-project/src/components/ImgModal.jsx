@@ -1,7 +1,10 @@
-import React, { createElement, useState } from "react";
+import React, { createElement, useRef, useState } from "react";
 import "../css/ImgModal.css";
 import { Link } from "react-router-dom";
 import axios from "../axios";
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
+
 // 회원탈퇴 모달, 이미지 상세정보 모달
 const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
@@ -10,16 +13,14 @@ const ImgModal = ({
   index,
 }) => {
   // 23-11-17 17:00 임휘훈 작성
+  const imgRef = useRef()
+
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
     console.log("다운로드 버튼 활성화");
-    const imgDownload = document.createElement('a')
-    console.log("경로", `${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`);
-    imgDownload.href = `/${ImgArray[index].IMG_URL}` // 절대경로를 넣으면 다운로드 안됨
-    console.log("다운로드", `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`);
-    imgDownload.download = `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`
-    console.log("dafdfa",imgDownload);
-    imgDownload.click()
+    domtoimage.toBlob(imgRef).then(blob => {
+      saveAs(blob, `DDAL_KKAK.${ImgArray[index].IMG_URL[-3]}`)
+    })
   }
 
   /* 
@@ -27,7 +28,7 @@ const ImgModal = ({
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
         이미지 URL, 사용자 Prompt, NPrompt
     */
-
+  console.log(ImgArray)
   return (
     <div>
       {isOpen ? (
@@ -35,7 +36,7 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`} alt="Ex_image" />
+              <img ref={imgRef}  src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`} alt="Ex_image" />
             </div>
             <hr />
             <div className="user-Prompt">
