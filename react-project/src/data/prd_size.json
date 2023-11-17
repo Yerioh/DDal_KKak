@@ -1,0 +1,102 @@
+[
+	{
+		"SIZE_ID" : "950526f1-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "S"
+	},
+	{
+		"SIZE_ID" : "a886c545-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "M"
+	},
+	{
+		"SIZE_ID" : "a8931ded-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "L"
+	},
+	{
+		"SIZE_ID" : "a89ed8c0-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "XL"
+	},
+	{
+		"SIZE_ID" : "a8aad1a2-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "2XL"
+	},
+	{
+		"SIZE_ID" : "a8b8da63-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "S"
+	},
+	{
+		"SIZE_ID" : "a8ca1047-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "M"
+	},
+	{
+		"SIZE_ID" : "a8dae3a7-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "L"
+	},
+	{
+		"SIZE_ID" : "a8ea1254-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "XL"
+	},
+	{
+		"SIZE_ID" : "a8f64cc7-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "2XL"
+	},
+	{
+		"SIZE_ID" : "a9032a7a-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "L"
+	},
+	{
+		"SIZE_ID" : "a9437445-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "XL"
+	},
+	{
+		"SIZE_ID" : "a94e06ee-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "2XL"
+	},
+	{
+		"SIZE_ID" : "a95a750a-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "3XL"
+	},
+	{
+		"SIZE_ID" : "a9685ad9-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "S"
+	},
+	{
+		"SIZE_ID" : "a9734fb0-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "M"
+	},
+	{
+		"SIZE_ID" : "a97e8586-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "L"
+	},
+	{
+		"SIZE_ID" : "a988f04a-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "XL"
+	},
+	{
+		"SIZE_ID" : "a99460b5-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "2XL"
+	},
+	{
+		"SIZE_ID" : "a99f7f09-81d2-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"SIZE_NAME" : "3XL"
+	}
+]

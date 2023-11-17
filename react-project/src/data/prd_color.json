@@ -1,0 +1,104 @@
+[
+	{
+		"COLOR_ID" : "435b66b8-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "블랙",
+		"COLOR_CODE" : "#000000"
+	},
+	{
+		"COLOR_ID" : "438bc9de-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "화이트",
+		"COLOR_CODE" : "#FFFFFF"
+	},
+	{
+		"COLOR_ID" : "4396552e-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "그레이",
+		"COLOR_CODE" : "#C3BFBE"
+	},
+	{
+		"COLOR_ID" : "43a1a1a0-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1b4c7a2f-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "네이비",
+		"COLOR_CODE" : "#022954"
+	},
+	{
+		"COLOR_ID" : "43bd428b-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "블랙",
+		"COLOR_CODE" : "#000000"
+	},
+	{
+		"COLOR_ID" : "43ce9890-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bb25a87-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "화이트",
+		"COLOR_CODE" : "#FFFFFF"
+	},
+	{
+		"COLOR_ID" : "43d96701-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "블랙",
+		"COLOR_CODE" : "#000000"
+	},
+	{
+		"COLOR_ID" : "4419d3b3-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "화이트",
+		"COLOR_CODE" : "#FFFFFF"
+	},
+	{
+		"COLOR_ID" : "4424596b-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "핑크",
+		"COLOR_CODE" : "#E8B0A6"
+	},
+	{
+		"COLOR_ID" : "442f1689-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bbe686a-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "바이올렛",
+		"COLOR_CODE" : "#AC99DF"
+	},
+	{
+		"COLOR_ID" : "443ba5ad-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "블랙",
+		"COLOR_CODE" : "#000000"
+	},
+	{
+		"COLOR_ID" : "44490af6-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "화이트",
+		"COLOR_CODE" : "#FFFFFF"
+	},
+	{
+		"COLOR_ID" : "4456d1c9-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "레드",
+		"COLOR_CODE" : "#C11F27"
+	},
+	{
+		"COLOR_ID" : "4461317b-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "블루",
+		"COLOR_CODE" : "#0D51B2"
+	},
+	{
+		"COLOR_ID" : "446ca87c-81d6-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bc99c5b-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "네이비",
+		"COLOR_CODE" : "#022954"
+	},
+	{
+		"COLOR_ID" : "dfe579dd-8290-11ee-be11-0242ac130002",
+		"PROD_ID" : "1bf00382-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "색상 없음",
+		"COLOR_CODE" : "없음"
+	},
+	{
+		"COLOR_ID" : "e13f883d-8290-11ee-be11-0242ac130002",
+		"PROD_ID" : "1eaf5516-81cf-11ee-be11-0242ac130002",
+		"COLOR_NAME" : "색상 없음",
+		"COLOR_CODE" : "없음"
+	}
+]
