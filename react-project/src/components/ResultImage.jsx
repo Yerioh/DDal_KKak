@@ -18,8 +18,9 @@ const ResultImage = () => {
   // const imgData = ['110467665808154977803/0197d55a-8387-11ee-b713-0242ac1c000c.png']
   // 선택한 이미지
   const [imgClick, setImgClick] = useState([])
-
-  
+  const positive = location.state.positivePrompt
+  const negative = location.state.negativePrompt
+  console.log("프롬프트 결과.", location.state.positivePrompt);  
   console.log("결과 이미지를 받았습니다.", location);
   const countImg = location.state?.countImg || 1;
   const containerClass = 
@@ -63,10 +64,13 @@ const ResultImage = () => {
       <div className="result-containor">
         <div>
           <div className="keywrod-area">
-          <div id="keywordbox">키워드</div>
+          {/* <div id="keywordbox">
+          </div> */}
+            {positive}
           </div>
           <div className="except-area">
-            <div id="excptbox">제외</div>
+          {negative}
+            {/* <div id="excptbox"></div> */}
           </div>
         </div>
         <ul className="image-list">{renderImageList()}</ul>

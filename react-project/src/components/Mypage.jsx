@@ -77,7 +77,7 @@ const Mypage = () => {
           </div>
           <div className="user-box">
             <span  onClick={delete_Modal}>회원탈퇴</span>
-            <img className="delete-icon-img" src={delete_user_icon} alt="delete_user_icon" />
+            <img onClick={delete_Modal} className="delete-icon-img" src={delete_user_icon} alt="delete_user_icon" />
           </div>
         </div>
       </div>

@@ -30,56 +30,56 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
       <label>
         <input className='keyWord-button'
           type="checkbox"
-          value="Gloomy,"
-          name="컬러만"
+          value="Colorful,"
+          name="컬러"
           onChange={handleCheckboxChange}
         ></input>
         <div id='showKeywordCheckbox'></div>
-        컬러만
+        컬러
       </label>
 
       <label>
         <input className='keyWord-button'
           type="checkbox"
-          value="Bright,"
-          name="밝은"
+          value="Logo,"
+          name="로고"
           onChange={handleCheckboxChange}
         ></input>
         <div id='showKeywordCheckbox'></div>
-          밝은
+        Logo
       </label>
 
       <label>
         <input className='keyWord-button'
           type="checkbox"
-          value="Dark,"
-          name="어두운"
+          value="Typography,"
+          name="타이포그래피"
           onChange={handleCheckboxChange}
         ></input>
         <div id='showKeywordCheckbox'></div>
-        어두운
+        타이포그래피
       </label>
       
       <label>
         <input className='keyWord-button'
           type="checkbox"
-          value="joyful,"
-          name="즐거운"
+          value="Vector logo, Vector Art, Vector graphics, Adobe illustrator,"
+          name="Vector로고"
           onChange={handleCheckboxChange}
         ></input>
         <div id='showKeywordCheckbox'></div>
-        즐거운
+        Vector Logo
       </label>
       
       <label>
         <input className='keyWord-button'
           type="checkbox"
-          value="Gloomy,"
-          name="우울한"
+          value="WordMark,"
+          name="WordMark"
           onChange={handleCheckboxChange}
         ></input>
         <div id='showKeywordCheckbox'></div>
-        우울한
+        Text Logo
       </label>
 
       <button className='btnmy' onClick={openKeyWordModal}>

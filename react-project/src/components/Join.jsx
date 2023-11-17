@@ -137,9 +137,9 @@ const Join = () => {
     setIsOpenPost(false);
     handleClose();
     postNum.current.value = data.zonecode; // 우편번호
-    postNum.current.disabled = true; //우편번호 입력창 비활성화
+    // postNum.current.disabled = true; //우편번호 입력창 비활성화
     userAdd.current.value = fullAddr;
-    userAdd.current.disabled = true;
+    // userAdd.current.disabled = true;
   };
   console.log(address, addressDetail);
   return (

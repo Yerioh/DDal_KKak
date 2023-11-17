@@ -19,7 +19,6 @@ import { useNavigate } from 'react-router-dom'
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
 
-
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState('')
@@ -37,8 +36,6 @@ const CreateImage = () => {
   const [imgData , setImgData] = useState([])
 
   const dispatch = useDispatch()
-
-
 
   // 키워드 모달 상태 변경을 처리하는 함수
   const handleKeyWordModalChange = () => {
@@ -104,17 +101,23 @@ const CreateImage = () => {
   // 2023.11.16 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가
   const goToResultPage = () => {
     console.log("Navigating with imageCount:", countImg);
-    dispatch(()=>ProgressReducerActions.resetProgress())
-    setTimeout(navigate('/image-result', { state : {countImg : countImg, imgData : imgData}}), 3000);
+    setTimeout(navigate('/image-result', { state : {
+      countImg : countImg,
+      imgData : imgData,
+      positivePrompt : positivePrompt,
+      negativePrompt : negativePrompt
+      }}), 3000);
   };
 
   const handleImageCountChange = (count) => {
     setCountImg(count);
   };
 
+  // progressBar 100%, 로딩 완료시 이미지 생성 결과 사이트로 이동
   useEffect(()=>{
     if(progress === 100 && !isLoading){
       console.log('이미지 생성 완료')
+      // 이미지 생성 결과 사이트로 이동
       goToResultPage()
     }
   },[progress, isLoading])
@@ -126,7 +129,7 @@ const CreateImage = () => {
       <div className="prompt_container">
         <div className="keyword">
           <h1>
-            생성 키워드 입력
+            긍정 프롬프트 입력
             <button className="guide-button btnmy" onClick={openGuideModal}>
               가이드
             </button>{' '}
@@ -141,7 +144,7 @@ const CreateImage = () => {
             id='inputPrompt' // 입력 값으로 사용될 state
           />
 
-          <h1>제외 키워드 입력</h1>
+          <h1>부정 프롬프트 입력</h1>
           <Form.Label htmlFor="inputPassword5"></Form.Label>
           <textarea 
          className="prompt"  
@@ -194,7 +197,7 @@ const CreateImage = () => {
                       value={'강아지,실사체,귀접힘'}
                       readOnly={true}
                     />
-                    <h1 style={{ 'margin-top': '10%' }}>제외 키워드 입력</h1>
+                    <h1 style={{ 'margin-top': '10%' }}>부정 프롬프트 입력</h1>
                     <Form.Control
                       type="text"
                       value={'컬러, 몸통'}
@@ -203,9 +206,9 @@ const CreateImage = () => {
                       
                     />
                     <div className="guide-manual">
-                      <p>1. 생성키워드에 만들고 싶은 단어를 입력하세요!</p>
-                      <p>2. 제외키워드에 빼고 싶은 단어를 입력하세요!</p>
-                      <p>3. 이미지생성! 버튼을 클릭하면 이미지가 생성됩니다.</p>
+                      <p>1. 긍정프롬프트에는 이미지에 포함하고 싶은 단어를 입력하세요.</p>
+                      <p>2. 부정프롬프트에는 이미지에 제외하고 싶은 단어를 입력하세요.</p>
+                      <p>3. '이미지 생성' 버튼을 클릭하면 이미지가 생성됩니다.</p>
                     </div>
                   </div>
                 </div>
@@ -236,7 +239,7 @@ const CreateImage = () => {
       <div>
       <ProgressBar className='progress-bar' completed={progress} maxCompleted={100}/>
       {/* <Link to='/image-edit'> */}
-        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 만들러가기!</button>
+        <button className="creImg_gotobutton btn" onClick={createImg}>이미지 생성</button>
         {/* </Link> */}
       </div>
       
