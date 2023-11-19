@@ -54,7 +54,7 @@ const SaveImage = () => {
     }));
   };
 
-  // 체크박스 핸들러
+  // 전체선택 핸들러
   useEffect(() => {
     const newSelectedImages = {};
     imgArray.forEach((_, index) => {
@@ -62,13 +62,13 @@ const SaveImage = () => {
     });
     setSelectedImages(newSelectedImages);
   }, [selectAll]);
+
   console.log("체크표시 요소", selectedImages);
 
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
   // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
   useEffect(() => {
     axios.post("/imgCreate/myimg", { id: useId, sort: "a" }).then((res) => {
-      console.log("DB 이미지 프론트로", res.data.imgArray);
       setImgArray(res.data.imgArray);
     });
     // 임휘훈 작성 끝
@@ -87,7 +87,7 @@ const SaveImage = () => {
     // isOpen의 상태를 변경하는 메소드를 구현
     // !false -> !true -> !false
     setIsOpen((prevIsOpen) => !prevIsOpen);
-    console.log("이미지 모달", isOpen);
+    // console.log("이미지 모달", isOpen);
     setTestindex(index);
     console.log("인덱스", index);
   };
@@ -110,7 +110,8 @@ const SaveImage = () => {
   const updateCheckedImages = () => {
     const checkedImages = imgArray
       .filter((_, index) => selectedImages[index])
-      .map((item) => item.url); // 체크된 이미지들의 URL만 추출
+      .map((item) => item.IMG_URL); // 체크된 이미지들의 URL만 추출
+    console.log("체크된 이미지 url", checkedImages);
     setcheck_Img(checkedImages);
   };
 
@@ -122,11 +123,27 @@ const SaveImage = () => {
 
   /**삭제 버튼 클릭 시 체크된 이미지 URL 변수 업데이트*/
   const handleDeleteClick = () => {
-    updateCheckedImages(); //함수 호출로 체크된 이미지 확인
-    console.log("삭제될 데이터", check_Img);
+    // updateCheckedImages(); //함수 호출로 체크된 이미지 확인
+    // console.log("삭제될 데이터", check_Img);
     // 이후 삭제 로직 구현
     // -------------------------------------
     // (임휘훈 여기에 삭제 로직을 적어라 - 임휘훈 -)
+    // 23-11-19 22:30 임휘훈 작성 : 삭제 버튼 기능
+    let arrImgId = [];
+    for (const key of Object.keys(selectedImages)) {
+      console.log("체크박스된 거 key", key);
+      arrImgId.push(imgArray[key].IMG_ID);
+
+      // 필요한가?
+      setcheck_Img(() => {
+        check_Img.push(imgArray[key].IMG_ID);
+      });
+    }
+    let strImgId = arrImgId.join();
+    console.log("문자열로 된 이미지 아이디들", strImgId);
+    axios.post("/imgCreate/deleteImg", {
+      imgId: strImgId,
+    });
   };
 
   /**최신순 정렬 함수*/
@@ -180,7 +197,9 @@ const SaveImage = () => {
           <div
             className="SImage-Card me-4"
             key={index}
-            onClick={() => openModalHandler(index)}
+            onClick={() => {
+              openModalHandler(index);
+            }}
           >
             {/* data-src 속성에 실제 이미지 URL을 지정 */}
             <img
@@ -196,7 +215,13 @@ const SaveImage = () => {
                 checked={selectedImages[index]}
                 onChange={(e) => handleCheckboxChange(index, e.target.checked)}
               />
-              <label className="check_label" htmlFor={`check${index}`}></label>
+              <label
+                className="check_label"
+                htmlFor={`check${index}`}
+                onClick={() => {
+                  updateCheckedImages();
+                }}
+              ></label>
               <span>{image?.DATE}</span>
             </div>
           </div>

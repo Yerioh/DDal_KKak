@@ -141,7 +141,7 @@ const CreateImage = () => {
           {/* 긍정 키워드 입력 구역  */}
           <div className="keyword">
             <h3 className="postive_head">
-              넣을 단어{" "}
+              긍정 프롬프트{" "}
               <button className="guide-button btnmy" onClick={openGuideModal}>
                 가이드
               </button>{" "}
@@ -156,7 +156,7 @@ const CreateImage = () => {
               value={positivePrompt} // 적용되는 키워드
               onChange={(e) => setPositivePrompt(e.target.value)}
               id="inputPrompt" // 입력 값으로 사용될 state
-              placeholder="키워드를 입력해주세요"
+              placeholder="긍정 프롬프트를 입력해주세요"
               spellCheck="false"
             />
 
@@ -169,7 +169,7 @@ const CreateImage = () => {
 
           {/* 부정 키워드 입력  */}
           <div className="negative_keyword">
-            <h3>뺄 단어</h3>
+            <h3>부정 프롬프트</h3>
             <Form.Label></Form.Label>
             <textarea
               type="text"
@@ -177,7 +177,7 @@ const CreateImage = () => {
               id="exceptPrompt" // 제외되는 키워드 입력창
               value={negativePrompt} // 적용되는 키워드
               onChange={(e) => setNegativePrompt(e.target.value)}
-              placeholder="제외하고 싶은 키워드를 입력해주세요"
+              placeholder="부정 프롬프트를 입력해주세요"
             />
           </div>
 
@@ -230,13 +230,15 @@ const CreateImage = () => {
                 <div className={"guidemodal-body"}>
                   <div className="guidemodal-body2">
                     <div className="guide-keyword">
-                      <h1>생성 키워드 입력</h1>
+                      <h1>긍정 프롬프트 입력</h1>
                       <Form.Control
                         type="text"
                         value={"강아지,실사체,귀접힘"}
                         readOnly={true}
                       />
-                      <h1 style={{ "margin-top": "10%" }}>제외 키워드 입력</h1>
+                      <h1 style={{ "margin-top": "10%" }}>
+                        부정 프롬프트 입력
+                      </h1>
                       <Form.Control
                         type="text"
                         value={"컬러, 몸통"}
@@ -244,11 +246,15 @@ const CreateImage = () => {
                         style={{ "margin-bottom": "10%" }}
                       />
                       <div className="guide-manual">
-                        <p>1. 생성키워드에 만들고 싶은 단어를 입력하세요!</p>
-                        <p>2. 제외키워드에 빼고 싶은 단어를 입력하세요!</p>
                         <p>
-                          3. 이미지생성! 버튼을 클릭하면 이미지가 생성됩니다.
+                          1. 긍정 프롬프트에 이미지에 포함하고 싶은 단어를
+                          입력하세요<div className=""></div>
                         </p>
+                        <p>
+                          2. 부정 프롬프트에 이미지에 포함하고 싶지 않은 단어를
+                          입력하세요.
+                        </p>
+                        <p>3. 딸-깍! 버튼을 클릭하면 이미지가 생성됩니다!</p>
                       </div>
                     </div>
                   </div>
