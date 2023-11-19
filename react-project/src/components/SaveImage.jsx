@@ -102,7 +102,7 @@ const SaveImage = () => {
       setDelImg(!delImg);
       console.log("삭제 모달", delImg);
     } else {
-      alert("삭제할 이미지 선택해주세요");
+      alert("삭제하려는 이미지를 선택해주세요");
     }
   };
 
