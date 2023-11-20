@@ -56,6 +56,7 @@ const Mypage = () => {
     // setdelete_user의 상태를 변경하는 메소드를 구현
     // !false -> !true -> !false
     setdelete_user(!delete_user);
+    console.log("회원탈퇴 모달", delete_user)
   };
 
   return (
@@ -80,11 +81,13 @@ const Mypage = () => {
             <img onClick={delete_Modal} className="delete-icon-img" src={delete_user_icon} alt="delete_user_icon" />
           </div>
         </div>
+        
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} />}
       {pageState === "Save_Image" && <SaveImage />}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
-    </div>
+
+          </div>
   );
 };
 

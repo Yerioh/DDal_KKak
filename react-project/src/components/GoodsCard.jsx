@@ -1,14 +1,15 @@
 // 231116 오전 11:21 성민 작성
+// 231117  prd:no 추가 성민작성
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 
-const GoodsCard = ({name, src, price, cate}) => {
-
+const GoodsCard = ({name, src, price, cate, PROD_ID}) => {
+console.log(PROD_ID)
   return (
     <div style={{margin:"5px 5px"}}>
-    <Link to={'/goodsdetail'} style={{textDecoration:"none"}}>
+    <Link to={`/goodsdetail/${PROD_ID}`} style={{textDecoration:"none"}}>
     <Card style={{ width: '18rem',textAlign:"center",border:"none"}} >
         {/* 제품 이미지 */}
     <div style={{textAlign:"center"}}>

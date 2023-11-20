@@ -63,9 +63,9 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
     setIsOpenPost(false);
     handleClose();
     postNum.current.value = data.zonecode; // 우편번호
-    postNum.current.disabled = true; //우편번호 입력창 비활성화
+    // postNum.current.disabled = true; //우편번호 입력창 비활성화
     userAdd.current.value = fullAddr; // 주소 입력창
-    userAdd.current.disabled = true;
+    // userAdd.current.disabled = true;
   };
 
   /**개인정보 수정 함수*/
@@ -74,7 +74,6 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   // 23-11-14 14:20 임휘훈 작성
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
-    console.log(email, phone);
     if (loginType == "M") {
       idRef.current.value = id;
     } else if (loginType == "G") {
@@ -94,10 +93,10 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
 
   return (
     <div className="UserInfo">
-      <h1>내 정보 수정</h1>
+      <h3>내 정보 수정</h3>
       <div className="UserInfo-elementbox">
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Group className="mb-3 mt-3" controlId="formBasicName">
             <Form.Label>ID</Form.Label>
             <Form.Control type="text" placeholder="Enter ID" ref={idRef} />
           </Form.Group>

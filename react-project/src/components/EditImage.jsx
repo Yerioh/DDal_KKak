@@ -9,9 +9,14 @@ import aws  from 'aws-sdk'
 import {Buffer} from 'buffer';
 import { useSelector } from "react-redux";
 import uuid from 'react-uuid'
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import axios from "../axios"
 
 function EditImage() {
+  const location = useLocation();
+
+  const positive = location.state.positivePrompt // 사용한 긍정 프롬프트
+  const negative = location.state.negativePrompt // 사용한 부정 프롬프트
 
   // 23-11-17 오전 09:40 박지훈 작성
   // aws 연동을 위한 config
@@ -41,12 +46,12 @@ function EditImage() {
       { label: "TAEBAEKmilkyway", value: "TAEBAEKmilkyway" },
       { label: "JalnanGothic", value: "JalnanGothic" },
       { label: "IAMAPLAYER", value: "IAMAPLAYER" },
-      { label: "Roboto", value: "Rovoto"},
-      { label: "Pretendard", value : "Pretendard"},
-      { label: 'PuradakGentleGothicR', value:'PuradakGentleGothicR'},
-      { label: '필승고딕', value:'PilseungGothic'},
-      { label: '도스고딕', value:'DOSGothic'},
-      {label:'신라고딕', value:'Shilla_Gothic-Bold'},
+      { label: "Roboto", value: "Rovoto" },
+      { label: "Pretendard", value: "Pretendard" },
+      { label: "PuradakGentleGothicR", value: "PuradakGentleGothicR" },
+      { label: "필승고딕", value: "PilseungGothic" },
+      { label: "도스고딕", value: "DOSGothic" },
+      { label: "신라고딕", value: "Shilla_Gothic-Bold" },
     ],
     fontSize: 28,
     letterSpacing: 0,
@@ -60,12 +65,7 @@ function EditImage() {
 
 
   return (
-    <div>
-      <div className="inputarea"></div>  
-      {/* 입력된 키워드 출력창 */}
-      <div className="exceptarea"></div>
-      {/* 제외된 키워드 출력창 */}
-
+    <div className="editimagebody">
       {/* 이미지 편집창 */}
       <FilerobotImageEditor
         source={imgUrl}
@@ -99,7 +99,12 @@ function EditImage() {
           promise.then(
             ()=>{
               console.log('이미지 업로드 성공')
-              
+              axios.post("/imgCreate/saveImg", {
+                userId : userId,
+                positive : positive,
+                negative : negative,
+                img_info : img_info,
+              })
             },
             (err)=>{
               console.log('이미지 업로드 실패', err)

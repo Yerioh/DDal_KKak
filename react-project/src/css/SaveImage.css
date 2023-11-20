@@ -1,11 +1,9 @@
 .SaveImage{
-    width: 90%;
+    width: 80%;
     margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
+/* 체크박스, 이미지, 날짜 div */
 .SImage-Card{
     width: 248px;
     height: 335px;
@@ -13,19 +11,129 @@
     height: 700px; */
     display: flex;
     justify-content: center;
-    overflow: hidden;   
+    overflow: hidden;     
+    flex-direction: column;
+    margin-top: 10px;
+    position: relative;
 }
-.S-Ibox{
+
+.img-thumb:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.SaveImage > h3{
+    display: flex;
     justify-content: center;
+}
+
+/* 날짜 */
+.SI-At{
+    display: flex;
+    margin-top: 7px;
+    justify-content:center;
+    font-weight: bold;
+}
+
+/* Tab 요소  */
+.S-Imenu{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+}
+
+.S-Ibox{
+    border-top: 1px solid gray;
+    margin-top: 10px;
+}
+
+/* Tab check box */
+input[type="checkbox"]{
+    display: none;
+  }
+
+  /* 전체 선택 checkbox css */
+  .main_check_label{
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer; 
+  }
+  input[type="checkbox"]:checked + .main_check_label {
+    background: url(../img/check-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+  }
+  /* 각각의 이미지 checkbox css */
+.check_label{
+  width: 25px;
+  height: 25px;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  top: 23px;
+  left: 5px;
+}
+/* 체크박스 눌렀을때 css */
+input[type="checkbox"]:checked + .check_label {
+    background: url(../img/check-icon.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+  }
+
+/* 전체선택 삭제 div */
+.check-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Tab 삭제 버튼 */
+.check-box > button {
+    color: #dc3545;
+    background-color: white;
+    border : 1px solid red;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.check-box > button:hover{
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+/* 정렬 div */
+.order-box{
+    display: flex;
+    gap: 10px;
+}
+
+.order-box> span:hover{
+    cursor: pointer;
+}
+
+
+
+/* 맵 함수 div */
+.S-Ibox{
+    justify-content: start;
     display: flex;
     flex-wrap: wrap;
     margin : 10px 60px 20px 60px;
 }
 
+
+/* 이미지 */
 .SImage-Card > img{
     border: solid 1px rgb(200, 200, 200);
     border-radius: 5px;
-    width: 90%;
+    width: 100%;
     height: 80%;
     cursor: pointer;
     object-fit: cover;
@@ -38,3 +146,93 @@
     transform: translate(-50%, -50%);
     /* 추가적인 스타일링... */
   }
+
+
+  /* 삭제 모달 */
+  .Img-Del-box{
+    background-color: white;
+    width: 20%;
+    height: 10%;
+    min-width: 230px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+  
+
+/* 삭제 하시겠습니까? */
+.Img-Del-text > span{
+    font-size: 20px;
+}
+.red-text{
+    color: red;
+    font-weight: bold;
+}
+
+
+/* 삭제 닫기 버튼 위치 */
+.Img-Del-Btn{
+    display: flex;  
+    gap: 5px;  
+}
+
+
+.Img-Del-Btn > button{
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+} 
+
+/* 모달 삭제 버튼 */
+.del-Btn{
+    color: #dc3545;
+    background-color: white;
+    border : 1px solid red;
+    
+}
+.del-Btn:hover{
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+    transition: all .10s linear;
+}
+/* 모달 닫기 버튼 */
+.del-close-btn{
+    background-color: white;
+    border: 1px solid rgb(200, 200, 200);
+    color : rgb(80, 77, 77)
+}
+.del-close-btn:hover{
+    background-color: rgb(80, 77, 77);
+    color: white;
+    transition: all .10s linear;
+}
+
+@media(max-width : 769px){
+    
+    .check-box > span{
+        display: none;
+    }
+    .S-Imenu{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 60px;
+    }
+    .check-box > button{
+        width: 46px;
+        height: 28px;
+    }
+    .order-box >.order-text{
+        width: 68px;
+        height: 28px;
+    }
+    .order-box > .old-text{
+        width : 48px;
+        height: 28px
+    }
+}

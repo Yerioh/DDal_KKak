@@ -7,7 +7,6 @@
     min-height: 250px;
     padding: 20px;
     border-radius: 5px;
-    
   }
   .delete-text-box{
     display: flex;
@@ -20,7 +19,7 @@
   .delete-Modal-try{
     background-color: white;
     width: 60%;
-    height: 30%;
+    height: 38%;
     min-width: 450px;
     min-height: 250px;
     padding: 20px;

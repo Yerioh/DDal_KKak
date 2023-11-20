@@ -20,8 +20,7 @@ const ResultImage = () => {
   const [imgClick, setImgClick] = useState([])
   const positive = location.state.positivePrompt
   const negative = location.state.negativePrompt
-  console.log("프롬프트 결과.", location.state.positivePrompt);  
-  console.log("결과 이미지를 받았습니다.", location);
+
   const countImg = location.state?.countImg || 1;
   const containerClass = 
     countImg === 4 ? "four-images" : countImg === 5 ? "five-images" : "";
@@ -54,7 +53,10 @@ const ResultImage = () => {
     axios.post('/imgCreate/choiceImg', imgClick)
       .then((response)=>{
         if(response.data.choiceImg){
-          navi(`/image-edit/?img=${imgClick[0]}`)
+          navi(`/image-edit/?img=${imgClick[0]}`,  { state : {
+            positivePrompt : positive,
+            negativePrompt : negative
+            }})
         }
       })
   }
@@ -62,10 +64,9 @@ const ResultImage = () => {
   return (
     <div className={`result-body ${containerClass}`}>
       <div className="result-containor">
-        <div>
+        <div className="input-area">
           <div className="keywrod-area">
-          {/* <div id="keywordbox">
-          </div> */}
+          {/* <div id="keywordbox"></div> */}
             {positive}
           </div>
           <div className="except-area">

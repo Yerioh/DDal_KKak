@@ -29,7 +29,7 @@ const Goodslist = () => {
                     }
                     let price = item.PROD_PRICE.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
                     return(
-                    <GoodsCard key={item.PROD_ID} name={item.PROD_NAME} src={item.PROD_THUMB} price={price} cate={cate}/>
+                    <GoodsCard key={item.PROD_ID} name={item.PROD_NAME} src={item.PROD_THUMB} price={price} cate={cate} PROD_ID={item.PROD_ID}/>
                     );
    })
    }
