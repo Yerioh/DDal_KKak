@@ -17,9 +17,9 @@ const ImgModal = ({
 
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
-    console.log("다운로드 버튼 활성화");
-    domtoimage.toBlob(imgRef).then((blob) => {
-      saveAs(blob, `DDAL_KKAK.${ImgArray[index].IMG_URL[-3]}`);
+    console.log("다운로드 버튼 활성화", `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`);
+    domtoimage.toBlob(imgRef.current).then((blob) => {
+      saveAs(blob, `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`);
     });
   };
 

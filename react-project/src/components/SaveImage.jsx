@@ -29,7 +29,6 @@ const SaveImage = () => {
             setIsLoading(true); // 이미지 로딩 시작을 나타내는 상태를 true로 설정
 
             image.src = image.dataset.src; // data-src 속성에서 실제 이미지 URL로 src 속성 변경
-            console.log(image.dataset.src);
             // 이미지 로드 완료시 실행될 함수
             image.onload = () => {
               setIsLoading(false); // 이미지 로드 완료 후 로딩 상태를 false로 변경
@@ -63,7 +62,6 @@ const SaveImage = () => {
     setSelectedImages(newSelectedImages);
   }, [selectAll]);
 
-  console.log("체크표시 요소", selectedImages);
 
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
   // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
@@ -87,9 +85,7 @@ const SaveImage = () => {
     // isOpen의 상태를 변경하는 메소드를 구현
     // !false -> !true -> !false
     setIsOpen((prevIsOpen) => !prevIsOpen);
-    // console.log("이미지 모달", isOpen);
     setTestindex(index);
-    console.log("인덱스", index);
   };
 
   /**삭제하시겠습니까? 모달 호출*/
@@ -100,7 +96,6 @@ const SaveImage = () => {
 
     if (isSelected) {
       setDelImg(!delImg);
-      console.log("삭제 모달", delImg);
     } else {
       alert("삭제하려는 이미지를 선택해주세요");
     }
@@ -111,7 +106,6 @@ const SaveImage = () => {
     const checkedImages = imgArray
       .filter((_, index) => selectedImages[index])
       .map((item) => item.IMG_URL); // 체크된 이미지들의 URL만 추출
-    console.log("체크된 이미지 url", checkedImages);
     setcheck_Img(checkedImages);
   };
 
@@ -158,7 +152,6 @@ const SaveImage = () => {
     newArr.sort((a, b) => 
       {return new Date(a.DATE) - new Date(b.DATE)}
     )
-    console.log("최신순", newArr);
     setImgArray(newArr);
   };
 
@@ -169,7 +162,6 @@ const SaveImage = () => {
     newArr.sort((a, b) => 
       {return new Date(b.DATE) - new Date(a.DATE)}
     )
-    console.log("오래된순", newArr);
     setImgArray(newArr);
   };
 
