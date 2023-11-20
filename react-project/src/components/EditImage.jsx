@@ -32,7 +32,7 @@ function EditImage() {
   const [ query, setQuery] = useSearchParams()
   const img_id = query.get('img')
   // 이미지 경로
-  const imgUrl = `${process.env.REACT_APP_AWS_BUCKET_URL}/${img_id}`
+  const imgUrl = `${process.env.REACT_APP_AWS_BUCKET_URL}/new_img/${img_id}`
 
   const fontAnnotationsConfig = {
     text: "예시용 글입니다.",
@@ -81,7 +81,7 @@ function EditImage() {
           
           // s3 버킷에 저장될 경로, 파일명
             // 사용자이름(폴더)/랜덤값.파일형식
-          const img_info = `${userId}/${uuid()}.${type}`
+          const img_info = `${userId}/edit_img/${uuid()}.${type}`
 
           // aws s3 이미지 업로드 함수
           const upload = new aws.S3.ManagedUpload({

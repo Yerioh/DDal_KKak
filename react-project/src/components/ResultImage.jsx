@@ -44,7 +44,7 @@ const ResultImage = () => {
       return (
         <li key={index} className="imageresult">
           <div className={cardClass} id={img} onClick={choiceImg}>
-            <img src={`${s3Url}${img}`} alt={`Image ${index + 1}`} id={img}/>
+            <img src={`${s3Url}/new_img/${img}`} alt={`Image ${index + 1}`} id={img}/>
           </div>
         </li>
       );
