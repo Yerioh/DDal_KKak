@@ -12,7 +12,7 @@ const ImgModal = ({
   ImgArray, // 이미지 배열
   index,
 }) => {
-  // 23-11-17 17:01 임휘훈 작성
+  // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();
 
   /** 내 저장 이미지 다운로드 함수 */
