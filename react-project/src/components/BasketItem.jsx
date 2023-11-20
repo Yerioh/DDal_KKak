@@ -113,6 +113,7 @@ const Basketitems = ({items}) => {
             <div className='vtline' ></div>
 {/* 간단한 함수로 각 상품의 총 금액 */}
             <div className='summary-price'>
+                {/* 가격 천단위 콤마 */}
                 {sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
             </div>
         </div>
