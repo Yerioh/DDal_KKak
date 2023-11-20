@@ -17,6 +17,8 @@ const imgCreate = require("./routes/imgCreate");
 const socialLogin = require("./routes/socialLogin");
 // user 라우터
 const user = require('./routes/user')
+// page 라우터
+const page = require("./routes/page")
 
 // 정적 파일을 가져오기 위한 미들웨어
 app.use(express.static(path.join(__dirname, "react-project", "build")));
@@ -47,6 +49,8 @@ app.use("/imgCreate", imgCreate);
 app.use("/socialLogin", socialLogin);
 // user 라우터
 app.use('/user', user)
+// page 라우터
+app.use('/page', page)
 
 // 포트번호 설정
 app.set("port", process.env.PORT || 3001);

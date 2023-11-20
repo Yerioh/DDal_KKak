@@ -153,7 +153,6 @@ const CreateImage = () => {
                 className="guide-button btnmy"
               />
             </h3>
-            {/* <Progress progress={75} /> */}
 
             <Form.Label></Form.Label>
             <textarea
