@@ -123,7 +123,7 @@ const SaveImage = () => {
 
   /**삭제 버튼 클릭 시 체크된 이미지 URL 변수 업데이트*/
   const handleDeleteClick = () => {
-    // 23-11-20 09:20 임휘훈 작성 : 삭제 버튼 기능
+    // 23-11-20 09:21 임휘훈 작성 : 삭제 버튼 기능
     let arrImgId = [];
     // 객체형태 반복문에서 사용하기 위해서 객체 key값만 접근 keys
     for (const key of Object.keys(selectedImages)) {
