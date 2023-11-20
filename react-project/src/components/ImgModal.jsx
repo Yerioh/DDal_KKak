@@ -2,8 +2,8 @@ import React, { createElement, useRef, useState } from "react";
 import "../css/ImgModal.css";
 import { Link } from "react-router-dom";
 import axios from "../axios";
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 
 // 회원탈퇴 모달, 이미지 상세정보 모달
 const ImgModal = ({
@@ -13,22 +13,22 @@ const ImgModal = ({
   index,
 }) => {
   // 23-11-17 17:01 임휘훈 작성
-  const imgRef = useRef()
+  const imgRef = useRef();
 
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
     console.log("다운로드 버튼 활성화");
-    domtoimage.toBlob(imgRef).then(blob => {
-      saveAs(blob, `DDAL_KKAK.${ImgArray[index].IMG_URL[-3]}`)
-    })
-  }
+    domtoimage.toBlob(imgRef).then((blob) => {
+      saveAs(blob, `DDAL_KKAK.${ImgArray[index].IMG_URL[-3]}`);
+    });
+  };
 
   /* 
         Props로 받아야할 Data
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
         이미지 URL, 사용자 Prompt, NPrompt
     */
-  console.log(ImgArray)
+  console.log(ImgArray);
   return (
     <div>
       {isOpen ? (
@@ -36,7 +36,11 @@ const ImgModal = ({
           {/* 버블링 중지 함수 */}
           <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
             <div className="S-ImgPic">
-              <img ref={imgRef}  src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`} alt="Ex_image" />
+              <img
+                ref={imgRef}
+                src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`}
+                alt="Ex_image"
+              />
             </div>
             <hr />
             <div className="user-Prompt">
@@ -48,13 +52,17 @@ const ImgModal = ({
             <hr />
             <div className="Modal-Btn">
               <Link to="#">
-                <button>이미지 재편집</button>
+                <button className="SM-btn">이미지 재편집</button>
               </Link>
               <Link to="#">
-                <button>굿즈 선택</button>
+                <button className="SM-btn">굿즈 선택</button>
               </Link>
-              <button onClick={downLoadBtn}>다운로드</button>
-              <button onClick={openModalHandler}>닫기</button>
+              <button className="SM-btn" onClick={downLoadBtn}>
+                다운로드
+              </button>
+              <button className="SM-btn" onClick={openModalHandler}>
+                닫기
+              </button>
             </div>
           </div>
         </div>
@@ -62,5 +70,4 @@ const ImgModal = ({
     </div>
   );
 };
-
 export default ImgModal;

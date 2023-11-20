@@ -11,10 +11,11 @@
     align-items: center;
   }
   
+  
   /* 모달 구성 (Container)*/
   .S-ImgInfo {
     background-color: white;
-    width: 50%;
+    min-width: 50%;
     height: 80%;
     padding: 20px;
     border-radius: 5px;
@@ -40,7 +41,7 @@
     margin-top: auto;
     display: flex;
     justify-content: space-evenly;
-    
+    gap: 5px;
   }
 
   /* 다운로드, 닫기 버튼 */
@@ -74,5 +75,64 @@
     transition: all .10s linear;
   }
   
+  .SM-text{
+    display: none;
+  }
+
+  /* App 이미지 상세 모달 */
+  
+  
+  @media(max-width:768px){
+    /* 모달 구성 (Container)*/
+
+  .SM-text{
+    display: block;
+  }
+  .S-ImgInfo {
+    background-color: white;
+    min-width: 300px;
+    width: 500px;
+    height: 60%;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+  }
+
+
+  /* 모달 Img css */
+  .S-ImgPic{
+    display: flex;
+    justify-content: center;
+    height: 60%;
+    width: 80%;
+    min-width: 80%;
+  }
+
+  /* 유저 프롬프트부분 css */
+  .user-Prompt{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  .user-Prompt > h5{
+   font-weight: bold;
+  }
+ 
+
+  .Modal-Btn{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+ .SM-text{
+    width: 50%;
+    font-size: 13px;
+  }
+
+ 
+  }
 
   
