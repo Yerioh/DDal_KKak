@@ -1,6 +1,7 @@
 .SaveImage{
     width: 80%;
     margin-top: 30px;
+    margin-left : auto;
 }
 
 /* 체크박스, 이미지, 날짜 div */
@@ -44,6 +45,7 @@
 .S-Ibox{
     border-top: 1px solid gray;
     margin-top: 10px;
+    
 }
 
 /* Tab check box */
@@ -123,7 +125,7 @@ input[type="checkbox"]:checked + .check_label {
 
 /* 맵 함수 div */
 .S-Ibox{
-    justify-content: start;
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
     margin : 10px 60px 20px 60px;
@@ -214,7 +216,7 @@ input[type="checkbox"]:checked + .check_label {
     transition: all .10s linear;
 }
 
-@media(max-width : 769px){
+@media(max-width : 768px){
     
     .check-box > span{
         display: none;
@@ -223,7 +225,17 @@ input[type="checkbox"]:checked + .check_label {
         display: flex;
         justify-content: space-between;
         padding: 0 60px;
+        gap: 13%;
     }
+    .S-Ibox{
+    justify-content: start;
+    display: flex;
+    flex-wrap: wrap;
+    margin : 10px 60px 20px 60px;
+}
+    
+
+
     .check-box > button{
         width: 46px;
         height: 28px;
@@ -235,5 +247,13 @@ input[type="checkbox"]:checked + .check_label {
     .order-box > .old-text{
         width : 48px;
         height: 28px
+    }
+}
+
+@media(min-width: 1520px) and (max-width : 1600px){
+    .S-Ibox{
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: start;
     }
 }

@@ -8,7 +8,7 @@
     height: 100vh;
     margin-top: 30px;
     min-width: 170px;
-    
+    position: fixed;
 }
 .user-side{
     display: flex;

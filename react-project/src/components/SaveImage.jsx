@@ -62,7 +62,6 @@ const SaveImage = () => {
     setSelectedImages(newSelectedImages);
   }, [selectAll]);
 
-
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
   // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
   useEffect(() => {
@@ -121,10 +120,9 @@ const SaveImage = () => {
     let arrImgId = [];
     // 객체형태 반복문에서 사용하기 위해서 객체 key값만 접근 keys
     for (const key of Object.keys(selectedImages)) {
-
       // SQL에서 IN 사용하기 위해서 따옴표 넣기
       // ex) "'문자열1', '문자열2'"
-      arrImgId.push("'" + imgArray[key].IMG_ID + "'"); 
+      arrImgId.push("'" + imgArray[key].IMG_ID + "'");
 
       // 필요한가?
       // setcheck_Img(() => {
@@ -134,34 +132,36 @@ const SaveImage = () => {
     let strImgId = arrImgId.join();
 
     // 이미지 삭제 axios
-    axios.post("/imgCreate/deleteImg", {
-      imgId: strImgId,
-    }).then((res) => {
-      let imgData = res.data.imgArray;
-      // 이미지 화면 최신화
-      setImgArray(imgData)
-      // 삭제 모달 닫기
-      setDelImg(!delImg);
-    })
+    axios
+      .post("/imgCreate/deleteImg", {
+        imgId: strImgId,
+      })
+      .then((res) => {
+        let imgData = res.data.imgArray;
+        // 이미지 화면 최신화
+        setImgArray(imgData);
+        // 삭제 모달 닫기
+        setDelImg(!delImg);
+      });
   };
 
   /**최신순 정렬 함수*/
   const date_Order = () => {
     // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
-    let newArr = [...imgArray]
-    newArr.sort((a, b) => 
-      {return new Date(a.DATE) - new Date(b.DATE)}
-    )
+    let newArr = [...imgArray];
+    newArr.sort((a, b) => {
+      return new Date(a.DATE) - new Date(b.DATE);
+    });
     setImgArray(newArr);
   };
 
   /**오래된순 정렬 함수*/
   const old_Order = () => {
-     // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
-    let newArr = [...imgArray]
-    newArr.sort((a, b) => 
-      {return new Date(b.DATE) - new Date(a.DATE)}
-    )
+    // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
+    let newArr = [...imgArray];
+    newArr.sort((a, b) => {
+      return new Date(b.DATE) - new Date(a.DATE);
+    });
     setImgArray(newArr);
   };
 
