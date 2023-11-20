@@ -23,6 +23,7 @@
 .SaveImage > h3{
     display: flex;
     justify-content: center;
+    font-weight: bold;
 }
 
 /* 날짜 */
