@@ -49,11 +49,21 @@ const CreateImage = () => {
 
     // 체크된 경우 값 추가
     if (checked) {
-      setPositivePrompt((prev) => [...prev, value]);
+      setPositivePrompt((prev) => {
+        // 이미 값이 포함되어 있는지 확인
+        const valuesArray = prev ? prev.split(', ').filter(Boolean) : [];
+        if (!valuesArray.includes(value)) {
+          return [...valuesArray, value].join(', ');
+        }
+        return prev;
+      });
     }
     // 체크 해제된 경우 값 제거
     else {
-      setPositivePrompt((prev) => prev.filter((item) => item !== value));
+      setPositivePrompt((prev) => {
+        const valuesArray = prev.split(', ').filter((item) => item !== value);
+        return valuesArray.join(', ');
+      });
     }
   };
 
@@ -63,32 +73,16 @@ const CreateImage = () => {
   // 모달을 닫기 위한 함수
   const closeGuideModal = () => setguideModalOpen(false);
 
-  // 23-11-15 오후 17:00 박지훈 작성
+  // 23-11-20 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
     if (positivePrompt !== "") {
-      axiosProgress
-        .post("/imgCreate/stable", {
+      axiosProgress.post("/imgCreate/stable", {
           positivePrompt: positivePrompt,
           negativePrompt: negativePrompt,
           countImg: countImg,
-        })
-        .then((res) => {
-          let data = res.data;
-          console.log("생성된 이미지", data);
-
-          // axios 통신 중, 에러 발생 시
-          if (data.createError) {
-            dispatch(ProgressReducerActions.resetProgress());
-            alert(
-              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
-            );
-          }
-          if (data.imgData.img_data !== undefined) {
-            setImgData(data.imgData.img_data);
-          }
-        })
+        })       
         .then((res) => {
           let data = res.data;
           console.log("생성된 이미지", data);
@@ -96,11 +90,11 @@ const CreateImage = () => {
           // axios 통신 중, 에러 발생 시
           if (data.createError) {
             dispatch(ProgressReducerActions.resetProgress());
-            alert(
-              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
-            );
+            alert("이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.");
           }
-          console.log("then", progress);
+          if (data.imgData.img_data !== undefined) {
+            setImgData(data.imgData.img_data);
+          }
         });
     }
   };
@@ -152,7 +146,7 @@ const CreateImage = () => {
                 src={qMark}
                 alt=""
                 onClick={openGuideModal}
-                className="guide-button btnmy"
+                className="guide-button"
               />
             </h3>
 
