@@ -97,58 +97,56 @@ button .creImg_body {
 
 /* 모달창 관련 */
 
-
-.modal-open-button,
-.modal-close-btn {
-  position: relative;
-  border-radius: 10px;
-  left: 85%;
-}
-
-/* 가이드 키워드부분 전체 구역*/
-.guide-keyword {
-  width: 500px;
-}
+/* 가이드 모달창 */
 .guidemodal-body {
-
-  justify-content: space-between;
-}
-
-.guidemodal-container {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
+  background-color: #ffffff;
+  min-width: 380px;
+  width: 40%;
+  max-width: 400px;
+  height: 80%;
+  padding: 10px;
+  border-radius: 5px;
   display: flex;
+  flex-direction: column;
+}
+.guidemodal-content{
+  height: 80%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
+  gap: 5px;
 }
-
-.guidemodal-content {
-  background-color: #ffffff;
-  width: 70%;
-  height: 80%;
-  padding: 15px;
-}
-
-.guidemodal-img {
+.guidemodal-guideinfo{
+  width: 98%;
+  height: 23%;
+  background-color: lightgray;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 20px;
   display: flex;
+  gap: 20px;
 }
-
-
-.guidemodal-body2 {
+.guidemodal-guideinfo-img{
+  width: 25%;
+  height: auto;
+}
+.guidemodal-guideinfo-info{
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
-
-/* 가이드 모달창 관련 */
-.guide-manual {
-  margin-top: 15%;
-  font-size: 25px;
+.guidemodal-guideinfo-info .bold{
+  font-weight: bolder;
+  text-decoration: underline;
+}
+.guidemodal-footer{
+  height: 5%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 30px 10px;
 }
 
 .guide-button {

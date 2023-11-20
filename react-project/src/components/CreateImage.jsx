@@ -13,7 +13,10 @@ import { ProgressReducerActions } from "../redux/reducers/progressSlice";
 import { useNavigate } from "react-router-dom";
 import Sample from "../img/guideSample_dog.jpeg";
 import Arrow from "../img/rightArrow.png";
-import qMark from '../img/question-mark.png'
+import qMark from "../img/question-mark.png";
+import guideKeyboard from "../img/guide-keyboard.png"
+import guideClick from "../img/guide-click.png"
+import guideBang from "../img/guide-bang.png"
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
@@ -143,8 +146,12 @@ const CreateImage = () => {
           <div className="keyword">
             <h3 className="postive_head">
               넣을 단어{" "}
-              
-              <img src={qMark} alt=""  onClick={openGuideModal} className="guide-button btnmy"/>
+              <img
+                src={qMark}
+                alt=""
+                onClick={openGuideModal}
+                className="guide-button btnmy"
+              />
             </h3>
             {/* <Progress progress={75} /> */}
 
@@ -202,66 +209,62 @@ const CreateImage = () => {
             </button>
             {/* </Link> */}
           </div>
-          {/*가이드 모달 창*/}
-          {guideModalOpen && (
-            <div
-              className={"guidemodal-container"}
-              onClick={(e) => {
-                if (e.target === e.currentTarget) {
-                  closeGuideModal();
-                }
-              }}
-            >
-              <div className={"guidemodal-content"}>
-                <div className={"modal-guide"}>
-                  {/* // 이미지 작성가이드 모달창 */}
-                  
-                </div>
-                <div className={"guidemodal-body"}>
-                  <div className="guidemodal-body2">
-                    <div className="guide-keyword">
-                      <h1>긍정 프롬프트 입력</h1>
-                      <Form.Control
-                        type="text"
-                        value={"강아지,실사체,귀접힘"}
-                        readOnly={true}
-                      />
-                      <h1 style={{ "margin-top": "10%" }}>
-                        부정 프롬프트 입력
-                      </h1>
-                      <Form.Control
-                        type="text"
-                        value={"컬러, 몸통"}
-                        readOnly={true}
-                        style={{ "margin-bottom": "10%" }}
-                      />
-                      <div className="guide-manual">
-                        <p>
-                          1. 긍정 프롬프트에 이미지에 포함하고 싶은 단어를
-                          입력하세요<div className=""></div>
-                        </p>
-                        <p>
-                          2. 부정 프롬프트에 이미지에 포함하고 싶지 않은 단어를
-                          입력하세요.
-                        </p>
-                        <p>3. 딸-깍! 버튼을 클릭하면 이미지가 생성됩니다!</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-               
-                </div>
-                <button
-                  className={"modal-close-btn btnmy"}
-                  onClick={closeGuideModal}
-                >
-                  모달 닫기
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
+      {/*가이드 모달 창*/}
+      {guideModalOpen && (
+        <div
+          className="modal-backdrop"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeGuideModal();
+            }
+          }}
+        >
+          <div className="guidemodal-body">
+            <h2>어떻게 만들까요?</h2>
+            <div className="guidemodal-content">
+              <div className="guidemodal-guideinfo">
+                <img src={guideKeyboard} alt="" className="guidemodal-guideinfo-img" />
+                <div className="guidemodal-guideinfo-info">
+                <span>만들고 싶은 이미지와</span>
+                <span>관련된 단어나 문장을</span>
+                <span><span className="bold">"넣을 단어"</span>에 입력해주세요.</span>
+                </div>
+              </div>
+              <div className="guidemodal-guideinfo">
+                <img src={guideBang} alt="" className="guidemodal-guideinfo-img" />
+                <div className="guidemodal-guideinfo-info">
+                  <span>어떻게 써야할지 어렵나요?</span>
+                  <span>저희가 <span className="bold">키워드</span>를 준비했어요.</span>
+                  <span>키워드를 클릭! 클릭!</span>
+                </div>
+              </div>
+              <div className="guidemodal-guideinfo">
+                <img src={guideKeyboard} alt="" className="guidemodal-guideinfo-img" />
+                <div className="guidemodal-guideinfo-info">
+                  <span>넣고 싶지 않은게 있나요?</span>
+                  <span>그렇다면 <span className="bold">"뺄 단어"</span>에</span>
+                  <span>관련 단어나 문장을 넣어봐요.</span>
+                </div>
+              </div>
+              <div className="guidemodal-guideinfo">
+                <img src={guideClick} alt="" className="guidemodal-guideinfo-img" />
+                <div className="guidemodal-guideinfo-info">
+                  <span>만들 이미지의 수를 선택!</span>
+                  <span>마지막으로 <span className="bold">"딸-깍!"</span></span>
+                  <span>어때요? 참 쉽죠?</span>
+                </div>
+              </div>
+            </div>
+            <div className="guidemodal-footer">
+              <button className="btnmy" onClick={closeGuideModal}>
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
