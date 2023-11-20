@@ -12,8 +12,7 @@ const ResultImage = () => {
 
   // 23-11-16 오후 14:30 박지훈 작성
   // S3 버킷 기본 주소 값
-  const s3Url = 'https://final-project-s3bucket.s3.ap-northeast-2.amazonaws.com/'  
-  console.log('머지?',location)
+  const s3Url = process.env.REACT_APP_AWS_BUCKET_URL  
   const imgData = location.state.imgData
 //   const imgData = ['108488627855757649516/b6bef82a-48ec-5f41-c240-31e3c174e544.png','108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png',
 // '108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png', '108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png','108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png']
@@ -66,7 +65,7 @@ const ResultImage = () => {
     console.log('이미지 선택 완료',imgClick)
     axios.post('/imgCreate/choiceImg', imgClick)
       .then((response)=>{
-        if(response.data.choiceImg){
+        if(response.data.choiceImg){          
           navi(`/image-edit/?img=${imgClick[0]}`,  { state : {
             positivePrompt : positive,
             negativePrompt : negative
