@@ -22,7 +22,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           <input
             className="keyWord-button"
             type="checkbox"
-            value="Gray-Scale,"
+            value="Gray-Scale"
             name="흑백"
             onChange={handleCheckboxChange}
           />
@@ -34,7 +34,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           <input
             className="keyWord-button"
             type="checkbox"
-            value="Colorful,"
+            value="Colorful"
             name="컬러"
             onChange={handleCheckboxChange}
           ></input>
@@ -46,7 +46,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           <input
             className="keyWord-button"
             type="checkbox"
-            value="Logo,"
+            value="Logo"
             name="로고"
             onChange={handleCheckboxChange}
           ></input>
@@ -58,7 +58,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           <input
             className="keyWord-button"
             type="checkbox"
-            value="Typography,"
+            value="Typography"
             name="타이포그래피"
             onChange={handleCheckboxChange}
           ></input>
@@ -70,7 +70,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           <input
             className="keyWord-button"
             type="checkbox"
-            value="Vector logo, Vector Art, Vector graphics, Adobe illustrator,"
+            value="Vector logo, Vector Art, Vector graphics, Adobe illustrator"
             name="Vector로고"
             onChange={handleCheckboxChange}
           ></input>
@@ -82,7 +82,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           <input
             className="keyWord-button"
             type="checkbox"
-            value="WordMark,"
+            value="WordMark"
             name="WordMark"
             onChange={handleCheckboxChange}
           ></input>

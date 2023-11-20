@@ -23,7 +23,7 @@ const PageCountButton = ({ handleImageCountChange }) => {
         </select>
       </div>
       <p>
-        *개수를 많이 생성할 수록 이미지가 만들어지는 데 시간이 더 소모됩니다.
+        * 개수를 많이 생성할 수록 이미지가 만들어지는 데 시간이 더 소모됩니다.
       </p>
     </div>
   );

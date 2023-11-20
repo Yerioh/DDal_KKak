@@ -84,7 +84,8 @@ const Basket = () => {
                     <div className='vtline' ></div>
                     <div style={{ width: "20%" }}>0원</div>
                     <div className='vtline' ></div>
-                    <div style={{ width: "20%" }}>10000원</div>
+                    <div style={{ width: "20%" }}>{"10000".toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원"}</div>
+                    {/*10000 총 결제 금액 유동적으로 바꿔야함 */}
                 </div>
             </div>
 

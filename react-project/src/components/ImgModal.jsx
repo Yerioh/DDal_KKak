@@ -10,7 +10,7 @@ const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
   ImgArray, // 이미지 배열
-  index,
+  index,                        
 }) => {
   // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();

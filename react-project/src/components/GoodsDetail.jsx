@@ -61,12 +61,12 @@ const GoodsDetail = () => {
   //수량 마이너스 버튼 간단함수
   const subtract = () => {
     console.log('-')
-    if (count > 0) {
+    if (count > 1) {
       setCount(count - 1)
     }
-    else {
-      setCount(1)
-    }
+    // else {
+    //   setCount(1)
+    // }
   }
 
 
@@ -223,7 +223,7 @@ const GoodsDetail = () => {
         <div style={{ textAlign: "center", margin: "10px" }}>
           <h5 style={{ float: "left", fontWeight: "bold" }}>가격</h5>
           <div style={{ float: "right" }}>
-            <h5>{sum}</h5>
+            <h5>{sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</h5>
           </div>
         </div>
         <br />
