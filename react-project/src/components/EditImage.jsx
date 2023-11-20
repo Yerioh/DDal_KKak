@@ -32,7 +32,7 @@ function EditImage() {
   const [ query, setQuery] = useSearchParams()
   const img_id = query.get('img')
   // 이미지 경로
-  const imgUrl = `${process.env.REACT_APP_AWS_BUCKET_URL}/new_img/${img_id}`
+  const imgUrl = `${process.env.REACT_APP_AWS_BUCKET_URL}/${img_id}`
 
   const fontAnnotationsConfig = {
     text: "예시용 글입니다.",

@@ -68,27 +68,11 @@ const CreateImage = () => {
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
     if (positivePrompt !== "") {
-      axiosProgress
-        .post("/imgCreate/stable", {
+      axiosProgress.post("/imgCreate/stable", {
           positivePrompt: positivePrompt,
           negativePrompt: negativePrompt,
           countImg: countImg,
-        })
-        .then((res) => {
-          let data = res.data;
-          console.log("생성된 이미지", data);
-
-          // axios 통신 중, 에러 발생 시
-          if (data.createError) {
-            dispatch(ProgressReducerActions.resetProgress());
-            alert(
-              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
-            );
-          }
-          if (data.imgData.img_data !== undefined) {
-            setImgData(data.imgData.img_data);
-          }
-        })
+        })       
         .then((res) => {
           let data = res.data;
           console.log("생성된 이미지", data);
@@ -96,11 +80,11 @@ const CreateImage = () => {
           // axios 통신 중, 에러 발생 시
           if (data.createError) {
             dispatch(ProgressReducerActions.resetProgress());
-            alert(
-              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
-            );
+            alert("이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.");
           }
-          console.log("then", progress);
+          if (data.imgData.img_data !== undefined) {
+            setImgData(data.imgData.img_data);
+          }
         });
     }
   };
