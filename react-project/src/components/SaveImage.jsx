@@ -123,43 +123,54 @@ const SaveImage = () => {
 
   /**삭제 버튼 클릭 시 체크된 이미지 URL 변수 업데이트*/
   const handleDeleteClick = () => {
-    // updateCheckedImages(); //함수 호출로 체크된 이미지 확인
-    // console.log("삭제될 데이터", check_Img);
-    // 이후 삭제 로직 구현
-    // -------------------------------------
-    // (임휘훈 여기에 삭제 로직을 적어라 - 임휘훈 -)
-    // 23-11-19 22:30 임휘훈 작성 : 삭제 버튼 기능
+    // 23-11-20 09:20 임휘훈 작성 : 삭제 버튼 기능
     let arrImgId = [];
+    // 객체형태 반복문에서 사용하기 위해서 객체 key값만 접근 keys
     for (const key of Object.keys(selectedImages)) {
-      console.log("체크박스된 거 key", key);
-      arrImgId.push(imgArray[key].IMG_ID);
+
+      // SQL에서 IN 사용하기 위해서 따옴표 넣기
+      // ex) "'문자열1', '문자열2'"
+      arrImgId.push("'" + imgArray[key].IMG_ID + "'"); 
 
       // 필요한가?
-      setcheck_Img(() => {
-        check_Img.push(imgArray[key].IMG_ID);
-      });
+      // setcheck_Img(() => {
+      //   check_Img.push("'" + imgArray[key].IMG_ID + "'");
+      // });
     }
     let strImgId = arrImgId.join();
-    console.log("문자열로 된 이미지 아이디들", strImgId);
+
+    // 이미지 삭제 axios
     axios.post("/imgCreate/deleteImg", {
       imgId: strImgId,
-    });
+    }).then((res) => {
+      let imgData = res.data.imgArray;
+      // 이미지 화면 최신화
+      setImgArray(imgData)
+      // 삭제 모달 닫기
+      setDelImg(!delImg);
+    })
   };
 
   /**최신순 정렬 함수*/
   const date_Order = () => {
-    axios.post("/imgCreate/myimg", { id: useId, sort: "a" }).then((res) => {
-      console.log("DB 이미지 프론트로", res.data.imgArray);
-      setImgArray(res.data.imgArray);
-    });
+    // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
+    let newArr = [...imgArray]
+    newArr.sort((a, b) => 
+      {return new Date(a.DATE) - new Date(b.DATE)}
+    )
+    console.log("최신순", newArr);
+    setImgArray(newArr);
   };
 
   /**오래된순 정렬 함수*/
   const old_Order = () => {
-    axios.post("/imgCreate/myimg", { id: useId, sort: "d" }).then((res) => {
-      console.log("DB 이미지 프론트로", res.data.imgArray);
-      setImgArray(res.data.imgArray);
-    });
+     // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
+    let newArr = [...imgArray]
+    newArr.sort((a, b) => 
+      {return new Date(b.DATE) - new Date(a.DATE)}
+    )
+    console.log("오래된순", newArr);
+    setImgArray(newArr);
   };
 
   return (
