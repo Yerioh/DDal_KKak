@@ -202,6 +202,8 @@ const CreateImage = () => {
               className="progress-bar"
               completed={progress}
               maxCompleted={100}
+              height={'38px'}
+              borderRadius={'5px'}
             />
             {/* <Link to='/image-edit'> */}
             <button className="creImg_gotobutton btn" onClick={createImg}>

@@ -1,9 +1,16 @@
 /* 생성페이지 몸통 */
-button .creImg_body {
+.creImg_body {
   display: flex;
   flex-direction: column;
-  margin: 0 15%;
-  gap: 49px;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 0;
+}
+.imgtopbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
 }
 /* 개인 버튼 커스텀  */
 .btnmy {
@@ -187,61 +194,52 @@ button .creImg_body {
 
 /* 페이지 개수 출력 */
 .pageCountOption {
-  display: flex;
-  flex-direction: column;
   border: 0;
-  border-radius: 10px;
+  border-radius: 5px;
   color: black;
-  background-color: #b4c8bb;
+  background-color: #E0E0DE;
   margin: 0 auto;
   width: 80px;
   height: 30px;
-  padding-left: 28px;
+}
+.pageCountOption>option{
+  text-align: center;
 }
 .pagecountbutton>.counthead{
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
+
 /* 이미지 생성버튼 */
+.gotoeditpage{
+  width:100%;
+  margin:0 auto;
+  margin-bottom:20px;
+  position: relative;
+}
+.progress-bar{
+  width: 100%;
+  position: absolute;
+  bottom: 5%;
+}
 .creImg_gotobutton {
   width: 100%;
   border-radius: 5px;
   border: 1px solid #c3c3c3;
   margin-top: 3%;
+  position: absolute;
+  bottom: 5%;
+  z-index: 2;
+
 }
 .creImg_gotobutton:hover {
-  border: solid 2px
+  border: solid 1px
 }
 
-.imgtopbody {
-  display: flex;
-  justify-content: center;
-}
 
-.previewimage {
-  width: 50%;
-  padding: 3% 3% 3% 3%;
-}
 
-.previewimage h3{
-  margin-left:60px;
-}
-
-.aisampleimage {
-  display: flex;
-  gap: 10px;
-  flex-direction : row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-evenly;
-}
-
-.gotoeditpage{
-  width:100%;
-  margin:0 auto;
-  margin-bottom:20px;
-}
 
 .counthead{
   display: flex;
