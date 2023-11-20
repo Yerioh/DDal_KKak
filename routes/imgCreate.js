@@ -89,41 +89,43 @@ router.post("/myimg", (req, res) => {
   let userId = req.body.id; // 유저 아이디
 
   let selectQuery =
-    "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT";
-  let descSelectQuery =
-    "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC";
+    "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT";
   conn.connect();
-  if (req.body.sort === "a") {
-    conn.query(selectQuery, [userId], (err, result) => {
-      if (err) {
-        console.log("내 저장 이미지 쿼리문 오류", err);
-      } else {
-        console.log("내 저장 이미지 불러오기 성공", result);
-        res.json({ imgArray: result });
-      }
-    });
-  } else if (req.body.sort === "d") {
-    conn.query(descSelectQuery, [userId], (err, result) => {
-      if (err) {
-        console.log("내 저장 이미지 쿼리문 오류", err);
-      } else {
-        console.log("내 저장 이미지 불러오기 성공", result);
-        res.json({ imgArray: result });
-      }
-    });
-  }
+  conn.query(selectQuery, [userId], (err, result) => {
+    if (err) {
+      console.log("내 저장 이미지 쿼리문 오류", err);
+    } else {
+      console.log("내 저장 이미지 불러오기 성공", result);
+      res.json({ imgArray: result });
+    }
+  });
 });
 
+// 내 저장이미지 선택 삭제 라우터
 router.post("/deleteImg", (req, res) => {
-  console.log("이미지삭제 라우터로 데이터 전송", req.body);
-  let sqlImgId = req.body.imgId;
-  let deleteQuery = "DELETE FROM TB_GEN_IMG WHERE IMG_ID IN (?)";
+
+  let sqlImgId = req.body.imgId; // 문자열 형태로 된 이미지 ID
+
+  let sessionId = req.session.userId // 세션에 저장된 유저 ID
+  // 삭제 쿼리
+  let deleteQuery = `DELETE FROM TB_GEN_IMG WHERE IMG_ID IN (${sqlImgId})`;
+  // 선택 쿼리
+  let selectQuery = "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT"
   conn.connect();
-  conn.query(deleteQuery, [sqlImgId], (err, result) => {
+  conn.query(deleteQuery, (err, result) => {
     if (err) {
       console.log("내 저장 이미지 삭제 쿼리문 오류", err);
     } else {
       console.log("이미지 삭제 완료");
+      conn.query(selectQuery, [sessionId], (err, result) => {
+        if (err){
+          console.log("삭제 후 이미지 최신화 쿼리 오류", err);
+        }
+        else{
+          console.log("삭제된 후 프론트로");
+          res.json({ imgArray: result });
+        }
+      })
     }
   });
 });
