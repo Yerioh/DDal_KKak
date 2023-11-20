@@ -108,7 +108,7 @@ const CreateImage = () => {
   //23-11-16 오전 9:36 나범수 navigate 추가 -> 페이지 개수 전달 위함.
   const navigate = useNavigate();
 
-  // 2023.11.16 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가
+  // 2023.11.20 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가 -박지훈-
   const goToResultPage = () => {
     console.log("Navigating with imageCount:", countImg);
     setTimeout(
@@ -122,6 +122,8 @@ const CreateImage = () => {
       }),
       3000
     );
+    // progress bar 관련 state초기화
+    dispatch(ProgressReducerActions.resetProgress())
   };
 
   const handleImageCountChange = (count) => {

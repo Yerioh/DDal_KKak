@@ -81,7 +81,7 @@ function EditImage() {
           
           // s3 버킷에 저장될 경로, 파일명
             // 사용자이름(폴더)/랜덤값.파일형식
-          const img_info = `${userId}/${uuid()}.${type}`
+          const img_info = `${userId}/edit_img/${uuid()}.${type}`
 
           // aws s3 이미지 업로드 함수
           const upload = new aws.S3.ManagedUpload({
