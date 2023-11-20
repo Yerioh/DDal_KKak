@@ -20,7 +20,7 @@ let conn = db.init();
 let flaskServer = ''
 
 router.post('/getUrl', (req,res)=>{
-  console.log(req.body)
+  console.log('Flask 서버 실행', req.body.url)
   flaskServer = req.body.url
 })
 
