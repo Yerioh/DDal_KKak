@@ -30,10 +30,6 @@ const Header = () => {
     });
   };
 
-  const handleMenu = () => {
-    setHeaderMenu(!headerMenu);
-  };
-
   return (
     <div className="Header-Container">
       <div className="Header-box bg-light">
@@ -84,30 +80,60 @@ const Header = () => {
         <div className="Mobile-Nav ">
           {!changeHeader ? (
             <div className="App-Nav">
-              <Link className="nav-link" to="login">
+              <Link
+                className="nav-link"
+                to="login"
+                onClick={() => setHeaderMenu(false)}
+              >
                 <span>로그인</span>
               </Link>
-              <Link className="nav-link" to="join">
+              <Link
+                className="nav-link"
+                to="join"
+                onClick={() => setHeaderMenu(false)}
+              >
                 <span>회원가입</span>
               </Link>
             </div>
           ) : (
             <div className="App-Nav">
-              <Link className="nav-link" to="mypage">
+              <Link
+                className="nav-link"
+                to="mypage"
+                onClick={() => setHeaderMenu(false)}
+              >
                 <span>{userName} 님</span>
               </Link>
-              <Link className="nav-link" onClick={logoutClick}>
+              <Link
+                className="nav-link"
+                onClick={() => {
+                  logoutClick();
+                  setHeaderMenu(false);
+                }}
+              >
                 <span>로그아웃</span>
               </Link>
-              <Link className="nav-link" to="/basket">
-                 <span>내 장바구니</span>
+              <Link
+                className="nav-link"
+                to="/basket"
+                onClick={() => setHeaderMenu(false)}
+              >
+                <span>내 장바구니</span>
               </Link>
             </div>
           )}
-          <Link className="nav-link" to="/image-create">
+          <Link
+            className="nav-link"
+            to="/image-create"
+            onClick={() => setHeaderMenu(false)}
+          >
             <span>이미지 생성</span>
           </Link>
-          <Link className="nav-link" to="/goodslist">
+          <Link
+            className="nav-link"
+            to="/goodslist"
+            onClick={() => setHeaderMenu(false)}
+          >
             <span>굿즈 페이지</span>
           </Link>
         </div>
