@@ -12,6 +12,7 @@ import ResultImage from './ResultImage'
 import Goodslist from "./Goodslist";
 import GoodsDetail from "./GoodsDetail";
 import Basket from "./Basket";
+import Main from "./Main";
 
 const Body = () => {
   // // 23-11-14 16:21 임휘훈 작성 Private Route
@@ -33,6 +34,8 @@ const Body = () => {
       <Routes>
         {/* 회원가입 */}
         <Route path="/join" element={<Join />}></Route>  
+        {/* 메인페이지*/}
+        <Route path="/" element={<Main />}></Route>  
         {/* 로그인 */}
         <Route path="/login" element={<Login />}></Route>
         {/*  마이페이지 */}
