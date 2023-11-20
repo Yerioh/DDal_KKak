@@ -15,14 +15,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top:10%;
+      margin-top:4%;
       /* margin-left:10%; */
       gap : 15%;
-      width:100%
+      width:100%;
+      margin-left:5%;
       
     }
   
-  .four-images .image-list {
+  .four-images {
       display: grid;
       grid-template-columns: repeat(2, 1fr); /* 2열 그리드 */
       gap: 10px;
@@ -34,7 +35,7 @@
       align-items: center;
   }
   
-  .five-images .image-list {
+  .five-images  {
       display: flex;
       flex-wrap : wrap;
       align-content : space-around;
@@ -53,15 +54,33 @@
   .five-images .image-list li:nth-child(4) { grid-area: img4; }
   .five-images .image-list li:nth-child(5) { grid-area: img5; }
   
-  .imageresult .card{
-      height: fit-content;
-      padding:15%;
-      width:30vh;
-      margin : 25px;
-  }
+  .imageresult{
+    width: 248px;
+    height: 335px;
+    /* width: 700px;
+    height: 700px; */
+    display: flex;
+    justify-content: center;
+    overflow: hidden;     
+    flex-direction: column;
+    margin-top: 10px;
+    position: relative;
+    margin-right:60px;
+}
   
   .imageresult .card:hover{
-      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  }
+
+  .imageresult .card-active{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    width: 248px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;     
+    flex-direction: column;
+    position: relative;
+    margin-right:60px;
   }
   
   
