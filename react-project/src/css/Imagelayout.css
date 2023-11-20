@@ -96,11 +96,22 @@ button .creImg_body {
 }
 
 /* 모달창 관련 */
+
+
 .modal-open-button,
 .modal-close-btn {
   position: relative;
   border-radius: 10px;
   left: 85%;
+}
+
+/* 가이드 키워드부분 전체 구역*/
+.guide-keyword {
+  width: 500px;
+}
+.guidemodal-body {
+
+  justify-content: space-between;
 }
 
 .guidemodal-container {
@@ -125,10 +136,7 @@ button .creImg_body {
 .guidemodal-img {
   display: flex;
 }
-.guidemodal-body {
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .guidemodal-body2 {
   display: flex;
@@ -136,10 +144,7 @@ button .creImg_body {
   justify-content: center;
 }
 
-/* 가이드 키워드부분 전체 구역*/
-.guide-keyword {
-  width: 500px;
-}
+
 /* 가이드 모달창 관련 */
 .guide-manual {
   margin-top: 15%;
@@ -147,12 +152,12 @@ button .creImg_body {
 }
 
 .guide-button {
-  width: 120px;
+  width: 30px;
   text-align: center;
   transition: all 0.2s;
   font-size: 20px;
-  margin: 0 0 0 6%;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 /* 전체 키워드 모달창  */
