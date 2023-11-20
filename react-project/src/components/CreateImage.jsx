@@ -13,6 +13,7 @@ import { ProgressReducerActions } from "../redux/reducers/progressSlice";
 import { useNavigate } from "react-router-dom";
 import Sample from "../img/guideSample_dog.jpeg";
 import Arrow from "../img/rightArrow.png";
+import qMark from '../img/question-mark.png'
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
@@ -141,10 +142,9 @@ const CreateImage = () => {
           {/* 긍정 키워드 입력 구역  */}
           <div className="keyword">
             <h3 className="postive_head">
-              긍정 프롬프트{" "}
-              <button className="guide-button btnmy" onClick={openGuideModal}>
-                가이드
-              </button>{" "}
+              넣을 단어{" "}
+              
+              <img src={qMark} alt=""  onClick={openGuideModal} className="guide-button btnmy"/>
             </h3>
             {/* <Progress progress={75} /> */}
 
@@ -169,7 +169,7 @@ const CreateImage = () => {
 
           {/* 부정 키워드 입력  */}
           <div className="negative_keyword">
-            <h3>부정 프롬프트</h3>
+            <h3> 뺄 단어</h3>
             <Form.Label></Form.Label>
             <textarea
               type="text"
@@ -215,17 +215,7 @@ const CreateImage = () => {
               <div className={"guidemodal-content"}>
                 <div className={"modal-guide"}>
                   {/* // 이미지 작성가이드 모달창 */}
-                  <Button
-                    variant="light"
-                    style={{
-                      disabled: "true",
-                      position: "relative",
-                      left: "10%",
-                      width: "1100px",
-                    }}
-                  >
-                    이미지를 생성하는 방법
-                  </Button>{" "}
+                  
                 </div>
                 <div className={"guidemodal-body"}>
                   <div className="guidemodal-body2">
@@ -258,16 +248,8 @@ const CreateImage = () => {
                       </div>
                     </div>
                   </div>
-                  <img src={Arrow} alt="" style={{ width: "30%" }} />
-                  <img
-                    src={Sample}
-                    alt=""
-                    style={{
-                      width: "30%",
-                      height: "90%",
-                      "margin-top": "20px",
-                    }}
-                  />
+                  
+               
                 </div>
                 <button
                   className={"modal-close-btn btnmy"}

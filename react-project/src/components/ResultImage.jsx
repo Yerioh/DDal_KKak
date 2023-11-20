@@ -14,12 +14,15 @@ const ResultImage = () => {
   // S3 버킷 기본 주소 값
   const s3Url = 'https://final-project-s3bucket.s3.ap-northeast-2.amazonaws.com/'  
   console.log('머지?',location)
-  const imgData = location.state.imgData
-  // const imgData = ['110467665808154977803/0197d55a-8387-11ee-b713-0242ac1c000c.png']
+  // const imgData = location.state.imgData
+  const imgData = ['108488627855757649516/b6bef82a-48ec-5f41-c240-31e3c174e544.png']
+
   // 선택한 이미지
   const [imgClick, setImgClick] = useState([])
-  const positive = location.state.positivePrompt
-  const negative = location.state.negativePrompt
+  // const positive = location.state.positivePrompt
+  // const negative = location.state.negativePrompt
+  const positive = 'test'
+  const negative = 'test'
 
   const countImg = location.state?.countImg || 1;
   const containerClass = 

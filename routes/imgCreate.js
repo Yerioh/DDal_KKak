@@ -17,7 +17,14 @@ let conn = db.init();
 //   res.status(200).json(response_data);
 // });
 
-const flaskServer = "https://f79c-34-126-70-79.ngrok.io";
+let flaskServer = ''
+
+router.post('/getUrl', (req,res)=>{
+  console.log('Flask 서버 실행', req.body.url)
+  flaskServer = req.body.url
+})
+
+
 
 // stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
