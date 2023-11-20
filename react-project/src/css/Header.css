@@ -15,7 +15,7 @@
   width: 100%; /* 헤더의 너비를 화면 전체로 설정 */
   z-index: 1000; /* 다른 요소들 위에 레이어링 */
   background: white; /* 배경 색상 설정 */
-
+  opacity: 0.9;
  
 }
 .Header-box{
