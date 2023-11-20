@@ -63,7 +63,7 @@ const CreateImage = () => {
   // 모달을 닫기 위한 함수
   const closeGuideModal = () => setguideModalOpen(false);
 
-  // 23-11-15 오후 17:00 박지훈 작성
+  // 23-11-20 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
