@@ -49,11 +49,21 @@ const CreateImage = () => {
 
     // 체크된 경우 값 추가
     if (checked) {
-      setPositivePrompt((prev) => [...prev, value]);
+      setPositivePrompt((prev) => {
+        // 이미 값이 포함되어 있는지 확인
+        const valuesArray = prev ? prev.split(', ').filter(Boolean) : [];
+        if (!valuesArray.includes(value)) {
+          return [...valuesArray, value].join(', ');
+        }
+        return prev;
+      });
     }
     // 체크 해제된 경우 값 제거
     else {
-      setPositivePrompt((prev) => prev.filter((item) => item !== value));
+      setPositivePrompt((prev) => {
+        const valuesArray = prev.split(', ').filter((item) => item !== value);
+        return valuesArray.join(', ');
+      });
     }
   };
 
@@ -136,7 +146,7 @@ const CreateImage = () => {
                 src={qMark}
                 alt=""
                 onClick={openGuideModal}
-                className="guide-button btnmy"
+                className="guide-button"
               />
             </h3>
 
