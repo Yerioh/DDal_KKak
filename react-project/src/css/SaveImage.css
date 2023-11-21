@@ -250,7 +250,7 @@ input[type="checkbox"]:checked + .check_label {
     }
 }
 
-@media(min-width: 1520px) and (max-width : 1600px){
+@media(min-width: 1520px){
     .S-Ibox{
         display: flex;
         flex-wrap:wrap;

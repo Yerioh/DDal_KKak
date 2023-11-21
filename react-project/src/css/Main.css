@@ -1,0 +1,63 @@
+.Main-Container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-image: url("../../public/images/"); */
+    /* background-size: cover; */
+    /* background-position: center;
+    background-repeat: no-repeat; */
+
+}
+.Main-text-img{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.back-Img{
+    width:90%;
+    height:90%;
+}
+.goods-Slide > a{
+    display: flex;
+    justify-content: end;
+}
+.image-Slide > a{
+    display: flex;
+    justify-content: end;
+}
+.moreShow{
+    margin-bottom: 5px;
+    width: 5%;
+    height: 40px;
+}
+.same-BTN{
+    border-radius: 5px;
+    border:1px solid lightgray;
+    color:black;
+    background-color: white;
+}
+
+.Main-Btn{
+    height: 60px;
+    width: 80%;
+    border-radius: 5px;
+}
+
+.same-BTN:hover{
+    background-color: black;
+    color:lightgray;
+    transition: all .10s linear;
+}
+
+
+.Slide-box{
+    max-width: 1500px;
+}
+
+.allCard > img{
+    height: 30%;
+    width: 100%;
+}
+.allCard{
+    margin-right: 5px;
+}
