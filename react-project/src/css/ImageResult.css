@@ -18,8 +18,7 @@
       align-items: center;
       justify-content: center;
       margin-top:4%;
-      /* margin-left:10%; */
-
+      margin-bottom: 1%;
       width:100%;
     }
   
@@ -65,9 +64,10 @@
  
   .card{
     width: 248px;
-    height: 335px;
+    height: auto;
     display: flex;
     justify-content: center;
+    align-content: center;
     overflow: hidden;     
     flex-direction: column;
     margin-top: 10px;
@@ -79,23 +79,34 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   }
 
-  .imageresult .card-active{
+ .card-active{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     width: 248px;
+    height: auto;
     display: flex;
     justify-content: center;
     overflow: hidden;     
     flex-direction: column;
     position: relative;
     margin-right:60px;
+    margin-top : 10px;
+    box-sizing: border-box;
+    border : 1px solid #C0C0C0;
+    border-radius: 5px;
   }
-  
-  
-  .keywrod-area{
+/* 키워드 구역 */
+  .input-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+  }
+
+  .keyword-area{
       border: 1px solid #C0C0C0;
       border-radius: 5px;
-      width: 50vh;
-      padding:5px;
+      width: 100vh;
+      padding:8px;
   }
   
   #keywordbox{
@@ -108,9 +119,18 @@
 
   .choice-img{
     border-radius: 5px;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     background-color: #C0C0C0;
     color: white;
+    margin-right:1.5%;
   }
   
-  
+ 
+  .keyword-label{
+    color: #C0C0C0;
+    margin-right:2%;
+  }
+
+  .keyword-content{
+    color: #C0C0C0;
+  }
