@@ -30,6 +30,9 @@ const CreateImage = () => {
   const [countImg, setCountImg] = useState("1");
   const [guideModalOpen, setguideModalOpen] = useState(false);
 
+  // "딸-깍! 버튼 상태
+  const [btnHidden, setBtnHidden] = useState("")
+
   // axios 진행률(0~100)
   const progress = useSelector((state) => state.progress.progress);
   // 이미지 생성 진행상황 (true, false)
@@ -50,6 +53,7 @@ const CreateImage = () => {
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
     if (positivePrompt !== "") {
+      setBtnHidden("hidden")
       axiosProgress
         .post("/imgCreate/stable", {
           positivePrompt: positivePrompt,
@@ -69,6 +73,7 @@ const CreateImage = () => {
           if (data.imgData.img_data !== undefined) {
             setImgData(data.imgData.img_data);
           }
+          setBtnHidden("")
         });
     }
   };
@@ -175,7 +180,7 @@ const CreateImage = () => {
               borderRadius={"5px"}
             />
             {/* <Link to='/image-edit'> */}
-            <button className="creImg_gotobutton btn" onClick={createImg}>
+            <button className={`creImg_gotobutton btn ${btnHidden}`} onClick={createImg}>
               딸-깍!
             </button>
             {/* </Link> */}
