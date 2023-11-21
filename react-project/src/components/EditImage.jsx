@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilerobotImageEditor, {
   TABS,
   TOOLS,
@@ -14,9 +14,11 @@ import axios from "../axios"
 
 function EditImage() {
   const location = useLocation();
-
-  const positive = location.state.positivePrompt // 사용한 긍정 프롬프트
-  const negative = location.state.negativePrompt // 사용한 부정 프롬프트
+  
+  // const positive = location.state.positivePrompt // 사용한 긍정 프롬프트
+  // const negative = location.state.negativePrompt // 사용한 부정 프롬프트
+  const positive = 'test'
+  const negative = 'test'
 
   // 23-11-17 오전 09:40 박지훈 작성
   // aws 연동을 위한 config
@@ -62,6 +64,12 @@ function EditImage() {
       console.log("선택된폰트", newFontFamily, reRenderCanvasFn);
     },
   };
+
+  // 23-11-21 임휘훈 작성 : 페이지 갱신 및 이탈 감지
+  window.onbeforeunload = () => {
+    console.log("window.onbeforeunload 시작");
+    return "이동?"
+  }
 
 
   return (
