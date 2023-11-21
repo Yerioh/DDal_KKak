@@ -39,8 +39,8 @@ ex) 20231109 Login,Join 푸쉬 했습니다.<br/>
 <br/>
 
 ### 💻 개발 환경
-- **FE** : `REACT.js`
-- **BE** : `Node.js`, `Python`
+- **FE** : `React.js`
+- **BE** : `Node.js` `Python`
 - **IDE** : Visual Studio
 - **Framework** : Express.js, Flask
 - **Database** : MySQL
