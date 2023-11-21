@@ -59,16 +59,21 @@ const ResultImage = () => {
 
   // 이미지 선택 버튼
   const choiceImgBtn = () => {
-    console.log("이미지 선택 완료", imgClick);
-    axios.post("/imgCreate/choiceImg", imgClick).then((response) => {
-      if (response.data.choiceImg) {
-        navi(`/image-edit/?img=${imgClick[0]}`, {
-          state: {
-            positivePrompt: positive,
-          },
-        });
-      }
-    });
+    if(imgClick.length > 0){
+      console.log("이미지 선택 완료", imgClick);
+      axios.post("/imgCreate/choiceImg", imgClick).then((response) => {
+        if (response.data.choiceImg) {
+          navi(`/image-edit/?img=${imgClick[0]}`, {
+            state: {
+              positivePrompt: positive,
+            },
+          });
+        }
+      });
+    }
+    else{
+      alert('이미지를 선택해주세요.')
+    }
   };
 
   return (

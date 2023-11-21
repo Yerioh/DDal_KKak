@@ -127,7 +127,7 @@ router.post("/deleteImg", async(req, res) => {
       Objects : deleteS3
     }
   })
-  
+
   const response = await client.send(command)
   console.log('s3 삭제 완료 : ', response)
 
