@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
+  // 모달창 상태
   const [keyWordModalOpen, setKeyWordModalOpen] = useState(false);
+  // 선택한 키워드 한글 state
+  const [keywordLabel, setKeywordLabel] = useState("")
 
   const openKeyWordModal = () => {
     setKeyWordModalOpen(true);
@@ -13,9 +16,23 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
   /** 키워드 선택 완료 함수 */
   const completeKeyword = (e) => {
     e.preventDefault();
+    const radioOption = {
+      color:{
+        ',Gray-Scale': '흑백',
+        ',Colorful': '컬러',
+      },
+      logo:{
+        ',Logo': '로고',
+        ',Typography': '타이포그래피',
+        ',Vector logo, Vector Art, Vector graphics, Adobe illustrator': 'Vector 로고',
+        ',WordMark': 'Text 로고',
+      }
+    }
+    // 각 테마별 value 값 가져오기
     let color = e.target.colorThema.value;
     let logo = e.target.logoThema.value;
     setPositiveKeyword(color + logo);
+    setKeywordLabel(radioOption.color[color]+"  "+radioOption.logo[logo])
     closeKeyWrodModal();
   };
 
@@ -24,7 +41,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
       <input
         type="text"
         className="keyword-result"
-        value={positiveKeyword}
+        value={keywordLabel}
         readOnly={true}
       />
       <button className="keywordModal-open btnmy" onClick={openKeyWordModal}>
@@ -44,7 +61,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
             <form onSubmit={completeKeyword}>
               <div className="keywordModal-content">
                 <h3>제공 키워드</h3>
-                {/* 테마 별 div 구획, 기본값(선택없음)=>checked 속성 */}
+                {/* 테마 별 div 구획, 기본값(선택없음)=>defaultChecked 속성 */}
                 <div className="keywordModal-thema">
                   <h4>컬러 테마</h4>
                   <div className="keywordModal-checkbox">
@@ -74,7 +91,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=""
                         name="colorThema"
-                        checked="checked"
+                        defaultChecked
                       ></input>
                       <div className="showKeywordCheckbox"></div>
                       선택 없음
@@ -130,7 +147,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=""
                         name="logoThema"
-                        checked="checked"
+                        defaultChecked
                       ></input>
                       <div className="showKeywordCheckbox"></div>
                       선택 없음
