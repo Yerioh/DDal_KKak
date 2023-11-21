@@ -88,14 +88,14 @@ function EditImage() {
           // aws s3 이미지 업로드 함수
           const upload = new aws.S3.ManagedUpload({
             params: {
-              Bucket: process.env.REACT_APP_AWS_BUCKET,
-              Key: img_info,
-              Body: base64Data,
-              ContentEncoding: "base64",
-              ContentType: `image/${type}`,
-            },
-          });
-
+              Bucket : process.env.REACT_APP_AWS_BUCKET,              
+              Key : img_info,
+              Body : base64Data,
+              ContentEncoding : 'base64',
+              ContentType : `image/${type}`
+            }
+          })
+          
           // 이미지 업로드 실행
           const promise = upload.promise();
           promise.then(
