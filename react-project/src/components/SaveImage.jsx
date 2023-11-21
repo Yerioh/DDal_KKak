@@ -3,6 +3,7 @@ import "../css/SaveImage.css";
 import axios from "../axios";
 import ImgModal from "./ImgModal";
 import { useSelector } from "react-redux";
+import { DeleteObjectsCommand, S3Client } from "@aws-sdk/client-s3";
 
 const SaveImage = () => {
   const [imgArray, setImgArray] = useState([]); // DB에서 온 이미지 배열
@@ -14,7 +15,16 @@ const SaveImage = () => {
   const [selectedImages, setSelectedImages] = useState({}); //체크표시 요소관리 state
   const [delImg, setDelImg] = useState(false); //삭제 모달 상태 state
 
+  // 사용자 아이디
   const useId = useSelector((state) => state.session.id);
+  // S3 클라이언트 생성
+  const client = new S3Client({
+    region : process.env.REACT_APP_AWS_DEFAULT_REGION,
+    credentials : {
+      accessKeyId : process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+      secretAccessKey : process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
+    }
+  });
 
   const observer = useRef(
     new IntersectionObserver(
@@ -67,6 +77,7 @@ const SaveImage = () => {
   useEffect(() => {
     axios.post("/imgCreate/myimg", { id: useId, sort: "a" }).then((res) => {
       setImgArray(res.data.imgArray);
+      // setImgArray([{ IMG_URL : '114662496405123443827/edit_img/da6ff7c1-ae6d-d43a-86ec-9d2390cc8f11.png'}])
     });
     // 임휘훈 작성 끝
     const currentObserver = observer.current;
@@ -117,32 +128,35 @@ const SaveImage = () => {
   /**삭제 버튼 클릭 시 체크된 이미지 URL 변수 업데이트*/
   const handleDeleteClick = () => {
     // 23-11-20 09:21 임휘훈 작성 : 삭제 버튼 기능
-    let arrImgId = [];
+    // 데이터베이스 삭제용 데이터
+    let arrImgUrl = [];
+    // S3 삭제용 데이터
+    let deleteImgData = []
     // 객체형태 반복문에서 사용하기 위해서 객체 key값만 접근 keys
     for (const key of Object.keys(selectedImages)) {
       // SQL에서 IN 사용하기 위해서 따옴표 넣기
       // ex) "'문자열1', '문자열2'"
-      arrImgId.push("'" + imgArray[key].IMG_ID + "'");
+      arrImgUrl.push("'" + imgArray[key].IMG_URL + "'");
+      deleteImgData.push({Key : imgArray[key].IMG_URL});
 
-      // 필요한가?
-      // setcheck_Img(() => {
-      //   check_Img.push("'" + imgArray[key].IMG_ID + "'");
-      // });
     }
-    let strImgId = arrImgId.join();
+    let strImgUrl = arrImgUrl.join();
 
     // 이미지 삭제 axios
     axios
       .post("/imgCreate/deleteImg", {
-        imgId: strImgId,
+        // 데이터베이스에서 삭제를 위한 데이터
+        imgUrl: strImgUrl,
+        // S3에서 삭제를 위한 데이터
+        deleteS3 : deleteImgData
       })
       .then((res) => {
         let imgData = res.data.imgArray;
         // 이미지 화면 최신화
         setImgArray(imgData);
         // 삭제 모달 닫기
-        setDelImg(!delImg);
-      });
+        setDelImg(!delImg);                
+      });   
   };
 
   /**최신순 정렬 함수*/

@@ -86,7 +86,6 @@ const CreateImage = () => {
         .then((res) => {
           let data = res.data;
           console.log("생성된 이미지", data);
-          setImgData(data.imgData.img_data);
           // axios 통신 중, 에러 발생 시
           if (data.createError) {
             dispatch(ProgressReducerActions.resetProgress());
