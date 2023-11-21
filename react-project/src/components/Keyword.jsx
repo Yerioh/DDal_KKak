@@ -92,8 +92,8 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
       </div>
 
       <button className="btnmy" onClick={openKeyWordModal}>
-          더보기
-        </button>
+        더보기
+      </button>
       {/* 키워드 모달 창 */}
       {keyWordModalOpen && (
         <div
