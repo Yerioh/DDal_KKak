@@ -53,7 +53,7 @@ const CreateImage = () => {
       setBtnHidden("hidden")
       axiosProgress
         .post("/imgCreate/stable", {
-          positivePrompt: positivePrompt,
+          positivePrompt: positivePrompt + positiveKeyword, // 긍정프롬프트 + 키워드
           negativePrompt: negativePrompt,
           countImg: countImg,
         })

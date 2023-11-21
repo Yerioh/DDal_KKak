@@ -33,6 +33,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
     // 각 테마별 value 값 가져오기
     let color = e.target.colorThema.value;
     let logo = e.target.logoThema.value;
+    console.log("선택한 키워드", color, logo);
     setPositiveKeyword(color + logo);
     const combiendLabel = `${radioOption.color[color]? radioOption.color[color]:''}${radioOption.logo[logo]? "  "+radioOption.logo[logo]:''}`
     setKeywordLabel(combiendLabel)
