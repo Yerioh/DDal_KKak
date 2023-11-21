@@ -31,22 +31,40 @@ const Main = () => {
   return (
     <div className="Main-Container">
       <div className="Main-text-img">
-        <h1>원하는 그림, 이미지, 굿즈? 딸깍</h1>
-        <div className="back-Img">
+        <div className="Main-head-btn">
+          <div className="Main-head">
+            <h2>원하는 그림, 이미지, 굿즈</h2>
+            <br />
+            <span>생성형AI 기술을 활용한</span>
+            <span>자동 이미지 생성</span>
+            <br />
+            <span>손쉬운 이미지 편집 가능</span>
+            <br />
+            <span>나만의 색다른 굿즈</span>
+            <br />
+            <span>만들고 싶다면?</span>
+          </div>
           <Link to="/image-create">
-            <button className="Main-Btn same-BTN">이미지 생성하러 가기</button>
+            <button className="Main-Btn">이미지 생성하러 가기! 딸~깍</button> 
+            {/*  */}
           </Link>
+        </div>
+        <div className="Main-Image">
+          <img src="./images/1.png" alt="d" />
         </div>
       </div>
 
       {/* 이미지 슬라이드 */}
       <div className="Slide-box">
         <div className="image-Slide">
-          <Link to="/image-create">
-            <button className="moreShow same-BTN">더보기</button>
-          </Link>
+          <div>
+            <span className="Main-Slide-text">디자인 이미지</span>
+            <Link to="/imageall">
+              <button className="moreShow same-BTN">더보기</button>
+            </Link>
+          </div>
 
-          <Carousel responsive={responsive} width="0%">
+          <Carousel responsive={responsive}>
             {testnumber.map((number, index) => (
               <ImageAllCard num={number} />
             ))}
@@ -54,9 +72,12 @@ const Main = () => {
         </div>
         {/* 굿즈 슬라이드 */}
         <div className="goods-Slide">
-          <Link>
-            <button className="moreShow same-BTN">더보기</button>
-          </Link>
+          <div className="goods-text-btn">
+            <span className="Main-Slide-text">굿즈</span>
+            <Link>
+              <button className="moreShow same-BTN">굿즈 더보기</button>
+            </Link>
+          </div>
           <Carousel responsive={responsive}>
             {testnumber.map((number, index) => (
               <ImageAllCard num={number} />

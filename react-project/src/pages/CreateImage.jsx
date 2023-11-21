@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../css/Imagelayout.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import PageCountButton from "./PageCountButton";
-import Keyword from "./Keyword";
-import { Link } from "react-router-dom";
+import PageCountButton from "../components/PageCountButton";
+import Keyword from "../components/Keyword";
 import axios from "../axios";
 import axiosProgress from "../axiosProgress";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { ProgressReducerActions } from "../redux/reducers/progressSlice";
 import { useNavigate } from "react-router-dom";
-import Sample from "../img/guideSample_dog.jpeg";
-import Arrow from "../img/rightArrow.png";
 import qMark from "../img/question-mark.png";
 import guideKeyboard from "../img/guide-keyboard.png";
 import guideClick from "../img/guide-click.png";
@@ -29,6 +26,9 @@ const CreateImage = () => {
   // 출력할 사진 개수
   const [countImg, setCountImg] = useState("1");
   const [guideModalOpen, setguideModalOpen] = useState(false);
+
+  // "딸-깍! 버튼 상태
+  const [btnHidden, setBtnHidden] = useState("")
 
   // axios 진행률(0~100)
   const progress = useSelector((state) => state.progress.progress);
@@ -50,9 +50,10 @@ const CreateImage = () => {
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
     if (positivePrompt !== "") {
+      setBtnHidden("hidden")
       axiosProgress
         .post("/imgCreate/stable", {
-          positivePrompt: positivePrompt,
+          positivePrompt: positivePrompt + positiveKeyword, // 긍정프롬프트 + 키워드
           negativePrompt: negativePrompt,
           countImg: countImg,
         })
@@ -69,6 +70,7 @@ const CreateImage = () => {
           if (data.imgData.img_data !== undefined) {
             setImgData(data.imgData.img_data);
           }
+          setBtnHidden("")
         });
     }
   };
@@ -175,7 +177,7 @@ const CreateImage = () => {
               borderRadius={"5px"}
             />
             {/* <Link to='/image-edit'> */}
-            <button className="creImg_gotobutton btn" onClick={createImg}>
+            <button className={`creImg_gotobutton same-BTN btn ${btnHidden}`} onClick={createImg}>
               딸-깍!
             </button>
             {/* </Link> */}
@@ -253,9 +255,9 @@ const CreateImage = () => {
               </div>
             </div>
             <div className="guidemodal-footer">
-              <button className="btnmy" onClick={closeGuideModal}>
+              <button className="btnmy same-BTN" onClick={closeGuideModal}>
                 닫기
-              </button>
+             </button>
             </div>
           </div>
         </div>

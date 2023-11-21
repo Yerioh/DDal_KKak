@@ -6,9 +6,9 @@ import Mypage from "../pages/Mypage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Header";
-import CreateImage from './CreateImage'
-import EditImage from "./EditImage";
-import ResultImage from './ResultImage'
+import CreateImage from '../pages/CreateImage'
+import EditImage from "../pages/EditImage";
+import ResultImage from '../pages/ResultImage'
 import Goodslist from "./Goodslist";
 import GoodsDetail from "../pages/GoodsDetail";
 import Basket from "../pages/Basket";

@@ -90,7 +90,7 @@ const ResultImage = () => {
         </div>
       </div>
       <ul className={`${containerClass}`}>{renderImageList()}</ul>
-      <button className="choice-img" onClick={choiceImgBtn}>
+      <button className="choice-img same-BTN" onClick={choiceImgBtn}>
         이미지 선택
       </button>{" "}
     </div>

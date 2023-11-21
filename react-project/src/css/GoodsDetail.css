@@ -42,3 +42,9 @@
     height: 50px;
     font-size: 25px;
 }
+
+.GoodsDetail .hr-style {
+    background: white;
+    height: 1px;
+    border: 0;
+}
