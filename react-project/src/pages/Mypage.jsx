@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../css/Mypage.css";
 import "../css/UserInfo.css";
-import UserInfo from "./UserInfo";
+import UserInfo from "../components/UserInfo";
 import { useSelector } from "react-redux";
-import SaveImage from "./SaveImage";
+import SaveImage from "../components/SaveImage";
 import axios from "../axios";
-import DeleteModal from "./DeleteModal";
+import DeleteModal from "../components/DeleteModal";
 import delete_user_icon from "../img/delete-user.png"
 import image_icon from "../img/image-icon.png"
 import order_icon from "../img/order-list.png"
