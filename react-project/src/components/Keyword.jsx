@@ -20,19 +20,22 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
       color:{
         ',Gray-Scale': '흑백',
         ',Colorful': '컬러',
+        '':' ',
       },
       logo:{
         ',Logo': '로고',
         ',Typography': '타이포그래피',
         ',Vector logo, Vector Art, Vector graphics, Adobe illustrator': 'Vector 로고',
         ',WordMark': 'Text 로고',
+        '':' ',
       }
     }
     // 각 테마별 value 값 가져오기
     let color = e.target.colorThema.value;
     let logo = e.target.logoThema.value;
     setPositiveKeyword(color + logo);
-    setKeywordLabel(radioOption.color[color]+"  "+radioOption.logo[logo])
+    const combiendLabel = `${radioOption.color[color]? radioOption.color[color]:''}${radioOption.logo[logo]? "  "+radioOption.logo[logo]:''}`
+    setKeywordLabel(combiendLabel)
     closeKeyWrodModal();
   };
 
