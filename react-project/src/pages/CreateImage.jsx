@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../css/Imagelayout.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import PageCountButton from "./PageCountButton";
-import Keyword from "./Keyword";
-import { Link } from "react-router-dom";
+import PageCountButton from "../components/PageCountButton";
+import Keyword from "../components/Keyword";
 import axios from "../axios";
 import axiosProgress from "../axiosProgress";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { ProgressReducerActions } from "../redux/reducers/progressSlice";
 import { useNavigate } from "react-router-dom";
-import Sample from "../img/guideSample_dog.jpeg";
-import Arrow from "../img/rightArrow.png";
 import qMark from "../img/question-mark.png";
 import guideKeyboard from "../img/guide-keyboard.png";
 import guideClick from "../img/guide-click.png";
@@ -180,7 +177,7 @@ const CreateImage = () => {
               borderRadius={"5px"}
             />
             {/* <Link to='/image-edit'> */}
-            <button className={`creImg_gotobutton btn ${btnHidden}`} onClick={createImg}>
+            <button className={`creImg_gotobutton same-BTN btn ${btnHidden}`} onClick={createImg}>
               딸-깍!
             </button>
             {/* </Link> */}
@@ -258,9 +255,9 @@ const CreateImage = () => {
               </div>
             </div>
             <div className="guidemodal-footer">
-              <button className="btnmy" onClick={closeGuideModal}>
+              <button className="btnmy same-BTN" onClick={closeGuideModal}>
                 닫기
-              </button>
+             </button>
             </div>
           </div>
         </div>

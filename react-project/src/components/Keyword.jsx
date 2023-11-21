@@ -47,8 +47,8 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
         value={keywordLabel}
         readOnly={true}
       />
-      <button className="keywordModal-open btnmy" onClick={openKeyWordModal}>
-        키워드 선택
+      <button className="keywordModal-open same-BTN" onClick={openKeyWordModal}>
+        키워드
       </button>
       {/* 키워드 모달 창 */}
       {keyWordModalOpen && (

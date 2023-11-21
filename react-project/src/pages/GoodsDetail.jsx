@@ -7,12 +7,15 @@ import prd_size from '../data/prd_size.json'
 import prd_info from '../data/product_info.json'
 import "../css/GoodsDetail.css"
 import { useParams } from 'react-router-dom';
+import GoodsEdit from '../components/GoodsEdit'
+
+
 
 
 const GoodsDetail = () => {
-  // 제품수량 선택을 위하 State
+  // 제품수량 선택을 위한 State
   const [count, setCount] = useState(1)
-  // 가격을 나타내기 위하 State
+  // 가격을 나타내기 위한 State
   const [sum, setSum] = useState(0)
   /** 제품의 사이즈 정보및 라디오버튼 */
   const [radioValue, setRadioValue] = useState('1');
@@ -20,6 +23,7 @@ const GoodsDetail = () => {
   const [color, setColor] = useState('')
   // 상품별 상세페이지 로딩을 위한 useParams
   const { PROD_ID } = useParams();
+
   // 해당페이지의 상품 ID
   let prd_id = PROD_ID
   //  굿즈색상정보 끌어오기
@@ -136,8 +140,8 @@ const GoodsDetail = () => {
   return (
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
 {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
-      <div style={{ backgroundColor: "green", width: "65%" }}>
-        이미지 편집 공간</div>
+      <div style={{ backgroundColor: "green", width: "65%"}}>
+      <GoodsEdit /></div>
       <div style={{ backgroundColor: "white", width: "35%", margin: "50px 0px 0px 0px", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
         <h3 className="GoodsDetail-title" style={{ margin: "10px 5px" }}>{prd_info_filter[0].PROD_NAME}</h3>
