@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import "../css/GoodsBasket.css"
-import BasketItem from './BasketItem'
+import BasketItem from '../components/BasketItem'
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/esm/Button';
 const Basket = () => {

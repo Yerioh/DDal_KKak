@@ -14,15 +14,16 @@ import { useNavigate } from "react-router-dom";
 import Sample from "../img/guideSample_dog.jpeg";
 import Arrow from "../img/rightArrow.png";
 import qMark from "../img/question-mark.png";
-import guideKeyboard from "../img/guide-keyboard.png"
-import guideClick from "../img/guide-click.png"
-import guideBang from "../img/guide-bang.png"
+import guideKeyboard from "../img/guide-keyboard.png";
+import guideClick from "../img/guide-click.png";
+import guideBang from "../img/guide-bang.png";
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState("");
+  const [positiveKeyword, setPositiveKeyword] = useState("");
   // 부정 프롬프트
   const [negativePrompt, setNegativePrompt] = useState("");
   // 출력할 사진 개수
@@ -38,35 +39,6 @@ const CreateImage = () => {
 
   const dispatch = useDispatch();
 
-  // 키워드 모달 상태 변경을 처리하는 함수
-  const handleKeyWordModalChange = () => {
-    // 모달 상태에 따른 추가적인 작업 (예: 모달 상태를 다른 state에 저장하는 등)
-  };
-
-  // 체크박스 입력 버튼
-  const handleCheckboxChange = (e) => {
-    const { value, checked } = e.target;
-
-    // 체크된 경우 값 추가
-    if (checked) {
-      setPositivePrompt((prev) => {
-        // 이미 값이 포함되어 있는지 확인
-        const valuesArray = prev ? prev.split(', ').filter(Boolean) : [];
-        if (!valuesArray.includes(value)) {
-          return [...valuesArray, value].join(', ');
-        }
-        return prev;
-      });
-    }
-    // 체크 해제된 경우 값 제거
-    else {
-      setPositivePrompt((prev) => {
-        const valuesArray = prev.split(', ').filter((item) => item !== value);
-        return valuesArray.join(', ');
-      });
-    }
-  };
-
   // 모달을 열기 위한 함수
   const openGuideModal = () => setguideModalOpen(true);
 
@@ -78,18 +50,21 @@ const CreateImage = () => {
   const createImg = () => {
     // 긍정 프롬프트 공백 아닐 때 실행
     if (positivePrompt !== "") {
-      axiosProgress.post("/imgCreate/stable", {
+      axiosProgress
+        .post("/imgCreate/stable", {
           positivePrompt: positivePrompt,
           negativePrompt: negativePrompt,
           countImg: countImg,
-        })       
+        })
         .then((res) => {
           let data = res.data;
           console.log("생성된 이미지", data);
           // axios 통신 중, 에러 발생 시
           if (data.createError) {
             dispatch(ProgressReducerActions.resetProgress());
-            alert("이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요.");
+            alert(
+              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
+            );
           }
           if (data.imgData.img_data !== undefined) {
             setImgData(data.imgData.img_data);
@@ -116,7 +91,7 @@ const CreateImage = () => {
       3000
     );
     // progress bar 관련 state초기화
-    dispatch(ProgressReducerActions.resetProgress())
+    dispatch(ProgressReducerActions.resetProgress());
   };
 
   const handleImageCountChange = (count) => {
@@ -163,8 +138,8 @@ const CreateImage = () => {
 
             {/* 키워드 버튼 창 */}
             <Keyword
-              handleCheckboxChange={handleCheckboxChange}
-              onModalChange={handleKeyWordModalChange}
+              setPositiveKeyword={setPositiveKeyword}
+              positiveKeyword={positiveKeyword}
             />
           </div>
 
@@ -196,8 +171,8 @@ const CreateImage = () => {
               className="progress-bar"
               completed={progress}
               maxCompleted={100}
-              height={'38px'}
-              borderRadius={'5px'}
+              height={"38px"}
+              borderRadius={"5px"}
             />
             {/* <Link to='/image-edit'> */}
             <button className="creImg_gotobutton btn" onClick={createImg}>
@@ -221,34 +196,58 @@ const CreateImage = () => {
             <h2>어떻게 만들까요?</h2>
             <div className="guidemodal-content">
               <div className="guidemodal-guideinfo">
-                <img src={guideKeyboard} alt="" className="guidemodal-guideinfo-img" />
+                <img
+                  src={guideKeyboard}
+                  alt=""
+                  className="guidemodal-guideinfo-img"
+                />
                 <div className="guidemodal-guideinfo-info">
-                <span>만들고 싶은 이미지와</span>
-                <span>관련된 단어나 문장을</span>
-                <span><span className="bold">"넣을 단어"</span>에 입력해주세요.</span>
+                  <span>만들고 싶은 이미지와</span>
+                  <span>관련된 단어나 문장을</span>
+                  <span>
+                    <span className="bold">"넣을 단어"</span>에 입력해주세요.
+                  </span>
                 </div>
               </div>
               <div className="guidemodal-guideinfo">
-                <img src={guideBang} alt="" className="guidemodal-guideinfo-img" />
+                <img
+                  src={guideBang}
+                  alt=""
+                  className="guidemodal-guideinfo-img"
+                />
                 <div className="guidemodal-guideinfo-info">
                   <span>어떻게 써야할지 어렵나요?</span>
-                  <span>저희가 <span className="bold">키워드</span>를 준비했어요.</span>
+                  <span>
+                    저희가 <span className="bold">키워드</span>를 준비했어요.
+                  </span>
                   <span>키워드를 클릭! 클릭!</span>
                 </div>
               </div>
               <div className="guidemodal-guideinfo">
-                <img src={guideKeyboard} alt="" className="guidemodal-guideinfo-img" />
+                <img
+                  src={guideKeyboard}
+                  alt=""
+                  className="guidemodal-guideinfo-img"
+                />
                 <div className="guidemodal-guideinfo-info">
                   <span>넣고 싶지 않은게 있나요?</span>
-                  <span>그렇다면 <span className="bold">"뺄 단어"</span>에</span>
+                  <span>
+                    그렇다면 <span className="bold">"뺄 단어"</span>에
+                  </span>
                   <span>관련 단어나 문장을 넣어봐요.</span>
                 </div>
               </div>
               <div className="guidemodal-guideinfo">
-                <img src={guideClick} alt="" className="guidemodal-guideinfo-img" />
+                <img
+                  src={guideClick}
+                  alt=""
+                  className="guidemodal-guideinfo-img"
+                />
                 <div className="guidemodal-guideinfo-info">
                   <span>만들 이미지의 수를 선택!</span>
-                  <span>마지막으로 <span className="bold">"딸-깍!"</span></span>
+                  <span>
+                    마지막으로 <span className="bold">"딸-깍!"</span>
+                  </span>
                   <span>어때요? 참 쉽죠?</span>
                 </div>
               </div>

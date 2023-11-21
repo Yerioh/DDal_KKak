@@ -1,29 +1,29 @@
-.editimagebody{
-    width:60%;
-    margin: auto;
-    margin-top : 7%;
+.editimagebody {
+  width: 60%;
+  margin: auto;
+  margin-top: 7%;
 }
 
-.imageedittool{
-    width:100%;
+.imageedittool {
+  width: 100%;
 }
 
-.displayKeyword{
-    display: flex;
-    flex-direction: column;
+.displayKeyword {
+  display: flex;
+  flex-direction: column;
 }
 
-.inputarea{
-    width: 30%;
-    height: 100px;
-    border:1px solid black;
-    border-radius: 5px;
-    margin : 1% 35%;
+.inputarea {
+  width: 30%;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1% 35%;
 }
-.exceptarea{
-    width:30%;
-    height: 50px;
-    border:1px solid black;
-    border-radius: 5px;
-    margin : 1% 35%;}
-
+.exceptarea {
+  width: 30%;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1% 35%;
+}

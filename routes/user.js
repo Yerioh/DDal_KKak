@@ -23,9 +23,9 @@ router.post("/join", (req, res) => {
   let doro = req.body.doro; // 도로명 주소 add1
   let detailAddress = req.body.detailAddress; // 상세주소 add2
   // 회원가입 쿼리문
-  // SHA() : 비밀번호 암호화
+  // SHA2(?, 256) : 비밀번호 256 비트 암호화
   let joinQuery =
-    'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, SHA(?), ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
+    'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, SHA2(?, 256), ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
 
   // 비밀번호 확인 조건문
   if (pw == checkPw) {
@@ -75,7 +75,7 @@ router.post("/checkId", (req, res) => {
 router.post("/login", (req, res) => {
   let id = req.body.userId; // 입력한 아이디
   let pw = req.body.userPw; // 입력한 비밀번호
-  const hash = crypto.createHash('sha1')
+  const hash = crypto.createHash('sha256')
                    .update(pw)
                    .digest('hex');
 
@@ -119,17 +119,51 @@ router.post("/login", (req, res) => {
 router.post("/mypage", (req, res) => {
   let id = req.body.userID
   // 고유한 아이디로 사용자 정보 가져오기
+
   let idQuery =
-  "SELECT MEMBER_EMAIL, MEMBER_PHONE FROM TB_MEMBER WHERE MEMBER_ID = ?";
+  "SELECT MEMBER_PW, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2 FROM TB_MEMBER WHERE MEMBER_ID = ?";
   // DB 연결
   conn.connect();
   conn.query(idQuery, [id], (err, result) => {
     let userEmail = result[0].MEMBER_EMAIL // DB에 저장된 회원 이메일
     let userPhone = result[0].MEMBER_PHONE // DB에 저장된 회원 전화번호
+    let userPw = result[0].MEMBER_PW  // DB에 저장된 비밀번호
+    let postNumber = result[0].MEMBER_POST // DB에 저장된 우편번호
+    let addr1 = result[0].MEMBER_ADDR1 // 도로명주소
+    let addr2 = result[0].MEMBER_ADDR2 // 상세주소
     res.json({member_email : userEmail,
-              member_phone : userPhone})
+              member_phone : userPhone,
+              user_pw: userPw,
+              post_number : postNumber,
+              addr_1 : addr1,
+              addr_2 : addr2})
   })
   
+})
+
+// 회원 정보 수정 라우터
+router.post("/updateInfo", (req, res) => {
+  let id = req.body.userID // 유저 아이디
+  let pw = req.body.userPw // 변경할 비밀번호
+  let email = req.body.userEmail // 변경할 이메일
+  let phone = req.body.userPhone // 변경할 전화번호
+  let postNumber = req.body.postNum // 우편번호
+  let addr1 = req.body.addr1 // 주소
+  let addr2 = req.body.addr2 // 상세주소  
+
+  let updateQuery =
+  "UPDATE TB_MEMBER SET MEMBER_PW = SHA2(?, 256), MEMBER_EMAIL = ?, MEMBER_PHONE = ?, MEMBER_POST = ?, MEMBER_ADDR1 = ?, MEMBER_ADDR2 = ? WHERE MEMBER_ID = ?";
+
+  conn.connect()
+  conn.query(updateQuery, [pw, email, phone, postNumber, addr1, addr2, id], (err, result) => {
+    if(err){
+      console.log("회원 정보 수정 update 쿼리 에러", err);
+      return res.json({result : false})
+    }
+    else{
+      return res.json({result : true})
+    }
+  })
 })
 
 // 23-11-14 오전 10:00 박지훈 작성

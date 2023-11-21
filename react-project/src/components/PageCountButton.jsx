@@ -8,7 +8,7 @@ const PageCountButton = ({ handleImageCountChange }) => {
   return (
     <div className="pagecountbutton">
       <div className="counthead">
-        <h3 style={{width:'90%',height:'10%'}}>사진 개수</h3>
+        <h3 style={{ width: "90%", height: "10%" }}>사진 개수</h3>
         <select
           name="페이지개수"
           className="pageCountOption"
