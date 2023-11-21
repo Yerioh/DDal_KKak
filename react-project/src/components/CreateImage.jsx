@@ -52,7 +52,7 @@ const CreateImage = () => {
     if (positivePrompt !== "") {
       axiosProgress
         .post("/imgCreate/stable", {
-          positivePrompt: positivePrompt,
+          positivePrompt: positivePrompt + positiveKeyword,
           negativePrompt: negativePrompt,
           countImg: countImg,
         })
