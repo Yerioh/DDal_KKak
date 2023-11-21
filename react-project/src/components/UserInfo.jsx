@@ -2,8 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
+import axios from "../axios"
+import { SHA256 } from "crypto-js";
+import { useNavigate } from "react-router-dom";
 
-const UserInfo = ({ userName, loginType, id, email, phone }) => {
+const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, addressDetail }) => {
+  const navigate = useNavigate();
   const idRef = useRef(); // 유저 아이디
   const nameRef = useRef(); // 사용자 이름
   const emailRef = useRef(); // 사용자 이메일
@@ -11,13 +15,11 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   const C_pwRef = useRef(); // 현재 비밀번호
   const pwRef = useRef(); //유저가 변경할 비밀번호
   const pw2Ref = useRef(); //유저가 변경할 비밀번호 확인
-  const postNum = useRef(); // 유저 우편번호 불러오기
-  const userAdd = useRef(); // 유저 주소 불러오기
-  const addDetail = useRef(); // 사용자 상세주소 불러오기
+  const postNumRef = useRef(); // 유저 우편번호 불러오기
+  const userAddRef = useRef(); // 유저 주소 불러오기
+  const addDetailRef = useRef(); // 사용자 상세주소 불러오기
 
   const [show, setShow] = useState(false); //모달창 활성화 state
-  const [address, setAddress] = useState(""); // 주소
-  const [addressDetail, setAddressDetail] = useState(""); // 상세주소
   const [isOpenPost, setIsOpenPost] = useState(false);
 
   // 모달 show 함수
@@ -25,7 +27,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
   // 모달 닫기 함수
   const handleClose = () => {
     setShow(false);
-    addDetail.current.focus();
+    addDetailRef.current.focus();
   };
 
   //모달창 스타일
@@ -58,29 +60,63 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
     console.log(data);
-    setAddress(data.zonecode);
-    setAddressDetail(fullAddr);
     setIsOpenPost(false);
     handleClose();
-    postNum.current.value = data.zonecode; // 우편번호
-    // postNum.current.disabled = true; //우편번호 입력창 비활성화
-    userAdd.current.value = fullAddr; // 주소 입력창
-    // userAdd.current.disabled = true;
+    postNumRef.current.value = data.zonecode; // 우편번호
+    userAddRef.current.value = fullAddr; // 주소 입력창
   };
 
   /**개인정보 수정 함수*/
-  const changeUserData = () => {};
+  const changeUserData = () => {
+    // 현재 비밀번호를 적은 걸 다시 hash 암호화 해서 DB 것과 비교하기
+    axios.post("/user/mypage", {userID : id})
+    .then((res) => {
+      let userEmail = emailRef.current.value  // 입력한 이메일 (DB로 감)
+      let userPhone = phoneRef.current.value // 입력한 전화번호 (DB로 감)
+      let postNum = postNumRef.current.value // 입력한 우편번호 (DB로 감)
+      let addr1 = userAddRef.current.value // 입력한 주소 (DB로 감)
+      let addr2 = addDetailRef.current.value // 입력한 상세주소 (DB로 감)
+      let changePw = pwRef.current.value // 변경할 비밀번호 (DB로 감)
+      let checkPw = pw2Ref.current.value // 변경할 비밀번호 확인
+
+      let userPw = res.data.user_pw // DB에서 온 비밀번호 (암호화 됨)
+      let currentPw = C_pwRef.current.value // 현재 비밀번호 입력값 (SHA2로 256비트 암호화 해야함)
+      currentPw = SHA256(currentPw).toString(); // 현재 비밀번호 입력값 암호화
+      if(userPw === currentPw && changePw === checkPw){ // 현재 비밀번호 정확 & 변경할 비밀번호, 확인 일치하는지
+        console.log("업데이트 준비 완료");
+        axios.post("user/updateInfo", {
+          userID : id,
+          userPw : changePw,
+          userEmail : userEmail,
+          userPhone : userPhone,
+          postNum : postNum,
+          addr1 : addr1,
+          addr2 : addr2
+        })
+        .then((res) => {
+          if(res.data.result){
+            alert("수정 완료!")
+            navigate("/mypage");
+          }
+        })
+      }
+
+    })
+      
+
+    
+  };
 
   // 23-11-14 14:20 임휘훈 작성
   /** 내 정보 수정 입력란 회원 정보 자동 입력 후 비활성화 */
   useEffect(() => {
-    if (loginType == "M") {
+    if (loginType === "M") {
       idRef.current.value = id;
-    } else if (loginType == "G") {
+    } else if (loginType === "G") {
       idRef.current.value = "Google Account";
-    } else if (loginType == "N") {
+    } else if (loginType === "N") {
       idRef.current.value = "Naver Account";
-    } else if (loginType == "K") {
+    } else if (loginType === "K") {
       idRef.current.value = "Kakao Account";
     }
     idRef.current.disabled = true; // 입력란 비활성화
@@ -88,6 +124,9 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
     nameRef.current.disabled = true; // 입력란 비활성화
     emailRef.current.value = email; // 이메일
     phoneRef.current.value = phone; // 전화번호
+    postNumRef.current.value = postNumber; // 우편번호
+    userAddRef.current.value = address; // 주소 입력창 
+    addDetailRef.current.value = addressDetail; // 상세주소
   }, [email, phone]);
   // 임휘훈 작성 끝
 
@@ -129,7 +168,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword1">
-            <Form.Label>비밀번호</Form.Label>
+            <Form.Label>변경할 비밀번호</Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter Password"
@@ -137,7 +176,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword2">
-            <Form.Label>비밀번호 확인</Form.Label>
+            <Form.Label>변경할 비밀번호 확인</Form.Label>
             <Form.Control
               type="password"
               placeholder="Confirm Password"
@@ -180,7 +219,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
                 <Form.Control
                   type="text"
                   placeholder="우편번호"
-                  ref={postNum}
+                  ref={postNumRef}
                   onClick={() => {
                     handleShow();
                     onChangeOpenPost();
@@ -191,7 +230,7 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
                 <Form.Control
                   type="text"
                   placeholder="주소"
-                  ref={userAdd}
+                  ref={userAddRef}
                   onClick={() => {
                     handleShow();
                     onChangeOpenPost();
@@ -201,10 +240,10 @@ const UserInfo = ({ userName, loginType, id, email, phone }) => {
             </Row>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicAdressDetail">
-            <Form.Control type="text" placeholder="상세주소" ref={addDetail} />
+            <Form.Control type="text" placeholder="상세주소" ref={addDetailRef} />
           </Form.Group>
           <div className="mb-3 userInfo-btn">
-            <Button className="Change-Btn" variant="outline-info" type="submit">
+            <Button className="Change-Btn" variant="outline-info" onClick={changeUserData}>
               수정완료
             </Button>
           </div>

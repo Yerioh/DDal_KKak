@@ -12,9 +12,9 @@ const ResultImage = () => {
   // 23-11-16 오후 14:30 박지훈 작성
   // S3 버킷 기본 주소 값
   const s3Url = process.env.REACT_APP_AWS_BUCKET_URL  
-  const imgData = location.state.imgData
-//   const imgData = ['108488627855757649516/b6bef82a-48ec-5f41-c240-31e3c174e544.png','108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png',
-// '108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png', '114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png','114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png']
+  // const imgData = location.state.imgData
+  const imgData = ['108488627855757649516/b6bef82a-48ec-5f41-c240-31e3c174e544.png','108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png',
+'108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png', '114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png','114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png']
  
 
  //이미지를 선택하면 그림자 값 유지
@@ -22,10 +22,10 @@ const ResultImage = () => {
 
   // 선택한 이미지
   const [imgClick, setImgClick] = useState([])
-  const positive = location.state.positivePrompt
+  // const positive = location.state.positivePrompt
   // const negative = location.state.negativePrompt
-  // const positive = 'test'
-  // const negative = 'test'
+  const positive = 'test'
+  const negative = 'test'
 
   const countImg = location.state?.countImg || 1;
 

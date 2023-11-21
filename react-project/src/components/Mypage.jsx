@@ -23,6 +23,9 @@ const Mypage = () => {
 
   const [email, setEmail] = useState(null)
   const [phone, setPhone] = useState(null)
+  const [postNum, setPostNum] = useState(null) // 우편번호
+  const [address, setAddress] = useState(null); // 주소
+  const [addressDetail, setAddressDetail] = useState(null); // 상세주소
 
   const [pageState, setpageState] = useState("user_info");
 
@@ -30,15 +33,25 @@ const Mypage = () => {
     if(isLogin){
       axios.post("/user/mypage", {userID : id})
       .then((res) => {
+        console.log("기본 정보 셋팅");
         if (res.data.member_email !== '0'){
           setEmail(res.data.member_email) // DB에서 가져온 Email을 state에 저장
         }
         if (res.data.member_phone !== '0') {
           setPhone(res.data.member_phone) // DB에서 가져온 전화번호를 state에 저장
         }
+        if (res.data.post_number !== "0"){
+          setPostNum(res.data.post_number) // DB에서 가져온 우편번호를 state에 저장
+        }
+        if (res.data.addr_1 !== "0"){
+          setAddress(res.data.addr_1) // DB에서 가져온 주소를 state에 저장
+        }
+        if(res.data.addr_2 !== "0"){
+          setAddressDetail(res.data.addr_2) // DB에서 가져온 상세주소를 state에 저장
+        }
       })
     }
-  }, [])
+  }, [isLogin])
 
   //내 정보 컴포넌트 호출
   const user_infoPage = () => {
@@ -83,7 +96,7 @@ const Mypage = () => {
         </div>
         
       </div>
-      {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} />}
+      {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} postNumber={postNum} address={address} addressDetail={addressDetail} />}
       {pageState === "Save_Image" && <SaveImage />}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
 
