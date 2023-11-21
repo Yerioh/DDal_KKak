@@ -4,28 +4,31 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const {DeleteObjectsCommand, S3Client} = require('@aws-sdk/client-s3')
+
+// S3 클라이언트 생성
+const client = new S3Client({
+  region : process.env.AWS_DEFAULT_REGION,
+  accessKeyId : process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY
+})
 
 // DB 연결
 const db = require("../config/database");
 let conn = db.init();
 
-// router.post("/data", (req, res) => {
-//   console.log("data", req.body);
-//   const data = req.body;
-
-//   const response_data = { 1: "123", 2: "456" };
-//   res.status(200).json(response_data);
-// });
-
+// Flask ngrok 서버
 let flaskServer = ''
 
+// Flask ngrok 서버 주소 가져오기
+// Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달
 router.post('/getUrl', (req,res)=>{
   console.log('Flask 서버 실행', req.body.url)
   flaskServer = req.body.url
 })
 
 
-
+// 2023-11-10 오전 10:00 박지훈 작성
 // stable diffusion 이미지 생성
 router.post("/stable", (req, res) => {
   // 긍정, 부정 프롬프트
@@ -47,6 +50,8 @@ router.post("/stable", (req, res) => {
     });
 });
 
+// 2023-11-10 오전 10:00 박지훈 작성
+// 생선된 이미지 선택 라우터(생성 된 이미지 중 사용할 이미지를 제외한 나머지 이미지 제거(S3 용량 관리))
 router.post("/choiceImg", (req, res) => {
   let data = req.body;
   axios
@@ -102,13 +107,27 @@ router.post("/myimg", (req, res) => {
 });
 
 // 내 저장이미지 선택 삭제 라우터
-router.post("/deleteImg", (req, res) => {
+router.post("/deleteImg", async(req, res) => {
 
-  let sqlImgId = req.body.imgId; // 문자열 형태로 된 이미지 ID
+  let sqlImgUrl = req.body.imgUrl; // 문자열 형태로 된 이미지 ID
+  let deleteS3 = req.body.deleteS3 // S3에서 삭제할 이미지 경로
 
   let sessionId = req.session.userId // 세션에 저장된 유저 ID
+
+  const command = new DeleteObjectsCommand({
+    Bucket : process.env.AWS_BUCKET,
+    Delete : {
+      Objects : deleteS3
+    }
+  })
+
+  const response = await client.send(command)
+  console.log('s3 삭제 완료 : ', response)
+
+
+
   // 삭제 쿼리
-  let deleteQuery = `DELETE FROM TB_GEN_IMG WHERE IMG_ID IN (${sqlImgId})`;
+  let deleteQuery = `DELETE FROM TB_GEN_IMG WHERE IMG_URL IN (${sqlImgUrl})`;
   // 선택 쿼리
   let selectQuery = "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT"
   conn.connect();

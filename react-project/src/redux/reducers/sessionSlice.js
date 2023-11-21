@@ -19,7 +19,7 @@ export const sessionSlice = createSlice({
         sessionName : (state, action) => { // 입력받은 이름
             state.name = action.payload
         },
-        sessionLoginType : (state, action) => { // 로그인 타입 M, G, K, N
+        sessionLoginType : (state, action) => { // 로그인 타입 M(일반), G(구글), K(카카오), N(네이버)
             state.loginType = action.payload
         },
         sessionID : (state, action) => { // 회원 ID

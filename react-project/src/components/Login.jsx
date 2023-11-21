@@ -48,7 +48,7 @@ const Login = () => {
     let client_id = process.env.REACT_APP_NAVER_CLIENT_ID
     let state = process.env.REACT_APP_NAVER_RANDOM_STATE;
     let redirectURI = encodeURI(process.env.REACT_APP_NAVER_REDIRECT_URI);
-    const api_url = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
+    const api_url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirectURI}&state=${state}`
     window.location.href = api_url
   }
 

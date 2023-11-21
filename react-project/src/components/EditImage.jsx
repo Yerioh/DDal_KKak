@@ -101,7 +101,7 @@ function EditImage() {
               ContentType : `image/${type}`
             }
           })
-
+          
           // 이미지 업로드 실행
           const promise = upload.promise()
           promise.then(

@@ -8,7 +8,7 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
     setKeyWordModalOpen(true);
     onModalChange(true);
   };
-  const closeKeyWrodModal = () => {
+  const closekeywordModal = () => {
     setKeyWordModalOpen(false);
     onModalChange(false);
   };
@@ -100,13 +100,13 @@ const Keyword = ({ handleCheckboxChange, onModalChange }) => {
           className={"keyWordmodal-container"}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
-              closeKeyWrodModal();
+              closekeywordModal();
             }
           }}
         >
           <div className={"keyWordmodal-content"}></div>
           {/* 모달 내용 */}
-          <button className={"modal-close-btn"} onClick={closeKeyWrodModal}>
+          <button className={"modal-close-btn"} onClick={closekeywordModal}>
             모달 닫기
           </button>
         </div>
