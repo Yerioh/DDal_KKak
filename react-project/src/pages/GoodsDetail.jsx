@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
@@ -77,7 +77,16 @@ const GoodsDetail = () => {
       })
   },[])
 
-
+ // 이미지 정보 가져오기 위한 ref
+ const getImgDataRef = useRef();
+ /**  이미지 정보 가져오는 함수*/
+ const getImgData = () => {
+   if (typeof getImgDataRef.current === "function") {
+     const fnOptionsIfNeededFoundInDocs = {};
+     const imageData = getImgDataRef.current(fnOptionsIfNeededFoundInDocs);
+     console.log(imageData);
+   }
+ };
 
   //제품수량 감소 함수
   // const prd_info_filter = prd_info.filter(item => item.PROD_ID === prd_id)
@@ -130,6 +139,8 @@ const GoodsDetail = () => {
 
   /**장바구니에 담기위한 함수 */
   function moveItemToCart() {
+    // 이미지 에디터에서 이미지 정보 가져오기 위해 함수 호출
+    getImgData();
     //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
     let newCartItem = {
       'PROD_ID': `${prd_info_filter[0].PROD_ID}`, // 상품 ID
@@ -179,7 +190,7 @@ const GoodsDetail = () => {
         <>
         {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
       <div style={{ backgroundColor: "green", width: "65%"}}>
-      <GoodsEdit imgData={goodsImgFilter[1].PROD_IMG}/></div>
+      <GoodsEdit imgData={goodsImgFilter[1].PROD_IMG} getImgDataRef={getImgDataRef} getImgData={getImgData}/></div>
       <div style={{ backgroundColor: "white", width: "35%", margin: "50px 0px 0px 0px", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
         <h3 className="GoodsDetail-title" style={{ margin: "10px 5px" }}>{prd_info_filter[0].PROD_NAME}</h3>

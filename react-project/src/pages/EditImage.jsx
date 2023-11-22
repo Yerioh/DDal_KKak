@@ -102,8 +102,6 @@ function EditImage() {
     penTool:"펜 그리기",
     lineTool:"선",
     arrowTool:"화살표",
-
-
   }
   // 23-11-21 임휘훈 작성 : 페이지 갱신 및 이탈 감지
   window.onbeforeunload = () => {
