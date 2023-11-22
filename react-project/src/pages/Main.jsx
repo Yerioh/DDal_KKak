@@ -8,7 +8,7 @@ import ImageAllCard from "../components/ImageAllCard";
 import e from "cors";
 
 const Main = () => {
-  const testnumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const testnumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1];
   const test_MainImage = [1, 2, 3, 4, 5, 6, 7, 8];
   const [currentIndex, setCurrentIndex] = useState(1);
 

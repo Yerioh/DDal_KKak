@@ -1,37 +1,34 @@
-/* ImageAll 이미지 검색 페이지 */
-.All-Container{
-    margin: "20px 10%";
-    display: "flex";
-    flex-Flow: "row wrap";
-    justify-Content: "center";
-    min-Width: "751px" ;
+.Card-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.All-top-box{
-    width: "100%";
-    justify-Content: "center";
-    display: "flex";
-    padding: "20px";
+.input-keyword-box{
+    display: flex;
+    justify-content: space-between;
+    border : 1px solid rgb(200, 200, 200);
+    border-radius: 30px;
+    width: 100%;
 }
-.All-search-box{
-    width: "30%";
-    height: "60px";
-    display: "flex";
-    border: "1px solid gray";
-    border-Radius: "30px";
-    box-Sizing: "border-box";
-    padding: "15px 5px";
+.search_Keyword{
+    width: 80%;  
+    border: none; 
 }
-.All-search-bar{
-    border: "none";
-    width: "80%";
-    outline: "none";
+.search_Keyword:focus{
+    outline: none;
 }
-.All-search-bar > button{
-    width: "20%";
-     border: "none";
-    background-Color: "white";
+
+#button-addon2{
+   border: none;
 }
-.All-search-bar > img{
-    width: "20px";
-    height: "20px";
+.search-Card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Card-div:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px;
+   cursor: pointer;
 }
