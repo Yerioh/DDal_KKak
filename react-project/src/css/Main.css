@@ -21,6 +21,7 @@
 }
 /* h1, 메인 버튼 위치 */
 .Main-head-btn{
+    
     min-width: 450px;
     width: 30%;
     display: flex;
@@ -35,20 +36,31 @@
     display: flex;
     flex-direction: column;
     font-size: 30px;
-    font-weight: bold;
 }
+
 .Main-Image{
+    display: flex;
     width: 40%;
     height: 90%;
     min-width: 700px;
     min-height: 630px;
+    align-items: center;
+    justify-content: space-between;
+    /* position: relative; */
 }
 .Main-Image > img{
     width: 100%;
     height: 95%;
-    border-radius: 2%;
+    border-radius: 100%;
+    border : solid 4px rgb(200, 200, 200);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px;
     object-fit: cover;
 }
+
+.mainLeft{
+    margin-right: 2%;
+}
+
 /* 메인 버튼 */
 .Main-Btn{
     width: 350px;
@@ -63,18 +75,34 @@
     background-color: black;
     color:lightgray;
     transition: all .10s linear;
-
 }
-/* 원하는 그림, 이미지, 굿즈 */
-/* .Main-head-btn > h1{
+.Main-Slide-position{
     display: flex;
-    justify-content: center;
-} */
+    justify-content: space-between;
+    /* position: absolute; */
+    width: 98%;
+}
+
+.Main-Slide-btn{
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+}
 
 .Slide-box{
     max-width: 1500px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.goods-text-btn{
+    flex: flex;
+    align-items: center;
+}
+.image-Slide-btn{
+    flex: flex;
     align-items: center;
 }
 
@@ -86,6 +114,7 @@
 }
 
 .Main-Slide-text{
+    font-size: 20px;
     font-weight: bold;
 }
 

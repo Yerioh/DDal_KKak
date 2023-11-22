@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router-dom";
 import "../css/Main.css";
 import ImageAllCard from "../components/ImageAllCard";
+import e from "cors";
 
 const Main = () => {
   const testnumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const test_MainImage = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   const responsive = {
     superLargeDesktop: {
@@ -28,6 +31,43 @@ const Main = () => {
       items: 2,
     },
   };
+  const imagePaths = test_MainImage.map((num) => `./images/${num}.png`);
+
+  const handleNextButtonClick = () => {
+    setCurrentIndex(currentIndex + 1);
+    //if문 currentIndex
+    if (currentIndex % imagePaths.length === 0) {
+      setCurrentIndex(test_MainImage[0]);
+      //else문 currentIndex
+    } else {
+      setCurrentIndex((currentIndex % imagePaths.length) + 1);
+    }
+  };
+
+  const handlePrevButtonClick = () => {
+    setCurrentIndex(Math.abs(currentIndex));
+    // currentIndex가 맨 마지막 일때
+    if (currentIndex % imagePaths.length === 0) {
+      setCurrentIndex(imagePaths.length - 1);
+      // currentIndex가 맨 처음일때
+    } else if (currentIndex - 1 === 0) {
+      setCurrentIndex(imagePaths.length);
+      // 기본 왼쪽 이동
+    } else {
+      setCurrentIndex((currentIndex % imagePaths.length) - 1);
+    }
+  };
+
+  // 자동 슬라이드 기능을 위한 useEffect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNextButtonClick();
+    }, 2000); // 2초마다 handleNextButtonClick 함수 호출
+
+    // 컴포넌트가 언마운트될 때 타이머 정리
+    return () => clearInterval(timer);
+  }, [currentIndex]); // currentIndex가 변경될 때마다 이펙트를 다시 실행
+
   return (
     <div className="Main-Container">
       <div className="Main-text-img">
@@ -45,19 +85,31 @@ const Main = () => {
             <span>만들고 싶다면?</span>
           </div>
           <Link to="/image-create">
-            <button className="Main-Btn">이미지 생성하러 가기! 딸~깍</button> 
+            <button className="Main-Btn">이미지 생성하러 가기! 딸~깍</button>
             {/*  */}
           </Link>
         </div>
         <div className="Main-Image">
-          <img src="./images/1.png" alt="d" />
+          <button
+            className="Main-Slide-btn mainLeft"
+            onClick={handlePrevButtonClick}
+          >
+            <img src="./images/arrow-left2.png" alt="left" />
+          </button>
+          <img src={`./images/${currentIndex}.png`} alt="Displayed" />
+          <button
+            className="Main-Slide-btn mainRight"
+            onClick={handleNextButtonClick}
+          >
+            <img src="./images/arrow-right2.png" alt="right" />
+          </button>
         </div>
       </div>
 
       {/* 이미지 슬라이드 */}
       <div className="Slide-box">
         <div className="image-Slide">
-          <div>
+          <div className="image-Slide-btn">
             <span className="Main-Slide-text">디자인 이미지</span>
             <Link to="/imageall">
               <button className="moreShow same-BTN">더보기</button>
@@ -74,7 +126,7 @@ const Main = () => {
         <div className="goods-Slide">
           <div className="goods-text-btn">
             <span className="Main-Slide-text">굿즈</span>
-            <Link to = "goodslist">
+            <Link to="goodslist">
               <button className="moreShow same-BTN">굿즈 더보기</button>
             </Link>
           </div>
