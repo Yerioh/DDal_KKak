@@ -57,6 +57,7 @@ const SaveImage = () => {
 
   // 각 이미지의 체크박스 상태 변경 함수
   const handleCheckboxChange = (imageId, isChecked) => {
+    console.log("체크함?", isChecked);
     setSelectedImages((prev) => ({
       ...prev,
       [imageId]: isChecked,
@@ -87,6 +88,7 @@ const SaveImage = () => {
 
     return () => {
       cards.forEach((card) => currentObserver.unobserve(card));
+
     };
   }, []);
 
@@ -100,6 +102,7 @@ const SaveImage = () => {
 
   /**삭제하시겠습니까? 모달 호출*/
   const delImg_Btn = () => {
+    console.log("삭제 모달 호출");
     const isSelected = Object.values(selectedImages).some(
       (value) => value === true
     );
@@ -116,12 +119,13 @@ const SaveImage = () => {
     const checkedImages = imgArray
       .filter((_, index) => selectedImages[index])
       .map((item) => item.IMG_URL); // 체크된 이미지들의 URL만 추출
+
+    console.log("체크된 이미지 URL 업데이트", checkedImages);
     setcheck_Img(checkedImages);
   };
 
   /** 전체 선택 함수 */
   const handleSelectAllChange = (e) => {
-    console.log("전체 선택 함수 작성 필요");
     setSelectAll(e.target.checked);
   };
 
@@ -155,7 +159,9 @@ const SaveImage = () => {
         // 이미지 화면 최신화
         setImgArray(imgData);
         // 삭제 모달 닫기
-        setDelImg(!delImg);                
+        setDelImg(false);       
+        // 이미지 모달 닫기
+        setIsOpen(false)         
       });   
   };
 
@@ -214,9 +220,6 @@ const SaveImage = () => {
           <div
             className="SImage-Card me-4"
             key={index}
-            onClick={() => {
-              openModalHandler(index);
-            }}
           >
             {/* data-src 속성에 실제 이미지 URL을 지정 */}
             <img
@@ -224,6 +227,11 @@ const SaveImage = () => {
               data-src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image?.IMG_URL}`}
               src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image?.IMG_URL}`}
               alt={`Image ${index}`}
+              onClick={() => {
+                openModalHandler(index);
+                handleCheckboxChange(index, true)
+                updateCheckedImages()
+              }}
             />
             <div className="SI-At">
               <input
@@ -246,9 +254,12 @@ const SaveImage = () => {
         {isOpen && (
           <ImgModal
             isOpen={isOpen}
-            openModalHandler={openModalHandler}
             ImgArray={imgArray}
             index={testIndex}
+            handleCheckboxChange={handleCheckboxChange}
+            openModalHandler={openModalHandler}
+            updateCheckedImages={updateCheckedImages}
+            delImg_Btn={delImg_Btn}
           />
         )}
       </div>
