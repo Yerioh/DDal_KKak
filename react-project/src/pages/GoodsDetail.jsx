@@ -7,9 +7,10 @@ import prd_size from '../data/prd_size.json'
 import prd_info from '../data/product_info.json'
 import "../css/GoodsDetail.css"
 import { useParams } from 'react-router-dom';
-import GoodsEdit from '../components/GoodsEdit'
 import axios from '../axios'
-
+import GoodsEdit from '../components/GoodsEdit';
+import AvgStarRating from '../components/AvgStarRating';
+import GoodsReview from '../components/GoodsReview';
 
 
 
@@ -172,6 +173,7 @@ const GoodsDetail = () => {
 
 
   return (
+    <div style={{ minWidth: "710px", margin: "5% 10% ", display: 'flex', flexDirection:'column' }}>
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
       {!isLoading ? (<h1>데이터 로딩중</h1>) : (
         <>
@@ -199,6 +201,8 @@ const GoodsDetail = () => {
 {/* 평균평점을 가져오기 없을경우 0.0점*/}
             <h5 style={{ fontWeight: "bold" }}>별점</h5>
           </div>
+{/* 평균평점을 표시해주는 별기능 평균 평균데이터와 연동합니다. */}
+        <div><AvgStarRating/></div> 
           <div style={{ float: "right" }}>
             <h5>0.0점</h5>
           </div>
@@ -277,6 +281,14 @@ const GoodsDetail = () => {
       </>
       )}
     </div>
+    <div style={{margin:'100px'}}>
+      <hr></hr>
+      <h3>딸깍의 상품 리뷰!</h3>
+      <div className='GoodsDetail-Reviewdbody' style={{minWidth: "710px", borderRadius:'5px', padding:'20px'}}>
+      <GoodsReview/>
+      </div>
+    </div>
+  </div>
   )
 }
 

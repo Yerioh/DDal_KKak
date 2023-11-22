@@ -48,3 +48,44 @@
     height: 1px;
     border: 0;
 }
+
+.GoodsReview-card{
+    display: flex;
+    justify-content: space-between;
+}
+
+.GoodsReview-card{
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    padding : 20px;
+    margin: 0 auto;
+    width:90%;
+}
+
+.GoodsReview-goodsinfoImg{
+    display: flex;
+}
+
+.GoodsReview-goodsinfo{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.RatingBox{
+    margin: 0 auto;
+
+    & svg {
+      color: #C4C4C4;
+      cursor: pointer;
+    }
+    :hover svg {
+      color: #EBF05E;
+    }
+    & svg:hover ~ svg {
+      color: #C4C4C4;
+    }
+    .black {
+      color: #EBF05E;
+    }
+}
