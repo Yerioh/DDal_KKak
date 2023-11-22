@@ -74,7 +74,7 @@ const Main = () => {
         <div className="goods-Slide">
           <div className="goods-text-btn">
             <span className="Main-Slide-text">굿즈</span>
-            <Link>
+            <Link to = "goodslist">
               <button className="moreShow same-BTN">굿즈 더보기</button>
             </Link>
           </div>

@@ -44,8 +44,8 @@
     gap: 5px;
   }
 
-  /* 다운로드, 닫기 버튼 */
-  .Modal-Btn > button{
+  /* 굿즈선택다운로드, 닫기 버튼 */
+  .SM-btn{
     border-radius: 5px;
     height: 40px;
     width: 150px;
@@ -54,7 +54,7 @@
     color : rgb(80, 77, 77)
   }
 
-  .Modal-Btn > button:hover{
+  .SM-btn:hover{
     background-color: rgb(80, 77, 77);
     color: white;
     transition: all .10s linear;
@@ -73,7 +73,18 @@
     background-color: rgb(80, 77, 77);
     color: white;
     transition: all .10s linear;
+  } 
+
+  /* .SMD-btn{
+    color: #dc3545;
+    background-color: white;
+    border : 1px solid red;
   }
+  .SMD-btn:hover{
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+  } */
   
   .SM-text{
     display: none;

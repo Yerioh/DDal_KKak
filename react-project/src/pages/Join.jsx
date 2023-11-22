@@ -187,7 +187,7 @@ const Join = () => {
                 <Col>
                   <Form.Control
                     type="text"
-                    placeholder="Enter Id"
+                    placeholder="Enter ID"
                     ref={idRef}
                     required
                   />
@@ -282,8 +282,8 @@ const Join = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button
-                        className="Button"
-                        variant="secondary"
+                        className="Button same-BTN"
+                      
                         onClick={handleClose}
                       >
                         닫기
@@ -326,8 +326,8 @@ const Join = () => {
             </Form.Group>
             <div className="d-grid gap mb-5">
               <Button
-                className="Button-search"
-                variant="outline-info"
+                className="Button-search same-BTN"
+           
                 type="submit"
                 onClick={join_btn}
               >
