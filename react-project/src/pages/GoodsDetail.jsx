@@ -46,9 +46,12 @@ const GoodsDetail = () => {
   let seconds = today.getSeconds();  // 초
   let times = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
 
-
+  //23-11-22 오후 15:00 박지훈 작성
+  // 굿즈 데이터
   const [prd_info_filter,setPrd_info_filter] = useState(null)
+  // 굿즈 색상 데이터
   const [prd_color_filter, setPrd_color_filter] = useState(null)
+  // 굿즈 사이즈 데이터
   const [prd_size_filter, setPrd_size_filter] = useState(null)
   // 불러온 굿즈 색상별 이미지 url
   const [prd_goods_img, setPrd_goods_img] = useState(null)
