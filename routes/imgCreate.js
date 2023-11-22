@@ -101,7 +101,7 @@ router.post("/myimg", (req, res) => {
   let userId = req.body.id; // 유저 아이디
 
   let selectQuery =
-    "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT";
+    "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC";
   conn.connect();
   conn.query(selectQuery, [userId], (err, result) => {
     if (err) {
