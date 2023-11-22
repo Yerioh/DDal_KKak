@@ -120,7 +120,7 @@ const Join = () => {
       setValues({
         numberValue : numberValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3') // 정규식
       })
-    } else if (numberValue.length === 13){
+    } else if (numberValue.length >= 13){
       setValues({
         numberValue : numberValue
         // 사용자가 직접 하이픈 입력해서 전화번호 작성시 하이픈 공백으로 변하고 자동 하이픈으로 변경함
