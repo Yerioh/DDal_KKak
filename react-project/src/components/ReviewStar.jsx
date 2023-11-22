@@ -1,36 +1,30 @@
-import React from 'react'
-import { useState } from 'react'
-import {FaStar} from 'react-icons/fa'
-import '../css/GoodsDetail.css'
+import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import "../css/GoodsDetail.css";
 
-// 리뷰를 남길때 사용하는 별점입니다. 
-// 마우스를 올리면 색이 칠해지고 누르면 색칠한 정도가 고정됩니다.
-const StarRaitings = () => {
-    const[checkRaitings,setCheckRaitings] = useState([false, false, false, false, false])
-    const array = [0, 1, 2, 3, 4]
+// 각각 별점을 수정, 보여주기만 하는 컴포넌트
+// initialRating : 초기값, onRatingChange : 변경값, editable : false면 수정불가능
+const ReviewStar = ({ initialRating, onRatingChange, editable }) => {
+    const [rating, setRating] = useState(initialRating);
+
     const handleStarClick = index => {
-        
-        let clickStates = [...checkRaitings];
-        for (let i =0; i < 5; i++){
-            clickStates[i] = i <= index ? true : false;
-        }
-        setCheckRaitings(clickStates); 
-        console.log(checkRaitings)
+        if (!editable) return; // 변경 불가능한 경우 클릭 무시
+        setRating(index);
+        if(onRatingChange) onRatingChange(index);
     };
-    let score = checkRaitings.filter(Boolean).length;
-    score
- 
-  return (
-    <div className='RatingBox'>
-    {array.map((el) => (
-        <FaStar
-        key={el}
-        onClick={()=> handleStarClick(el)}
-        className={checkRaitings[el] && 'black'}
-        size='35'
-    />))}
-    </div>
-  )
-}
 
-export default StarRaitings
+    return (
+        <div className='RatingBox'>
+            {[1, 2, 3, 4, 5].map((el) => (
+                <FaStar
+                    key={el}
+                    onClick={() => handleStarClick(el)}
+                    className={el <= rating ? 'clo' : ''}
+                    size='35'
+                />
+            ))}
+        </div>
+    );
+};
+
+export default ReviewStar;

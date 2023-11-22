@@ -64,12 +64,18 @@
 
 .GoodsReview-goodsinfoImg{
     display: flex;
+
 }
 
 .GoodsReview-goodsinfo{
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+}
+
+.GoodsReview-img{
+    display: flex;
+    justify-content: flex-end;
+
 }
 
 .RatingBox{
@@ -80,12 +86,13 @@
       cursor: pointer;
     }
     :hover svg {
-      color: #EBF05E;
+      color: #966fd6
     }
     & svg:hover ~ svg {
       color: #C4C4C4;
     }
-    .black {
-      color: #EBF05E;
+    .clo {
+      color: #966fd6;
     }
 }
+
