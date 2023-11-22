@@ -57,7 +57,6 @@ const SaveImage = () => {
 
   // 각 이미지의 체크박스 상태 변경 함수
   const handleCheckboxChange = (imageId, isChecked) => {
-    console.log("체크함?", isChecked);
     setSelectedImages((prev) => ({
       ...prev,
       [imageId]: isChecked,
@@ -102,7 +101,6 @@ const SaveImage = () => {
 
   /**삭제하시겠습니까? 모달 호출*/
   const delImg_Btn = () => {
-    console.log("삭제 모달 호출");
     const isSelected = Object.values(selectedImages).some(
       (value) => value === true
     );
@@ -119,8 +117,6 @@ const SaveImage = () => {
     const checkedImages = imgArray
       .filter((_, index) => selectedImages[index])
       .map((item) => item.IMG_URL); // 체크된 이미지들의 URL만 추출
-
-    console.log("체크된 이미지 URL 업데이트", checkedImages);
     setcheck_Img(checkedImages);
   };
 
