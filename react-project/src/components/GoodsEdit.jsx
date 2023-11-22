@@ -4,16 +4,17 @@ import FilerobotImageEditor, {
   TOOLS,
 } from 'react-filerobot-image-editor';
 
-function GoodsEdit() {
+function GoodsEdit({imgData}) {
     // 상품의 편집된 이미지를 나타내는 state
     const [isImgEditorShown, setIsImgEditorShown] = useState(true); 
+    console.log(imgData.slice(24))
 
 
   return (
     <div style={{height:'100%'}}>
       {isImgEditorShown && (
         <FilerobotImageEditor
-          source="https://scaleflex.airstore.io/demo/stephen-walker-unsplash.jpg"
+          source={`${process.env.REACT_APP_AWS_BUCKET_URL}/ddal-kkak/${imgData}`}
           onSave={(editedImageObject, designState) =>
             console.log('saved', editedImageObject, designState)
           }

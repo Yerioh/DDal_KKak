@@ -8,6 +8,7 @@ import prd_info from '../data/product_info.json'
 import "../css/GoodsDetail.css"
 import { useParams } from 'react-router-dom';
 import GoodsEdit from '../components/GoodsEdit'
+import axios from '../axios'
 
 
 
@@ -43,11 +44,35 @@ const GoodsDetail = () => {
   let times = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
 
 
+  const [prd_info_filter,setPrd_info_filter] = useState(null)
+  const [prd_color_filter, setPrd_color_filter] = useState(null)
+  const [prd_size_filter, setPrd_size_filter] = useState(null)
+  const [prd_goods_img, setPrd_goods_img] = useState(null)
+  const [isLoading , setIsLoading] = useState(false)
+    //  해당제품의 가격 데이터 
+    let [price, setPrice] = useState(0)
+
+  // 데이터베이스에서 PROD_ID로 상품 데이터 가져오기
+  useEffect(()=>{
+    axios.post('/page/goodProduct', {prodId : prd_id})
+      .then(res=>{
+        let data = res.data
+        setPrd_info_filter(data.prdInfo)
+        setPrd_color_filter(data.prdColor)
+        setPrd_size_filter(data.prdSize)
+        setPrd_goods_img(data.prdImg)
+        setPrice(data.prdInfo[0].PROD_PRICE)
+        setIsLoading(true)
+      })
+  },[])
+
+
 
   //제품수량 감소 함수
-  const prd_info_filter = prd_info.filter(item => item.PROD_ID === prd_id)
-  const prd_color_filter = prd_color.filter(item => item.PROD_ID === prd_id)
-  const prd_size_filter = prd_size.filter(item => item.PROD_ID === prd_id)
+  // const prd_info_filter = prd_info.filter(item => item.PROD_ID === prd_id)
+  // const prd_color_filter = prd_color.filter(item => item.PROD_ID === prd_id)
+  // const prd_size_filter = prd_size.filter(item => item.PROD_ID === prd_id)
+
 
   console.log(prd_info_filter, "필터링정보")
   console.log(prd_color_filter, "필터링 컬러 정보")
@@ -56,8 +81,7 @@ const GoodsDetail = () => {
   
 
 
-  //  해당제품의 가격 데이터 
-  let price = prd_info_filter[0].PROD_PRICE
+
 
 
 
@@ -139,9 +163,11 @@ const GoodsDetail = () => {
 
   return (
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
-{/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
+      {!isLoading ? (<h1>로딩중</h1>) : (
+        <>
+        {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
       <div style={{ backgroundColor: "green", width: "65%"}}>
-      <GoodsEdit /></div>
+      <GoodsEdit imgData={prd_goods_img[0].PROD_IMG}/></div>
       <div style={{ backgroundColor: "white", width: "35%", margin: "50px 0px 0px 0px", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
         <h3 className="GoodsDetail-title" style={{ margin: "10px 5px" }}>{prd_info_filter[0].PROD_NAME}</h3>
@@ -238,6 +264,8 @@ const GoodsDetail = () => {
             style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
         </div>
       </div>
+      </>
+      )}
     </div>
   )
 }

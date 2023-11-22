@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const axios = require("axios");
 const path = require("path");
 const session = require('express-session')
+// cors 에러 방지 프록시 설정
+const { createProxyMiddleware } = require('http-proxy-middleware');
 // env 사용
 require('dotenv').config()
 

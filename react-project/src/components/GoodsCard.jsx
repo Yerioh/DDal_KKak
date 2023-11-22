@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const GoodsCard = ({name, src, price, cate, PROD_ID}) => {
   return (
     <div style={{margin:"5px 5px"}}>
+      
     <Link to={`/goodsdetail/${PROD_ID}`} style={{textDecoration:"none"}}>
     <Card style={{ width: '18rem',textAlign:"center",border:"none"}} >
         {/* 제품 이미지 */}
