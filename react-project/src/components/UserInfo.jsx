@@ -208,8 +208,8 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
                   </Modal.Body>
                   <Modal.Footer>
                     <Button
-                      className="Button"
-                      variant="secondary"
+                      className="Button same-BTN"
+               
                       onClick={handleClose}
                     >
                       닫기
@@ -243,7 +243,7 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
             <Form.Control type="text" placeholder="상세주소" ref={addDetailRef} />
           </Form.Group>
           <div className="mb-3 userInfo-btn">
-            <Button className="Change-Btn" variant="outline-info" onClick={changeUserData}>
+            <Button className="Change-Btn same-BTN"  onClick={changeUserData}>
               수정완료
             </Button>
           </div>
