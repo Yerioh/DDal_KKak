@@ -29,8 +29,11 @@ const GoodsDetail = () => {
   let prd_id = PROD_ID
   //  굿즈색상정보 끌어오기
   const goods_color = (e) => {
-    console.log(e.currentTarget.value)
-    setColor(e.currentTarget.value)
+    let data = e.currentTarget.value
+    let new_array = [...prd_goods_img]
+    const prd_size_filter = new_array.filter(item => item.COLOR_CODE === data)
+    setGoodsImgFilter(prd_size_filter)
+    setColor(data)
   }
 
   // 오늘 날짜 추가를 위한 변수선언들
@@ -47,7 +50,10 @@ const GoodsDetail = () => {
   const [prd_info_filter,setPrd_info_filter] = useState(null)
   const [prd_color_filter, setPrd_color_filter] = useState(null)
   const [prd_size_filter, setPrd_size_filter] = useState(null)
+  // 불러온 굿즈 색상별 이미지 url
   const [prd_goods_img, setPrd_goods_img] = useState(null)
+  // 색상별로 필터링 된 굿즈 이미지 url
+  const [goodsImgFilter, setGoodsImgFilter] = useState(null)
   const [isLoading , setIsLoading] = useState(false)
     //  해당제품의 가격 데이터 
     let [price, setPrice] = useState(0)
@@ -61,6 +67,7 @@ const GoodsDetail = () => {
         setPrd_color_filter(data.prdColor)
         setPrd_size_filter(data.prdSize)
         setPrd_goods_img(data.prdImg)
+        setGoodsImgFilter(data.prdImg)
         setPrice(data.prdInfo[0].PROD_PRICE)
         setIsLoading(true)
       })
@@ -163,11 +170,11 @@ const GoodsDetail = () => {
 
   return (
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
-      {!isLoading ? (<h1>로딩중</h1>) : (
+      {!isLoading ? (<h1>데이터 로딩중</h1>) : (
         <>
         {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
       <div style={{ backgroundColor: "green", width: "65%"}}>
-      <GoodsEdit imgData={prd_goods_img[0].PROD_IMG}/></div>
+      <GoodsEdit imgData={goodsImgFilter[1].PROD_IMG}/></div>
       <div style={{ backgroundColor: "white", width: "35%", margin: "50px 0px 0px 0px", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
         <h3 className="GoodsDetail-title" style={{ margin: "10px 5px" }}>{prd_info_filter[0].PROD_NAME}</h3>

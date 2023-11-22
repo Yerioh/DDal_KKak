@@ -26,10 +26,9 @@ router.post("/goods", (req, res) => {
 // 굿즈 상세페이지 데이터
 router.post('/goodProduct', (req,res)=>{
     let data = req.body.prodId
-    console.log(data)
     let selectQuery1 = 'SELECT * FROM TB_PRODUCT WHERE PROD_ID = ?'
     let selectQuery2 = 'SELECT * FROM TB_PRODUCT_COLOR WHERE PROD_ID = ?'
-    let selectQuery3 = 'SELECT * FROM TB_PRODUCT_IMG WHERE PROD_ID = ?'
+    let selectQuery3 = 'SELECT A.*, B.COLOR_CODE FROM TB_PRODUCT_IMG A INNER JOIN TB_PRODUCT_COLOR B ON(A.COLOR_ID = B.COLOR_ID) WHERE A.PROD_ID = ?'
     let selectQuery4 = 'SELECT * FROM TB_PRODUCT_SIZE WHERE PROD_ID = ?'
     let prdInfo = ''
     let prdColor = ''

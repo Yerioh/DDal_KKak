@@ -7,14 +7,14 @@ import FilerobotImageEditor, {
 function GoodsEdit({imgData}) {
     // 상품의 편집된 이미지를 나타내는 state
     const [isImgEditorShown, setIsImgEditorShown] = useState(true); 
-    console.log(imgData.slice(24))
+    console.log(imgData)
 
 
   return (
     <div style={{height:'100%'}}>
       {isImgEditorShown && (
         <FilerobotImageEditor
-          source={`${process.env.REACT_APP_AWS_BUCKET_URL}/ddal-kkak/${imgData}`}
+          source={imgData}
           onSave={(editedImageObject, designState) =>
             console.log('saved', editedImageObject, designState)
           }
