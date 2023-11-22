@@ -10,14 +10,16 @@ const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
   ImgArray, // 이미지 배열
-  index,                        
+  index,
+  handleCheckboxChange,
+  updateCheckedImages,
+  delImg_Btn
 }) => {
   // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();
 
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
-    console.log("다운로드 버튼 활성화", `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`);
     domtoimage.toBlob(imgRef.current).then((blob) => {
       saveAs(blob, `DDAL_KKAK.${ImgArray[index].IMG_URL.slice(-3)}`);
     });
@@ -28,7 +30,6 @@ const ImgModal = ({
         isOpen 모달 상태, openModalHandler : 모달 열고 닫기
         이미지 URL, 사용자 Prompt, NPrompt
     */
-  console.log(ImgArray);
   return (
     <div>
       {isOpen ? (
@@ -52,21 +53,24 @@ const ImgModal = ({
             <hr />
             <div className="Modal-Btn">
               <Link to="#">
-                <button className="SM-btn">이미지 재편집</button>
-              </Link>
-              <Link to="#">
                 <button className="SM-btn">굿즈 선택</button>
               </Link>
               <button className="SM-btn" onClick={downLoadBtn}>
                 다운로드
               </button>
-              <button className="SM-btn" onClick={openModalHandler}>
+              <button className="SM-btn" onClick={delImg_Btn}>삭제</button>
+              <button className="SM-btn" onClick={() => {
+                openModalHandler()
+                handleCheckboxChange(index, false)
+                updateCheckedImages()
+                }}>
                 닫기
               </button>
             </div>
           </div>
         </div>
       ) : null}
+      
     </div>
   );
 };

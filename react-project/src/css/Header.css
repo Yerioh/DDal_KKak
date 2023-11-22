@@ -60,7 +60,9 @@
 .nav-link {
   display: flex;
 }
-
+.nav-link > span{
+  font-weight: bold;
+}
 
 /* 장바구니 아이콘 이미지에 대한 스타일 */
 .basket{

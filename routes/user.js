@@ -13,15 +13,17 @@ let conn = db.init();
 
 // 회원가입 라우터
 router.post("/join", (req, res) => {
-  let id = req.body.userId; // 사용자가 입력한 ID, name 속성
-  let email = req.body.useremail; // 사용자가 입력한 email
-  let pw = req.body.userPw; // 사용자가 입력한 PW
+  let data = req.body
+  let userId = req.body.userId; // 사용자가 입력한 ID, name 속성
+  let useremail = req.body.useremail; // 사용자가 입력한 email
+  let userPw = req.body.userPw; // 사용자가 입력한 PW
   let checkPw = req.body.checkPw; // 비밀번호 확인
   let userName = req.body.userName; // 사용자 이름
   let phone = req.body.phone; // 사용자 휴대전화
   let postNumber = req.body.postNumber; // 우편번호
   let doro = req.body.doro; // 도로명 주소 add1
   let detailAddress = req.body.detailAddress; // 상세주소 add2
+
   // 회원가입 쿼리문
   // SHA2(?, 256) : 비밀번호 256 비트 암호화
   let joinQuery =
@@ -33,7 +35,7 @@ router.post("/join", (req, res) => {
     conn.connect();
     conn.query(
       joinQuery,
-      [id, pw, userName, email, phone, postNumber, doro, detailAddress],
+      [userId, userPw, userName, useremail, phone, postNumber, doro, detailAddress],
       (err, result) => {
         if (err) {
           console.log("회원가입 쿼리문 오류", err);

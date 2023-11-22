@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import axios from "../axios";
@@ -35,7 +35,7 @@ const Join = () => {
   const join_btn = (e) => {
     e.preventDefault();
     if (isCheck) {
-      if (pwRef.current.value == pw2Ref.current.value) {
+      if (pwRef.current.value === pw2Ref.current.value) {
         console.log("회원가입 라우터로 이동");
         axios
           .post("/user/join", {
@@ -76,7 +76,7 @@ const Join = () => {
         .then((res) => {
           console.log("중복체크 결과", res.data);
           if (res.data === true) {
-            idRef.current.disabled = true;
+            // idRef.current.disabled = true;
             spanRef.current.style = "color:gray";
             setText("※ 사용 가능한 아이디 입니다.");
             setIsCheck(true);
@@ -98,6 +98,37 @@ const Join = () => {
     }
   };
   // 아이디 중복체크 함수 끝
+
+  // 23-11-22 09:36 임휘훈 휴대전화 자동 하이픈 함수 작성
+  // 전화번호 state
+  const [valuse, setValues] = useState({
+    numberValue : ""
+  })
+  const {numberValue} = valuse;
+
+  /** 전화번호 작성 감지 */
+  const handleNumber = (e) => {
+    const {value, name} = e.target; // 전화번호 input창의 입력값과 name속성
+    setValues({
+      [name] : value, // 대괄호를 통해 키값을 적어주는 것은 변수를 선언하고 그 실제값을 불러오기 위해서 사용 => 키값이 변해야 할 때 사용
+    })
+  }
+
+  /** 휴대전화 자동 하이픈 useEffect */
+  useEffect(() => {
+    if(numberValue.length === 11){ // 하이픈 없이 번호만 입력한 경우
+      setValues({
+        numberValue : numberValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3') // 정규식
+      })
+    } else if (numberValue.length >= 13){
+      setValues({
+        numberValue : numberValue
+        // 사용자가 직접 하이픈 입력해서 전화번호 작성시 하이픈 공백으로 변하고 자동 하이픈으로 변경함
+        .replace(/-/g, '')
+        .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')
+      })
+    }
+  }, [numberValue])
 
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
@@ -141,7 +172,7 @@ const Join = () => {
     userAdd.current.value = fullAddr;
     // userAdd.current.disabled = true;
   };
-  console.log(address, addressDetail);
+
   return (
     <div  className="JoinInfo">
       <Container className="d-flex justify-content-center align-items-center mt-5">
@@ -156,7 +187,7 @@ const Join = () => {
                 <Col>
                   <Form.Control
                     type="text"
-                    placeholder="Enter Id"
+                    placeholder="Enter ID"
                     ref={idRef}
                     required
                   />
@@ -217,8 +248,11 @@ const Join = () => {
               <Form.Control
                 type="text"
                 placeholder="Enter Phone Number"
+                name="numberValue"
+                value={numberValue || ""}
                 required
                 ref={numberRef}
+                onChange={handleNumber}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicAdressNum">
@@ -248,8 +282,8 @@ const Join = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button
-                        className="Button"
-                        variant="secondary"
+                        className="Button same-BTN"
+                      
                         onClick={handleClose}
                       >
                         닫기
@@ -292,8 +326,8 @@ const Join = () => {
             </Form.Group>
             <div className="d-grid gap mb-5">
               <Button
-                className="Button-search"
-                variant="outline-info"
+                className="Button-search same-BTN"
+           
                 type="submit"
                 onClick={join_btn}
               >
