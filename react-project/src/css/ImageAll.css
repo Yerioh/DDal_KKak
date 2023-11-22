@@ -1,0 +1,37 @@
+/* ImageAll 이미지 검색 페이지 */
+.All-Container{
+    margin: "20px 10%";
+    display: "flex";
+    flex-Flow: "row wrap";
+    justify-Content: "center";
+    min-Width: "751px" ;
+}
+.All-top-box{
+    width: "100%";
+    justify-Content: "center";
+    display: "flex";
+    padding: "20px";
+}
+.All-search-box{
+    width: "30%";
+    height: "60px";
+    display: "flex";
+    border: "1px solid gray";
+    border-Radius: "30px";
+    box-Sizing: "border-box";
+    padding: "15px 5px";
+}
+.All-search-bar{
+    border: "none";
+    width: "80%";
+    outline: "none";
+}
+.All-search-bar > button{
+    width: "20%";
+     border: "none";
+    background-Color: "white";
+}
+.All-search-bar > img{
+    width: "20px";
+    height: "20px";
+}

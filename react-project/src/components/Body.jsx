@@ -13,7 +13,7 @@ import Goodslist from "./Goodslist";
 import GoodsDetail from "../pages/GoodsDetail";
 import Basket from "../pages/Basket";
 import Main from "../pages/Main";
-import ImageAll from "./ImageAll"
+import ImageAll from "../pages/ImageAll"
 
 const Body = () => {
   // // 23-11-21 09:55 임휘훈 작성 Private Route

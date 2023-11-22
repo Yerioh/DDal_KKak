@@ -62,11 +62,12 @@ const Main = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       handleNextButtonClick();
-    }, 2000); // 2초마다 handleNextButtonClick 함수 호출
+    }, 5000); // 2초마다 handleNextButtonClick 함수 호출
 
     // 컴포넌트가 언마운트될 때 타이머 정리
     return () => clearInterval(timer);
   }, [currentIndex]); // currentIndex가 변경될 때마다 이펙트를 다시 실행
+
 
   return (
     <div className="Main-Container">

@@ -21,7 +21,6 @@
 }
 /* h1, 메인 버튼 위치 */
 .Main-head-btn{
-    
     min-width: 450px;
     width: 30%;
     display: flex;
@@ -55,8 +54,12 @@
     border : solid 4px rgb(200, 200, 200);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px;
     object-fit: cover;
-}
 
+}
+.Images-Container {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* 부드러운 전환 효과 */
+  }
 .mainLeft{
     margin-right: 2%;
 }
@@ -157,4 +160,6 @@
     margin-left: 3%;
     border-radius: 5%;
 }
+
+
 
