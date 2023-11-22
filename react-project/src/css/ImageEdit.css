@@ -1,9 +1,14 @@
 .editimagebody {
-  width: 60%;
+  width: 50%;
+  height: 600px;
   margin: auto;
-  margin-top: 7%;
+  margin-top: 6%;
 }
-
+@media (max-width:480px){
+  .editimagebody{
+    margin-top: 30px;
+  }
+}
 .imageedittool {
   width: 100%;
 }
