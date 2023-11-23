@@ -12,8 +12,13 @@ const ResultImage = () => {
   // S3 버킷 기본 주소 값
   const s3Url = process.env.REACT_APP_AWS_BUCKET_URL;
   const imgData = location.state.imgData;
-  //   const imgData = ['108488627855757649516/b6bef82a-48ec-5f41-c240-31e3c174e544.png','108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png',
-  // '108488627855757649516/c168fb51-89d2-5676-d90b-04eb401fa572.png', '114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png']
+  // const imgData = [
+  //   "108488627855757649516/b6bef82a-48ec-5f41-c240-31e3c174e544.png",
+  //   "114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png",
+  //   "114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png"
+  //   // "114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png",
+  //   // "114662496405123443827/6c77b248-6eb1-6588-67b7-558e0acf4f0f.png",
+  // ];
 
   //이미지를 선택하면 그림자 값 유지
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,14 +26,15 @@ const ResultImage = () => {
   // 선택한 이미지
   const [imgClick, setImgClick] = useState([]);
   const positive = location.state.positivePrompt;
-  // const positive = 'test,testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest'
+  // const positive =
+  //   "test,testtesttesttesttesttesttesttesttesttesttesttsttesttesttesttesttesttesttesttesttesttesttest";
   // 부정프롬프트
-  const negative = location.state.negativePrompt;
+  // const negative = location.state.negativePrompt;
 
   const countImg = location.state?.countImg || 1;
-  // const countImg = 4
+  // const countImg = 3;
 
-  const containerClass = 
+  const containerClass =
     countImg === 4 ? "four-images" : countImg === 5 ? "five-images" : "";
   // 출력 이미지가 4개인 경우와 5개인 경우의 개별 레이아웃 생성
 
@@ -60,27 +66,29 @@ const ResultImage = () => {
 
   // 이미지 선택 버튼
   const choiceImgBtn = () => {
-    if(imgClick.length > 0){
+    if (imgClick.length > 0) {
       console.log("이미지 선택 완료", imgClick);
       axios.post("/imgCreate/choiceImg", imgClick).then((response) => {
         if (response.data.choiceImg) {
           navi(`/image-edit/?img=${imgClick[0]}`, {
             state: {
               positivePrompt: positive,
-              negativePrompt : negative
+              // negativePrompt : negative
             },
           });
         }
       });
-    }
-    else{
-      alert('이미지를 선택해주세요.')
+    } else {
+      alert("이미지를 선택해주세요.");
     }
   };
 
   return (
     <div className={`result-body `}>
       <div className="result-containor">
+        <div>
+        <h4 > 편집하고 싶은 이미지를 선택하세요!</h4>
+        </div>
         <div className="input-area">
           <div className="keyword-area">
             {/* <div id="keywordbox"></div> */}
@@ -90,11 +98,12 @@ const ResultImage = () => {
           </div>
           {/* <div id="excptbox"></div> */}
         </div>
+        <ul className={`${containerClass}`}>{renderImageList()}</ul>
+        
       </div>
-      <ul className={`${containerClass}`}>{renderImageList()}</ul>
       <button className="choice-img same-BTN" onClick={choiceImgBtn}>
-        이미지 선택
-      </button>{" "}
+          이미지 선택
+        </button>{" "}
     </div>
   );
 };

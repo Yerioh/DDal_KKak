@@ -86,13 +86,13 @@
       cursor: pointer;
     }
     :hover svg {
-      color: #966fd6
+      color: #EBF05E
     }
     & svg:hover ~ svg {
       color: #C4C4C4;
     }
     .clo {
-      color: #966fd6;
+      color: #EBF05E;
     }
 }
 
