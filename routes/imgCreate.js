@@ -77,6 +77,7 @@ router.post("/saveImg", (req, res) => {
   let userId = req.body.userId; // 유저 아이디
   let positive = req.body.positive; // 사용된 긍정 프롬프트
   let negative = req.body.negative; // 사용된 부정 프롬프트
+  console.log("negative", negative);
   let img_info = req.body.img_info; // 이미지 고유한 url
 
   let insertQuery =

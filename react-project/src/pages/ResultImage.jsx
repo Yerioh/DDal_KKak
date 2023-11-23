@@ -22,7 +22,8 @@ const ResultImage = () => {
   const [imgClick, setImgClick] = useState([]);
   const positive = location.state.positivePrompt;
   // const positive = 'test,testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest'
-
+  // 부정프롬프트
+  const negative = location.state.negativePrompt;
 
   const countImg = location.state?.countImg || 1;
   // const countImg = 4
@@ -66,6 +67,7 @@ const ResultImage = () => {
           navi(`/image-edit/?img=${imgClick[0]}`, {
             state: {
               positivePrompt: positive,
+              negativePrompt : negative
             },
           });
         }
