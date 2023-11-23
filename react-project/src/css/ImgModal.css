@@ -66,12 +66,13 @@
   .like-box{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
+    justify-content: space-between;
+    gap: 20px;
   }
   .share-toggle-box{
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
  

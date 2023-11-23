@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import Switch from "@mui/material/Switch";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 
 const ShareImgModal = ({
@@ -19,15 +20,9 @@ const ShareImgModal = ({
             <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
               <div className="S-ImgPic">
                 <img
-                  //   ref={imgRef}
                   src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray.IMG_URL}`}
                   alt="Ex_image"
                 />
-                {/* <img
-                ref={imgRef}
-                src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`}
-                alt="Ex_image"
-              /> */}
               </div>
               <div className="image-info">
                 <div className="user-Prompt">

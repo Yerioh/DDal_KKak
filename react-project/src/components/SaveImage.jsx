@@ -212,12 +212,13 @@ const SaveImage = () => {
       </div>
 
       <div className="S-Ibox">
+        {/* imgArray */}
         {imgArray.map((image, index) => (
           <div
             className="SImage-Card me-4"
             key={index}
           >
-            {/* data-src 속성에 실제 이미지 URL을 지정 */}
+            {/* data-src 속성에 실제 이미지 URL을 지정 */}          
             <img
               className="img-thumb"
               data-src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image?.IMG_URL}`}

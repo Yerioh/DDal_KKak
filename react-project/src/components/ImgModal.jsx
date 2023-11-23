@@ -6,7 +6,7 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import Switch from "@mui/material/Switch";
 import { FaHeart } from "react-icons/fa6";
-
+import { FiDownload } from "react-icons/fi";
 // 회원탈퇴 모달, 이미지 상세정보 모달
 const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
@@ -19,7 +19,7 @@ const ImgModal = ({
 }) => {
   // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();
-  console.log("부정프롬프트와 인덱스",ImgArray[0].IMG_NE_PROMPT, index);
+  console.log("부정프롬프트와 인덱스", ImgArray[0].IMG_NE_PROMPT, index);
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
     domtoimage.toBlob(imgRef.current).then((blob) => {
@@ -39,70 +39,142 @@ const ImgModal = ({
   // 내 저장 이미지 모달 체크 변경
   const handleChange = () => {
     setChecked(!checked);
-    axios.post('/imgCreate/imgShare', {imgId : ImgArray[index].IMG_ID})
+    axios.post("/imgCreate/imgShare", { imgId: ImgArray[index].IMG_ID });
   };
 
   return (
     <div>
-      {isOpen ? (
-        <div className="modal-backdrop" onClick={openModalHandler}>
-          {/* 버블링 중지 함수 */}
-          <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
-            <div className="S-ImgPic">
-              <img
-                ref={imgRef}
-                src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`}
-                alt="Ex_image"
-              />
-            </div>
-
-            <div className="like-toggle-box">
-              <div className="like-box">
-                <FaHeart color="red" />
-                <span>100</span>
-              </div>
-              <div className="share-toggle-box">
-                <span>공유</span>
-                <Switch
-                  checked={checked}
-                  onClick={handleChange}
-                  inputProps={{ "aria-label": "controlled" }}
+      <div>
+        {isOpen ? (
+          <div className="modal-backdrop" onClick={openModalHandler}>
+            {/* 버블링 중지 함수 */}
+            <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
+              <div className="S-ImgPic">
+                <img
+                  ref={imgRef}
+                  src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`}
+                  alt="Ex_image"
                 />
               </div>
-            </div>
-
-            <div className="user-Prompt mt-4">
-              <h5>Positive Prompt</h5>
-              <span>{ImgArray[index].IMG_PROMPT}</span>
-              <h5>Negative Prompt </h5>
-              <span>{ImgArray[index].IMG_NE_PROMPT}</span>
-            </div>
-
-            <div className="Modal-Btn">
-              <Link to="#">
-                <button className="SM-btn">굿즈 선택</button>
-              </Link>
-              <button className="SM-btn" onClick={downLoadBtn}>
-                다운로드
-              </button>
-              <button className="SM-btn" onClick={delImg_Btn}>
-                삭제
-              </button>
-              <button
-                className="SM-btn"
-                onClick={() => {
-                  openModalHandler();
-                  handleCheckboxChange(index, false);
-                  updateCheckedImages();
-                }}
-              >
-                닫기
-              </button>
+              <div className="image-info">
+                <div className="user-Prompt">
+                  <h3>title</h3>
+                  <h5>Positive Prompt :</h5>
+                  <span>{ImgArray[index].IMG_PROMPT}</span>
+                  <span></span>
+                  <h5>Negative Prompt :</h5>
+                  <span>{ImgArray[index].IMG_NE_PROMPT}</span>
+                  <span></span>
+                </div>
+                <div className="like-toggle-box">
+                  <div className="like-box">
+                    <div className="like-btn">
+                      <FaHeart color="red" />
+                      <span>100</span>
+                      {/* <span>{likeCnt}</span> */}
+                    </div>
+                    <div className="share-toggle-box">
+                      <span>공유</span>
+                      <Switch
+                        checked={checked}
+                        onClick={handleChange}
+                        inputProps={{ "aria-label": "controlled" }}
+                      />
+                    </div>
+                  </div>
+                  <div className="Modal-Btn">
+                    <button className="SM-btn" onClick={downLoadBtn}>
+                      <FiDownload />
+                    </button>
+                    <button className="SM-btn" onClick={delImg_Btn}>
+                      삭제
+                    </button>
+                    <button
+                      className="SM-btn"
+                      onClick={() => {
+                        openModalHandler();
+                        handleCheckboxChange(index, false);
+                        updateCheckedImages();
+                      }}
+                    >
+                      닫기
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
+    // <div>
+    //   {isOpen ? (
+    //     <div className="modal-backdrop" onClick={openModalHandler}>
+    //       {/* 버블링 중지 함수 */}
+    //       <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
+    //         <div className="S-ImgPic">
+    //           <img
+    //             ref={imgRef}
+    //             src={`./images/${ImgArray[0]}.png`}
+    //             alt="Ex_image"
+    //           />
+    //           {/* <img
+    //             ref={imgRef}
+    //             src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray[index].IMG_URL}`}
+    //             alt="Ex_image"
+    //           /> */}
+    //         </div>
+
+    //         <div className="like-toggle-box">
+    //           <div className="like-box">
+    //             <FaHeart color="red" />
+    //             <span>100</span>
+    //           </div>
+    //           <div className="share-toggle-box">
+    //             <span>공유</span>
+    //             <Switch
+    //               checked={checked}
+    //               onClick={handleChange}
+    //               inputProps={{ "aria-label": "controlled" }}
+    //             />
+    //           </div>
+    //         </div>
+
+    //         <div className="user-Prompt mt-4">
+    //           <h5>Positive Prompt</h5>
+    //           <span>{ImgArray[index].IMG_PROMPT}</span>
+    //           <h5>Negative Prompt </h5>
+    //           <span>{ImgArray[index].IMG_NE_PROMPT}</span>
+    //         </div>
+
+    //         <div className="Modal-Btn">
+    //           <Link to="#">
+    //             <button className="SM-btn">굿즈 선택</button>
+    //           </Link>
+    //           <button className="SM-btn">
+    //             다운로드
+    //           </button>
+    //           {/* <button className="SM-btn" onClick={downLoadBtn}>
+    //             다운로드
+    //           </button> */}
+    //           <button className="SM-btn" onClick={delImg_Btn}>
+    //             삭제
+    //           </button>
+    //           <button
+    //             className="SM-btn"
+    //             onClick={() => {
+    //               openModalHandler();
+    //               handleCheckboxChange(index, false);
+    //               updateCheckedImages();
+    //             }}
+    //           >
+    //             닫기
+    //           </button>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   ) : null}
+    // </div>
   );
 };
 export default ImgModal;
