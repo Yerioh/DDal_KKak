@@ -62,17 +62,27 @@ const GoodsDetail = () => {
     //  해당제품의 가격 데이터 
     let [price, setPrice] = useState(0)
 
+  // 23-11-23 오전 09:40 박지훈 수정
   // 데이터베이스에서 PROD_ID로 상품 데이터 가져오기
   useEffect(()=>{
     axios.post('/page/goodProduct', {prodId : prd_id})
       .then(res=>{
         let data = res.data
+        // 굿즈 데이터(이름, 가격 등)
         setPrd_info_filter(data.prdInfo)
+        // 굿즈 색상 데이터    
         setPrd_color_filter(data.prdColor)
+        // 굿즈 사이즈 데이터
         setPrd_size_filter(data.prdSize)
+        // 굿즈 전체(모든색상) 이미지 URL
         setPrd_goods_img(data.prdImg)
+        // 굿즈 색상별로 필터링된 URL
         setGoodsImgFilter(data.prdImg)
+        // 굿즈 가격
         setPrice(data.prdInfo[0].PROD_PRICE)
+        // 굿즈 수량 증가에 따른 가격 증가
+        setSum(data.prdInfo[0].PROD_PRICE)
+        // 굿즈 데이터 로딩 여부
         setIsLoading(true)
       })
   },[])
@@ -84,7 +94,7 @@ const GoodsDetail = () => {
    if (typeof getImgDataRef.current === "function") {
      const fnOptionsIfNeededFoundInDocs = {};
      const imageData = getImgDataRef.current(fnOptionsIfNeededFoundInDocs);
-     console.log(imageData);
+     console.log('이미지데이터',imageData);
    }
  };
 
@@ -112,11 +122,7 @@ const GoodsDetail = () => {
     if (count > 1) {
       setCount(count - 1)
     }
-    // else {
-    //   setCount(1)
-    // }
   }
-
 
   // 수량 플러스 버튼 간단함수
   const addtion = () => {
@@ -186,11 +192,11 @@ const GoodsDetail = () => {
   return (
     <div style={{ minWidth: "710px", margin: "5% 10% ", display: 'flex', flexDirection:'column' }}>
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
-      {!isLoading ? (<h1>데이터 로딩중</h1>) : (
+      {!isLoading ? (<h1>굿즈 로딩중</h1>) : (
         <>
         {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
       <div style={{ backgroundColor: "green", width: "65%"}}>
-      <GoodsEdit imgData={goodsImgFilter[1].PROD_IMG} getImgDataRef={getImgDataRef} getImgData={getImgData}/></div>
+      <GoodsEdit imgData={goodsImgFilter[0].PROD_IMG} getImgDataRef={getImgDataRef} getImgData={getImgData}/></div>
       <div style={{ backgroundColor: "white", width: "35%", margin: "50px 0px 0px 0px", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
         <h3 className="GoodsDetail-title" style={{ margin: "10px 5px" }}>{prd_info_filter[0].PROD_NAME}</h3>

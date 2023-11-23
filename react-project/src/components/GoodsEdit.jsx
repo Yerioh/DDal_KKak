@@ -1,21 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilerobotImageEditor, {
   TABS,
   TOOLS,
 } from "react-filerobot-image-editor";
+import axios from '../axios'
+import { useSelector } from "react-redux";
 
 const GoodsEdit = ({imgData, getImgDataRef}) => {
+  // 23-11-23 오전 10:35 박지훈 작성(생성한 이미지 굿즈페이지에서 불러오기)
+  // 사용자 아이디
+  const useId = useSelector((state) => state.session.id);
+
   // 상품의 편집된 이미지를 나타내는 state
   const [isImgEditorShown, setIsImgEditorShown] = useState(true);
 
-  // 이미지 에디터에 내 저장 이미지 가져오기
-  const gallery = {};
+  // 내 저장 이미지 데이터 배열
+  const [myGallery, setMyGallery] = useState(null)
 
- 
+  // 이미지 에디터에 내 저장 이미지 가져오기
+  useEffect(()=>{
+    axios.post('/imgCreate/myimg', {id : useId})
+      .then(res=>{
+        let gallery = res.data.imgArray
+        console.log('갤라리', gallery)
+        // 굿즈 편집에 사용할 내 저장 이미지 url 생성        
+        const newGallery = gallery.map((data)=>{
+          return {
+            originalUrl: `${process.env.REACT_APP_AWS_BUCKET_URL}/${data.IMG_URL}`,
+            previewUrl:`${process.env.REACT_APP_AWS_BUCKET_URL}/${data.IMG_URL}`
+          }
+        });
+        setMyGallery(newGallery)
+      })
+  },[])
+  
+
 
   // 이미지 에디터 폰트 객체
   const fontAnnotationsConfig = {
-    text: "예시용 글입니다.",
+    text: "문구를 입력해주세요.",
     fontFamily: "Arial",
     // 폰트 추가 장소입니다. { laebl: '제목', value: '가져온 font이름'},
     fonts: [
@@ -96,20 +119,7 @@ const GoodsEdit = ({imgData, getImgDataRef}) => {
           Image={{
             disableUpload: true,
             // db에서 이미지 정보 가져오면 gallery 변수 활용
-            gallery: [
-              {
-                originalUrl:
-                  "https://assets.scaleflex.com/Marketing/Logos/Scaleflex+Logos/PNG/SCALEFLEX+LOGO+-+Color+Dark+text.png?vh=45cac1",
-                previewUrl:
-                  "https://assets.scaleflex.com/Marketing/Logos/Scaleflex+Logos/PNG/SCALEFLEX+LOGO+-+Color+Dark+text.png?vh=45cac1",
-              },
-              {
-                originalUrl:
-                  "https://assets.scaleflex.com/Marketing/Logos/Filerobot+Logos/Logo+with+Scaleflex/LOGOTYPE+WITH+SCALEFLEX-01-01.png?vh=76c5a7",
-                previewUrl:
-                  "https://assets.scaleflex.com/Marketing/Logos/Filerobot+Logos/Logo+with+Scaleflex/LOGOTYPE+WITH+SCALEFLEX-01-01.png?vh=76c5a7",
-              },
-            ],
+            gallery: myGallery,
           }}
           // 번역
           translations={translations}
