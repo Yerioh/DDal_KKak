@@ -202,12 +202,12 @@ const GoodsDetail = () => {
         <>
         {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
         <div style={{ backgroundColor: "green", width: "65%", position:"relative"}}>
-        {/* 상품 카테고리가 clothes일 때만 출력 */}
+        {/* 상품 카테고리가 clothes일 때만 출력 앞 뒤 토글 버튼 */}
         {prd_info_filter[0].PROD_CATEGORY==='clothes' ?  
          <div className={`clothes-toggle clothes-${isFront}`}>
           <button className="toggle-btn" onClick={clothesToggle}>{isFront==='front'?'앞':'뒤'}</button>
         </div> : null}
-        <GoodsEdit imgData={goodsImgFilter[0].PROD_IMG} getImgDataRef={getImgDataRef} isFront={isFront} setIsFront={setIsFront}/>
+        <GoodsEdit imgData={goodsImgFilter[prd_info_filter[0].PROD_CATEGORY==='clothes' ? isFront==='front'? 1 : 0 : 0].PROD_IMG} getImgDataRef={getImgDataRef} isFront={isFront} setIsFront={setIsFront}/>
       </div>
       <div style={{ backgroundColor: "white", width: "35%", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
