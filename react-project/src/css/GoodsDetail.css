@@ -100,3 +100,29 @@
 #root > div > div > div:nth-child(2) > div.GoodsDetail > div:nth-child(1) > div > div > div.sc-21g986-0.eYjqr.FIE_topbar > div.sc-21g986-5.bUKiDG.FIE_topbar-buttons-wrapper > div.sc-m9ezm7-0.iFLsae.FIE_topbar-save-wrapper > button{
     display: none;
 }
+.clothes-toggle{
+    width: 100px;
+    height: 30px;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 15px;
+    position: absolute;
+    top: 10px;
+    right: 5%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+.clothes-front{
+    justify-content: baseline;
+}
+.clothes-back{
+    justify-content: end;
+}
+.clothes-toggle>.toggle-btn{
+    width: 60px;
+    height: 28px;
+    border: none;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}

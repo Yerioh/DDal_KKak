@@ -61,6 +61,8 @@ const GoodsDetail = () => {
   const [isLoading , setIsLoading] = useState(false)
     //  해당제품의 가격 데이터 
     let [price, setPrice] = useState(0)
+     /** 의류 앞뒤 확인 위한 state */
+  const [isFront, setIsFront] = useState('front')
 
   // 23-11-23 오전 09:40 박지훈 수정
   // 데이터베이스에서 PROD_ID로 상품 데이터 가져오기
@@ -97,6 +99,10 @@ const GoodsDetail = () => {
      console.log('이미지데이터',imageData);
    }
  };
+  /** 의류 앞뒤 토글 함수 */
+  const clothesToggle = ()=>{
+    isFront==='front'? setIsFront('back') : setIsFront('front')
+  }
 
   //제품수량 감소 함수
   // const prd_info_filter = prd_info.filter(item => item.PROD_ID === prd_id)
@@ -108,7 +114,7 @@ const GoodsDetail = () => {
   console.log(prd_color_filter, "필터링 컬러 정보")
   console.log(prd_size_filter, "필터링 사이즈 정보")
   console.log(radioValue, "라디오스테이트")
-  
+  console.log(prd_goods_img,"색상 이미지")
 
 
 
@@ -195,9 +201,15 @@ const GoodsDetail = () => {
       {!isLoading ? (<h1>굿즈 로딩중</h1>) : (
         <>
         {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
-      <div style={{ backgroundColor: "green", width: "65%"}}>
-      <GoodsEdit imgData={goodsImgFilter[0].PROD_IMG} getImgDataRef={getImgDataRef} getImgData={getImgData}/></div>
-      <div style={{ backgroundColor: "white", width: "35%", margin: "50px 0px 0px 0px", padding: "0px 20px" }}>
+        <div style={{ backgroundColor: "green", width: "65%", position:"relative"}}>
+        {/* 상품 카테고리가 clothes일 때만 출력 */}
+        {prd_info_filter[0].PROD_CATEGORY==='clothes' ?  
+         <div className={`clothes-toggle clothes-${isFront}`}>
+          <button className="toggle-btn" onClick={clothesToggle}>{isFront==='front'?'앞':'뒤'}</button>
+        </div> : null}
+        <GoodsEdit imgData={goodsImgFilter[0].PROD_IMG} getImgDataRef={getImgDataRef} isFront={isFront} setIsFront={setIsFront}/>
+      </div>
+      <div style={{ backgroundColor: "white", width: "35%", padding: "0px 20px" }}>
 {/* 상품명은 DB 에서 연동하여 가져옴 - 품목번호기준 */}
         <h3 className="GoodsDetail-title" style={{ margin: "10px 5px" }}>{prd_info_filter[0].PROD_NAME}</h3>
         <br />
