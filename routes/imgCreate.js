@@ -25,7 +25,7 @@ let conn = db.init();
 //   res.status(200).json(response_data);
 // });
 
-let flaskServer = 'http://9dae-34-143-189-44.ngrok.io'
+let flaskServer = 'https://7e5e-34-126-114-33.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달
@@ -77,6 +77,7 @@ router.post("/saveImg", (req, res) => {
   let userId = req.body.userId; // 유저 아이디
   let positive = req.body.positive; // 사용된 긍정 프롬프트
   let negative = req.body.negative; // 사용된 부정 프롬프트
+  console.log("negative", negative);
   let img_info = req.body.img_info; // 이미지 고유한 url
 
   let insertQuery =
