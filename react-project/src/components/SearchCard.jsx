@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import ShareImgModal from "./ShareImgModal";
-
+import "../css/ImageAll.css"
 const SearchCard = ({ num, index }) => {
   const [likeBtn, setLikeBtn] = useState(false); //좋아요 활성화
   const [shareModal, setShareModal] = useState(false); // 이미지 상세 모달
