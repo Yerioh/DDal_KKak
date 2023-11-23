@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../css/ImageAll.css";
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
 import SearchCard from "../components/SearchCard";
+import axios from "../axios";
 
 const ImageAll = () => {
-  // 이미지 카드
-  const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1];
+  // 공유 이미지 데이터
+  const [imgCard, setImgCard] = useState(null)
+
+  // 공유 이미지 데이터 가져오기
+  useEffect(()=>{
+    axios.post('/imgCreate/shareImgShow')
+      .then((res)=>{
+        let data = res.data.result
+        setImgCard(data)
+      })
+  },[])
+
+
   // 좋아요 기능 
   return (
     <div className="All-Container">
@@ -22,8 +34,8 @@ const ImageAll = () => {
           </div>
         </Row>
         <div className="search-Card">
-          {number.map((num, index) => (
-            <SearchCard num={num} index={index} />
+          {imgCard?.map((data, index) => (
+            <SearchCard data={data} index={index}/>
           ))}
         </div>
       </Container>

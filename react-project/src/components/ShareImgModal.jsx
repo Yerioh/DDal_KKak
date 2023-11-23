@@ -7,22 +7,21 @@ const ShareImgModal = ({
   likeBtn, //이미지 좋아요 상태
   handleShareImg, //이미지 상세 모달 제어 함수
   handleLike, // 이미지 상세 모달 함수
-  ImgArray, // 이미지 배열
-  
-  index,
+  ImgArray, // 이미지 배열  
+  likeCnt,
 }) => {
   const imgRef = useRef();
   return (
     <div>
       <div>
         {shareModal ? (
-          <div className="modal-backdrop" onClick={handleLike}>
+          <div className="modal-backdrop">
             {/* 버블링 중지 함수 */}
             <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
               <div className="S-ImgPic">
                 <img
                   //   ref={imgRef}
-                  src={`./images/${ImgArray}.png`}
+                  src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${ImgArray.IMG_URL}`}
                   alt="Ex_image"
                 />
                 {/* <img
@@ -37,12 +36,12 @@ const ShareImgModal = ({
                   {likeBtn ? (
                     <div className="like-btn">
                       <FaHeart color="red" onClick={handleLike} />
-                      <span>100</span>
+                      <span>{likeCnt}</span>
                     </div>
                   ) : (
                     <div className="like-btn">
                       <FaRegHeart onClick={handleLike} />
-                      <span>100</span>
+                      <span>{likeCnt}</span>
                     </div>
                   )}
                 </div>
@@ -50,9 +49,9 @@ const ShareImgModal = ({
 
               <div className="user-Prompt mt-4">
                 <h5>Positive Prompt</h5>
-                {/* <span>{ImgArray[index].IMG_PROMPT}</span> */}
+                <span>{ImgArray.IMG_PROMPT}</span>
                 <h5>Negative Prompt </h5>
-                {/* <span>{ImgArray[index].IMG_NE_PROMPT}</span> */}
+                <span>{ImgArray.IMG_NE_PROMPT}</span>
               </div>
 
               <div className="Modal-Btn">

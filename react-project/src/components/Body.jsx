@@ -13,7 +13,9 @@ import Goodslist from "./Goodslist";
 import GoodsDetail from "../pages/GoodsDetail";
 import Basket from "../pages/Basket";
 import Main from "../pages/Main";
-import ImageAll from "../pages/ImageAll"
+import ImageAll from "../pages/ImageAll";
+import BuyScript from "../pages/BuyScript";
+import Complete from "../pages/Complete";
 
 const Body = () => {
   // // 23-11-21 09:55 임휘훈 작성 Private Route
@@ -66,6 +68,10 @@ const Body = () => {
         <Route path="/goodsdetail/:PROD_ID" element={<GoodsDetail/>}/>
         {/* 장바구니 */}
         <Route path="/basket" element={<Basket/>}/>
+        {/* 주문서작성 */}
+        <Route path="/buyscript" element={<BuyScript/>}/>
+        {/* 주문완료 */}
+        <Route path='/complete' element={<Complete/>}/>
         </Routes>
       <Footer />
     </div>

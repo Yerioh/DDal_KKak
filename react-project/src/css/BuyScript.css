@@ -1,0 +1,149 @@
+.buyscript{
+    margin : 20px auto 0px auto ;
+    width: 80%;
+}
+/* 장바구니 페이지 맨 위에 큰 장바구니 텍스트 */
+.buyscript .buyscript-top-text .title{
+    font-size: 40px;
+    font-weight: bold;
+}
+/* 가장 윗칸 보조제목 */
+.buyscript .buyscript-top-text .subtitle{
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+}
+/* 구매페이지 상품정보 박스 */
+.buyscript .buy-goods-list {
+    display:flex;
+    text-align:center;
+    border-top:1px solid #1a1a1a;
+    border-bottom:1px solid lightgray;
+    background-color: whitesmoke;
+    margin: 20px 0px;
+}
+.buyscript .buy-goods-list .vtline{
+    border-right: 1px solid lightgray;
+    margin: 5px 0px;
+}
+/* 상품정보박스 첫번째 박스 */
+.buyscript .buy-goods-list .first-list-box{
+    width:20%;
+    margin:4px 0px;
+    font-size:20px;
+    display:flex;
+}
+.buyscript .buy-goods-list .first-list-box .inner-check-box{
+    height:100%;
+    width:20%;
+    display: grid; 
+    place-items: center;
+}
+.buyscript .buy-goods-list .first-list-box .inner-info-box{
+    width:80%;
+    height:100%;
+    display: grid;
+    place-items: center;
+}
+/* 장바구니 페이지 두번쨰줄 텍스트 */
+/* 두번째 상품정보 div */
+.buyscript .buy-goods-list .second-box{
+    width: 50%;
+    margin: 5px 0px;
+    font-size: 20px;
+    display: flex;
+}
+/* 두번째 상품정보 div 안의 상품이미지 */
+.buyscript .buy-goods-list .second-box .img-box{
+    height: 200px;
+    width: 150px;
+    object-fit: cover;
+    margin: 5px;
+}
+/* 두번째 상품정보 div 안의 오른쪽 div */
+.buyscript .buy-goods-list .second-box .txt-info{
+    width: 60%;
+    display: grid;
+    place-items: center;   
+}
+/* 세번쨰 상품정보 div */
+.buyscript .buy-goods-list .count-box{
+    width: 20%;
+    margin: 5px 0px;
+    font-size: 20px;   
+}
+/* 네번째 칸 상품당 가격정보 */
+.buyscript .buy-goods-list .summary-price{
+    width: 20%;
+    margin: 5px 0px;
+    font-size: 20px;
+    display: grid;
+    place-items: center;
+}
+
+/* 주문자 정보 */
+.buyscript .buyscript-input-area{
+    margin: 50px 0px 0px 0px;
+}
+.buyscript .buyscript-input-area .title{
+    font-size: 30px;
+    font-weight: bold;
+}
+/* 주문자 정보 이름/연락처/이메일 */
+.buyscript .buyscript-input-area .subtitle{
+    width: 10%;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: grid;
+    place-items: center;
+   
+}
+/* 주문서 작성 텍스트 입력창 */
+.buyscript .buyscript-input-area .input-place{
+    width: 100%;
+    height: 100%;
+    border:none;
+    border-bottom: 1px solid lightgray;
+}
+/* 텍스트 입력창 감싸는 div */
+.buyscript .buyscript-input-area .input-txt-box{
+    width:85%;
+    height: 100%;
+    margin-left: 5px;
+}
+/* 결제하기 버튼 감싸는 div */
+.buyscript .buy-submit-div{
+    width: 100%;
+    display: gird;
+    text-align: center;
+    place-items: center;
+}
+/* 결제하기 버튼 */
+.buyscript .buy-submit-div .buy-submit-btn{
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    background-color: #0028ac;
+    width: 30%;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+/*  */
+.buyscript .buyscript-goods-title{
+    display: flex;
+    text-align: center;
+    height: 60px;
+    margin: 10px 0px;
+}
+.buyscript .buyscript-goods-title .inner-items{
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+}
