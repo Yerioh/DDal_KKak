@@ -6,7 +6,7 @@ import SearchCard from "../components/SearchCard";
 const ImageAll = () => {
   // 이미지 카드
   const number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1];
-
+  // 좋아요 기능 
   return (
     <div className="All-Container">
       <Container className="Card-box">

@@ -29,11 +29,40 @@
     justify-content: center;
     height: 60%;
   }
+  /* 좋아요 수, 공유 토글 */
 
+  .like-toggle-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    
+    
+  }
+  .like-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .share-toggle-box{
+    display: flex;
+    align-items: center;
+  }
+
+ 
   /* 유저 프롬프트부분 css */
   .user-Prompt{
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(200, 200, 200);
+    border-bottom: 1px solid rgb(200, 200, 200);
+    padding : 2% 0px;
+  }
+  .user-Prompt > h5{
+    font-weight: bold;
   }
   
   /* 모달 버튼 CSS */
@@ -136,6 +165,7 @@
   .Modal-Btn{
     display: flex;
     flex-wrap: wrap;
+    padding-top: 2%;
     gap: 8px;
   }
  .SM-text{
@@ -146,4 +176,3 @@
  
   }
 
-  

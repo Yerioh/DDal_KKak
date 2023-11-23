@@ -113,7 +113,7 @@ const Main = () => {
           <div className="image-Slide-btn">
             <span className="Main-Slide-text">디자인 이미지</span>
             <Link to="/imageall">
-              <button className="moreShow same-BTN">더보기</button>
+              <button className="moreShow same-BTN">이미지 더보기</button>
             </Link>
           </div>
 
