@@ -131,8 +131,6 @@ router.post("/deleteImg", async(req, res) => {
   const response = await client.send(command)
   console.log('s3 삭제 완료 : ', response)
 
-
-
   // 삭제 쿼리
   let deleteQuery = `DELETE FROM TB_GEN_IMG WHERE IMG_URL IN (${sqlImgUrl})`;
   // 선택 쿼리
@@ -155,5 +153,21 @@ router.post("/deleteImg", async(req, res) => {
     }
   });
 });
+
+// 내 저장 이미지 공유 여부 설정 라우터
+router.post('/imgShare', (req,res)=>{
+  let imgId = req.body.imgId
+  let sql = `UPDATE TB_GEN_IMG SET IMG_SHARE = CASE WHEN IMG_SHARE = 'Y' THEN 'N' WHEN IMG_SHARE = 'N' THEN 'Y' ELSE IMG_SHARE END WHERE IMG_ID = ?`
+  conn.connect()
+  conn.query(sql,[imgId], (err,result)=>{
+    if(err){
+      console.log('공유 여부 변경 쿼리문 에러', err)
+    }
+    else{
+      // console.log('공유여부 변경 성공')
+    }
+  })
+})
+
 
 module.exports = router;

@@ -39,6 +39,7 @@ const ImgModal = ({
   // 내 저장 이미지 모달 체크 변경
   const handleChange = () => {
     setChecked(!checked);
+    axios.post('/imgCreate/imgShare', {imgId : ImgArray[index].IMG_ID})
   };
 
   return (
