@@ -19,7 +19,7 @@ const ImgModal = ({
 }) => {
   // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();
-
+  console.log("부정프롬프트와 인덱스",ImgArray[0].IMG_NE_PROMPT, index);
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
     domtoimage.toBlob(imgRef.current).then((blob) => {

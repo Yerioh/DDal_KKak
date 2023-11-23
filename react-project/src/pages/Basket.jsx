@@ -9,6 +9,84 @@ const Basket = () => {
 
     // 세션스토리지에 있던 데이터를 불러와 저장할 State 
     const [cartItem, setCartItem] = useState([]);
+    const [selectedItem, setSelectItem] = useState({});
+    const [sum, setSum] = useState(0)
+
+    // 세션스토리지에서 장바구니 데이터 불러오기
+    useEffect(() => {
+        // 세션 스토리지에서 아이템 로드
+        const storedCartItems = sessionStorage.getItem('cartItem');
+        if (storedCartItems) {
+            const loadedCartItems = JSON.parse(storedCartItems);
+            setCartItem(loadedCartItems);
+        }
+    }, []);
+
+    useEffect(() => {
+        // 선택된 아이템들의 총 금액 계산
+        calculateTotal();
+        console.log(sum, '총합계')
+    }, [selectedItem, cartItem]);
+
+    // 개별 아이템 선택 처리
+    const handleItemCheck = (id, isChecked) => {
+        // setSelectItem(prev => ({ ...prev, [id]: isChecked }));
+        setSelectItem(prev => ({ ...prev, [id]: isChecked }));
+        updateBuyItems(id, isChecked);
+    };
+
+    const handleDeleteItem = () => {
+
+    }
+
+
+    // 전체 선택 처리
+    const handleSelectAll = () => {
+        const newSelectedItems = {};
+        if (!isAllChecked()) {
+            cartItem.forEach(item => {
+                newSelectedItems[item.id] = true;
+            });
+        }
+        // setSelectItem(newSelectedItems);
+
+        // let selectAll = !isAllChecked();
+
+        // cartItem.forEach(item => {
+        //     newSelected[item.id] = selectAll;
+        //     updateBuyItems(item.id, selectAll);
+        //     setSelectItem(newSelected);
+        // });
+        //전체 선택 상태 확인
+    }
+
+    const isAllChecked = () => {
+        return cartItem.every(item => selectedItem[item.id]);
+    };
+    const calculateTotal = () => {
+        let total = 0;
+        cartItem.forEach(item => {
+            if (selectedItem[item.id]) {
+                total += parseInt(item.PRICE_SUM); // 가정: 각 아이템 객체에 'price' 속성이 있다고 가정합니다.
+            }
+        });
+        setSum(total);
+    };
+
+
+    //체크박스 선택시 butItems 에 세션을 넣기위함
+    const updateBuyItems = (PROD_UUID, isChecked) => {
+        let buyItems = JSON.parse(sessionStorage.getItem('buyItem')) || [];
+        if (isChecked) {
+            // 선택된 경우, buyItem에 추가
+            const selectedItem = cartItem.find(item => item.PROD_UUID === PROD_UUID);
+            buyItems = [...buyItems, selectedItem];
+        } else {
+            // 선택 해제된 경우, buyItem에서 제거
+            buyItems = buyItems.filter(item => item.PROD_UUID !== PROD_UUID);
+        }
+        sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+    };
 
     /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
     useEffect(() => {
@@ -20,8 +98,9 @@ const Basket = () => {
     }, [])
 
 
+
     return (
-        <div style={{ margin: "0% 10%", minWidth: "780px" }}>
+        <div style={{ margin: "0% 20%", minWidth: "780px" }}>
             <div className='basket-top-text'>
                 <div className="title">
                     장바구니
@@ -34,40 +113,45 @@ const Basket = () => {
                     <p style={{ color: "#bebebe" }}>주문완료</p>
                 </div>
             </div>
-{/* 장바구니의 전체선택님 하나하나 선택되는 기능 구현 예정 */}
+            {/* 장바구니의 전체선택님 하나하나 선택되는 기능 구현 예정 */}
             <div className='basket-all-check' >
                 <div className='inner-box'>
-                    <input className='basket-top-check' type="checkbox" />
+                    <input className='basket-top-check' type="checkbox"
+                        checked={isAllChecked()}
+                        onChange={handleSelectAll} />
                     <p className='basket-top-check' >전체선택</p>
-                    <div style={{ borderLeft: "1px solid lightgray", margin: "0px 10px" }}>
-                        <p className='basket-top-check'>선택삭제</p>
-                    </div>
+                    <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={handleDeleteItem()}>
+                        <div style={{ borderLeft: "1px solid lightgray", margin: "0px 10px" }}>
+                            <p className='basket-top-check'>선택삭제</p>
+                        </div>
+                    </button>
                 </div>
             </div>
             <div style={{ padding: "10px 0px" }}>
                 <div className='basket-goods-title'>
-                    <div className='inner-times' style={{ width: "20%" }}>
+                    <div className='inner-items' style={{ width: "20%" }}>
                         일자
-                        <br />
-                        상품번호
                     </div>
-                    <div className='inner-times' style={{ width: "50%" }}>
+                    <div className='inner-items' style={{ width: "50%" }}>
                         상품정보
                     </div>
-                    <div className='inner-times' style={{ width: "20%" }}>
+                    <div className='inner-items' style={{ width: "20%" }}>
                         사이즈
                         <br />
                         수량
                     </div>
-                    <div className='inner-times' style={{ width: "20%" }}>
+                    <div className='inner-items' style={{ width: "20%" }}>
                         금액
                     </div>
                 </div>
-{/* 세션에 들어있는 장바구니에 들어가 있는 제품들의 정보를 컴포넌트를 통해 map 으로 뿌려줌 */}
+                {/* 세션에 들어있는 장바구니에 들어가 있는 제품들의 정보를 컴포넌트를 통해 map 으로 뿌려줌 */}
                 {cartItem.map((item) => {
-                    console.log(item, "mapTEST")
                     return (
-                        <BasketItem items={item} />
+                        <BasketItem
+                            key={item.id}
+                            items={item}
+                            isChecked={selectedItem[item.PROD_UUID] || false}
+                            onCheck={handleItemCheck} />
                     );
                 })}
 
@@ -80,12 +164,11 @@ const Basket = () => {
                     <div style={{ width: "20%" }}>총 결제 금액</div>
                 </div>
                 <div style={{ display: "flex", textAlign: "center", borderTop: "1px solid lightgray", borderBottom: "1px solid lightgray" }}>
-                    <div style={{ width: "70%" }}>0원</div>
+                    <div style={{ width: "70%" }}>{sum}원</div>
                     <div className='vtline' ></div>
                     <div style={{ width: "20%" }}>0원</div>
                     <div className='vtline' ></div>
-                    <div style={{ width: "20%" }}>{"10000".toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")+"원"}</div>
-                    {/*10000 총 결제 금액 유동적으로 바꿔야함 */}
+                    <div style={{ width: "20%" }}>10000원</div>
                 </div>
             </div>
 

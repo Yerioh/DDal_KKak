@@ -67,6 +67,9 @@
     display: grid; 
     place-items: center;
 }
+.basket-goods-list .first-list-box .inner-check-box input[type=checkbox]{
+    display: block;
+}
 /* 상품정보 div 의 왼쪽에서 첫번쨰 박스의 일자/상품번호 div */
 .basket-goods-list .first-list-box .inner-info-box{
     width:80%;

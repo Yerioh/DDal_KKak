@@ -73,6 +73,9 @@ const CreateImage = () => {
           setBtnHidden("")
         });
     }
+    else{
+      alert("생성 단어를 입력해주세요.")
+    }
   };
 
   //23-11-16 오전 9:36 나범수 navigate 추가 -> 페이지 개수 전달 위함.
