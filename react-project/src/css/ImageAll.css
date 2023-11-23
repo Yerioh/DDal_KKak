@@ -32,3 +32,15 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px;
    cursor: pointer;
 }
+
+/* 좋아요 배치 css */
+.like-btn{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* 닉네임 */
+  .Card-body{
+    text-align: right;
+  }

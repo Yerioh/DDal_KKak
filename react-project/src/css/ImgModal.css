@@ -32,6 +32,7 @@
   /* 좋아요 수, 공유 토글 */
 
   .like-toggle-box{
+    padding-top: 2%;
     width: 100%;
     display: flex;
     justify-content: center;
