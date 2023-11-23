@@ -169,5 +169,80 @@ router.post('/imgShare', (req,res)=>{
   })
 })
 
+// 이미지 더보기 페이지 이미지 출력
+router.post('/shareImgShow', (req,res)=>{
+  let sql = 'SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, B.MEMBER_NAME ,(SELECT COUNT(*) CNT FROM TB_LIKE WHERE IMG_ID= A.IMG_ID) AS CNT FROM TB_GEN_IMG A INNER JOIN TB_MEMBER B ON(A.MEMBER_ID = B.MEMBER_ID) WHERE IMG_SHARE = "Y"'
+  conn.connect()
+  conn.query(sql, (err,result)=>{
+    if(err){
+      console.log('이미지 불러오기 쿼리문 에러', err)
+    }
+    else{
+      res.json({result})
+    }
+  })
+})
+
+// 이미지 좋아요 클릭, 클릭 해제 라우터
+router.post('/likeClick', (req,res)=>{
+  let userId = req.body.id
+  let imgId = req.body.imgId
+  let sqlSelect = 'SELECT COUNT(*) AS CNT FROM TB_LIKE WHERE MEMBER_ID =? AND IMG_ID = ?'
+  let sqlInsert = 'INSERT INTO TB_LIKE (MEMBER_ID, IMG_ID) VALUES(?,?)'
+  let sqlDelete = 'DELETE FROM TB_LIKE WHERE MEMBER_ID = ? AND IMG_ID = ?'
+  conn.connect()
+  conn.query(sqlSelect, [userId, imgId], (err,result)=>{
+    if(err){
+      console.log('이미지 좋아요 쿼리 에러')
+    }
+    else{
+      let data = result[0].CNT
+      if(data === 0){
+        conn.query(sqlInsert, [userId, imgId], (err,result)=>{
+          if(err){
+            console.log('좋아요 DB 데이터 INSERT 에러')
+          }
+          else{
+            console.log('좋아요 등록 성공')
+          }
+        })
+      }
+      else{
+        conn.query(sqlDelete, [userId, imgId],(err,result)=>{
+          if(err){
+            console.log('좋아요 DB 데이터 DELETE 에러')
+          }
+          else{
+            console.log('좋아요 삭제 성공')
+          }
+        })
+      }
+
+    }
+  })  
+})
+
+// 이미지 좋아요 클릭 여부 확인 라우터
+router.post('/likeCheck', (req,res)=>{
+  let userId = req.body.id
+  let imgId = req.body.imgId
+  let sqlSelect = 'SELECT COUNT(*) AS CNT FROM TB_LIKE WHERE MEMBER_ID =? AND IMG_ID = ?'
+  conn.connect()
+  conn.query(sqlSelect, [userId, imgId], (err,result)=>{
+    if(err){
+      console.log('좋아요 체크 유무 쿼리문 에러')
+    }
+    else{
+      let data = result[0].CNT
+      // 좋아요 체크 되있으면 true 값 반환
+      if(data > 0){        
+        res.json(true)
+      }
+      else{
+        res.json(false)
+      }
+    }
+  })
+})
 
 module.exports = router;
