@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Switch from "@mui/material/Switch";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 
 const ShareImgModal = ({
@@ -15,7 +14,7 @@ const ShareImgModal = ({
     <div>
       <div>
         {shareModal ? (
-          <div className="modal-backdrop">
+          <div className="modal-backdrop" onClick={handleShareImg}>
             {/* 버블링 중지 함수 */}
             <div className="S-ImgInfo" onClick={(e) => e.stopPropagation()}>
               <div className="S-ImgPic">
@@ -30,39 +29,41 @@ const ShareImgModal = ({
                 alt="Ex_image"
               /> */}
               </div>
-
-              <div className="like-toggle-box">
-                <div className="like-box">
-                  {likeBtn ? (
-                    <div className="like-btn">
-                      <FaHeart color="red" onClick={handleLike} />
-                      <span>{likeCnt}</span>
-                    </div>
-                  ) : (
-                    <div className="like-btn">
-                      <FaRegHeart onClick={handleLike} />
-                      <span>{likeCnt}</span>
-                    </div>
-                  )}
+              <div className="image-info">
+                <div className="user-Prompt">
+                  <h3>title</h3>
+                  <h5>Positive Prompt :</h5>
+                  <span>{ImgArray.IMG_PROMPT}</span>
+                  <span></span>
+                  <h5>Negative Prompt :</h5>
+                  <span>{ImgArray.IMG_NE_PROMPT}</span>
+                  <span></span>
                 </div>
-              </div>
-
-              <div className="user-Prompt mt-4">
-                <h5>Positive Prompt</h5>
-                <span>{ImgArray.IMG_PROMPT}</span>
-                <h5>Negative Prompt </h5>
-                <span>{ImgArray.IMG_NE_PROMPT}</span>
-              </div>
-
-              <div className="Modal-Btn">
-                <button
-                  className="SM-btn"
-                  onClick={() => {
-                    handleShareImg();
-                  }}
-                >
-                  닫기
-                </button>
+                <div className="like-toggle-box">
+                  <div className="like-box">
+                    {likeBtn ? (
+                      <div className="like-btn">
+                        <FaHeart color="red" onClick={handleLike} />
+                        <span>{likeCnt}</span>
+                      </div>
+                    ) : (
+                      <div className="like-btn">
+                        <FaRegHeart onClick={handleLike} />
+                        <span>{likeCnt}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="Modal-Btn">
+                    <button
+                      className="SM-btn"
+                      onClick={() => {
+                        handleShareImg();
+                      }}
+                    >
+                      닫기
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

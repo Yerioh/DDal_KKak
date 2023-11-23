@@ -29,7 +29,7 @@
 }
 
 .Card-div:hover{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 30px 60px -30px;
    cursor: pointer;
 }
 
@@ -37,10 +37,13 @@
 .like-btn{
     display: flex;
     align-items: center;
+    justify-content: start;
     gap: 5px;
   }
 
-  /* 닉네임 */
-  .Card-body{
+  /* 닉네임, 날짜 */
+  .Card-date-title{
+    display: flex;
+    flex-direction: column;
     text-align: right;
-  }
+}
