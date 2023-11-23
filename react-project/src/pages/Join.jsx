@@ -17,6 +17,8 @@ const Join = () => {
   const userAdd = useRef(); // 주소
   const postNum = useRef(); // 우편번호
   const addDetail = useRef(); // 상세주소
+  const pwTextRef = useRef() // 비밀번호 span
+  const pw2TextRef = useRef() // 비밀번호 확인 span
   const [show, setShow] = useState(false); // true : 모달보임 / false : 모달 안보임
 
   /** 모달 닫는 함수 */
@@ -27,74 +29,104 @@ const Join = () => {
   /** 모달 보여지게 하는 함수 */
   const handleShow = () => setShow(true);
   const [text, setText] = useState("");
+  const [pwText, setPwText] = useState("");
+  const [pw2Text, setPw2Text] = useState("")
 
   // 2023-11-13 09:20 임휘훈 작성
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(false);
+  // 임휘훈 작성 :  한글, 영어, 숫자, 특수문자 구분 정규식 모음
+  let checkEngA = /[A-Z]/;
+  let checkSpc = /[~!@#$%^&*()_+|<>?:{}]/;
+  let checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
   /** 회원가입 버튼 */
   const join_btn = (e) => {
     e.preventDefault();
     if (isCheck) {
-      if (pwRef.current.value === pw2Ref.current.value) {
-        console.log("회원가입 라우터로 이동");
-        axios
-          .post("/user/join", {
-            userId: idRef.current.value, // 아이디
-            userPw: pwRef.current.value, // 비밀번호
-            checkPw: pw2Ref.current.value, // 비밀번호 확인
-            userName: nameRef.current.value, // 이름
-            useremail: emailRef.current.value, // 이메일
-            phone: numberRef.current.value, // 전화번호
-            postNumber: postNum.current.value, // 우편번호
-            doro: userAdd.current.value, // 도로명주소
-            detailAddress: addDetail.current.value, // 상세주소
-          })
-          .then((res) => {
-            let data = res.data;
-            if (data) {
-              // data == true 회원가입 성공시
-              navigate("/");
-            }
-          });
-      }
+      if(pwRef.current.value.length >= 8 &&
+        pwRef.current.value.length <= 16
+        ){
+          if (pwRef.current.value === pw2Ref.current.value) {
+            setPwText("");
+            pw2TextRef.current.style = "color:gray";
+            setPw2Text("※ 사용가능한 비밀번호 입니다.");
+            console.log("회원가입 라우터로 이동");
+            axios
+              .post("/user/join", {
+                userId: idRef.current.value, // 아이디
+                userPw: pwRef.current.value, // 비밀번호
+                checkPw: pw2Ref.current.value, // 비밀번호 확인
+                userName: nameRef.current.value, // 이름
+                useremail: emailRef.current.value, // 이메일
+                phone: numberRef.current.value, // 전화번호
+                postNumber: postNum.current.value, // 우편번호
+                doro: userAdd.current.value, // 도로명주소
+                detailAddress: addDetail.current.value, // 상세주소
+              })
+              .then((res) => {
+                let data = res.data;
+                if (data) {
+                  // data == true 회원가입 성공시
+                  navigate("/");
+                }
+              });
+          } else{
+            pw2TextRef.current.style = "color:red";
+            setPw2Text("※ 비밀번호가 일치히지 않습니다.");
+          }
+        } else{
+          pwTextRef.current.style = "color:red";
+          setPwText("※ 비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.");
+        }
     } else {
       spanRef.current.style = "color:red";
-      setText("※ 중복체크 하시길바랍니다.");
+      setText("※ 중복체크를 해주세요.");
     }
   };
   // 임휘훈 작성 끝
 
+  // 23-11-23 임휘훈 작성 : 아이디 비밀번호 유효성 검사 (정규식)
   /**중복체크 함수*/
   const checkId = () => {
-    console.log("사용자 입력 아이디", idRef.current.value);
+    console.log("사용자 입력 아이디");
+
     // 데이터 전송
     if (idRef.current.value !== "") {
-      axios
-        .post("/user/checkId", {
-          id: idRef.current.value,
-        })
-        .then((res) => {
-          console.log("중복체크 결과", res.data);
-          if (res.data === true) {
-            // idRef.current.disabled = true;
-            spanRef.current.style = "color:gray";
-            setText("※ 사용 가능한 아이디 입니다.");
-            setIsCheck(true);
-          } else {
-            idRef.current.value = "";
-            idRef.current.focus();
-            spanRef.current.style = "color:red";
-            setText(
-              "※ 사용 불가능한 아이디 입니다. 다른 아이디를 입력해주세요."
-            );
-            setIsCheck(false);
-          }
-        });
-    } else {
+      if(idRef.current.value.length >= 5 && 
+        idRef.current.value.length <= 20 && 
+        !checkEngA.test(idRef.current.value) && 
+        !checkSpc.test(idRef.current.value) && 
+        !checkKor.test(idRef.current.value)){
+        axios
+          .post("/user/checkId", {
+            id: idRef.current.value,
+          })
+          .then((res) => {
+            if (res.data === true) {
+              // idRef.current.disabled = true;
+              spanRef.current.style = "color:gray";
+              setText("※ 사용 가능한 ID 입니다.");
+              setIsCheck(true);
+            } else {
+              idRef.current.value = "";
+              idRef.current.focus();
+              spanRef.current.style = "color:red";
+              setText(
+                "※ 사용 불가능한 ID 입니다. 다른 ID를 입력해주세요."
+              );
+              setIsCheck(false);
+            }
+          });
+      } else {// 아이디 길이 조건 X
+        idRef.current.focus();
+        spanRef.current.style = "color:red";
+        setText("※ ID는 5 ~ 20자의 영문 소문자, 숫자와 특수기호(_), (-)만 사용가능합니다.");
+      }
+    }else{
       // 아이디 칸이 빈칸일때 231110 14:10 추가 -임휘훈-
-      setText("※ 아이디를 입력해주세요.");
       idRef.current.focus();
       spanRef.current.style = "color:red";
+      setText("※ ID를 입력해주세요.");
     }
   };
   // 아이디 중복체크 함수 끝
@@ -225,6 +257,9 @@ const Join = () => {
                 required
               />
             </Form.Group>
+            <div className="d-grid gap mb-3">
+              <span ref={pwTextRef}> {pwText}</span>
+            </div>
             <Form.Group className="mb-3" controlId="formBasicPassword2">
               <Form.Label>* 비밀번호 확인</Form.Label>
               <Form.Control
@@ -234,6 +269,9 @@ const Join = () => {
                 required
               />
             </Form.Group>
+            <div className="d-grid gap mb-3">
+              <span ref={pw2TextRef}> {pw2Text}</span>
+            </div>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>* 이름</Form.Label>
               <Form.Control

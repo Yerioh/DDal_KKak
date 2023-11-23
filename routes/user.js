@@ -30,7 +30,7 @@ router.post("/join", (req, res) => {
     'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, SHA2(?, 256), ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
 
   // 비밀번호 확인 조건문
-  if (pw == checkPw) {
+  if (userPw == checkPw) {
     // DB 연결
     conn.connect();
     conn.query(

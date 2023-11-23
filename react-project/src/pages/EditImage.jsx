@@ -120,6 +120,7 @@ function EditImage() {
           console.log("saved", editedImageObject, designState);
           // 편집된 base64 이미지
           const base64 = editedImageObject.imageBase64;
+          const imgName = editedImageObject.name; // 설정한 이미지 이름
           // base64 이미지 데이터에서 데이터URI 스키마부분 제거 (data:[<미디어타입>];base64)
           const base64Data = new Buffer.from(
             base64.replace(/^data:image\/\w+;base64,/, ""),
@@ -153,6 +154,7 @@ function EditImage() {
                 positive: positive,
                 negative: negative,
                 img_info: img_info,
+                imgName : imgName
               });
             },
             (err) => {

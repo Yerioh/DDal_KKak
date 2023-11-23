@@ -74,14 +74,16 @@ router.post("/choiceImg", (req, res) => {
 
 // 이미지 생성 후 DB에 고유 ID 기준으로 이미지 저장하기
 router.post("/saveImg", (req, res) => {
-  let userId = req.body.userId; // 유저 아이디
-  let positive = req.body.positive; // 사용된 긍정 프롬프트
-  let negative = req.body.negative; // 사용된 부정 프롬프트
-  console.log("negative", negative);
-  let img_info = req.body.img_info; // 이미지 고유한 url
+  // 유저 아이디
+  // 사용된 긍정 프롬프트
+  // 사용된 부정 프롬프트
+  // 이미지 고유한 url
+  // 이미지 이름
+  let {userId, positive, negative, img_info, imgName} = req.body
+  console.log(imgName);
 
   let insertQuery =
-    "INSERT INTO TB_GEN_IMG (MEMBER_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, GENERATED_AT) VALUES (?, ?, ?, ?,  DATE_ADD(NOW(), INTERVAL 9 HOUR))";
+    "INSERT INTO TB_GEN_IMG (MEMBER_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, GENERATED_AT, IMG_NAME) VALUES (?, ?, ?, ?,  DATE_ADD(NOW(), INTERVAL 9 HOUR), ?)";
   conn.connect();
   conn.query(
     insertQuery,
