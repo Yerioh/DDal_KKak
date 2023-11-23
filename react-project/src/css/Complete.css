@@ -1,0 +1,40 @@
+.complete .top-text .title{
+    font-size: 40px;
+    font-weight: bold;    
+}
+.complete .top-text .subtitle{
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+}
+.complete .goods-title{
+    display: flex;
+    margin: 10px 0px 0px 0px;
+}
+.complete .goods-title .inner-items{
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+.complete .submit-div{
+    width: 100%;
+    display: gird;
+    text-align: center;
+    place-items: center;
+}
+
+.complete .submit-div .submit-btn{
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    background-color: #0028ac;
+    width: 30%;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
