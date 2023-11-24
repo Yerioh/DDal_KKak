@@ -16,7 +16,7 @@ const SaveImage = () => {
   const [delImg, setDelImg] = useState(false); //삭제 모달 상태 state
 
   // 사용자 아이디
-  const useId = useSelector((state) => state.session.id);
+  const userId = useSelector((state) => state.session.id);
   // S3 클라이언트 생성
   const client = new S3Client({
     region : process.env.REACT_APP_AWS_DEFAULT_REGION,
@@ -75,7 +75,7 @@ const SaveImage = () => {
   // 각 이미지 렌더링 함수 / 내 저장 이미지 불러오기 함수
   // 23-11-17 15:16 임휘훈 작성 DB에 저장된 이미지 정보 불러오기
   useEffect(() => {
-    axios.post("/imgCreate/myimg", { id: useId }).then((res) => {
+    axios.post("/imgCreate/myimg", { id: userId }).then((res) => {
       setImgArray(res.data.imgArray);
       // setImgArray([{ IMG_URL : '114662496405123443827/edit_img/da6ff7c1-ae6d-d43a-86ec-9d2390cc8f11.png'}])
     });

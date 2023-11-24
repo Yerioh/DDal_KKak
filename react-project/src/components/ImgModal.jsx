@@ -7,6 +7,8 @@ import { saveAs } from "file-saver";
 import Switch from "@mui/material/Switch";
 import { FaHeart } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
+import session from "express-session";
+import { useSelector } from "react-redux";
 // 회원탈퇴 모달, 이미지 상세정보 모달
 const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
@@ -19,6 +21,7 @@ const ImgModal = ({
 }) => {
   // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();
+  const userId = useSelector((state) => state.session.id); // redux에 저장된 회원 아이디
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
     domtoimage.toBlob(imgRef.current).then((blob) => {
@@ -37,12 +40,16 @@ const ImgModal = ({
   
   // 23-11-24 09:35 임휘훈 작성 : 공유 토글 DB 연동
   useEffect(() => {
-    if(ImgArray[index].IMG_SHARE === "Y"){ // 공유 허용
-      setChecked(true)
-    } else if(ImgArray[index].IMG_SHARE === "N"){ // 공유 비허용
-      setChecked(false)
-    }
-  }, [checked])
+    axios.post("/imgCreate/myimg", { id: userId }).then((res) => {
+      console.log(res.data);
+      // let isShare = res.data.IMG_SHARE;
+      // if(ImgArray[index].IMG_SHARE === "Y"){ // 공유 허용
+      //   setChecked(true)
+      // } else if(ImgArray[index].IMG_SHARE === "N"){ // 공유 비허용
+      //   setChecked(false)
+      // }
+    });
+  }, [])
 
   // 내 저장 이미지 모달 체크 변경
   const handleChange = () => {
