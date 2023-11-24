@@ -108,8 +108,8 @@ const Main = () => {
       </div>
 
       {/* 이미지 슬라이드 */}
-      <div className="Slide-box">
-        <div className="image-Slide">
+      <div className="Slide-box mb-4 mt-3">
+        <div className="image-Slide mb-4">
           <div className="image-Slide-btn">
             <span className="Main-Slide-text">디자인 이미지</span>
             <Link to="/imageall">
@@ -124,8 +124,9 @@ const Main = () => {
           </Carousel>
         </div>
         {/* 굿즈 슬라이드 */}
+        
         <div className="goods-Slide">
-          <div className="goods-text-btn">
+          <div className="goods-text-btn mt-5">
             <span className="Main-Slide-text">굿즈</span>
             <Link to="goodslist">
               <button className="moreShow same-BTN">굿즈 더보기</button>

@@ -109,14 +109,21 @@
     align-items: center;
 }
 
-.goods-Slide{
-    width: 81%;
-}
-.image-Slide{
-    width: 81%;
+.Slide-box{
+    gap: 30px;
 }
 
-.Main-Slide-text{
+.Slide-box > .goods-Slide{
+    width: 81%;
+}
+.Slide-box > .image-Slide{
+    width: 81%;
+}
+.image-Slide-btn > .Main-Slide-text{
+    font-size: 20px;
+    font-weight: bold;
+}
+.goods-text-btn > .Main-Slide-text{
     font-size: 20px;
     font-weight: bold;
 }
