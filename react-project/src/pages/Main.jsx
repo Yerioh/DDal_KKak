@@ -6,11 +6,24 @@ import { Link } from "react-router-dom";
 import "../css/Main.css";
 import ImageAllCard from "../components/ImageAllCard";
 import e from "cors";
+import axios from "../axios";
 
 const Main = () => {
-  const testnumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1];
+
+  const [shareImg, setShareImg] = useState(null)
   const test_MainImage = [1, 2, 3, 4, 5, 6, 7, 8];
   const [currentIndex, setCurrentIndex] = useState(1);
+
+  useEffect(()=>{
+    axios.post('/imgCreate/mainImgShow')
+      .then(res=>{
+        console.log(res.data.result)
+        setShareImg(res.data.result)
+      })
+  },[])
+
+
+  
 
   const responsive = {
     superLargeDesktop: {
@@ -117,11 +130,13 @@ const Main = () => {
             </Link>
           </div>
 
-          <Carousel responsive={responsive}>
-            {testnumber.map((number, index) => (
-              <ImageAllCard num={number} />
+          {shareImg !== null ? (<Carousel responsive={responsive}>
+            {shareImg?.map((data, index) => (
+              <ImageAllCard data={data} />
             ))}
-          </Carousel>
+          </Carousel>) :
+          (<h2>로딩</h2>)
+          }
         </div>
         {/* 굿즈 슬라이드 */}
         
@@ -132,11 +147,13 @@ const Main = () => {
               <button className="moreShow same-BTN">굿즈 더보기</button>
             </Link>
           </div>
-          <Carousel responsive={responsive}>
-            {testnumber.map((number, index) => (
-              <ImageAllCard num={number} />
+          {shareImg !== null ? (<Carousel responsive={responsive}>
+            {shareImg?.map((data, index) => (
+              <ImageAllCard data={data} />
             ))}
-          </Carousel>
+          </Carousel>) :
+          (<h2>로딩</h2>)
+          }
         </div>
       </div>
     </div>

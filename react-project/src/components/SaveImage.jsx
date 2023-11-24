@@ -19,11 +19,11 @@ const SaveImage = () => {
   const userId = useSelector((state) => state.session.id);
   // S3 클라이언트 생성
   const client = new S3Client({
-    region : process.env.REACT_APP_AWS_DEFAULT_REGION,
-    credentials : {
-      accessKeyId : process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-      secretAccessKey : process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
-    }
+    region: process.env.REACT_APP_AWS_DEFAULT_REGION,
+    credentials: {
+      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    },
   });
 
   const observer = useRef(
@@ -87,7 +87,6 @@ const SaveImage = () => {
 
     return () => {
       cards.forEach((card) => currentObserver.unobserve(card));
-
     };
   }, []);
 
@@ -131,14 +130,13 @@ const SaveImage = () => {
     // 데이터베이스 삭제용 데이터
     let arrImgUrl = [];
     // S3 삭제용 데이터
-    let deleteImgData = []
+    let deleteImgData = [];
     // 객체형태 반복문에서 사용하기 위해서 객체 key값만 접근 keys
     for (const key of Object.keys(selectedImages)) {
       // SQL에서 IN 사용하기 위해서 따옴표 넣기
       // ex) "'문자열1', '문자열2'"
       arrImgUrl.push("'" + imgArray[key].IMG_URL + "'");
-      deleteImgData.push({Key : imgArray[key].IMG_URL});
-
+      deleteImgData.push({ Key: imgArray[key].IMG_URL });
     }
     let strImgUrl = arrImgUrl.join();
 
@@ -148,17 +146,17 @@ const SaveImage = () => {
         // 데이터베이스에서 삭제를 위한 데이터
         imgUrl: strImgUrl,
         // S3에서 삭제를 위한 데이터
-        deleteS3 : deleteImgData
+        deleteS3: deleteImgData,
       })
       .then((res) => {
         let imgData = res.data.imgArray;
         // 이미지 화면 최신화
         setImgArray(imgData);
         // 삭제 모달 닫기
-        setDelImg(false);       
+        setDelImg(false);
         // 이미지 모달 닫기
-        setIsOpen(false)         
-      });   
+        setIsOpen(false);
+      });
   };
 
   /**최신순 정렬 함수*/
@@ -180,7 +178,7 @@ const SaveImage = () => {
     });
     setImgArray(newArr);
   };
-
+  let num = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div className="SaveImage">
       {isLoading && <div className="loading-indicator">로딩 중...</div>}
@@ -214,11 +212,9 @@ const SaveImage = () => {
       <div className="S-Ibox">
         {/* imgArray */}
         {imgArray.map((image, index) => (
-          <div
-            className="SImage-Card me-4"
-            key={index}
-          >
-            {/* data-src 속성에 실제 이미지 URL을 지정 */}          
+          // <div className="">
+          <div className="SImage-Card me-4" key={index}>
+            {/* data-src 속성에 실제 이미지 URL을 지정 */}
             <img
               className="img-thumb"
               data-src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${image?.IMG_URL}`}
@@ -226,8 +222,8 @@ const SaveImage = () => {
               alt={`Image ${index}`}
               onClick={() => {
                 openModalHandler(index);
-                handleCheckboxChange(index, true)
-                updateCheckedImages()
+                handleCheckboxChange(index, true);
+                updateCheckedImages();
               }}
             />
             <div className="SI-At">
@@ -246,6 +242,7 @@ const SaveImage = () => {
               ></label>
               <span>{image?.DATE}</span>
             </div>
+            {/* </div> */}
           </div>
         ))}
         {isOpen && (
