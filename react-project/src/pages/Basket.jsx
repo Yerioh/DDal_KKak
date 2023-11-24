@@ -5,6 +5,10 @@ import "../css/GoodsBasket.css"
 import BasketItem from '../components/BasketItem'
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/esm/Button';
+import { useSelector } from 'react-redux';
+
+
+
 const Basket = () => {
 
     // 세션스토리지에 있던 데이터를 불러와 저장할 State 
@@ -12,6 +16,7 @@ const Basket = () => {
     const [selectedItem, setSelectItem] = useState({});
     const [sum, setSum] = useState(0)
 
+    const USER_ID = useSelector((state)=>state.session.id)
     // 세션스토리지에서 장바구니 데이터 불러오기
     useEffect(() => {
         // 세션 스토리지에서 아이템 로드
@@ -21,7 +26,8 @@ const Basket = () => {
             setCartItem(loadedCartItems);
         }
     }, []);
-
+    // 현재 로그인된 아이디에 해당하는 세션만 걸러내기
+    const UserIdFilter = cartItem.filter(item => item.USER_ID === USER_ID)
     useEffect(() => {
         // 선택된 아이템들의 총 금액 계산
         calculateTotal();
@@ -34,11 +40,6 @@ const Basket = () => {
         setSelectItem(prev => ({ ...prev, [id]: isChecked }));
         updateBuyItems(id, isChecked);
     };
-
-    const handleDeleteItem = () => {
-
-    }
-
 
     // 전체 선택 처리
     const handleSelectAll = () => {
@@ -120,7 +121,7 @@ const Basket = () => {
                         checked={isAllChecked()}
                         onChange={handleSelectAll} />
                     <p className='basket-top-check' >전체선택</p>
-                    <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={handleDeleteItem()}>
+                    <button style={{ border: "none", backgroundColor: "whitesmoke" }}>
                         <div style={{ borderLeft: "1px solid lightgray", margin: "0px 10px" }}>
                             <p className='basket-top-check'>선택삭제</p>
                         </div>
@@ -145,7 +146,8 @@ const Basket = () => {
                     </div>
                 </div>
                 {/* 세션에 들어있는 장바구니에 들어가 있는 제품들의 정보를 컴포넌트를 통해 map 으로 뿌려줌 */}
-                {cartItem.map((item) => {
+                {UserIdFilter.map((item) => {
+
                     return (
                         <BasketItem
                             key={item.id}
