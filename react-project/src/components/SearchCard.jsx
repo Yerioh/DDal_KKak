@@ -65,7 +65,7 @@ const SearchCard = ({ data, index }) => {
         )}
         <div className="Card-date-title">
           <Card.Title>{data.MEMBER_NAME} 님</Card.Title>
-          <span>{data.DATE}</span>
+          <span>{data.DATE.slice(0, 10)}</span>
         </div>
       </Card.Body>
       {shareModal && (
