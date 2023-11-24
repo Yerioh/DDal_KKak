@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // 점수를 정확하게 표현해주는 별점 기능입니다. 평균 별점을 나타낼 때 사용합니다.
 //
 function AvgStarRating() {
-    const AVR_RATE = 50;  // 평균별 평점입니다. 여기를 조정해야 별점의 색칠 정도가 달라집니다. REVIEW_RAITINGS랑 연결해야할 부분
+    const AVR_RATE = 70;  // 평균별 평점입니다. 여기를 조정해야 별점의 색칠 정도가 달라집니다. REVIEW_RAITINGS랑 연결해야할 부분
     const STAR_IDX_ARR = ['first', 'second', 'third', 'fourth', 'last']; // 별 한개당 관리하는 id 입니다.
     const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
     const calcStarRates = () => {
@@ -28,7 +28,7 @@ function AvgStarRating() {
             {STAR_IDX_ARR.map((item, idx) => {
                 return <span className='star_icon' key={`${item}_${idx}`}>
                     {/* 별이 비어있을 때 설정하는 값 */}
-                    <svg xmlns='http://www.w3.org/2000/svg' width='40' height='39' viewBox='0 0 14 13' fill='#cacaca'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='40' height='39' viewBox='0 0 14 13' fill='#C4C4C4'>
                         <clipPath id={`${item}StarClip`}>
                             <rect width={`${ratesResArr[idx]}`} height='39' />
                         </clipPath>
@@ -38,7 +38,7 @@ function AvgStarRating() {
                             transform='translate(-2 -2)'
                         />
                         {/* 별의 색깔이 칠해졌을 때 설정하는 값 */}
-                        <use clipPath={`url(#${item}StarClip)`} href={`#${item}Star`} fill='#966fd6'
+                        <use clipPath={`url(#${item}StarClip)`} href={`#${item}Star`} fill='rgb(250, 250, 26)'
                         />
                     </svg>
                 </span>

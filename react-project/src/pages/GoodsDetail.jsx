@@ -12,10 +12,23 @@ import GoodsEdit from '../components/GoodsEdit';
 import AvgStarRating from '../components/AvgStarRating';
 import GoodsReview from '../components/GoodsReview';
 import {v4 as uuidv4} from 'uuid';
-
+import aws from "aws-sdk";
+import { Buffer } from "buffer";
+import { useSelector } from 'react-redux';
 
 
 const GoodsDetail = () => {
+    // 23-11-24 오전 12:20 박지훈 작성
+  // aws 연동을 위한 config
+  aws.config.update({
+    region: process.env.REACT_APP_AWS_DEFAULT_REGION,
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  });
+
+  // s3 bucket 폴더명으로 사용할 사용자 아이디
+  const userId = useSelector((state) => state.session.id);
+
   // 제품수량 선택을 위한 State
   const [count, setCount] = useState(1)
   // 가격을 나타내기 위한 State
@@ -97,6 +110,43 @@ const GoodsDetail = () => {
    if (typeof getImgDataRef.current === "function") {
      const fnOptionsIfNeededFoundInDocs = {};
      const imageData = getImgDataRef.current(fnOptionsIfNeededFoundInDocs);
+     const base64 = imageData.imageData.imageBase64
+     console.log('이미지데이터',base64);
+
+    // base64 이미지 데이터에서 데이터URI 스키마부분 제거 (data:[<미디어타입>];base64)
+    const base64Data = new Buffer.from(
+      base64.replace(/^data:image\/\w+;base64,/, ""),
+      "base64"
+    );
+    // 데이터 URI 스키마 부분에서 파일 형식 추출
+    const type = base64.split(";")[0].split("/")[1];
+
+    // s3 버킷에 저장될 경로, 파일명
+    // 사용자이름(폴더)/랜덤값.파일형식
+    const goods_info = `${userId}/edit_goods/${uuidv4()}.${type}`;
+
+    // aws s3 이미지 업로드 함수
+    const upload = new aws.S3.ManagedUpload({
+      params: {
+        Bucket : process.env.REACT_APP_AWS_BUCKET,              
+        Key : goods_info,
+        Body : base64Data,
+        ContentEncoding : 'base64',
+        ContentType : `image/${type}`
+      }
+    })
+    
+    // 이미지 업로드 실행
+    const promise = upload.promise();
+    promise.then(
+      () => {
+        console.log("이미지 업로드 성공");
+        moveItemToCart(goods_info)
+      },
+      (err) => {
+        console.log("이미지 업로드 실패", err);
+      }
+    );
    }
  };
   /** 의류 앞뒤 토글 함수 */
@@ -133,9 +183,8 @@ const GoodsDetail = () => {
   }, [count])
 
   /**장바구니에 담기위한 함수 */
-  function moveItemToCart() {
-    // 이미지 에디터에서 이미지 정보 가져오기 위해 함수 호출
-    getImgData();
+  function moveItemToCart(goods_info) {
+    console.log('12312312',goods_info)
     //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
     let newCartItem = {
       'PROD_ID': `${prd_info_filter[0].PROD_ID}`, // 상품 ID
@@ -146,7 +195,8 @@ const GoodsDetail = () => {
       'PROD_PRICE': `${prd_info_filter[0].PROD_PRICE}`, //상품 가격
       'CARTED_AT': `${times}`,
       'PRICE_SUM':`${parseInt(count)*parseInt(prd_info_filter[0].PROD_PRICE)}`,
-      'PROD_UUID' : uuidv4()
+      'PROD_UUID' : uuidv4(),
+      'PROD_URL' : `${process.env.REACT_APP_AWS_BUCKET_URL}/${goods_info}`
     };
 
     // 로컬 스토리지에있는 정보를 일단 가져온다.
@@ -285,13 +335,14 @@ const GoodsDetail = () => {
         <hr className='hr-style' />
 {/* 장바구니 담기 버튼 / 클릭시 세션로컬스토리지에 저장됨 */}
         <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
-          <Button variant="outline-secondary" onClick={moveItemToCart}
+          <Button variant="outline-secondary" onClick={getImgData}
             style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
         </div>
       </div>
       </>
       )}
     </div>
+{/* 상품 리뷰 칸 */}
     <div style={{margin:'100px'}}>
       <hr></hr>
       <h3>딸깍의 상품 리뷰!</h3>

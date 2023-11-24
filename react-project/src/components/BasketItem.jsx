@@ -95,7 +95,8 @@ const Basketitems = ({  items, isChecked, onCheck }) => {
             'PROD_PRICE': `${items.PROD_PRICE}`, //상품 가격
             'CARTED_AT': `${items.CARTED_AT}`, //굿즈 상세페이지에서 카트에 넣을 당시의 시각
             'PRICE_SUM':`${parseInt(items.PROD_PRICE)*parseInt(count)}`,
-            'PROD_UUID' : `${items.PROD_UUID}`
+            'PROD_UUID' : `${items.PROD_UUID}`,
+            'PROD_URL' : `${items.PROD_URL}`
         };
 
         // 로컬 스토리지에있는 정보를 일단 가져온다.
@@ -176,7 +177,7 @@ const Basketitems = ({  items, isChecked, onCheck }) => {
             <div className='second-box'>
                 <div style={{ width: "40%" }}>
                     {/* <img className='img-box' src="./images/GM4_누끼.png" alt="" /> */}
-                    <Card.Img variant="top" src={prd_info_filter[0].PROD_THUMB} style={{ width: "auto", height: "auto", maxWidth: "200px", maxHeight: "200px" }} />
+                    <Card.Img variant="top" src={items.PROD_URL} style={{ width: "auto", height: "auto", maxWidth: "200px", maxHeight: "200px" }} />
                 </div>
                 <div className='txt-info' style={{ width: "60%" }}>
                     {/* DB에서 상품번호를 기반으로 불러오기 */}

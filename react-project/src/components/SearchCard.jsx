@@ -52,19 +52,26 @@ const SearchCard = ({ data, index }) => {
         onClick={handleShareImg}
       />
       <Card.Body>
-        {likeBtn ? (
-          <div className="like-btn">
-            <FaHeart color="red" onClick={handleLike} />
-            <span>{likeCnt}</span>
-          </div>
-        ) : (
-          <div className="like-btn">
-            <FaRegHeart onClick={handleLike} />
-            <span>{likeCnt}</span>
-          </div>
-        )}
+        {/* 
+          <span>{data.DATE}</span>
+          <span>{data.MEMBER_NAME} 님</span>
+        </div> */}
         <div className="Card-date-title">
-          <Card.Title>{data.MEMBER_NAME} 님</Card.Title>
+          <Card.Title>{data.IMG_NAME}</Card.Title>
+          <span>{data.MEMBER_NAME} 님</span>
+        </div>
+        <div className="Card-like-title">
+          {likeBtn ? (
+            <div className="like-btn">
+              <FaHeart color="red" onClick={handleLike} />
+              <span>{likeCnt}</span>
+            </div>
+          ) : (
+            <div className="like-btn">
+              <FaRegHeart onClick={handleLike} />
+              <span>{likeCnt}</span>
+            </div>
+          )}
           <span>{data.DATE.slice(0, 10)}</span>
         </div>
       </Card.Body>
