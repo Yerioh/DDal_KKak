@@ -66,7 +66,7 @@ const ImgModal = ({
               </div>
               <div className="image-info">
                 <div className="user-Prompt">
-                  <h3>title</h3>
+                  <h3>{ImgArray[index].IMG_NAME}</h3>
                   <h5>Positive Prompt :</h5>
                   <span>{ImgArray[index].IMG_PROMPT}</span>
                   <span></span>

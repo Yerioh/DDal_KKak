@@ -104,7 +104,7 @@ router.post("/myimg", (req, res) => {
   let userId = req.body.id; // 유저 아이디
 
   let selectQuery =
-    `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE, IMG_SHARE, 
+    `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE, IMG_SHARE, IMG_NAME,
     (SELECT COUNT(*)
        FROM TB_LIKE
       WHERE IMG_ID = TB_GEN_IMG.IMG_ID) AS CNT
