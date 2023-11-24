@@ -8,17 +8,16 @@ const ReviewStar = ({ initialRating, onRatingChange, editable }) => {
     const [rating, setRating] = useState(initialRating);
 
     const handleStarClick = index => {
-        if (!editable) return; // 변경 불가능한 경우 클릭 무시
         setRating(index);
         if(onRatingChange) onRatingChange(index);
     };
 
     return (
-        <div className='RatingBox'>
+        <div className='RatingBox' style={{ pointerEvents: editable? 'auto' : 'none'}}>
             {[1, 2, 3, 4, 5].map((el) => (
                 <FaStar
                     key={el}
-                    onClick={() => handleStarClick(el)}
+                    onClick={ editable ? () => handleStarClick(el) : null}
                     className={el <= rating ? 'clo' : ''}
                     size='35'
                 />

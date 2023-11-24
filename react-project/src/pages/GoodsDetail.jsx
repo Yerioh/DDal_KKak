@@ -292,6 +292,7 @@ const GoodsDetail = () => {
       </>
       )}
     </div>
+{/* 상품 리뷰 칸 */}
     <div style={{margin:'100px'}}>
       <hr></hr>
       <h3>딸깍의 상품 리뷰!</h3>
