@@ -31,18 +31,20 @@ const ImgModal = ({
 
   // 내 저장 이미지 모달 내 공유 여부 state
   const [checked, setChecked] = useState(false);
-  
+
   // 23-11-24 09:35 임휘훈 작성 : 공유 토글 DB 연동
   useEffect(() => {
     axios.post("/imgCreate/myimg", { id: userId }).then((res) => {
       let isShare = res.data.imgArray[index].IMG_SHARE;
-      if(isShare === "Y"){ // 공유 허용
-        setChecked(true)
-      } else if(isShare === "N"){ // 공유 비허용
-        setChecked(false)
+      if (isShare === "Y") {
+        // 공유 허용
+        setChecked(true);
+      } else if (isShare === "N") {
+        // 공유 비허용
+        setChecked(false);
       }
     });
-  }, [])
+  }, []);
 
   // 내 저장 이미지 모달 체크 변경
   const handleChange = () => {
@@ -65,14 +67,23 @@ const ImgModal = ({
                 />
               </div>
               <div className="image-info">
-                <div className="user-Prompt">
+              <div className="user-Prompt">
                   <h3>{ImgArray[index].IMG_NAME}</h3>
-                  <h5>Positive Prompt :</h5>
-                  <span>{ImgArray[index].IMG_PROMPT}</span>
-                  <span></span>
-                  <h5>Negative Prompt :</h5>
-                  <span>{ImgArray[index].IMG_NE_PROMPT}</span>
-                  <span></span>
+                  {/* <div className="user-Prompt"> */}
+
+                  <div className="title-prompt-Pos">
+                    <h4>Positive Prompt</h4>
+                    <div className="prompt-text">
+                      <span>{ImgArray[index].IMG_PROMPT}</span>
+                    </div>
+                  </div>
+                  <div className="prompt-Neg">
+                    {" "}
+                    <h4>Negative Prompt</h4>
+                    <div className="prompt-text">
+                      <span>{ImgArray[index].IMG_NE_PROMPT}</span>
+                    </div>
+                  </div>
                 </div>
                 <div className="like-toggle-box">
                   <div className="like-box">

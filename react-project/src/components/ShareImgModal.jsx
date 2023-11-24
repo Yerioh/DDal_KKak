@@ -7,7 +7,7 @@ const ShareImgModal = ({
   likeBtn, //이미지 좋아요 상태
   handleShareImg, //이미지 상세 모달 제어 함수
   handleLike, // 이미지 상세 모달 함수
-  ImgArray, // 이미지 배열  
+  ImgArray, // 이미지 배열
   likeCnt,
 }) => {
   const imgRef = useRef();
@@ -27,13 +27,24 @@ const ShareImgModal = ({
               <div className="image-info">
                 <div className="user-Prompt">
                   <h3>{ImgArray.IMG_NAME}</h3>
-                  <h5>Positive Prompt :</h5>
-                  <span>{ImgArray.IMG_PROMPT}</span>
-                  <span></span>
-                  <h5>Negative Prompt :</h5>
-                  <span>{ImgArray.IMG_NE_PROMPT}</span>
-                  <span></span>
+                  {/* <div className="user-Prompt"> */}
+
+                  <div className="title-prompt-Pos">
+                    <h4>Positive Prompt</h4>
+                    <div className="prompt-text">
+                      <span>{ImgArray.IMG_PROMPT}</span>
+                    </div>
+                  </div>
+                  <div className="prompt-Neg">
+                    {" "}
+                    <h4>Negative Prompt</h4>
+                    <div className="prompt-text">
+                      <span>{ImgArray.IMG_NE_PROMPT}</span>
+                    </div>
+                  </div>
                 </div>
+
+                {/* </div> */}
                 <div className="like-toggle-box">
                   <div className="like-box">
                     {likeBtn ? (

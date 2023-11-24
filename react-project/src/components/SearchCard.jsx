@@ -40,6 +40,7 @@ const SearchCard = ({ data, index }) => {
       });
   }, []);
 
+  
   // 이미지 상세 모달 제어
   const handleShareImg = () => {
     setShareModal((prevshareModal) => !prevshareModal);

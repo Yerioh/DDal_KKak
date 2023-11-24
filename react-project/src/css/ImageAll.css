@@ -89,3 +89,21 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
 .Search-Img-Nav > .Search-Img-box > span:active{
     font-weight: bold;
 }
+@media(max-width:1176px){
+    .search-Card{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+ @media(max-width:766px){
+    .search-Card{
+        grid-template-columns: repeat(2,1fr);
+    }
+} 
+ @media(max-width:430px){
+    .search-Card{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .Card-box > .search-Card > .img-card{
+        justify-content: center;
+    }
+} 

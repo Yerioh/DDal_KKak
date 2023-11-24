@@ -178,7 +178,7 @@ const SaveImage = () => {
     });
     setImgArray(newArr);
   };
-  let num = [1, 2, 3, 4, 5, 6, 7];
+
   return (
     <div className="SaveImage">
       {isLoading && <div className="loading-indicator">로딩 중...</div>}
