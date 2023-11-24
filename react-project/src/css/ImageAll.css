@@ -15,6 +15,10 @@
     width: 80%;  
     border: none; 
 }
+
+#button-addon2{
+    background : none;
+}
 .search_Keyword:focus{
     outline: none;
 }
@@ -22,10 +26,18 @@
 #button-addon2{
    border: none;
 }
+
+/* 이미지 카드 배치 */
 .search-Card{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4,1fr);
+    gap: 5px;
+}
+.Card-box > .search-Card > .img-card{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: end;
+    margin-right: 0px;
 }
 
 .Card-div:hover{
@@ -38,12 +50,42 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
     display: flex;
     align-items: center;
     justify-content: start;
-    gap: 5px;
+    gap: 3px;
   }
 
   /* 닉네임, 날짜 */
   .Card-date-title{
     display: flex;
     flex-direction: column;
-    text-align: right;
+    justify-content: center;
+    align-items: center;
+}
+
+.Card-box > .search-Card .img-card .Card-div .card-body{
+    border-top: 1px solid rgb(200, 200, 200);
+    display: flex;
+    flex-direction: column;
+}
+/* .Card-box > .search-Card .img-card .Card-div {
+
+} */
+.Card-div .card-body > .Card-like-title{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 인기순, 최신순,오래된순 Nav Container */
+.Search-Img-Nav{
+    width: 100%;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    
+}
+.Search-Img-Nav > .Search-Img-box{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    cursor: pointer;
+}
+.Search-Img-Nav > .Search-Img-box > span:active{
+    font-weight: bold;
 }

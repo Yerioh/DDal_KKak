@@ -10,7 +10,7 @@ const GoodsReview = () => {
     <div className="GoodsReview-card">
       <div className="GoodsReview-cardbody">
         <p>
-          <ReviewStar initialRating={5} editable={false} />
+          <ReviewStar initialRating={5} editable= {false}/>
           {/* initalRaitng: 초기값, DB에서 받아올 값, editable = false면 수정 불가능  */}
         </p>
         {/* 이름  날짜 */}

@@ -52,20 +52,27 @@ const SearchCard = ({ data, index }) => {
         onClick={handleShareImg}
       />
       <Card.Body>
-        {likeBtn ? (
-          <div className="like-btn">
-            <FaHeart color="red" onClick={handleLike} />
-            <span>{likeCnt}</span>
-          </div>
-        ) : (
-          <div className="like-btn">
-            <FaRegHeart onClick={handleLike} />
-            <span>{likeCnt}</span>
-          </div>
-        )}
+        {/* 
+          <span>{data.DATE}</span>
+          <span>{data.MEMBER_NAME} 님</span>
+        </div> */}
         <div className="Card-date-title">
-          <Card.Title>{data.MEMBER_NAME} 님</Card.Title>
-          <span>2023.11.23</span>
+          <Card.Title>역병의 핑크빈</Card.Title>
+          <span>{data.MEMBER_NAME} 님</span>
+        </div>
+        <div className="Card-like-title">
+          {likeBtn ? (
+            <div className="like-btn">
+              <FaHeart color="red" onClick={handleLike} />
+              <span>{likeCnt}</span>
+            </div>
+          ) : (
+            <div className="like-btn">
+              <FaRegHeart onClick={handleLike} />
+              <span>{likeCnt}</span>
+            </div>
+          )}
+          <span>{data.DATE}</span>
         </div>
       </Card.Body>
       {shareModal && (

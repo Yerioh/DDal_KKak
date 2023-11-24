@@ -45,6 +45,12 @@
 .S-Ibox{
     border-top: 1px solid gray;
     margin-top: 10px;
+    justify-content: start;
+    display: flex;
+    flex-wrap: wrap;
+    margin : 10px 60px 20px 60px;
+    box-sizing: border-box;
+    padding-left: 15px;
     
 }
 
@@ -124,12 +130,7 @@ input[type="checkbox"]:checked + .check_label {
 
 
 /* 맵 함수 div */
-.S-Ibox{
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin : 10px 60px 20px 60px;
-}
+
 
 
 /* 이미지 */

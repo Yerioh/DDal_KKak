@@ -13,7 +13,6 @@ const Goodslist = () => {
    useEffect(() => {
     axios.post("/page/goods")
     .then((res) => {
-      console.log("굿즈 페이지 데이터", res.data.result);
       setIsLoading(res.data.isLoading)
       setProduct(res.data.result)
     })
