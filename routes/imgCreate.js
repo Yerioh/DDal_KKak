@@ -191,6 +191,21 @@ router.post('/shareImgShow', (req,res)=>{
   })
 })
 
+// 메인 페이지 공유 이미지 좋아요 순 상위 10개 데이터
+router.post('/mainImgShow', (req,res)=>{
+  let sql = 'SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, B.MEMBER_NAME ,(SELECT COUNT(*) CNT FROM TB_LIKE WHERE IMG_ID= A.IMG_ID) AS CNT FROM TB_GEN_IMG A INNER JOIN TB_MEMBER B ON(A.MEMBER_ID = B.MEMBER_ID) WHERE IMG_SHARE = "Y" ORDER BY CNT DESC LIMIT 10'
+  conn.connect()
+  conn.query(sql, (err,result)=>{
+    if(err){
+      console.log('이미지 불러오기 쿼리문 에러', err)
+    }
+    else{
+      console.log(result)
+      res.json({result})
+    }
+  })
+})
+
 // 이미지 좋아요 클릭, 클릭 해제 라우터
 router.post('/likeClick', (req,res)=>{
   let userId = req.body.id

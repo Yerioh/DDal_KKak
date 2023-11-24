@@ -163,7 +163,7 @@ function EditImage() {
           );
         }}
         // 세이브 버튼 시 연관되는 함수. 현재는 편집된 사진이 원본+편집한 효과로 나뉘어져 파라미터로 별도 저장됨.
-
+        
         annotationsCommon={{ fill: "#000000" }}
         Text={fontAnnotationsConfig}
         // 폰트 추가하는 곳.
