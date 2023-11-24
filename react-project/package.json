@@ -38,16 +38,17 @@
     "react-scripts": "5.0.1",
     "react-session-api": "^1.1.0",
     "react-uuid": "^2.0.0",
+    "socket.io-client": "^4.7.2",
     "styled-components": "^5.3.11",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
-  "scripts": { 
-    "start": "react-app-rewired start", 
-    "build": "react-app-rewired build", 
-    "test": "react-app-rewired test", 
-    "eject": "react-scripts eject" 
-   },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
