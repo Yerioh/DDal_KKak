@@ -20,12 +20,13 @@ const Basket = () => {
     // 세션스토리지에서 장바구니 데이터 불러오기
     useEffect(() => {
         // 세션 스토리지에서 아이템 로드
-        const storedCartItems = sessionStorage.getItem('cartItem');
-        if (storedCartItems) {
-            const loadedCartItems = JSON.parse(storedCartItems);
-            setCartItem(loadedCartItems);
-        }
-    }, []);
+        const storedCartItems = JSON.parse(sessionStorage.getItem('cartItem'));
+        const sotredBuyItems = JSON.parse(sessionStorage.getItem('buyItem'))
+        setCartItem(storedCartItems);
+        sotredBuyItems = []
+        sessionStorage.setItem('buyItem', JSON.stringify(sotredBuyItems));
+
+        }, []);
     // 현재 로그인된 아이디에 해당하는 세션만 걸러내기
     const UserIdFilter = cartItem.filter(item => item.USER_ID === USER_ID)
     useEffect(() => {

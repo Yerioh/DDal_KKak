@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/esm/Button';
 import Post from '../components/Post'
 import BuyScriptItem from '../components/BuyScriptItem';
 import BuyScriptSummary from '../components/BuyScriptSummary';
+import { useSelector } from 'react-redux';
 
 const BuyScript = () => {
 
@@ -26,15 +27,21 @@ const BuyScript = () => {
   const handleComplete = (data) => {
     setPopup(!popup);
   }
-//   useEffect(() => {
-//     const buyItems = sessionStorage.getItem('buyItem');
-//     if (buyItems) {
-//         setBuyItem(JSON.parse(buyItems))
-//     }  
-//     console.log(buyItem, "장바구니페이지 처음 랜더링")
-// }, [])
+  const userId = useSelector((state) => state.session.id);
+
+  useEffect(() => {
+
+    const buyItems = JSON.parse(sessionStorage.getItem('buyItem'));
+    const UserIdFilter = buyItems.filter(item => item.USER_ID === userId)
+    setBuyItem(UserIdFilter)
+
+
+  }, [])
+  console.log('유저아이디필터:',buyItem)
+ 
+
   return (
-    <div className='buyscript'style={{ minWidth: "800px", margin: "0% 10%", padding: "0px 0px 50px 0px" }}>
+    <div className='buyscript' style={{ minWidth: "800px", margin: "0% 10%", padding: "0px 0px 50px 0px" }}>
       {/* 맨위 타이틀 텍스트 */}
       <div className='buyscript-top-text'>
         <div className='title'>
@@ -130,14 +137,9 @@ const BuyScript = () => {
           금액
         </div>
       </div>
-      <div>
-        {
-          buyItem.map=((item)=>{
-            <BuyScriptItem item={item}/> 
-          })
-        }
-        
-      </div>
+      <div>      
+              <BuyScriptItem item={buyItem[0]}/>    
+     </div>
       <BuyScriptSummary />
       <Link to="/complete" style={{ textDecoration: "none" }}>
         <div className='buy-submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
