@@ -13,10 +13,33 @@ const ImageAll = () => {
     axios.post("/imgCreate/shareImgShow").then((res) => {
       let data = res.data.result;
       // 이미지 모음 날짜 하드코딩한거 고쳐야됨 23-11-24 11:40 임휘훈
-      console.log("공유 이미지 가져오기", data);
       setImgCard(data);
     });
   }, []);
+
+  // 23-11-24 12:38 임휘훈 작성 : 이미지 정렬
+    /**최신순 정렬 함수*/
+    const date_Order = () => {
+      // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
+      let newArr = [...imgCard];
+      console.log("최신순 정렬 전 arr", newArr);
+      newArr.sort((a, b) => {
+        return new Date(b.DATE) - new Date(a.DATE);
+      });
+      console.log("최신순", newArr);
+      setImgCard(newArr);
+    };
+  
+    /**오래된순 정렬 함수*/
+    const old_Order = () => {
+      // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
+      let newArr = [...imgCard];
+      newArr.sort((a, b) => {
+        return new Date(a.DATE) - new Date(b.DATE);
+      });
+      console.log("오래된 순", newArr);
+      setImgCard(newArr);
+    };
 
   // 좋아요 기능
   return (
@@ -36,8 +59,8 @@ const ImageAll = () => {
         <div className="Search-Img-Nav">
           <div className="Search-Img-box">
             <span>인기순</span>
-            <span>최신순</span>
-            <span>오래된순</span>
+            <span onClick={date_Order}>최신순</span>
+            <span onClick={old_Order}>오래된순</span>
           </div>
         </div>
         <div className="search-Card mt-4">

@@ -57,7 +57,7 @@ const SearchCard = ({ data, index }) => {
           <span>{data.MEMBER_NAME} 님</span>
         </div> */}
         <div className="Card-date-title">
-          <Card.Title>역병의 핑크빈</Card.Title>
+          <Card.Title>{data.IMG_NAME}</Card.Title>
           <span>{data.MEMBER_NAME} 님</span>
         </div>
         <div className="Card-like-title">
@@ -72,7 +72,7 @@ const SearchCard = ({ data, index }) => {
               <span>{likeCnt}</span>
             </div>
           )}
-          <span>{data.DATE}</span>
+          <span>{data.DATE.slice(0, 10)}</span>
         </div>
       </Card.Body>
       {shareModal && (

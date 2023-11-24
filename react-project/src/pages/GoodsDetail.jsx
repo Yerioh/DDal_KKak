@@ -16,7 +16,6 @@ import aws from "aws-sdk";
 import { Buffer } from "buffer";
 import { useSelector } from 'react-redux';
 
-
 const GoodsDetail = () => {
     // 23-11-24 오전 12:20 박지훈 작성
   // aws 연동을 위한 config
@@ -182,11 +181,17 @@ const GoodsDetail = () => {
     }
   }, [count])
 
+  const USER_ID = useSelector((state)=>state.session.id)
+  // const dispatch = useDispatch()
+
   /**장바구니에 담기위한 함수 */
   function moveItemToCart(goods_info) {
+
+
     console.log('12312312',goods_info)
     //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
     let newCartItem = {
+      'USER_ID' : `${USER_ID}`, 
       'PROD_ID': `${prd_info_filter[0].PROD_ID}`, // 상품 ID
       'PROD_NAME': `${prd_info_filter[0].PROD_NAME}`, // 상품명
       'PROD_SIZE': `${radioValue}`, // 상품 사이즈
