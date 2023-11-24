@@ -87,7 +87,7 @@ router.post("/saveImg", (req, res) => {
   conn.connect();
   conn.query(
     insertQuery,
-    [userId, positive, negative, img_info],
+    [userId, positive, negative, img_info, imgName],
     (err, result) => {
       if (err) {
         console.log("이미지 DB 저장 쿼리문 오류", err);
@@ -104,13 +104,18 @@ router.post("/myimg", (req, res) => {
   let userId = req.body.id; // 유저 아이디
 
   let selectQuery =
-    "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC";
+    `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE, IMG_SHARE, 
+    (SELECT COUNT(*)
+       FROM TB_LIKE
+      WHERE IMG_ID = TB_GEN_IMG.IMG_ID) AS CNT
+       FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC`;
   conn.connect();
   conn.query(selectQuery, [userId], (err, result) => {
     if (err) {
       console.log("내 저장 이미지 쿼리문 오류", err);
     } else {
       console.log("내 저장 이미지 불러오기 성공", result);
+      console.log(result);
       res.json({ imgArray: result });
     }
   });

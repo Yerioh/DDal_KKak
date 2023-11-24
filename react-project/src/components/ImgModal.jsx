@@ -1,4 +1,4 @@
-import React, { createElement, useRef, useState } from "react";
+import React, { createElement, useEffect, useRef, useState } from "react";
 import "../css/ImgModal.css";
 import { Link } from "react-router-dom";
 import axios from "../axios";
@@ -19,7 +19,6 @@ const ImgModal = ({
 }) => {
   // 23-11-20 11:01 임휘훈 작성
   const imgRef = useRef();
-  console.log("부정프롬프트와 인덱스", ImgArray[0].IMG_NE_PROMPT, index);
   /** 내 저장 이미지 다운로드 함수 */
   const downLoadBtn = () => {
     domtoimage.toBlob(imgRef.current).then((blob) => {
@@ -35,6 +34,15 @@ const ImgModal = ({
 
   // 내 저장 이미지 모달 내 공유 여부 state
   const [checked, setChecked] = useState(false);
+  
+  // 23-11-24 09:35 임휘훈 작성 : 공유 토글 DB 연동
+  useEffect(() => {
+    if(ImgArray[index].IMG_SHARE === "Y"){ // 공유 허용
+      setChecked(true)
+    } else if(ImgArray[index].IMG_SHARE === "N"){ // 공유 비허용
+      setChecked(false)
+    }
+  }, [checked])
 
   // 내 저장 이미지 모달 체크 변경
   const handleChange = () => {
@@ -70,8 +78,7 @@ const ImgModal = ({
                   <div className="like-box">
                     <div className="like-btn">
                       <FaHeart color="red" />
-                      <span>100</span>
-                      {/* <span>{likeCnt}</span> */}
+                      <span>{ImgArray[index].CNT}</span>
                     </div>
                     <div className="share-toggle-box">
                       <span>공유</span>
