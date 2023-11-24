@@ -12,6 +12,8 @@ const ImageAll = () => {
   useEffect(() => {
     axios.post("/imgCreate/shareImgShow").then((res) => {
       let data = res.data.result;
+      // 이미지 모음 날짜 하드코딩한거 고쳐야됨 23-11-24 11:40 임휘훈
+      console.log("공유 이미지 가져오기", data);
       setImgCard(data);
     });
   }, []);

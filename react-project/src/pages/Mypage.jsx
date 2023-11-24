@@ -33,7 +33,6 @@ const Mypage = () => {
     if(isLogin){
       axios.post("/user/mypage", {userID : id})
       .then((res) => {
-        console.log("기본 정보 셋팅");
         if (res.data.member_email !== '0'){
           setEmail(res.data.member_email) // DB에서 가져온 Email을 state에 저장
         }
@@ -53,23 +52,21 @@ const Mypage = () => {
     }
   }, [isLogin])
 
-  //내 정보 컴포넌트 호출
+  /**내 정보 컴포넌트 호출*/
   const user_infoPage = () => {
-    console.log("내 정보 페이지 조건함수")
     setpageState("user_info");
   };
 
-  // 내 저장 이미지 컴포넌트 호출
+  /**내 저장 이미지 컴포넌트 호출*/
   const Save_Image = () => {
     setpageState("Save_Image");
   };
 
-  //회원 탈퇴 모달창 11.15 11:40
+  /**회원 탈퇴 모달창*/
   const delete_Modal = () => {
     // setdelete_user의 상태를 변경하는 메소드를 구현
     // !false -> !true -> !false
     setdelete_user(!delete_user);
-    console.log("회원탈퇴 모달", delete_user)
   };
 
   return (

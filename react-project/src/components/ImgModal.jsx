@@ -12,10 +12,10 @@ import { useSelector } from "react-redux";
 // 회원탈퇴 모달, 이미지 상세정보 모달
 const ImgModal = ({
   isOpen, // 이미지 상세 모달 state
-  openModalHandler, // 이미지 상세 모달 함수
   ImgArray, // 이미지 배열
   index,
   handleCheckboxChange,
+  openModalHandler, // 이미지 상세 모달 함수
   updateCheckedImages,
   delImg_Btn,
 }) => {
@@ -29,25 +29,18 @@ const ImgModal = ({
     });
   };
 
-  /* 
-        Props로 받아야할 Data
-        isOpen 모달 상태, openModalHandler : 모달 열고 닫기
-        이미지 URL, 사용자 Prompt, NPrompt
-    */
-
   // 내 저장 이미지 모달 내 공유 여부 state
   const [checked, setChecked] = useState(false);
   
   // 23-11-24 09:35 임휘훈 작성 : 공유 토글 DB 연동
   useEffect(() => {
     axios.post("/imgCreate/myimg", { id: userId }).then((res) => {
-      console.log(res.data);
-      // let isShare = res.data.IMG_SHARE;
-      // if(ImgArray[index].IMG_SHARE === "Y"){ // 공유 허용
-      //   setChecked(true)
-      // } else if(ImgArray[index].IMG_SHARE === "N"){ // 공유 비허용
-      //   setChecked(false)
-      // }
+      let isShare = res.data.imgArray[index].IMG_SHARE;
+      if(isShare === "Y"){ // 공유 허용
+        setChecked(true)
+      } else if(isShare === "N"){ // 공유 비허용
+        setChecked(false)
+      }
     });
   }, [])
 

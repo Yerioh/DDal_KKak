@@ -179,7 +179,8 @@ router.post('/imgShare', (req,res)=>{
 
 // 이미지 더보기 페이지 이미지 출력
 router.post('/shareImgShow', (req,res)=>{
-  let sql = `SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, A.IMG_NAME, B.MEMBER_NAME, 
+  let sql = `SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, A.IMG_NAME, DATE_FORMAT(A.GENERATED_AT, '%Y-%m-%d') AS DATE,
+   B.MEMBER_NAME, 
   (SELECT COUNT(*) CNT 
      FROM TB_LIKE
     WHERE IMG_ID= A.IMG_ID) AS CNT

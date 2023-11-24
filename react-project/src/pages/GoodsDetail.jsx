@@ -97,7 +97,6 @@ const GoodsDetail = () => {
    if (typeof getImgDataRef.current === "function") {
      const fnOptionsIfNeededFoundInDocs = {};
      const imageData = getImgDataRef.current(fnOptionsIfNeededFoundInDocs);
-     console.log('이미지데이터',imageData);
    }
  };
   /** 의류 앞뒤 토글 함수 */
@@ -110,22 +109,8 @@ const GoodsDetail = () => {
   // const prd_color_filter = prd_color.filter(item => item.PROD_ID === prd_id)
   // const prd_size_filter = prd_size.filter(item => item.PROD_ID === prd_id)
 
-
-  console.log(prd_info_filter, "필터링정보")
-  console.log(prd_color_filter, "필터링 컬러 정보")
-  console.log(prd_size_filter, "필터링 사이즈 정보")
-  console.log(radioValue, "라디오스테이트")
-  console.log(prd_goods_img,"색상 이미지")
-
-
-
-
-
-
-
   //수량 마이너스 버튼 간단함수
   const subtract = () => {
-    console.log('-')
     if (count > 1) {
       setCount(count - 1)
     }
@@ -145,9 +130,6 @@ const GoodsDetail = () => {
     } else {
       setSum(price * count)
     }
-    console.log("useEffect 실행")
-    console.log(count)
-    console.log(price)
   }, [count])
 
   /**장바구니에 담기위한 함수 */
@@ -173,8 +155,6 @@ const GoodsDetail = () => {
     if (cartItems) {
       // JSON 형태로 변환하고 새 상품 추가
       cartItems = JSON.parse(cartItems);
-      console.log((cartItems.length), "세션기능TEST")
-      console.log(newCartItem);
 
       // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
       for (let i = 0; i < parseInt(cartItems.length); i++) {
@@ -246,7 +226,6 @@ const GoodsDetail = () => {
           <h5 style={{ fontWeight: "bold" }}>색상</h5>
           <div className="GoodsDetail-radio-flex" >
             {prd_color_filter.map((item) => {
-              console.log(item.COLOR_CODE)
               return (
                 <div style={{ margin: "0px 10px" }}>
                   <h6 style={item.COLOR_CODE === '#FFFFFF' ? { color: 'black' } : { color: `${item.COLOR_CODE}` }}>{item.COLOR_NAME}</h6>
