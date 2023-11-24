@@ -65,7 +65,6 @@ router.post("/choiceImg", (req, res) => {
     .post(`${flaskServer}/imageChoice`, { data: data, id: req.session.userId })
     .then((response) => {
       let data = response.data;
-      console.log(data);
       res.json({ choiceImg: true });
     });
 });
@@ -80,7 +79,6 @@ router.post("/saveImg", (req, res) => {
   // 이미지 고유한 url
   // 이미지 이름
   let {userId, positive, negative, img_info, imgName} = req.body
-  console.log(imgName);
 
   let insertQuery =
     "INSERT INTO TB_GEN_IMG (MEMBER_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, GENERATED_AT, IMG_NAME) VALUES (?, ?, ?, ?,  DATE_ADD(NOW(), INTERVAL 9 HOUR), ?)";
@@ -209,7 +207,6 @@ router.post('/mainImgShow', (req,res)=>{
       console.log('이미지 불러오기 쿼리문 에러', err)
     }
     else{
-      console.log(result)
       res.json({result})
     }
   })
