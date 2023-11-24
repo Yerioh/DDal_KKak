@@ -22,7 +22,6 @@ const GoodsEdit = ({imgData, getImgDataRef}) => {
     axios.post('/imgCreate/myimg', {id : useId})
       .then(res=>{
         let gallery = res.data.imgArray
-        console.log('갤라리', gallery)
         // 굿즈 편집에 사용할 내 저장 이미지 url 생성        
         const newGallery = gallery.map((data)=>{
           return {
