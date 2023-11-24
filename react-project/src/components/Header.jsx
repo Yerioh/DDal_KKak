@@ -42,8 +42,11 @@ const Header = () => {
               <Link className="nav-link" to="/image-create">
                 <span>이미지 생성</span>
               </Link>
+              <Link className="nav-link" to="/imageall">
+                <span>이미지 모음</span>
+              </Link>
               <Link className="nav-link" to="/goodslist">
-                <span>굿즈 페이지</span>
+                <span>굿즈</span>
               </Link>
             </div>
 
