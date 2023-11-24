@@ -240,7 +240,7 @@ const SaveImage = () => {
                   updateCheckedImages();
                 }}
               ></label>
-              <span>{image?.DATE}</span>
+              <span>{image.DATE.slice(0, 10)}</span>
             </div>
             {/* </div> */}
           </div>

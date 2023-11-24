@@ -104,7 +104,7 @@ router.post("/myimg", (req, res) => {
   let userId = req.body.id; // 유저 아이디
 
   let selectQuery =
-    `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d') AS DATE, IMG_SHARE, IMG_NAME,
+    `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE, IMG_SHARE, IMG_NAME,
     (SELECT COUNT(*)
        FROM TB_LIKE
       WHERE IMG_ID = TB_GEN_IMG.IMG_ID) AS CNT
@@ -142,7 +142,11 @@ router.post("/deleteImg", async(req, res) => {
   // 삭제 쿼리
   let deleteQuery = `DELETE FROM TB_GEN_IMG WHERE IMG_URL IN (${sqlImgUrl})`;
   // 선택 쿼리
-  let selectQuery = "SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y년 %m월 %d일') AS DATE  FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT"
+  let selectQuery = `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE, IMG_SHARE, IMG_NAME,
+                    (SELECT COUNT(*)
+                       FROM TB_LIKE
+                      WHERE IMG_ID = TB_GEN_IMG.IMG_ID) AS CNT
+                       FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC`;
   conn.connect();
   conn.query(deleteQuery, (err, result) => {
     if (err) {
@@ -179,7 +183,7 @@ router.post('/imgShare', (req,res)=>{
 
 // 이미지 더보기 페이지 이미지 출력
 router.post('/shareImgShow', (req,res)=>{
-  let sql = `SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, A.IMG_NAME, DATE_FORMAT(A.GENERATED_AT, '%Y-%m-%d') AS DATE,
+  let sql = `SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, A.IMG_NAME, DATE_FORMAT(A.GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE,
    B.MEMBER_NAME, 
   (SELECT COUNT(*) CNT 
      FROM TB_LIKE
