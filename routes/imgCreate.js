@@ -179,7 +179,11 @@ router.post('/imgShare', (req,res)=>{
 
 // 이미지 더보기 페이지 이미지 출력
 router.post('/shareImgShow', (req,res)=>{
-  let sql = 'SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, B.MEMBER_NAME ,(SELECT COUNT(*) CNT, A.IMG_NAME FROM TB_LIKE WHERE IMG_ID= A.IMG_ID) AS CNT FROM TB_GEN_IMG A INNER JOIN TB_MEMBER B ON(A.MEMBER_ID = B.MEMBER_ID) WHERE IMG_SHARE = "Y"'
+  let sql = `SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, A.IMG_NAME, B.MEMBER_NAME, 
+  (SELECT COUNT(*) CNT 
+     FROM TB_LIKE
+    WHERE IMG_ID= A.IMG_ID) AS CNT
+   FROM TB_GEN_IMG A INNER JOIN TB_MEMBER B ON(A.MEMBER_ID = B.MEMBER_ID) WHERE IMG_SHARE = "Y"`
   conn.connect()
   conn.query(sql, (err,result)=>{
     if(err){

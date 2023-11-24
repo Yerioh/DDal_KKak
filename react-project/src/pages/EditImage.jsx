@@ -117,7 +117,6 @@ function EditImage() {
         source={imgUrl}
         // 생성된 이미지 주소
         onSave={(editedImageObject, designState) => {
-          console.log("saved", editedImageObject, designState);
           // 편집된 base64 이미지
           const base64 = editedImageObject.imageBase64;
           const imgName = editedImageObject.name; // 설정한 이미지 이름
@@ -184,6 +183,7 @@ function EditImage() {
         }}
    
         // 세이브 버튼 및 추가 효과들
+        defaultSavedImageName="무제"
         tabsIds={[TABS.ADJUST, TABS.ANNOTATE, TABS.FILTERS]} // or {['Adjust', 'Annotate', 'Watermark']}
         defaultTabId={TABS.ADJUST} // or 'Annotate'
         defaultToolId={TOOLS.CROP} // or 'Text'
