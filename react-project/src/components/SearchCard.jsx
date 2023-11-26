@@ -46,7 +46,7 @@ const SearchCard = ({ data, index }) => {
     setShareModal((prevshareModal) => !prevshareModal);
   };
   return (
-    <Card className="mb-3 Card-div" style={{ width: "14rem" }}>
+    <Card className="mb-3 Card-div" style={{ width: "17rem" }}>
       <Card.Img
         variant="top"
         src={`${process.env.REACT_APP_AWS_BUCKET_URL}/${data.IMG_URL}`}

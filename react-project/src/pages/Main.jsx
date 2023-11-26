@@ -87,7 +87,7 @@ const Main = () => {
       <div className="Main-text-img">
         <div className="Main-head-btn">
           <div className="Main-head">
-            <h2>원하는 그림, 이미지, 굿즈</h2>
+            <span>원하는 그림, 이미지, 굿즈</span>
             <br />
             <span>생성형AI 기술을 활용한</span>
             <span>자동 이미지 생성</span>

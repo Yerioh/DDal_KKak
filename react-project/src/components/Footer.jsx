@@ -8,7 +8,7 @@ export default function App() {
         &copy; {new Date().getFullYear()} Copyright:{' '}
         <a className='text-dark'> 
         {/* href='https://mdbootstrap.com/' */}
-          DDAL KKAK
+          광주인공지능사관학교 딸깍
         </a>
       </div>
     </MDBFooter>
