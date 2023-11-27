@@ -15,6 +15,7 @@ import {v4 as uuidv4} from 'uuid';
 import aws from "aws-sdk";
 import { Buffer } from "buffer";
 import { useSelector } from 'react-redux';
+import Alert from '@mui/material/Alert';
 
 const GoodsDetail = () => {
     // 23-11-24 오전 12:20 박지훈 작성
@@ -37,7 +38,9 @@ const GoodsDetail = () => {
   /** 제품 색상정보 저장 state */
   const [color, setColor] = useState('')
   // 상품별 상세페이지 로딩을 위한 useParams
-  const { PROD_ID } = useParams();
+  const {PROD_ID} = useParams();
+  // 장바구니 추가체크를 위한 State
+  const [basketCheck, setBasketCheck] = useState(false);
 
   // 해당페이지의 상품 ID
   let prd_id = PROD_ID
@@ -230,7 +233,9 @@ const GoodsDetail = () => {
     }
     // 업데이트된 장바구니 데이터를 다시 JSON 형태로 변환하여 저장
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
+    setBasketCheck(true)
   }
+
 
 
   return (
@@ -339,10 +344,21 @@ const GoodsDetail = () => {
         <br />
         <hr className='hr-style' />
 {/* 장바구니 담기 버튼 / 클릭시 세션로컬스토리지에 저장됨 */}
-        <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
+       
+          { basketCheck == true ?
+          ( <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
           <Button variant="outline-secondary" onClick={getImgData}
+          style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
+        <Alert severity="success" style={{marginTop:"10px"}}> 장바구니 담기 성공!</Alert></div>)
+        :
+        (
+          <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
+        <Button variant="outline-secondary" onClick={getImgData}
+            style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button></div>)
+          }
+          {/* <Button variant="outline-secondary" onClick={getImgData}
             style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
-        </div>
+          <Alert severity="success" style={{marginTop:"10px"}}> 장바구니 담기 성공!</Alert> */}
       </div>
       </>
       )}
