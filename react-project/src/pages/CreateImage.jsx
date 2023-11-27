@@ -106,6 +106,7 @@ const CreateImage = () => {
   // 이미지 생성 버튼 클릭
   const createImg = () => {
     // 사용자 아이디 전송해서 대기열에 추가
+    console.log("딸깍 버튼");
     socket.emit('createClick', {id : userId})
   };
 

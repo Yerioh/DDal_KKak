@@ -22,13 +22,22 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
       "": "선택 없음",
     },
     logo: {
-      ",Logo": "로고",
-      ",Typography": "타이포그래피",
+      ",Logo Icon, Signature Logo": "아이콘 로고",
+      // ",Typography": "타이포그래피",
       ",Vector logo, Vector Art, Vector graphics, Adobe illustrator":
-        "Vector 로고",
-      ",WordMark": "Text 로고",
+        "벡터 로고",
+      ",Emblem Logo": "엠블렘 로고",
       "": "선택 없음",
     },
+    style : {
+      ",Classic" : "클래식",
+      ",Modern" : "모던",
+      ",Minimalism" : "미니멀리즘",
+      ",Vintage" : "빈티지",
+      ",Retro" : '레트로',
+      ",Graphic" : "그래픽",
+      "": "선택 없음",
+    }
   };
   /** 키워드 선택 완료 함수 */
   const completeKeyword = (e) => {
@@ -37,14 +46,19 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
     // 각 테마별 value 값 가져오기
     let color = e.target.colorThema.value;
     let logo = e.target.logoThema.value;
+    let style = e.target.styleThema.value;
+    console.log("스타일테마", style);
    if(color!==''){
     keywordArray.push(color)
    }
    if(color!==''){
     keywordArray.push(logo)
    }
+   if(color!==''){
+    keywordArray.push(style)
+   }
     setPositiveKeyword(keywordArray);
-    setKeywordLabel([radioOption.color[color], radioOption.logo[logo]])
+    setKeywordLabel([radioOption.color[color], radioOption.logo[logo], radioOption.style[style]])
     closeKeyWrodModal();
   };
 
@@ -124,21 +138,11 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                       <input
                         className="keyWord-button"
                         type="radio"
-                        value=",Logo"
+                        value=",Logo Icon, Signature Logo"
                         name="logoThema"
-                        defaultChecked={keywordLabel[1]==='로고' && true}
+                        defaultChecked={keywordLabel[1]==='아이콘 로고' && true}
                       ></input>
-                      <div className="showKeywordCheckbox">로고</div>
-                    </label>
-                    <label>
-                      <input
-                        className="keyWord-button"
-                        type="radio"
-                        value=",Typography"
-                        name="logoThema"
-                        defaultChecked={keywordLabel[1]==='타이포그래피' && true}
-                      ></input>
-                      <div className="showKeywordCheckbox">타이포그래피</div>
+                      <div className="showKeywordCheckbox">아이콘 로고</div>
                     </label>
                     <label>
                       <input
@@ -146,9 +150,9 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",Vector logo, Vector Art, Vector graphics, Adobe illustrator"
                         name="logoThema"
-                        defaultChecked={keywordLabel[1]==='Vector 로고' && true}
+                        defaultChecked={keywordLabel[1]==='벡터 로고' && true}
                       ></input>
-                      <div className="showKeywordCheckbox">Vector 로고</div>
+                      <div className="showKeywordCheckbox">벡터 로고</div>
                     </label>
                     <label>
                       <input
@@ -156,9 +160,9 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",WordMark"
                         name="logoThema"
-                        defaultChecked={keywordLabel[1]==='Text 로고'}
+                        defaultChecked={keywordLabel[1]==='엠블렘 로고'}
                       ></input>
-                      <div className="showKeywordCheckbox">Text 로고</div>
+                      <div className="showKeywordCheckbox">엠블렘 로고</div>
                     </label>
                     <label>
                       <input
@@ -167,6 +171,81 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=""
                         name="logoThema"
                         defaultChecked={keywordLabel[1]===undefined || keywordLabel[1]==='선택 없음' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">선택 없음</div>
+                    </label>
+                  </div>
+                </div>
+                <div className="keywordModal-thema">
+                  <h4>로고 스타일</h4>
+                  <div className="keywordModal-checkbox">
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=",Classic"
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]==='클래식' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">클래식</div>
+                    </label>
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=",Modern"
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]==='모던' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">모던</div>
+                    </label>
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=",Minimalism"
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]==='미니멀리즘' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">미니멀리즘</div>
+                    </label>
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=",Vintage"
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]==='빈티지' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">빈티지</div>
+                    </label>
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=",Retro"
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]==='레트로' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">레트로</div>
+                    </label>
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=",Graphic"
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]==='그래픽' && true}
+                      ></input>
+                      <div className="showKeywordCheckbox">그래픽</div>
+                    </label>
+                    <label>
+                      <input
+                        className="keyWord-button"
+                        type="radio"
+                        value=""
+                        name="styleThema"
+                        defaultChecked={keywordLabel[2]===undefined || keywordLabel[2]==='선택 없음' && true}
                       ></input>
                       <div className="showKeywordCheckbox">선택 없음</div>
                     </label>
