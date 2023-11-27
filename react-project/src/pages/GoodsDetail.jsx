@@ -134,7 +134,8 @@ const GoodsDetail = () => {
         Key : goods_info,
         Body : base64Data,
         ContentEncoding : 'base64',
-        ContentType : `image/${type}`
+        ContentType : `image/${type}`,
+        CacheControl : 'no-store'
       }
     })
     

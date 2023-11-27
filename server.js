@@ -97,6 +97,7 @@ io.on('connection', (socket)=>{
         io.emit('createList', {createList : data})
       })
   })
+
   io.on('disconnecting', ()=>{
     console.log('이미지 생성 종료')
   })

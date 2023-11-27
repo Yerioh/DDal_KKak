@@ -51,6 +51,8 @@ const CreateImage = () => {
   // 이미지 생성 상태 state
   const [creating, setCreating] = useState(false)
 
+  const [isConnected, setIsConnected] = useState(socket.connected)
+
   // 이미지 대기 리스트 최신화
   useEffect(()=>{
 
@@ -94,13 +96,15 @@ const CreateImage = () => {
 
   // socket 연결 useEffect
   useEffect(() => {
+    // 소켓 연결
+    socket.connect()
     // 이미지 생성 대기열 변경
     socket.on('createList', (data)=>{
       setCreateList(data.createList)
     })   
     return () => {
-    };
-  }, []);
+    }
+  }, [])
 
   // 23-11-20 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
