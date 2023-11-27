@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../css/Imagelayout.css";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import PageCountButton from "../components/PageCountButton";
 import Keyword from "../components/Keyword";
-import axios from "../axios";
 import axiosProgress from "../axiosProgress";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -15,6 +13,10 @@ import guideKeyboard from "../img/guide-keyboard.png";
 import guideClick from "../img/guide-click.png";
 import guideBang from "../img/guide-bang.png";
 import { socket } from "../socket";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
   // 23-11-15 오후 17:00 박지훈 작성
@@ -47,71 +49,67 @@ const CreateImage = () => {
 
   // 유저 아이디
   const userId = useSelector((state) => state.session.id);
-  const [createList, setCreateList] = useState([])
+  const [createList, setCreateList] = useState([]);
   // 이미지 생성 상태 state
-  const [creating, setCreating] = useState(false)
+  const [creating, setCreating] = useState(false);
 
-  const [isConnected, setIsConnected] = useState(socket.connected)
+  const [isConnected, setIsConnected] = useState(socket.connected);
 
   // 이미지 대기 리스트 최신화
-  useEffect(()=>{
-
-    if(createList.length !== 0){
+  useEffect(() => {
+    if (createList.length !== 0) {
       // 대기열 0번째 인덱스와 실행한 유저 ID가 같고, 이미지가 생성중이지 않을 때 실행
-      if(createList[0].MEMBER_ID === userId && !creating){
+      if (createList[0].MEMBER_ID === userId && !creating) {
         // 긍정 프롬프트 공백 아닐 때 실행
-    if (positivePrompt !== "" && negativePrompt !== "") {
-      setBtnHidden("hidden")
-      // 이미지 생성중 상태로 변경
-      setCreating(true)
-      axiosProgress
-        .post("/imgCreate/stable", {
-          positivePrompt: positivePrompt + positiveKeyword.join(""), // 긍정프롬프트 + 키워드
-          negativePrompt: negativePrompt,
-          countImg: countImg,
-        })
-        .then((res) => {
-          let data = res.data;
-          console.log("생성된 이미지", data);
-          // axios 통신 중, 에러 발생 시
-          if (data.createError) {
-            dispatch(ProgressReducerActions.resetProgress());
-            alert(
-              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
-            );
-          }
-          if (data.imgData.img_data !== undefined) {
-            setImgData(data.imgData.img_data);
-          }
-          setBtnHidden("")
-        });
-    }
-    else{
-      alert("긍정, 부정 프롬프트를 입력해주세요.")
-    }
+        if (positivePrompt !== "" && negativePrompt !== "") {
+          setBtnHidden("hidden");
+          // 이미지 생성중 상태로 변경
+          setCreating(true);
+          axiosProgress
+            .post("/imgCreate/stable", {
+              positivePrompt: positivePrompt + positiveKeyword.join(""), // 긍정프롬프트 + 키워드
+              negativePrompt: negativePrompt,
+              countImg: countImg,
+            })
+            .then((res) => {
+              let data = res.data;
+              console.log("생성된 이미지", data);
+              // axios 통신 중, 에러 발생 시
+              if (data.createError) {
+                dispatch(ProgressReducerActions.resetProgress());
+                alert(
+                  "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
+                );
+              }
+              if (data.imgData.img_data !== undefined) {
+                setImgData(data.imgData.img_data);
+              }
+              setBtnHidden("");
+            });
+        } else {
+          alert("긍정, 부정 프롬프트를 입력해주세요.");
+        }
       }
     }
-  },[createList])
-
+  }, [createList]);
 
   // socket 연결 useEffect
   useEffect(() => {
     // 소켓 연결
-    socket.connect()
+    socket.connect();
     // 이미지 생성 대기열 변경
-    socket.on('createList', (data)=>{
-      setCreateList(data.createList)
-    })   
-    return () => {
-    }
-  }, [])
+    socket.on("createList", (data) => {
+      setCreateList(data.createList);
+    });
+    return () => {};
+  }, []);
 
   // 23-11-20 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
   const createImg = () => {
     // 사용자 아이디 전송해서 대기열에 추가
     console.log("딸깍 버튼");
-    socket.emit('createClick', {id : userId})
+    socket.emit("createClick", { id: userId });
   };
 
   //23-11-16 오전 9:36 나범수 navigate 추가 -> 페이지 개수 전달 위함.
@@ -120,8 +118,8 @@ const CreateImage = () => {
   // 2023.11.20 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가 -박지훈-
   const goToResultPage = () => {
     // 이미지 생성 state 변경(종료)
-    setCreating(false)
-    socket.emit('deQueue', {id : userId})
+    setCreating(false);
+    socket.emit("deQueue", { id: userId });
     // socket.disconnect();
     console.log("Navigating with imageCount:", countImg);
     setTimeout(
@@ -151,6 +149,72 @@ const CreateImage = () => {
       goToResultPage();
     }
   }, [progress, isLoading]);
+
+  //  모달 슬라이드바 다음페이지 이동 화살표
+  const NextArrow = ({ onClick }) => {
+    // props로 onClick을 전달해줘야 한다.
+    return (
+      <button
+        onClick={onClick}
+        type="button"
+        style={{
+          display: "block",
+          background: "red",
+          width: "15%",
+          height: "10%",
+          position: "absolute",
+          right: "10%",
+          zIndex: "50",
+          marginLeft: "5%",
+          border: "none",
+          background: "none",
+        }}
+      >
+        <img
+          src="./images/arrow-right2.png"
+          alt="left"
+          style={{ width: "100%", objectFit: "cover" }}
+        />
+      </button>
+    );
+  };
+  //  모달 슬라이드바 이전페이지 이동 화살표
+  const PrevArrow = ({ onClick }) => {
+    return (
+      <button
+        onClick={onClick}
+        type="button"
+        style={{
+          display: "block",
+          width: "15%",
+          height: "10%",
+          position: "absolute",
+          bottom: "-10%",
+          zIndex: "50",
+          marginLeft: "5%",
+          border: "none",
+          background: "none",
+        }}
+      >
+        <img
+          src="./images/arrow-left2.png"
+          alt="left"
+          style={{ width: "100%", objectFit: "cover" }}
+        />
+      </button>
+    );
+  };
+
+  // 가이드 모달 슬라이드 배너
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />, // 화살표 버튼을 커스텀해서 사용
+    prevArrow: <PrevArrow />,
+  };
 
   return (
     // 이미지 생성페이지 전체
@@ -243,64 +307,83 @@ const CreateImage = () => {
         >
           <div className="guidemodal-body">
             <h2>어떻게 만들까요?</h2>
+
             <div className="guidemodal-content">
-              <div className="guidemodal-guideinfo">
-                <img
-                  src={guideKeyboard}
-                  alt=""
-                  className="guidemodal-guideinfo-img"
-                />
-                <div className="guidemodal-guideinfo-info">
-                  <span>만들고 싶은 이미지와</span>
-                  <span>관련된 단어나 문장을</span>
-                  <span>
-                    <span className="bold">"넣을 단어"</span>에 입력해주세요.
-                  </span>
+              <Slider {...settings}>
+                <div>
+                  <div className="guidemodal-guideinfo">
+                    <img
+                      src={"./images/inputguide.png"}
+                      alt=""
+                      className="guidemodal-guideinfo-img"
+                      style={{ marginTop: "45%" }}
+                    />
+                    <div
+                      className="guidemodal-guideinfo-info"
+                      style={{ marginTop: "30%" }}
+                    >
+                      <span>
+                        만들고 싶은 이미지와 관련된 단어나 문장을{' '}
+                        <span className="bold">"핵심 키워드"</span>에
+                        입력해주세요.
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="guidemodal-guideinfo">
-                <img
-                  src={guideBang}
-                  alt=""
-                  className="guidemodal-guideinfo-img"
-                />
-                <div className="guidemodal-guideinfo-info">
-                  <span>어떻게 써야할지 어렵나요?</span>
-                  <span>
-                    저희가 <span className="bold">키워드</span>를 준비했어요.
-                  </span>
-                  <span>키워드를 클릭! 클릭!</span>
+                <div className="guidemodal-guideinfo">
+                  <img
+                    src={"./images/guidekeyword.png"}
+                    alt=""
+                    className="guidemodal-guideinfo-img"
+                  />
+                  <div className="guidemodal-guideinfo-info">
+                    <span>
+                      어떻게 써야할지 어렵나요? 저희가{" "}
+                      <span className="bold">키워드</span>를 준비했어요.
+                    </span>
+                    <span>키워드를 클릭! 클릭!</span>
+                  </div>
                 </div>
-              </div>
-              <div className="guidemodal-guideinfo">
-                <img
-                  src={guideKeyboard}
-                  alt=""
-                  className="guidemodal-guideinfo-img"
-                />
-                <div className="guidemodal-guideinfo-info">
-                  <span>넣고 싶지 않은게 있나요?</span>
-                  <span>
-                    그렇다면 <span className="bold">"뺄 단어"</span>에
-                  </span>
-                  <span>관련 단어나 문장을 넣어봐요.</span>
+                <div className="guidemodal-guideinfo">
+                  <img
+                    src={"./images/guidenegative.png"}
+                    alt=""
+                    className="guidemodal-guideinfo-img"
+                    style={{ marginTop: "45%" }}
+                  />
+                  <div
+                    className="guidemodal-guideinfo-info"
+                    style={{ marginTop: "35%" }}
+                  >
+                    <span>
+                      넣고 싶지 않은게 있나요?그렇다면{" "}
+                      <span className="bold">"제외 키워드"</span>에 관련 단어나
+                      문장을 넣어봐요.
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="guidemodal-guideinfo">
-                <img
-                  src={guideClick}
-                  alt=""
-                  className="guidemodal-guideinfo-img"
-                />
-                <div className="guidemodal-guideinfo-info">
-                  <span>만들 이미지의 수를 선택!</span>
-                  <span>
-                    마지막으로 <span className="bold">"딸-깍!"</span>
-                  </span>
-                  <span>어때요? 참 쉽죠?</span>
+                <div className="guidemodal-guideinfo">
+                  <img
+                    src={"./images/DDALKKAK.png"}
+                    alt=""
+                    className="guidemodal-guideinfo-img"
+                    style={{ marginTop: "45%" }}
+                  />
+                  <div
+                    className="guidemodal-guideinfo-info"
+                    style={{ marginTop: "30%" }}
+                  >
+                    <span>만들 이미지의 수를 선택!</span>
+                    <p>
+                      마지막으로 <span className="bold">"딸-깍!"</span>
+                      {' '}<span>어때요? 참 쉽죠?</span>
+                    </p>
+                    
+                  </div>
                 </div>
-              </div>
+              </Slider>
             </div>
+
             <div className="guidemodal-footer">
               <button className="btnmy same-BTN" onClick={closeGuideModal}>
                 닫기
