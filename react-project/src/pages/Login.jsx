@@ -83,7 +83,7 @@ const Login = () => {
 
             <Form.Group className="mb-3">
               <Link className="d-grid gap-2">
-                <Button className="login-btn" onClick={login_btn} variant="dark">Login</Button>
+                <Button className="login-btn" variant="dark" onClick={login_btn} >Login</Button>
               </Link>
             </Form.Group>
 
@@ -91,13 +91,13 @@ const Login = () => {
               <Link to="/join">
                 <span className="text-btn">회원가입</span>
               </Link>
-              <Link to="/join">
+              {/* <Link to="/join">
                 <span className="text-btn">ID찾기</span>
               </Link>
 
               <Link to="/join">
                 <span className="text-btn">비밀번호 찾기</span>
-              </Link>
+              </Link> */}
             </Form.Group>
             <Form.Group className="mb-3">
               <ListGroup className="login-box mb-3" variant="flush">

@@ -1,0 +1,108 @@
+.Goodslist-Container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.GL-text-box{
+    padding: 30px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.GL-text-box > h2 {
+    font-weight: bold;
+}
+
+.Goodslist-Container > .Goodslist-navbar{
+   width: 80%;
+    display: flex;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    align-items: center;
+    border-bottom: 3px solid rgb(200,200,200);
+    gap: 30px;
+    justify-content: start;
+}
+.Goodslist-Container > .Goodslist-navbar > span:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+/* 필터 됐을때 bold */
+.Goodslist-navbar > .goods-filter-all, .goods-filter-clothes, .goods-filter-living, .goods-filter-phone_acc{
+    font-weight: bold;
+}
+.Goodslist-product-Card{
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+.GC-Img-box{
+    padding-top: 30px;
+}
+
+/* 이미지 hover시 버튼 block 적용 */
+.GC-Img-box:hover + .Start-shopping > .start-btn {
+    opacity: 1;  /* 투명도를 이용한 트랜지션 */
+    transform: translateY(0);  /* 이동을 이용한 트랜지션 */
+    transition: opacity 0.3s linear, transform 0.3s linear;
+}
+
+.Start-shopping {
+    position: relative;
+}
+
+.Start-shopping > .start-btn:hover {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.Start-shopping > .start-btn {
+    position: absolute;
+    height: 35px;
+    top: -55px;
+    left: 90px;
+    opacity: 0;
+    border-radius: 62.4375rem;
+    background-color: #FF7E00;
+    color: white;
+    transition: opacity 0.3s linear, transform 0.3s linear;
+    border: none;
+}
+
+@media(max-width:1497px){
+    .Goodslist-product-Card{
+        grid-template-columns: repeat(4,1fr);
+    }
+}
+
+@media(max-width:1176px){
+    .Goodslist-product-Card{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+ @media(max-width:766px){
+    .Goodslist-product-Card{
+        grid-template-columns: repeat(2,1fr);
+    }
+} 
+ @media(max-width:430px){
+    .Goodslist-product-Card{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .Goodslist-Container > .Goodslist-navbar{
+       gap: 20px;
+       min-width: 389px;
+       justify-content: center;
+     }
+     .GL-text-box{
+        min-width: 389px;
+        align-items: center;
+     }
+    /* .Card-box > .search-Card > .img-card{
+        justify-content: center;
+    } */
+} 

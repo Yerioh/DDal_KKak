@@ -11,7 +11,7 @@ const GoodsCard = ({ name, src, price, cate, PROD_ID }) => {
       <Link to={`/goodsdetail/${PROD_ID}`} style={{ textDecoration: "none" }}>
         <Card style={{ width: "18rem", textAlign: "center", border: "none" }}>
           {/* 제품 이미지 */}
-          <div style={{ textAlign: "center" }}>
+          <div className="GC-Img-box">
             <Card.Img
               variant="top"
               src={src}
@@ -22,6 +22,9 @@ const GoodsCard = ({ name, src, price, cate, PROD_ID }) => {
                 maxHeight: "350px",
               }}
             />
+          </div>
+          <div className="Start-shopping">
+              <button className="start-btn">Go Make Goods</button>
           </div>
           <Card.Body>
             {cate}
