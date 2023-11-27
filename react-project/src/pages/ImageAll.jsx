@@ -55,9 +55,7 @@ const ImageAll = () => {
         <div className="Search-Img-Nav">
           <div className="Search-Img-box">
             <span
-              className={`event-text-${sortImg === "New" ? "New" : null}`}
-              onClick={date_Order}
-            >
+              className={`event-text-${sortImg === "New" ? "New" : null}`} onClick={date_Order}>
               최신순
             </span>
             <span className={`event-text-${sortImg === "Old" ? "Old" : null}`} onClick={old_Order}>

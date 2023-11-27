@@ -37,7 +37,6 @@ const Basketitems = ({ items,index }) => {
     const handleCheckboxChange = () => {
         setChecked(!checked); // 체크 상태를 토글합니다.
         // 부모 컴포넌트에 변경 사항을 알립니다.
-        console.log(checked, '체크상태를 봅시다')
         GoToBuyItems(); // 체크된 경우에만 goToBuyItems 호출
     };
 
@@ -118,7 +117,6 @@ const Basketitems = ({ items,index }) => {
     }
 
     const GoToBuyItems = () => {
-
         if (JSON.parse(sessionStorage.getItem('buyItem')) == null) {
             if (checked == true) {
                console.log('여기는true')
@@ -183,7 +181,7 @@ const Basketitems = ({ items,index }) => {
                     </div>
                     <div style={{ height: "50%" }}>
                         {color_filter[0]?.COLOR_NAME}
-                        <button style={{ cursor: "default", borderRadius: "50%", width: "20px", height: "20px", backgroundColor: `${items.PROD_COLOR}` }}></button>
+                        <button style={{ cursor: "default", marginLeft : "5px", borderRadius: "50%", width: "20px", height: "20px", backgroundColor: `${items.PROD_COLOR}` }}></button>
                     </div>
                 </div>
             </div>
@@ -213,7 +211,7 @@ const Basketitems = ({ items,index }) => {
             <div className='vtline' ></div>
             {/* 간단한 함수로 각 상품의 총 금액 */}
             <div className='summary-price'>
-                {sum}원
+                {sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
             </div>
         </div>
     )

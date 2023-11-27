@@ -166,11 +166,11 @@ const Basket = () => {
                     <div style={{ width: "20%" }}>총 결제 금액</div>
                 </div>
                 <div style={{ display: "flex", textAlign: "center", borderTop: "1px solid lightgray", borderBottom: "1px solid lightgray" }}>
-                    <div style={{ width: "70%" }}>{sum}원</div>
+                    <div style={{ width: "70%" }}>{sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</div>
                     <div className='vtline' ></div>
-                    <div style={{ width: "20%" }}>0원</div>
+                    <div style={{ width: "20%" }}>1500원</div>
                     <div className='vtline' ></div>
-                    <div style={{ width: "20%" }}>10000원</div>
+                    <div style={{ width: "20%" }}>{(sum + 1500).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</div>
                 </div>
             </div>
 
