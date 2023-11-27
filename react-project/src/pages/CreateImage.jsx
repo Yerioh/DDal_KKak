@@ -14,10 +14,9 @@ import qMark from "../img/question-mark.png";
 import guideKeyboard from "../img/guide-keyboard.png";
 import guideClick from "../img/guide-click.png";
 import guideBang from "../img/guide-bang.png";
-import { socket } from '../socket';
+import { socket } from "../socket";
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
-
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState("");
@@ -29,7 +28,7 @@ const CreateImage = () => {
   const [guideModalOpen, setguideModalOpen] = useState(false);
 
   // "딸-깍! 버튼 상태
-  const [btnHidden, setBtnHidden] = useState("")
+  const [btnHidden, setBtnHidden] = useState("");
 
   // axios 진행률(0~100)
   const progress = useSelector((state) => state.progress.progress);
@@ -49,77 +48,72 @@ const CreateImage = () => {
   // 유저 아이디
   const userId = useSelector((state) => state.session.id);
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [createList, setCreateList] = useState(null)
+  const [createList, setCreateList] = useState(null);
 
   // 이미지 대기 리스트 최신화
-  useEffect(()=>{
-    if(createList !== null){
-      if(createList[0].MEMBER_ID === userId){
+  useEffect(() => {
+    if (createList !== null) {
+      if (createList[0].MEMBER_ID === userId) {
         // 긍정 프롬프트 공백 아닐 때 실행
-    if (positivePrompt !== "" && negativePrompt !== "") {
-      setBtnHidden("hidden")
-      axiosProgress
-        .post("/imgCreate/stable", {
-          positivePrompt: positivePrompt + positiveKeyword.join(""), // 긍정프롬프트 + 키워드
-          negativePrompt: negativePrompt,
-          countImg: countImg,
-        })
-        .then((res) => {
-          let data = res.data;
-          console.log("생성된 이미지", data);
-          // axios 통신 중, 에러 발생 시
-          if (data.createError) {
-            dispatch(ProgressReducerActions.resetProgress());
-            alert(
-              "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
-            );
-          }
-          if (data.imgData.img_data !== undefined) {
-            setImgData(data.imgData.img_data);
-          }
-          setBtnHidden("")
-        });
-    }
-    else{
-      alert("긍정, 부정 프롬프트를 입력해주세요.")
-    }
+        if (positivePrompt !== "" && negativePrompt !== "") {
+          setBtnHidden("hidden");
+          axiosProgress
+            .post("/imgCreate/stable", {
+              positivePrompt: positivePrompt + positiveKeyword.join(""), // 긍정프롬프트 + 키워드
+              negativePrompt: negativePrompt,
+              countImg: countImg,
+            })
+            .then((res) => {
+              let data = res.data;
+              console.log("생성된 이미지", data);
+              // axios 통신 중, 에러 발생 시
+              if (data.createError) {
+                dispatch(ProgressReducerActions.resetProgress());
+                alert(
+                  "이미지 생성 서버가 불안정합니다. 잠시 후 다시 시도해주세요."
+                );
+              }
+              if (data.imgData.img_data !== undefined) {
+                setImgData(data.imgData.img_data);
+              }
+              setBtnHidden("");
+            });
+        } else {
+          alert("긍정, 부정 프롬프트를 입력해주세요.");
+        }
       }
     }
-  },[createList])
+  }, [createList]);
 
   // socket 연결 useEffect
   useEffect(() => {
     socket.connect();
     function onConnect() {
       setIsConnected(true);
-      console.log('연결')
+      console.log("연결");
     }
 
     function onDisconnect() {
       setIsConnected(false);
-      console.log('아웃')
+      console.log("아웃");
     }
 
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('createList', (data)=>{
-      setCreateList(data.createList)
-    })   
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+    socket.on("createList", (data) => {
+      setCreateList(data.createList);
+    });
 
     return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
     };
   }, []);
-
-
-
-
 
   // 23-11-20 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
   const createImg = () => {
-    socket.emit('createClick', {id : userId})
+    socket.emit("createClick", { id: userId });
     // // 긍정 프롬프트 공백 아닐 때 실행
     // if (positivePrompt !== "" && negativePrompt !== "") {
     //   setBtnHidden("hidden")
@@ -155,7 +149,7 @@ const CreateImage = () => {
 
   // 2023.11.20 이미지 출력 결과 페이지로이동하는 함수. 페이지 개수 전달하고자 useNavigate 추가 -박지훈-
   const goToResultPage = () => {
-    socket.emit('deQueue', {id : userId})
+    socket.emit("deQueue", { id: userId });
     socket.disconnect();
     console.log("Navigating with imageCount:", countImg);
     setTimeout(
@@ -194,7 +188,7 @@ const CreateImage = () => {
           {/* 긍정 키워드 입력 구역  */}
           <div className="keyword">
             <h3 className="postive_head">
-              넣을 단어{" "}
+              핵심 키워드{" "}
               <img
                 src={qMark}
                 alt=""
@@ -224,7 +218,7 @@ const CreateImage = () => {
 
           {/* 부정 키워드 입력  */}
           <div className="negative_keyword">
-            <h3> 뺄 단어</h3>
+            <h3> 제외 키워드</h3>
             <Form.Label></Form.Label>
             <textarea
               type="text"
@@ -254,7 +248,10 @@ const CreateImage = () => {
               borderRadius={"5px"}
             />
             {/* <Link to='/image-edit'> */}
-            <button className={`creImg_gotobutton same-BTN btn ${btnHidden}`} onClick={createImg}>
+            <button
+              className={`creImg_gotobutton same-BTN btn ${btnHidden}`}
+              onClick={createImg}
+            >
               딸-깍!
             </button>
             {/* </Link> */}
@@ -334,7 +331,7 @@ const CreateImage = () => {
             <div className="guidemodal-footer">
               <button className="btnmy same-BTN" onClick={closeGuideModal}>
                 닫기
-             </button>
+              </button>
             </div>
           </div>
         </div>
