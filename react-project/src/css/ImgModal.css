@@ -71,9 +71,6 @@
     font-size: 20px;
   }
 
-  .like-btn > svg {
-    color: red !important;
-  }
 
   .share-toggle-box{
     display: flex;

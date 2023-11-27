@@ -70,7 +70,7 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
             </div>
           ) : (
             <div className="like-btn">
-              <FaRegHeart onClick={handleLike} />
+              <FaRegHeart className="red-heart" onClick={handleLike} />
               <span>{data.CNT}</span>
             </div>
           )}

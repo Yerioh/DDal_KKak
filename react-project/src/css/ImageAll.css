@@ -53,7 +53,7 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
     gap: 3px;
   }
   .like-btn > .red-heart {
-    color: red ;
+    filter: invert(20%) sepia(77%) saturate(7341%) hue-rotate(357deg) brightness(103%) contrast(116%);
   }
   /* 닉네임, 날짜 */
   .Card-date-title{

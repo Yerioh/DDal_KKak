@@ -29,7 +29,7 @@
 }
 .box-current{
     background-color: #FF7E00;
-    border:1px solid lightgray;
+    border: #FF7E00;
     /* background-color: #c2e7ff; */
     border-radius: 0 50px 50px 0;
     font-weight: bold;
