@@ -65,12 +65,12 @@ const SearchCard = ({ data, index }) => {
           {likeBtn ? (
             <div className="like-btn">
               <FaHeart color="red" onClick={handleLike} />
-              <span>{likeCnt}</span>
+              <span>{data.CNT}</span>
             </div>
           ) : (
             <div className="like-btn">
               <FaRegHeart onClick={handleLike} />
-              <span>{likeCnt}</span>
+              <span>{data.CNT}</span>
             </div>
           )}
           <span>{data.DATE.slice(0, 10)}</span>
