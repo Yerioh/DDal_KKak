@@ -145,12 +145,13 @@ const Basket = () => {
                     </div>
                 </div>
                 {/* 세션에 들어있는 장바구니에 들어가 있는 제품들의 정보를 컴포넌트를 통해 map 으로 뿌려줌 */}
-                {UserIdFilter.map((item) => {
+                {UserIdFilter.map((item,index) => {
 
                     return (
                         <BasketItem
                             key={item.id}
                             items={item}
+                            index={index}
                             isChecked={selectedItem[item.PROD_UUID] || false}
                             onCheck={handleItemCheck} />
                     );

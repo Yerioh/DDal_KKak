@@ -88,7 +88,7 @@ const ImgModal = ({
                 <div className="like-toggle-box">
                   <div className="like-box">
                     <div className="like-btn">
-                      <FaHeart color="red" />
+                      <FaHeart className="red-heart" />
                       <span>{ImgArray[index].CNT}</span>
                     </div>
                     <div className="share-toggle-box">

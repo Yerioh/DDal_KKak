@@ -69,7 +69,7 @@ const Login = () => {
         <div style={{ width: "500px" }}>
           <Form>
             <Form.Group className="mb-4">
-              <h2>딸깍</h2>
+              <h2>로그인</h2>
             </Form.Group>
 
             <Form.Group className="mb-3 email-input" controlId="formGroupEmail">

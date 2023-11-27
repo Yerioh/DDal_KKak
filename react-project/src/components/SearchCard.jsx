@@ -65,12 +65,12 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
         <div className="Card-like-title">
           {likeBtn ? (
             <div className="like-btn">
-              <FaHeart color="red" onClick={handleLike} />
+              <FaHeart className="red-heart" onClick={handleLike} />
               <span>{data.CNT}</span>
             </div>
           ) : (
             <div className="like-btn">
-              <FaRegHeart onClick={handleLike} />
+              <FaRegHeart className="red-heart" onClick={handleLike} />
               <span>{data.CNT}</span>
             </div>
           )}

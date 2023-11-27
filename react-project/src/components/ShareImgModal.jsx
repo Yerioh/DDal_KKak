@@ -49,12 +49,12 @@ const ShareImgModal = ({
                   <div className="like-box">
                     {likeBtn ? (
                       <div className="like-btn">
-                        <FaHeart color="red" onClick={handleLike} />
+                        <FaHeart className="red-heart" onClick={handleLike} />
                         <span>{ImgArray.CNT}</span>
                       </div>
                     ) : (
                       <div className="like-btn">
-                        <FaRegHeart onClick={handleLike} />
+                        <FaRegHeart className="red-heart" onClick={handleLike} />
                         <span>{ImgArray.CNT}</span>
                       </div>
                     )}

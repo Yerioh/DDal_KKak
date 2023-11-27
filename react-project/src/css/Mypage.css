@@ -28,9 +28,15 @@
     box-sizing: border-box;
 }
 .box-current{
-    background-color: #c2e7ff;
+    background-color: #FF7E00;
+    border: #FF7E00;
+    /* background-color: #c2e7ff; */
     border-radius: 0 50px 50px 0;
     font-weight: bold;
+    
+}
+.box-current>span{
+    color: white
 }
 .user-box > span:hover{
     cursor: pointer;
