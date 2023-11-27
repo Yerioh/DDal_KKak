@@ -28,7 +28,7 @@ const BuyScriptItem = ({item}) => {
             </div>
             {/* 세션 스토리지 저장 */}
             <div style={{ height: "50%" }}>
-                색상명
+                {item?.PROD_COLOR.COLOR_NAME}
             </div>
         </div>
     </div>

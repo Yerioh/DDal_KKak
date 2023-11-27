@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-const BuyScriptSummary = () => {
+const BuyScriptSummary = ({setTotalNum}) => {
 
   const [sum, setSum] = useState();
-  const [deliverprice,setDeliverPrice] = useState(3000);
+  const [deliverprice,setDeliverPrice] = useState(1500);
   const [total,setTotal] = useState(0);
   useEffect(()=>{
   let price = 0;
@@ -15,6 +15,7 @@ const BuyScriptSummary = () => {
   setSum(price)
   setTotal(price + deliverprice)
   console.log(total)
+  setTotalNum(total)
   },[])
   
 

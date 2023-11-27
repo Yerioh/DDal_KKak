@@ -25,7 +25,6 @@ const GoodsDetail = () => {
     accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
   });
-
   // s3 bucket 폴더명으로 사용할 사용자 아이디
   const userId = useSelector((state) => state.session.id);
 
@@ -83,6 +82,8 @@ const GoodsDetail = () => {
     let [price, setPrice] = useState(0)
      /** 의류 앞뒤 확인 위한 state */
   const [isFront, setIsFront] = useState('front')
+  const [sizeData, setSizeData] =useState(null)
+
 
   // 23-11-23 오전 09:40 박지훈 수정
   // 데이터베이스에서 PROD_ID로 상품 데이터 가져오기
@@ -113,7 +114,6 @@ const GoodsDetail = () => {
         }
       })
   },[])
-
  // 이미지 정보 가져오기 위한 ref
  const getImgDataRef = useRef();
  /**  이미지 정보 가져오는 함수*/
@@ -194,7 +194,6 @@ const GoodsDetail = () => {
     }
   }, [count])
 
-  const USER_ID = useSelector((state)=>state.session.id)
   // const dispatch = useDispatch()
 
   /** 장바구님 담기 알림 창 함수 */
@@ -204,14 +203,18 @@ const GoodsDetail = () => {
       setBasketCheck(false)
     },3000) // 5초후 초기화
   }
+
+
+
   /**장바구니에 담기위한 함수 */
   function moveItemToCart(goods_info) {
+    
   
     console.log('색상이름',prd_color_filter[0].COLOR_NAME)
     console.log('12312312',goods_info)
     //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
     let newCartItem = {
-      'USER_ID' : `${USER_ID}`, 
+      'USER_ID' : `${userId}`, 
       'PROD_ID': `${prd_info_filter[0].PROD_ID}`, // 상품 ID
       'PROD_NAME': `${prd_info_filter[0].PROD_NAME}`, // 상품명
       'PROD_SIZE': `${radioValue}`, // 상품 사이즈
@@ -255,6 +258,9 @@ const GoodsDetail = () => {
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
     basketAlert()
   }
+
+
+  
   return (
     <div style={{ minWidth: "710px", margin: "5% 10% ", display: 'flex', flexDirection:'column' }}>
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
