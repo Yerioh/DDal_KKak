@@ -64,6 +64,9 @@
   font-weight: bold;
   font-size: 18px;
 }
+.nav-link > span:hover{
+  color: black;
+}
 
 /* 장바구니 아이콘 이미지에 대한 스타일 */
 .Web-Nav > a > .basket{

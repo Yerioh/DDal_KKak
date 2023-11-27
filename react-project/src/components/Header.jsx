@@ -48,6 +48,7 @@ const Header = () => {
               <Link className="nav-link" to="/goodslist">
                 <span>굿즈</span>
               </Link>
+            
             </div>
 
             {!changeHeader ? (

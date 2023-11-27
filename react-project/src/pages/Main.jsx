@@ -9,21 +9,16 @@ import e from "cors";
 import axios from "../axios";
 
 const Main = () => {
-
-  const [shareImg, setShareImg] = useState(null)
+  const [shareImg, setShareImg] = useState(null);
   const test_MainImage = [1, 2, 3, 4, 5, 6, 7, 8];
   const [currentIndex, setCurrentIndex] = useState(1);
 
-  useEffect(()=>{
-    axios.post('/imgCreate/mainImgShow')
-      .then(res=>{
-        console.log(res.data.result)
-        setShareImg(res.data.result)
-      })
-  },[])
-
-
-  
+  useEffect(() => {
+    axios.post("/imgCreate/mainImgShow").then((res) => {
+      console.log(res.data.result);
+      setShareImg(res.data.result);
+    });
+  }, []);
 
   const responsive = {
     superLargeDesktop: {
@@ -81,20 +76,17 @@ const Main = () => {
     return () => clearInterval(timer);
   }, [currentIndex]); // currentIndex가 변경될 때마다 이펙트를 다시 실행
 
-
   return (
     <div className="Main-Container">
       <div className="Main-text-img">
         <div className="Main-head-btn">
           <div className="Main-head">
-            <span>원하는 그림, 이미지, 굿즈</span>
+            <span className="text-up">생성형AI 기술을 활용한</span>
+            <span className="text-up">자동 이미지 생성</span>
             <br />
-            <span>생성형AI 기술을 활용한</span>
-            <span>자동 이미지 생성</span>
+            <span className="text-up">손쉬운 이미지 편집 가능</span>
             <br />
-            <span>손쉬운 이미지 편집 가능</span>
-            <br />
-            <span>나만의 색다른 굿즈</span>
+            <span className="text-up">나만의 색다른 굿즈</span>
             <br />
             <span>만들고 싶다면?</span>
           </div>
@@ -121,7 +113,7 @@ const Main = () => {
       </div>
 
       {/* 이미지 슬라이드 */}
-      <div className="Slide-box mb-4 mt-3">
+      <div className="Slide-box mb-4 mt-4">
         <div className="image-Slide mb-4">
           <div className="image-Slide-btn">
             <span className="Main-Slide-text">디자인 이미지</span>
@@ -130,30 +122,34 @@ const Main = () => {
             </Link>
           </div>
 
-          {shareImg !== null ? (<Carousel responsive={responsive}>
-            {shareImg?.map((data, index) => (
-              <ImageAllCard data={data} />
-            ))}
-          </Carousel>) :
-          (<h2>로딩</h2>)
-          }
+          {shareImg !== null ? (
+            <Carousel responsive={responsive}>
+              {shareImg?.map((data, index) => (
+                <ImageAllCard data={data} />
+              ))}
+            </Carousel>
+          ) : (
+            <h2>로딩</h2>
+          )}
         </div>
         {/* 굿즈 슬라이드 */}
-        
-        <div className="goods-Slide">
+
+        <div className="goods-Slide mb-5">
           <div className="goods-text-btn mt-5">
             <span className="Main-Slide-text">굿즈</span>
             <Link to="goodslist">
               <button className="moreShow same-BTN">굿즈 더보기</button>
             </Link>
           </div>
-          {shareImg !== null ? (<Carousel responsive={responsive}>
-            {shareImg?.map((data, index) => (
-              <ImageAllCard data={data} />
-            ))}
-          </Carousel>) :
-          (<h2>로딩</h2>)
-          }
+          {shareImg !== null ? (
+            <Carousel responsive={responsive}>
+              {shareImg?.map((data, index) => (
+                <ImageAllCard data={data} />
+              ))}
+            </Carousel>
+          ) : (
+            <h2>로딩</h2>
+          )}
         </div>
       </div>
     </div>
