@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const instance = axios.create({
     baseURL : "http://localhost:3001"
+    // baseURL : "http://121.66.158.211:3001/"
 });
 
 

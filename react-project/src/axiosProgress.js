@@ -5,6 +5,7 @@ import {ProgressReducerActions} from './redux/reducers/progressSlice'
 
 // axios 인스턴스 생성
 const instance = axios.create({
+    // baseURL : "http://121.66.158.211:3001/"
     baseURL : "http://localhost:3001"
 });
 
