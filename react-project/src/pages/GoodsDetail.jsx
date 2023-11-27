@@ -102,6 +102,10 @@ const GoodsDetail = () => {
         setSum(data.prdInfo[0].PROD_PRICE)
         // 굿즈 데이터 로딩 여부
         setIsLoading(true)
+        // 굿즈 기본 색상 설정
+        if(data.prdInfo[0].PROD_CATEGORY==='clothes'){
+          setColor('#000000')
+        }
       })
   },[])
 
@@ -242,9 +246,6 @@ const GoodsDetail = () => {
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
     basketAlert()
   }
-
-
-
   return (
     <div style={{ minWidth: "710px", margin: "5% 10% ", display: 'flex', flexDirection:'column' }}>
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
