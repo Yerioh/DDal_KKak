@@ -34,12 +34,6 @@
 /* main text font 추가 */
 
 @font-face {
-    font-family: 'RixYeoljeongdo_Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2102-01@1.0/RixYeoljeongdo_Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
@@ -138,16 +132,24 @@
 
 .Slide-box > .goods-Slide{
     width: 81%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 .Slide-box > .image-Slide{
     width: 81%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 5%;
+    border-bottom: 3px solid rgb(200, 200, 200);
 }
 .image-Slide-btn > .Main-Slide-text{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
 }
 .goods-text-btn > .Main-Slide-text{
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
 }
 

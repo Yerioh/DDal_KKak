@@ -116,7 +116,7 @@ const Main = () => {
       <div className="Slide-box mb-4 mt-4">
         <div className="image-Slide mb-4">
           <div className="image-Slide-btn">
-            <span className="Main-Slide-text">디자인 이미지</span>
+            <span className="Main-Slide-text">오늘의 이미지</span>
             <Link to="/imageall">
               <button className="moreShow same-BTN">이미지 더보기</button>
             </Link>
@@ -135,8 +135,8 @@ const Main = () => {
         {/* 굿즈 슬라이드 */}
 
         <div className="goods-Slide mb-5">
-          <div className="goods-text-btn mt-5">
-            <span className="Main-Slide-text">굿즈</span>
+          <div className="goods-text-btn">
+            <span className="Main-Slide-text">커스텀 굿즈</span>
             <Link to="goodslist">
               <button className="moreShow same-BTN">굿즈 더보기</button>
             </Link>

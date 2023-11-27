@@ -4,7 +4,7 @@ import basket from "../img/basket.png";
 import axios from "../axios";
 import "../css/Header.css";
 import { IoMdMenu } from "react-icons/io";
-
+import logo from "../img/image-editor/image-edit-gallery2.png";
 import { Link } from "react-router-dom";
 const Header = () => {
   // 23-11-14 10:20 임휘훈 작성 useEffect, session, redux, Private Route
@@ -35,6 +35,7 @@ const Header = () => {
       <div className="Header-box bg-light">
         <div className="logo-ele-box">
           <Link to="/" className="header-logo">
+            <img className="project-logo" src={logo} alt="" />
             딸깍
           </Link>
           <div className="Header-ele">
@@ -48,7 +49,6 @@ const Header = () => {
               <Link className="nav-link" to="/goodslist">
                 <span>굿즈</span>
               </Link>
-            
             </div>
 
             {!changeHeader ? (
