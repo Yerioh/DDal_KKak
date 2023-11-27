@@ -16,13 +16,14 @@
     justify-content: center;
     width: 100%;
     height: 100vh;
+    /* 메인화면 배경 */
     background-color: whitesmoke;
     min-height: 685px;
 }
 /* h1, 메인 버튼 위치 */
 .Main-head-btn{
     min-width: 450px;
-    width: 35%;
+    width: 38%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,15 +43,22 @@
 .Main-head{
     display: flex;
     flex-direction: column;
-    font-size: 25px;
-    color: #453f3f;
+   
 }
 
+.text-up-box > span{
+    font-size: 38px;
+    color: #453f3f;
+}
+.text-up-box > .text-up{
+    font-weight: 700;
+}
 
  .Main-head > .text-up{
     font-family:  'Pretendard-Regular';
-    font-weight: bold;
+   
     font-size: 38px;
+    color: #453f3f;
  }
 
 
@@ -86,15 +94,17 @@
     width: 330px;
     height: 50px;
     border-radius: 40px;
-    border:1px solid lightgray;
-    color: rgb(44, 43, 43);
-    background-color: white;
+   border:1px solid lightgray;
+    color: white;
+    background-color: #FF7E00;
     font-weight: bold;
 }
 .Main-Btn:hover{
-    background-color: rgb(44, 43, 43);
-    color:lightgray;
-    transition: all .10s linear;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    border: none;
+}
+.Main-Btn:active{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 .Main-Slide-position{
     display: flex;
@@ -177,9 +187,10 @@
 
 
 .same-BTN:hover{
-    background-color: #453f3f;
-    color:lightgray;
+    background-color: #FF7E00;
+    color:white;
     transition: all .10s linear;
+    border: none;
 }
 
 

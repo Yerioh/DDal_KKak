@@ -52,7 +52,9 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
     justify-content: start;
     gap: 3px;
   }
-
+  .like-btn > .red-heart {
+    color: red ;
+  }
   /* 닉네임, 날짜 */
   .Card-date-title{
     display: flex;
@@ -86,7 +88,16 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
     gap: 10px;
     cursor: pointer;
 }
-.Search-Img-Nav > .Search-Img-box > span:active{
+.Search-Img-Nav > .Search-Img-box > .event-text-Best{
+    font-weight: bold;
+}
+.Search-Img-Nav > .Search-Img-box > .event-text-New{
+    font-weight: bold;
+}
+.Search-Img-Nav > .Search-Img-box > .event-text-Old{
+    font-weight: bold;
+}
+.Search-Img-Nav > .Search-Img-box > span:hover{
     font-weight: bold;
 }
 @media(max-width:1176px){

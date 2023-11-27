@@ -31,8 +31,8 @@ const Header = () => {
   };
 
   return (
-    <div className="Header-Container">
-      <div className="Header-box bg-light">
+    <div className="Header-Container bg-light">
+      <div className="Header-box">
         <div className="logo-ele-box">
           <Link to="/" className="header-logo">
             <img className="project-logo" src={logo} alt="" />
