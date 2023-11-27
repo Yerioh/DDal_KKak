@@ -7,12 +7,13 @@ import "../css/Main.css";
 import ImageAllCard from "../components/ImageAllCard";
 import e from "cors";
 import axios from "../axios";
+import goodsList from '../data/custumGoods.json'
 
 const Main = () => {
   const [shareImg, setShareImg] = useState(null);
   const test_MainImage = [1, 2, 3, 4, 5, 6, 7, 8];
   const [currentIndex, setCurrentIndex] = useState(1);
-
+  console.log(goodsList)
   useEffect(() => {
     axios.post("/imgCreate/mainImgShow").then((res) => {
       console.log(res.data.result);
@@ -152,7 +153,7 @@ const Main = () => {
           </div>
           {shareImg !== null ? (
             <Carousel responsive={responsive}>
-              {shareImg?.map((data, index) => (
+              {goodsList?.map((data, index) => (
                 <ImageAllCard data={data} />
               ))}
             </Carousel>
