@@ -257,6 +257,7 @@ router.post('/likeClick', (req,res)=>{
           }
           else{
             console.log('좋아요 삭제 성공')
+            res.json({likeCheck:true})
           }
         })
       }

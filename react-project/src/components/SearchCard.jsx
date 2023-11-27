@@ -24,8 +24,9 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
         .then(res=>{
           // 좋아요 클릭 시 img data 재 요청
           console.log(res.data.likeCheck)
-          if(res.data.likeCheck)
-          setImgState(!imgState)
+          if(res.data.likeCheck){
+            setImgState(!imgState)
+          }
         })
     } else {
       alert("로그인이 필요한 서비스 입니다.");
