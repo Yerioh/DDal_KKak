@@ -7,51 +7,34 @@ import axios from "../axios";
 const ImageAll = () => {
   // 공유 이미지 데이터
   const [imgCard, setImgCard] = useState(null);
+  const [imgState, setImgState] = useState(false)
+  // 정렬
+  const [sortImg, setSortImg] = useState('New')
 
   // 공유 이미지 데이터 가져오기
   useEffect(() => {
-    axios.post("/imgCreate/shareImgShow").then((res) => {
+    axios.post("/imgCreate/shareImgShow", {sortImg}).then((res) => {
       let data = res.data.result;
       console.log("이미지 모음 data", data);
       // 이미지 모음 날짜 연동 23-11-24 11:40 임휘훈
       setImgCard(data);
     });
-  }, []);
+  }, [imgState,sortImg]);
 
   // 23-11-24 12:38 임휘훈 작성 : 이미지 정렬
     /**인기순 정렬 => 좋아요 수 기준 내림차순 */
     const like_order = () => {
-      // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
-      let newArr = [...imgCard];
-      console.log("최신순 정렬 전 arr", newArr);
-      newArr.sort((a, b) => {
-        return b.CNT - a.CNT;
-      });
-      console.log("인기순", newArr);
-      setImgCard(newArr);
+      setSortImg('Best')
     }
 
     /**최신순 정렬 함수 내림차순*/
     const date_Order = () => {
-      // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
-      let newArr = [...imgCard];
-      console.log("최신순 정렬 전 arr", newArr);
-      newArr.sort((a, b) => {
-        return new Date(b.DATE) - new Date(a.DATE);
-      });
-      console.log("최신순", newArr);
-      setImgCard(newArr);
+      setSortImg('New')
     };
   
     /**오래된순 정렬 함수 오름차순*/
     const old_Order = () => {
-      // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
-      let newArr = [...imgCard];
-      newArr.sort((a, b) => {
-        return new Date(a.DATE) - new Date(b.DATE);
-      });
-      console.log("오래된 순", newArr);
-      setImgCard(newArr);
+      setSortImg('Old')
     };
 
   // 좋아요 기능
@@ -71,15 +54,15 @@ const ImageAll = () => {
         </Row>
         <div className="Search-Img-Nav">
           <div className="Search-Img-box">
-            <span onClick={like_order}>인기순</span>
             <span onClick={date_Order}>최신순</span>
             <span onClick={old_Order}>오래된순</span>
+            <span onClick={like_order}>인기순</span>
           </div>
         </div>
         <div className="search-Card mt-4">
           {imgCard?.map((data, index) => (
             <div className="img-card">
-              <SearchCard data={data} index={index} />
+              <SearchCard data={data} index={index} setImgState={setImgState} imgState={imgState} sortImg={sortImg} />
             </div>
           ))}
         </div>
