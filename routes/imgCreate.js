@@ -25,7 +25,7 @@ let conn = db.init();
 //   res.status(200).json(response_data);
 // });
 
-let flaskServer = 'https://68d7-34-124-229-142.ngrok.io'
+let flaskServer = 'http://dc2d-34-143-144-45.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달

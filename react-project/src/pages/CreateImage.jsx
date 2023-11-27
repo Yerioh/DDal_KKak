@@ -58,6 +58,7 @@ const CreateImage = () => {
         // 긍정 프롬프트 공백 아닐 때 실행
     if (positivePrompt !== "" && negativePrompt !== "") {
       setBtnHidden("hidden")
+      
       axiosProgress
         .post("/imgCreate/stable", {
           positivePrompt: positivePrompt + positiveKeyword.join(""), // 긍정프롬프트 + 키워드
