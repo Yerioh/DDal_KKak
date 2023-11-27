@@ -4,7 +4,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
@@ -15,11 +14,12 @@
   /* 모달 구성 (Container)*/
   .S-ImgInfo {
     background-color: white;
+    border: 2px solid black;
     width: 55%;
     min-width: 40%;
     min-height: 40%;
     height: 80%;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -33,29 +33,26 @@
     display: flex;
     justify-content: center;
     height: 90%;
-    width: 70%;
+    width: 65%;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
   }
   .S-ImgPic > img{
     width: 100%;
     border-radius: 5px;
-    object-fit: cover;
   }
 
 
  .S-ImgInfo > .image-info{
-    height: 90%;
+  height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
  }
 
- .image-info{
-   height: 100%;
- }
  
   /* 좋아요 수, 공유 토글 */
   .image-info > .like-toggle-box{
-    height: 10%;
     width: 100%; 
     display: flex;
     flex-direction: column;
@@ -67,28 +64,53 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    font-size: 20px;
+    gap:20px
+  }
+  .like-box .like-btn{
+    font-size: 20px;
   }
   .share-toggle-box{
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
   }
 
  
   /* 유저 프롬프트부분 css */
   .user-Prompt{
-    width: 100%;
-    height: auto;
-    max-width: 200px;
-    box-sizing: border-box;
-    padding-bottom: 2%;
-    overflow-y: auto;;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    gap: 10px;
   }
-  .user-Prompt > h3, h5{
+  /* 긍정 프롬프트 부분 */
+  .title-prompt-Pos{
+    max-width: 240px;
+    height: 50%;
+  }
+  .title-prompt-Pos > .prompt-text{
+    height: 85%;
+    max-height: 90%;
+    overflow-y: auto;
+  }
+  /* 부정 프롬프트 부분 */
+  .user-Prompt > .prompt-Neg{
+    max-width: 240px;
+    height: 50%;
+  }
+  .user-Prompt > .prompt-Neg > .prompt-text{
+    height: 85%;
+   
+    max-height: 70%;
+    overflow-y: auto;
+    
+  }
+
+  .image-info > .user-Prompt > h3,h4{
     font-weight: bold;
   }
-  
   /* 모달 버튼 CSS */
   .Modal-Btn{
     margin-top: auto;
@@ -141,19 +163,12 @@
     border-color: #dc3545;
   } */
   
-  .SM-text{
-    display: none;
-  }
-
   /* App 이미지 상세 모달 */
   
   
-  @media(max-width:768px){
+  @media(max-width:1326px){
     /* 모달 구성 (Container)*/
 
-  .SM-text{
-    display: block;
-  }
   .S-ImgInfo {
     background-color: white;
     min-width: 300px;
@@ -164,33 +179,62 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    justify-content: start;
   }
+
 
 
   /* 모달 Img css */
   .S-ImgPic{
     display: flex;
     justify-content: center;
-    
-    height: 60%;
+    height: 100%;
     width: 80%;
     min-width: 80%;
   }
-
-  .image-info{
-    width: 100%;
+ .S-ImgPic > img{
+  
+    height: auto;
   }
+  .S-ImgInfo > .image-info{
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+   }
   /* 유저 프롬프트부분 css */
   .user-Prompt{
     display: flex;
-    flex-direction: column;
-    width: 80%;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
   }
-  .user-Prompt > h5{
-   font-weight: bold;
-  }
- 
 
+
+  .title-prompt-Pos{
+    max-width: 240px;
+    height: 50%;
+  }
+  .title-prompt-Pos > .prompt-text{
+    width: 100%;
+    height: 85%;
+    max-height: 90%;
+    overflow-y: auto;
+  }
+  /* 부정 프롬프트 부분 */
+  .user-Prompt > .prompt-Neg{
+    width: 100%;
+    max-width: 240px;
+    
+    height: 50%;
+  }
+  .user-Prompt > .prompt-Neg > .prompt-text{
+    height: 85%;
+    max-height: 90%;
+    overflow-y: auto;
+  }
+
+ 
   .Modal-Btn{
     display: flex;
     flex-wrap: wrap;

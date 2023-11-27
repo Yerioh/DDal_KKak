@@ -21,7 +21,7 @@ const CreateImage = () => {
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState("");
-  const [positiveKeyword, setPositiveKeyword] = useState("");
+  const [positiveKeyword, setPositiveKeyword] = useState([]);
   // 부정 프롬프트
   const [negativePrompt, setNegativePrompt] = useState("");
   // 출력할 사진 개수
@@ -60,7 +60,7 @@ const CreateImage = () => {
       setBtnHidden("hidden")
       axiosProgress
         .post("/imgCreate/stable", {
-          positivePrompt: positivePrompt + positiveKeyword, // 긍정프롬프트 + 키워드
+          positivePrompt: positivePrompt + positiveKeyword.join(""), // 긍정프롬프트 + 키워드
           negativePrompt: negativePrompt,
           countImg: countImg,
         })

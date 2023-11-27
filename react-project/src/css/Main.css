@@ -22,7 +22,7 @@
 /* h1, 메인 버튼 위치 */
 .Main-head-btn{
     min-width: 450px;
-    width: 30%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,10 +31,23 @@
     padding-right: 8%; 
     gap: 30px;
 }
+/* main text font 추가 */
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .Main-head{
     display: flex;
     flex-direction: column;
     font-size: 30px;
+    color: #453f3f;
+}
+
+.Main-head > span{
+    font-family: 'NanumSquareRound';
+    font-weight: bold;
 }
 
 .Main-Image{
@@ -66,16 +79,16 @@
 
 /* 메인 버튼 */
 .Main-Btn{
-    width: 350px;
+    width: 330px;
     height: 50px;
     border-radius: 40px;
     border:1px solid lightgray;
-    color:black;
+    color: rgb(44, 43, 43);
     background-color: white;
     font-weight: bold;
 }
 .Main-Btn:hover{
-    background-color: black;
+    background-color: rgb(44, 43, 43);
     color:lightgray;
     transition: all .10s linear;
 }
@@ -145,14 +158,14 @@
 .same-BTN{
     border-radius: 5px;
     border:1px solid lightgray;
-    color:black;
+    color:#453f3f;
     background-color: white;
 }
 
 
 
 .same-BTN:hover{
-    background-color: black;
+    background-color: #453f3f;
     color:lightgray;
     transition: all .10s linear;
 }

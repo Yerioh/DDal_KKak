@@ -59,7 +59,7 @@ app.use(session({
 app.use("/imgCreate", imgCreate);
 // socialLogin 라우터
 app.use("/socialLogin", socialLogin);
-// user 라우터
+// user 라우터 
 app.use('/user', user)
 // page 라우터
 app.use('/page', page)

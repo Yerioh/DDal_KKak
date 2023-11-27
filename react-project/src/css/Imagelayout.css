@@ -25,11 +25,13 @@
   border-style: none;
   color: black;
   transition: all 0.2s;
+  border: 1px solid lightgray;
   border-radius: 5px;
+  background-color: white;
 }
 .btnmy:hover {
-  background: #01939a;
-  color: black;
+  background: black;
+  color: white;
 }
 
 /* 프롬포트 구역 */
@@ -90,32 +92,39 @@
 /* 키워드 체크박스 부분 */
 .keyword-result {
   width: 80%;
-  height: 30px;
-  border: 1px solid #c3c3c3;
   border-radius: 5px;
   margin-right: 1%;
   box-sizing: border-box;
-  padding: 2px 10px;
+  padding: 2px 0;
+  display: flex;
+  gap: 5px;
 }
 .keywordModal-open{
   width: 19%;
-  height: 30px;
+  height: 32px;
+}
+.keywordModal-checkbox{
+  display:  flex;
+  flex-wrap: wrap;
+  justify-content: baseline;
+  gap: 20px;
 }
 /* 체크박스 체크 애니메이션 */
 .keyWord-button {
   display: none;
 }
 .showKeywordCheckbox {
-  width: 20px;
-  height: 20px;
-  background: url("https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png")
-    0 -438px no-repeat;
-  vertical-align: top;
-  margin: 0 auto;
+  width: 95px;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 28px;
 }
 
 .keyWord-button:checked + .showKeywordCheckbox {
-  background-position: -75px -438px;
+  background-color: rgb(55,55,55);
+  color: whitesmoke;
 }
 
 /* 모달창 관련 */

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import { Chip } from "@mui/material";
 
 const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
   // 모달창 상태
   const [keyWordModalOpen, setKeyWordModalOpen] = useState(false);
   // 선택한 키워드 한글 state
-  const [keywordLabel, setKeywordLabel] = useState("")
+  const [keywordLabel, setKeywordLabel] = useState([]);
 
   const openKeyWordModal = () => {
     setKeyWordModalOpen(true);
@@ -13,41 +14,56 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
   const closeKeyWrodModal = () => {
     setKeyWordModalOpen(false);
   };
+  // 버튼의 key, value 비교 객체
+  const radioOption = {
+    color: {
+      ",Gray-Scale": "흑백",
+      ",Colorful": "컬러",
+      "": "선택 없음",
+    },
+    logo: {
+      ",Logo": "로고",
+      ",Typography": "타이포그래피",
+      ",Vector logo, Vector Art, Vector graphics, Adobe illustrator":
+        "Vector 로고",
+      ",WordMark": "Text 로고",
+      "": "선택 없음",
+    },
+  };
   /** 키워드 선택 완료 함수 */
   const completeKeyword = (e) => {
     e.preventDefault();
-    const radioOption = {
-      color:{
-        ',Gray-Scale': '흑백',
-        ',Colorful': '컬러',
-        '':' ',
-      },
-      logo:{
-        ',Logo': '로고',
-        ',Typography': '타이포그래피',
-        ',Vector logo, Vector Art, Vector graphics, Adobe illustrator': 'Vector 로고',
-        ',WordMark': 'Text 로고',
-        '':' ',
-      }
-    }
+    let keywordArray = []
     // 각 테마별 value 값 가져오기
     let color = e.target.colorThema.value;
     let logo = e.target.logoThema.value;
-    console.log("선택한 키워드", color, logo);
-    setPositiveKeyword(color + logo);
-    const combiendLabel = `${radioOption.color[color]? radioOption.color[color]:''}${radioOption.logo[logo]? "  "+radioOption.logo[logo]:''}`
-    setKeywordLabel(combiendLabel)
+   if(color!==''){
+    keywordArray.push(color)
+   }
+   if(color!==''){
+    keywordArray.push(logo)
+   }
+    setPositiveKeyword(keywordArray);
+    setKeywordLabel([radioOption.color[color], radioOption.logo[logo]])
     closeKeyWrodModal();
   };
 
+  const deleteKeyword = (index) => {
+    const tempLabelArray = [...keywordLabel]
+    tempLabelArray[index] = '선택 없음'
+    setKeywordLabel(tempLabelArray)
+    const tempKeywordArray = [...positiveKeyword]
+    tempKeywordArray.splice(index)
+    setPositiveKeyword(tempKeywordArray)
+  }
+
   return (
     <div className="creImg_opt">
-      <input
-        type="text"
-        className="keyword-result"
-        value={keywordLabel}
-        readOnly={true}
-      />
+      <div className="keyword-result">
+        {keywordLabel.map((item, index)=>(
+          item !== '선택 없음' ? <Chip key={index} label={item} onDelete={()=>deleteKeyword(index)}/> : null
+        ))}
+      </div>
       <button className="keywordModal-open same-BTN" onClick={openKeyWordModal}>
         키워드
       </button>
@@ -76,8 +92,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=",Gray-Scale"
                         name="colorThema"
                       />
-                      <div className="showKeywordCheckbox"></div>
-                      흑백
+                      <div className="showKeywordCheckbox">흑백</div>
                     </label>
                     <label>
                       <input
@@ -86,8 +101,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=",Colorful"
                         name="colorThema"
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      컬러
+                      <div className="showKeywordCheckbox">컬러</div>
                     </label>
                     <label>
                       <input
@@ -97,8 +111,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         name="colorThema"
                         defaultChecked
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      선택 없음
+                      <div className="showKeywordCheckbox">선택 없음</div>
                     </label>
                   </div>
                 </div>
@@ -112,8 +125,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=",Logo"
                         name="logoThema"
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      로고
+                      <div className="showKeywordCheckbox">로고</div>
                     </label>
                     <label>
                       <input
@@ -122,8 +134,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=",Typography"
                         name="logoThema"
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      타이포그래피
+                      <div className="showKeywordCheckbox">타이포그래피</div>
                     </label>
                     <label>
                       <input
@@ -132,8 +143,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=",Vector logo, Vector Art, Vector graphics, Adobe illustrator"
                         name="logoThema"
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      Vector 로고
+                      <div className="showKeywordCheckbox">Vector 로고</div>
                     </label>
                     <label>
                       <input
@@ -142,8 +152,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         value=",WordMark"
                         name="logoThema"
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      Text 로고
+                      <div className="showKeywordCheckbox">Text 로고</div>
                     </label>
                     <label>
                       <input
@@ -153,8 +162,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         name="logoThema"
                         defaultChecked
                       ></input>
-                      <div className="showKeywordCheckbox"></div>
-                      선택 없음
+                      <div className="showKeywordCheckbox">선택 없음</div>
                     </label>
                   </div>
                 </div>

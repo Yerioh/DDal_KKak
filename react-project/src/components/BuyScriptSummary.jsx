@@ -13,7 +13,7 @@ const BuyScriptSummary = () => {
         <div className='vtline' ></div>
         <div style={{width:"20%"}}>0원</div>
         <div className='vtline' ></div>
-        <div style={{width:"20%"}}>10000원</div>
+        <div style={{width:"20%"}}>10,000원</div>
     </div>
     </div>
   )
