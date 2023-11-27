@@ -136,3 +136,16 @@
     background-color: black;
     color:lightgray;
 }
+
+.basket-submit-btn{
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    width: 300%;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
