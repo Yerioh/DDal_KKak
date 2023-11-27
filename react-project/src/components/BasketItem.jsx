@@ -23,7 +23,6 @@ const Basketitems = ({ items,index }) => {
 
     // 개수와 합계가격을 위해 별도로 변수선언
     let price = items.PROD_PRICE;
-    console.log(price, "가격")
 
 
     // 부모 컴포넌트로부터 받은 isChecked prop이 변경될 때마다 checked 상태를 업데이트합니다.
@@ -69,7 +68,6 @@ const Basketitems = ({ items,index }) => {
         } else {
             setSum(price * count)
         }
-        console.log("useEffect 장바구니 수량조절")
     }, [count])
 
 
@@ -77,15 +75,14 @@ const Basketitems = ({ items,index }) => {
     //  select 구문에서 수정될 값을 받아 size State 에 넣어주는 구문
     const sizeChange = (e) => {
         setSize(e.target.value)
-        console.log(size, "sizeChang사이즈변경")
     }
 
 
 
     /**장바구니에 담겨있는 데이터를 변경하기 위한 함수 */
-    function correctItemToCart() {
+    function changeItemToCart() {
         //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
-        let correctCartItem = {
+        let changeCartItem = {
             'USER_ID':`${items.USER_ID}`, // 회원 ID
             'PROD_ID': `${items.PROD_ID}`, // 상품 ID
             'PROD_NAME': `${items.PROD_NAME}`, // 상품명
@@ -102,34 +99,107 @@ const Basketitems = ({ items,index }) => {
         // 로컬 스토리지에있는 정보를 일단 가져온다.
         let cartItems = JSON.parse(sessionStorage.getItem('cartItem'));
 
-        console.log((cartItems.length), "세션기능TEST")
-        console.log(correctCartItem, '수정되는아이템');
-
         // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
         
-            if (cartItems[index]?.PROD_UUID === correctCartItem.PROD_UUID) {
+            if (cartItems[index]?.PROD_UUID === changeCartItem.PROD_UUID) {
                 // 수정된 객체로 변경
-                cartItems[index] = correctCartItem
+                cartItems[index] = changeCartItem
             } 
        
         // 업데이트된 장바구니 데이터를 다시 JSON 형태로 변환하여 저장
         sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
     }
 
+    function changebuyItem() {
+        //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
+        let changeBuyItem = {
+            'USER_ID':`${items.USER_ID}`, // 회원 ID
+            'PROD_ID': `${items.PROD_ID}`, // 상품 ID
+            'PROD_NAME': `${items.PROD_NAME}`, // 상품명
+            'PROD_SIZE': `${size}`, // 상품 사이즈 State 를 통한 값 수정
+            'PROD_COLOR': `${items.PROD_COLOR}`, // 상품 색상
+            'PROD_COUNT': `${count}`, // 상품 수량 State 를 통한 값 수정
+            'PROD_PRICE': `${items.PROD_PRICE}`, //상품 가격
+            'CARTED_AT': `${items.CARTED_AT}`, //굿즈 상세페이지에서 카트에 넣을 당시의 시각
+            'PRICE_SUM': `${parseInt(items.PROD_PRICE) * parseInt(count)}`,
+            'PROD_UUID': `${items.PROD_UUID}`,
+            'PROD_URL': `${items.PROD_URL}`,
+        };
+
+        // 로컬 스토리지에있는 정보를 일단 가져온다.
+        let buyItems = JSON.parse(sessionStorage.getItem('buyItem'));
+
+        // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
+        for(let i=0 ; i<parseInt(buyItems.length);i++)
+            if (buyItems[i].PROD_UUID === changeBuyItem.PROD_UUID) {
+                // 수정된 객체로 변경
+                buyItems[i] = changeBuyItem
+            } 
+       
+        // 업데이트된 장바구니 데이터를 다시 JSON 형태로 변환하여 저장
+        sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+    }
+
+
+
     const GoToBuyItems = () => {
-        if (JSON.parse(sessionStorage.getItem('buyItem')) == null) {
-            if (checked == true) {
-               console.log('여기는true')
-            } else if (checked == false) {
-               console.log('여기는false')
+
+        let pushBuyItem = {
+            'USER_ID':`${items.USER_ID}`, // 회원 ID
+            'PROD_ID': `${items.PROD_ID}`, // 상품 ID
+            'PROD_NAME': `${items.PROD_NAME}`, // 상품명
+            'PROD_SIZE': `${size}`, // 상품 사이즈 State 를 통한 값 수정
+            'PROD_COLOR': `${items.PROD_COLOR}`, // 상품 색상
+            'PROD_COUNT': `${count}`, // 상품 수량 State 를 통한 값 수정
+            'PROD_PRICE': `${items.PROD_PRICE}`, //상품 가격
+            'CARTED_AT': `${items.CARTED_AT}`, //굿즈 상세페이지에서 카트에 넣을 당시의 시각
+            'PRICE_SUM': `${parseInt(items.PROD_PRICE) * parseInt(count)}`,
+            'PROD_UUID': `${items.PROD_UUID}`,
+            'PROD_URL': `${items.PROD_URL}`,
+        };
+
+        if(checked === true){
+            if(JSON.parse(sessionStorage.getItem('buyItem')) == null){
+                let buyItems = []
+                sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+                console.log('여기는 비어있을때 true')
+            }else if(JSON.parse(sessionStorage.getItem('buyItem')) !== null){
+                let buyItems = JSON.parse(sessionStorage.getItem('buyItem'))
+                buyItems.pop(items.PROD_UUID)
+                sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+                console.log('여기는 목록이있을때 true');
             }
-        } else if (JSON.parse(sessionStorage.getItem('buyItem')) !== null) {
-            if (checked == true) {
-                console.log('여기는true')
-            } else if (checked == false) {
-                console.log('여기는false')
-                }
+        }else if(checked === false){
+            if(JSON.parse(sessionStorage.getItem('buyItem')) == null){
+                let buyItems = []
+                buyItems.push(pushBuyItem)
+                sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+            }else if(JSON.parse(sessionStorage.getItem('buyItem')) !== null){
+                let buyItems = JSON.parse(sessionStorage.getItem('buyItem'))
+                buyItems.push(pushBuyItem)
+                sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+                console.log('여기는 목록이있을때 false')
             }
+        }
+
+
+        // if (JSON.parse(sessionStorage.getItem('buyItem')) == null) {
+        //     if (checked == true) {
+        //        console.log('여기는 비어있을때 true')
+        //     } else if (checked == false) {
+        //         sessionStorage.setItem('buyItem', JSON.stringify(pushBuyItem));
+        //     }
+        // } else if (JSON.parse(sessionStorage.getItem('buyItem')) !== null) {
+        //     if (checked == true) {
+        //         let buyItems = JSON.parse(sessionStorage.getItem('buyItem'))
+        //         buyItems.pop(items.PROD_UUID)
+        //         sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
+        //         console.log('여기는 목록이있을때 true');
+        //     } else if (checked == false) {
+        //         sessionStorage.setItem('buyItem', JSON.stringify(pushBuyItem));
+        //         console.log('여기는 목록이있을때 false')
+        //         }
+        //     }
 
         }
         // sessionStorage.setItem('buyItem', JSON.stringify(buyItems));
@@ -143,7 +213,11 @@ const Basketitems = ({ items,index }) => {
         if (count == items.PROD_COUNT && size == items.PROD_SIZE) {
             console.log('추가할 값 없음')
         } else {
-            correctItemToCart()
+            changeItemToCart()
+            if(checked == false){
+                changebuyItem()
+            }
+            
         }
 
     }, [count, size])
@@ -180,8 +254,8 @@ const Basketitems = ({ items,index }) => {
                         {items.PROD_NAME}
                     </div>
                     <div style={{ height: "50%" }}>
-                        {color_filter[0]?.COLOR_NAME}
-                        <button style={{ cursor: "default", marginLeft : "5px", borderRadius: "50%", width: "20px", height: "20px", backgroundColor: `${items.PROD_COLOR}` }}></button>
+                        {items.PROD_COLOR.COLOR_NAME}
+                        <button style={{ cursor: "default", marginLeft : "5px", borderRadius: "50%", width: "20px", height: "20px", backgroundColor: `${items.PROD_COLOR.COLOR_CODE}` }}></button>
                     </div>
                 </div>
             </div>

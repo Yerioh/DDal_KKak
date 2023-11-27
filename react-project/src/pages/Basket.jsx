@@ -177,7 +177,7 @@ const Basket = () => {
 
             {/* 주문하기 버튼을 누를 시 주문서 작성 페이지로 체크된 제품만 정보가 넘어감*/}
             <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Link to={'/buyscript'} style={{ textDecoration: "none" }}>
+                <Link to={'/buyscript'} style={{ textDecoration: "none",width:"25%" }}>
                     <Button variant="outline-dark"  className='basket-submit-btn'>주문하기</Button>
                 </Link>
             </div>

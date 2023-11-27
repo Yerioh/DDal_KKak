@@ -42,6 +42,10 @@ const GoodsDetail = () => {
   // 장바구니 추가체크를 위한 State
   const [basketCheck, setBasketCheck] = useState(false);
 
+  // 색상 명 확인 ref
+  const colorNameRef = useRef('')
+  // 색상 명 저장 state
+  const [colorName, setColorName] = useState('')
   // 해당페이지의 상품 ID
   let prd_id = PROD_ID
   //  굿즈색상정보 끌어오기
@@ -51,6 +55,7 @@ const GoodsDetail = () => {
     const prd_size_filter = new_array.filter(item => item.COLOR_CODE === data)
     setGoodsImgFilter(prd_size_filter)
     setColor(data)
+    setColorName(colorNameRef.current.innerText)
   }
 
   // 오늘 날짜 추가를 위한 변수선언들
@@ -105,6 +110,7 @@ const GoodsDetail = () => {
         // 굿즈 기본 색상 설정
         if(data.prdInfo[0].PROD_CATEGORY==='clothes'){
           setColor('#000000')
+          setColorName('블랙')
         }
       })
   },[])
@@ -201,8 +207,8 @@ const GoodsDetail = () => {
   }
   /**장바구니에 담기위한 함수 */
   function moveItemToCart(goods_info) {
-
-
+  
+    console.log('색상이름',prd_color_filter[0].COLOR_NAME)
     console.log('12312312',goods_info)
     //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
     let newCartItem = {
@@ -210,7 +216,10 @@ const GoodsDetail = () => {
       'PROD_ID': `${prd_info_filter[0].PROD_ID}`, // 상품 ID
       'PROD_NAME': `${prd_info_filter[0].PROD_NAME}`, // 상품명
       'PROD_SIZE': `${radioValue}`, // 상품 사이즈
-      'PROD_COLOR': `${color}`, // 상품 색상
+      'PROD_COLOR': {
+        'COLOR_NAME':`${colorName}`,
+        'COLOR_CODE':`${color}`
+      },
       'PROD_COUNT': `${count}`, // 상품 수량
       'PROD_PRICE': `${prd_info_filter[0].PROD_PRICE}`, //상품 가격
       'CARTED_AT': `${times}`,
@@ -297,7 +306,7 @@ const GoodsDetail = () => {
             {prd_color_filter.map((item) => {
               return (
                 <div style={{ margin: "0px 10px" }}>
-                  <h6 style={item.COLOR_CODE === '#FFFFFF' ? { color: 'black' } : { color: `${item.COLOR_CODE}` }}>{item.COLOR_NAME}</h6>
+                  <h6 style={item.COLOR_CODE === '#FFFFFF' ? { color: 'black' } : { color: `${item.COLOR_CODE}` }} ref={colorNameRef}>{item.COLOR_NAME}</h6>
                   <button value={item.COLOR_CODE}
                     style={{ width: "20px", height: "20px", boxSizing: 'border-box', borderRadius: '50%', backgroundColor: `${item.COLOR_CODE}` }}
                     onClick={(goods_color)}>
