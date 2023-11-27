@@ -14,10 +14,9 @@ import qMark from "../img/question-mark.png";
 import guideKeyboard from "../img/guide-keyboard.png";
 import guideClick from "../img/guide-click.png";
 import guideBang from "../img/guide-bang.png";
-import { socket } from '../socket';
+import { socket } from "../socket";
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
-
   // 23-11-15 오후 17:00 박지훈 작성
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState("");
@@ -29,7 +28,7 @@ const CreateImage = () => {
   const [guideModalOpen, setguideModalOpen] = useState(false);
 
   // "딸-깍! 버튼 상태
-  const [btnHidden, setBtnHidden] = useState("")
+  const [btnHidden, setBtnHidden] = useState("");
 
   // axios 진행률(0~100)
   const progress = useSelector((state) => state.progress.progress);
@@ -103,10 +102,6 @@ const CreateImage = () => {
     };
   }, []);
 
-
-
-
-
   // 23-11-20 오후 17:00 박지훈 작성
   // 이미지 생성 버튼 클릭
   const createImg = () => {
@@ -161,7 +156,7 @@ const CreateImage = () => {
           {/* 긍정 키워드 입력 구역  */}
           <div className="keyword">
             <h3 className="postive_head">
-              넣을 단어{" "}
+              핵심 키워드{" "}
               <img
                 src={qMark}
                 alt=""
@@ -191,7 +186,7 @@ const CreateImage = () => {
 
           {/* 부정 키워드 입력  */}
           <div className="negative_keyword">
-            <h3> 뺄 단어</h3>
+            <h3> 제외 키워드</h3>
             <Form.Label></Form.Label>
             <textarea
               type="text"
@@ -221,7 +216,10 @@ const CreateImage = () => {
               borderRadius={"5px"}
             />
             {/* <Link to='/image-edit'> */}
-            <button className={`creImg_gotobutton same-BTN btn ${btnHidden}`} onClick={createImg}>
+            <button
+              className={`creImg_gotobutton same-BTN btn ${btnHidden}`}
+              onClick={createImg}
+            >
               딸-깍!
             </button>
             {/* </Link> */}
@@ -301,7 +299,7 @@ const CreateImage = () => {
             <div className="guidemodal-footer">
               <button className="btnmy same-BTN" onClick={closeGuideModal}>
                 닫기
-             </button>
+              </button>
             </div>
           </div>
         </div>

@@ -91,6 +91,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",Gray-Scale"
                         name="colorThema"
+                        defaultChecked={keywordLabel[0]==='흑백' && true}
                       />
                       <div className="showKeywordCheckbox">흑백</div>
                     </label>
@@ -100,6 +101,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",Colorful"
                         name="colorThema"
+                        defaultChecked={keywordLabel[0]==='컬러' && true}
                       ></input>
                       <div className="showKeywordCheckbox">컬러</div>
                     </label>
@@ -109,7 +111,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=""
                         name="colorThema"
-                        defaultChecked
+                        defaultChecked={keywordLabel[0]===undefined || keywordLabel[0]==='선택 없음' && true}
                       ></input>
                       <div className="showKeywordCheckbox">선택 없음</div>
                     </label>
@@ -124,6 +126,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",Logo"
                         name="logoThema"
+                        defaultChecked={keywordLabel[1]==='로고' && true}
                       ></input>
                       <div className="showKeywordCheckbox">로고</div>
                     </label>
@@ -133,6 +136,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",Typography"
                         name="logoThema"
+                        defaultChecked={keywordLabel[1]==='타이포그래피' && true}
                       ></input>
                       <div className="showKeywordCheckbox">타이포그래피</div>
                     </label>
@@ -142,6 +146,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",Vector logo, Vector Art, Vector graphics, Adobe illustrator"
                         name="logoThema"
+                        defaultChecked={keywordLabel[1]==='Vector 로고' && true}
                       ></input>
                       <div className="showKeywordCheckbox">Vector 로고</div>
                     </label>
@@ -151,6 +156,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=",WordMark"
                         name="logoThema"
+                        defaultChecked={keywordLabel[1]==='Text 로고'}
                       ></input>
                       <div className="showKeywordCheckbox">Text 로고</div>
                     </label>
@@ -160,7 +166,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                         type="radio"
                         value=""
                         name="logoThema"
-                        defaultChecked
+                        defaultChecked={keywordLabel[1]===undefined || keywordLabel[1]==='선택 없음' && true}
                       ></input>
                       <div className="showKeywordCheckbox">선택 없음</div>
                     </label>

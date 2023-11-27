@@ -30,6 +30,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.logo-ele-box > .header-logo > img{
+  width: 30px;
+  height: 30px;
+}
 /* 링크 요소 박스 */
 .Header-ele{
   display: flex;
@@ -63,6 +68,9 @@
 .nav-link > span{
   font-weight: bold;
   font-size: 18px;
+}
+.nav-link > span:hover{
+  color: black;
 }
 
 /* 장바구니 아이콘 이미지에 대한 스타일 */
@@ -121,7 +129,10 @@
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
-
+  .logo-ele-box > .header-logo > img{
+    width: 28px;
+    height: 28px;
+  }
   .basket {
     width: 28px; /* 중간 크기의 화면에서 아이콘 크기 조정 */
     height: 28px;

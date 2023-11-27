@@ -12,13 +12,26 @@ const ImageAll = () => {
   useEffect(() => {
     axios.post("/imgCreate/shareImgShow").then((res) => {
       let data = res.data.result;
-      // 이미지 모음 날짜 하드코딩한거 고쳐야됨 23-11-24 11:40 임휘훈
+      console.log("이미지 모음 data", data);
+      // 이미지 모음 날짜 연동 23-11-24 11:40 임휘훈
       setImgCard(data);
     });
   }, []);
 
   // 23-11-24 12:38 임휘훈 작성 : 이미지 정렬
-    /**최신순 정렬 함수*/
+    /**인기순 정렬 => 좋아요 수 기준 내림차순 */
+    const like_order = () => {
+      // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
+      let newArr = [...imgCard];
+      console.log("최신순 정렬 전 arr", newArr);
+      newArr.sort((a, b) => {
+        return b.CNT - a.CNT;
+      });
+      console.log("인기순", newArr);
+      setImgCard(newArr);
+    }
+
+    /**최신순 정렬 함수 내림차순*/
     const date_Order = () => {
       // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
       let newArr = [...imgCard];
@@ -30,7 +43,7 @@ const ImageAll = () => {
       setImgCard(newArr);
     };
   
-    /**오래된순 정렬 함수*/
+    /**오래된순 정렬 함수 오름차순*/
     const old_Order = () => {
       // state는 변하지 않기 때문에 새로운 배열로 복제해서 사용
       let newArr = [...imgCard];
@@ -58,7 +71,7 @@ const ImageAll = () => {
         </Row>
         <div className="Search-Img-Nav">
           <div className="Search-Img-box">
-            <span>인기순</span>
+            <span onClick={like_order}>인기순</span>
             <span onClick={date_Order}>최신순</span>
             <span onClick={old_Order}>오래된순</span>
           </div>
