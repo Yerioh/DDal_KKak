@@ -35,9 +35,7 @@ const Complete = () => {
             {/* 상품정보 안내 제목 */}
             <div className='goods-title'>
                 <div className='inner-items' style={{ width: "20%" }}>
-                    일자
-                    <br />
-                    상품번호
+                    주문일자
                 </div>
                 <div className='inner-items' style={{ width: "50%" }}>
                     상품정보
@@ -54,7 +52,7 @@ const Complete = () => {
             {/* <BuyScriptItem /> */}
             <Link to="/" style={{ textDecoration: "none" }}>
                 <div className='submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
-                    <Button className='submit-btn'>메인페이지로</Button>
+                    <Button  variant="outline-dark"  className='submit-btn'>메인페이지로</Button>
                 </div>
             </Link>
 

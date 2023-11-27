@@ -16,7 +16,7 @@ const Basket = () => {
     const [selectedItem, setSelectItem] = useState({});
     const [sum, setSum] = useState(0)
     let restartBuyItem = [];
-    const USER_ID = useSelector((state)=>state.session.id)
+    const USER_ID = useSelector((state) => state.session.id)
 
     // 현재 로그인된 아이디에 해당하는 세션만 걸러내기
     const UserIdFilter = cartItem.filter(item => item.USER_ID === USER_ID)
@@ -84,15 +84,19 @@ const Basket = () => {
     /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
     useEffect(() => {
         console.log(cartItem, "장바구니페이지 처음 랜더링");
-        const storedCartItems = JSON.parse(sessionStorage.getItem("cartItem"));
-          setCartItem(storedCartItems);
-        if (JSON.parse(sessionStorage.getItem("buyItem")) === null) {
-          console.log("구매목록초기화Already");
-        } else {
-          console.log("구매목록 초기화");
-          sessionStorage.setItem("buyItem", JSON.stringify(restartBuyItem))        
+        if (JSON.parse(sessionStorage.getItem("cartItem")) == null) {
+           console.log('장바구니에 아이템이 없음')
+        }else{
+            const storedCartItems = JSON.parse(sessionStorage.getItem("cartItem"));
+            setCartItem(storedCartItems);
+            if (JSON.parse(sessionStorage.getItem("buyItem")) === null) {
+                console.log("구매목록초기화Already");
+            } else {
+                console.log("구매목록 초기화");
+                sessionStorage.setItem("buyItem", JSON.stringify(restartBuyItem))
+            }
         }
-      }, []);
+    }, []);
 
 
     return (

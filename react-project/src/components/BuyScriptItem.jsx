@@ -35,14 +35,12 @@ const BuyScriptItem = ({item}) => {
     <div className='count-box' >
         {/* 세션스토리지저장 */}
         <div style={{ height: "50%", display: "grid", placeItems: "center" }}>
-            사이즈
             <div>
             {item?.PROD_SIZE}
             </div>
         </div>
         {/* 세션 스토리지 저장 */}
         <div style={{ height: "50%", display: "grid", placeItems: "center" }}>
-            <div>수량</div>
             <div style={{ display: "flex", alignItems: "center" }}>
                 {/* 세션에 저장된 수량정보 가져오기 */}
                 <h6 >{item?.PROD_COUNT}</h6>
