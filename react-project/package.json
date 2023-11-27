@@ -21,6 +21,7 @@
     "dom-to-image": "^2.6.0",
     "express-session": "^1.17.3",
     "file-saver": "^2.0.5",
+    "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
     "mdb-react-ui-kit": "^6.3.0",
     "react": "^18.2.0",

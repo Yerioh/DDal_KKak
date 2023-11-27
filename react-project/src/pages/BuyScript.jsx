@@ -66,6 +66,40 @@ const BuyScript = () => {
     let name = nameRef.current.value
     console.log(name)
   }
+   /** 결제 창 호출 함수 */
+   const onClickPayment = () => {
+    const { IMP } = window;
+    IMP.init(process.env.REACT_APP_KEY_ID) // 가맹점 식별 코드
+
+    // 결제 데이터 정의하기
+    const data = {
+        pg: 'html5_inicis.{INIpayTest}',               // PG사
+        pay_method: 'card',                           // 결제수단
+        merchant_uid: `mid_${new Date().getTime()}` ,  // 주문번호
+        amount: 1000,                                 // 결제금액
+        name: '아임포트 결제 데이터 분석',                  // 주문명
+        buyer_name: '홍길동',                           // 구매자 이름
+        buyer_tel: '01012341234',                     // 구매자 전화번호
+        buyer_email: 'example@example',               // 구매자 이메일
+        buyer_addr: '신사동 661-16',                    // 구매자 주소
+        buyer_postcode: '06018',                      // 구매자 우편번호
+    }
+    IMP.request_pay(data, portoneCallback)
+    }
+
+    /** 결제 콜백 함수 */
+    const portoneCallback = (res) => {
+        const{
+            success,
+            merchant_uid,
+            error_msg,
+        } = res;
+        if(success){
+            alert('결제 성공')
+        }else{
+            alert('결제 실패:',error_msg)
+        }
+    }
 
 
   return (
@@ -173,11 +207,9 @@ const BuyScript = () => {
         })}
       </div>
       <BuyScriptSummary />
-      <Link to="/complete" style={{ textDecoration: "none" }}>
         <div className='buy-submit-div' style={{ width: "100%", display: "grid", textAlign: "center", placeItems: "center" }}>
-          <Button onClick={reftest} variant="outline-dark" className='buy-submit-btn'>결제하기</Button>
+          <Button onClick={onClickPayment} variant="outline-dark" className='buy-submit-btn'>결제하기</Button>
         </div>
-      </Link>
     </div>
   )
 }

@@ -37,25 +37,24 @@ const GoodsDetail = () => {
   const [radioValue, setRadioValue] = useState('1');
   /** 제품 색상정보 저장 state */
   const [color, setColor] = useState('')
+    // 색상 명 저장 state
+    const [colorName, setColorName] = useState('')
   // 상품별 상세페이지 로딩을 위한 useParams
   const {PROD_ID} = useParams();
   // 장바구니 추가체크를 위한 State
   const [basketCheck, setBasketCheck] = useState(false);
 
-  // 색상 명 확인 ref
-  const colorNameRef = useRef('')
-  // 색상 명 저장 state
-  const [colorName, setColorName] = useState('')
+
+
   // 해당페이지의 상품 ID
   let prd_id = PROD_ID
   //  굿즈색상정보 끌어오기
-  const goods_color = (e) => {
-    let data = e.currentTarget.value
+  const goods_color = (name, code) => {
     let new_array = [...prd_goods_img]
-    const prd_size_filter = new_array.filter(item => item.COLOR_CODE === data)
+    const prd_size_filter = new_array.filter(item => item.COLOR_CODE === code)
     setGoodsImgFilter(prd_size_filter)
-    setColor(data)
-    setColorName(colorNameRef.current.innerText)
+    setColor(code)
+    setColorName(name)
   }
 
   // 오늘 날짜 추가를 위한 변수선언들
@@ -306,10 +305,10 @@ const GoodsDetail = () => {
             {prd_color_filter.map((item) => {
               return (
                 <div style={{ margin: "0px 10px" }}>
-                  <h6 style={item.COLOR_CODE === '#FFFFFF' ? { color: 'black' } : { color: `${item.COLOR_CODE}` }} ref={colorNameRef}>{item.COLOR_NAME}</h6>
+                  <h6 style={item.COLOR_CODE === '#FFFFFF' ? { color: 'black' } : { color: `${item.COLOR_CODE}` }}>{item.COLOR_NAME}</h6>
                   <button value={item.COLOR_CODE}
                     style={{ width: "20px", height: "20px", boxSizing: 'border-box', borderRadius: '50%', backgroundColor: `${item.COLOR_CODE}` }}
-                    onClick={(goods_color)}>
+                    onClick={()=>goods_color(item.COLOR_NAME, item.COLOR_CODE)}>
                   </button>
                 </div>
                 )
