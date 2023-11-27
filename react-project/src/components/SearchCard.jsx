@@ -5,7 +5,7 @@ import ShareImgModal from "./ShareImgModal";
 import "../css/ImageAll.css";
 import { useSelector } from "react-redux";
 import axios from "../axios";
-const SearchCard = ({ data, index }) => {
+const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
   // 사용자 아이디
   const useId = useSelector((state) => state.session.id);
   const isLogin = useSelector((state) => state.session.isLogin);
@@ -18,14 +18,15 @@ const SearchCard = ({ data, index }) => {
     if (isLogin) {
       // 좋아요 색 변환
       setLikeBtn(!likeBtn);
-      // 좋아요 숫자 증감
-      if (!likeBtn) {
-        setLikeCnt(likeCnt + 1);
-      } else {
-        setLikeCnt(likeCnt - 1);
-      }
+            
       // 이미지에 대한 좋아요 데이터 베이스 저장
-      axios.post("/imgCreate/likeClick", { id: useId, imgId: data.IMG_ID });
+      axios.post("/imgCreate/likeClick", { id: useId, imgId: data.IMG_ID })
+        .then(res=>{
+          // 좋아요 클릭 시 img data 재 요청
+          console.log(res.data.likeCheck)
+          if(res.data.likeCheck)
+          setImgState(!imgState)
+        })
     } else {
       alert("로그인이 필요한 서비스 입니다.");
     }
@@ -38,7 +39,7 @@ const SearchCard = ({ data, index }) => {
       .then((res) => {
         setLikeBtn(res.data);
       });
-  }, []);
+  }, [data]);
 
   
   // 이미지 상세 모달 제어

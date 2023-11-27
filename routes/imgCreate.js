@@ -181,18 +181,31 @@ router.post('/imgShare', (req,res)=>{
 
 // 이미지 더보기 페이지 이미지 출력
 router.post('/shareImgShow', (req,res)=>{
+  let data = req.body.sortImg
+  let sort = ''
+  if(data === 'Best'){
+    sort = 'CNT DESC'
+  }
+  else if(data === 'New'){
+    sort = 'DATE DESC'
+  }
+  else if(data === 'Old'){
+    sort = 'DATE ASC'
+  }
+  
   let sql = `SELECT A.IMG_ID, A.MEMBER_ID, A.IMG_PROMPT, A.IMG_NE_PROMPT, A.IMG_URL, A.IMG_NAME, DATE_FORMAT(A.GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE,
    B.MEMBER_NAME, 
   (SELECT COUNT(*) CNT 
      FROM TB_LIKE
     WHERE IMG_ID= A.IMG_ID) AS CNT
-   FROM TB_GEN_IMG A INNER JOIN TB_MEMBER B ON(A.MEMBER_ID = B.MEMBER_ID) WHERE IMG_SHARE = "Y"`
+   FROM TB_GEN_IMG A INNER JOIN TB_MEMBER B ON(A.MEMBER_ID = B.MEMBER_ID) WHERE IMG_SHARE = "Y" ORDER BY ${sort}`
   conn.connect()
   conn.query(sql, (err,result)=>{
     if(err){
       console.log('이미지 불러오기 쿼리문 에러', err)
     }
     else{
+      console.log(result)
       res.json({result})
     }
   })
@@ -233,6 +246,7 @@ router.post('/likeClick', (req,res)=>{
           }
           else{
             console.log('좋아요 등록 성공')
+            res.json({likeCheck:true})
           }
         })
       }
@@ -264,7 +278,7 @@ router.post('/likeCheck', (req,res)=>{
     else{
       let data = result[0].CNT
       // 좋아요 체크 되있으면 true 값 반환
-      if(data > 0){        
+      if(data > 0){
         res.json(true)
       }
       else{
