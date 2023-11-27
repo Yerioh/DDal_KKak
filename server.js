@@ -73,32 +73,33 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+// 23-11-27 오전 11:15 박지훈 작성
+// 이미지 생성 대기리스트 실시간 연동(Socket.io)
 io.on('connection', (socket)=>{
-  console.log('이미지 생성 페이지 연결')
-
+  // 이미지 생성 클릭 시 사용자 이름 대기열에 추가
   socket.on('createClick', (data)=>{
     let id = data.id
     axios.post('/socket/enQueue', {id : id})
       .then(res=>{
         let data = res.data.result
-        socket.emit('createList', {createList : data})
+        // 대기열 모든 사용자에게 전송
+        io.emit('createList', {createList : data})
       })
   })
 
+  // 이미지 생성 종료 시 사용자 이름 대기열에서 삭제
   socket.on('deQueue', (data)=>{
     let id = data.id
     axios.post('/socket/deQueue', {id : id})
       .then(res=>{
         let data = res.data.result
-        console.log('디큐', data)
+        // 대기열 모든 사용자에게 전송
+        io.emit('createList', {createList : data})
       })
   })
-
-  socket.on('disconnecting', ()=>{
+  io.on('disconnecting', ()=>{
     console.log('이미지 생성 종료')
   })
-
-
 })
 
 
