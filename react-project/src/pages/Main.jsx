@@ -81,15 +81,24 @@ const Main = () => {
       <div className="Main-text-img">
         <div className="Main-head-btn">
           <div className="Main-head">
-            <span className="text-up">생성형AI 기술을 활용한</span>
+            <div className="text-up-box">
+              <span className="text-up">생성형 AI </span>
+              <span className="test1-up">기술을 활용한</span>
+            </div>
             <span className="text-up">자동 이미지 생성</span>
             <br />
             <span className="text-up">손쉬운 이미지 편집 가능</span>
             <br />
-            <span className="text-up">나만의 색다른 굿즈</span>
+            <div className="text-up-box">
+              <span className="test-up">나만의 </span>
+              <span className="text-up">색다른 굿즈</span>
+            </div>
             <br />
-            <span>만들고 싶다면?</span>
+            <span className="long-text">
+            딸깍에서 당신만을 위한, 세상에 단 하나뿐인 이미지를 만들어보세요.
+            </span>
           </div>
+         
           <Link to="/image-create">
             <button className="Main-Btn">이미지 생성하러 가기! 딸~깍</button>
             {/*  */}

@@ -24,8 +24,9 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
         .then(res=>{
           // 좋아요 클릭 시 img data 재 요청
           console.log(res.data.likeCheck)
-          if(res.data.likeCheck)
-          setImgState(!imgState)
+          if(res.data.likeCheck){
+            setImgState(!imgState)
+          }
         })
     } else {
       alert("로그인이 필요한 서비스 입니다.");
@@ -65,12 +66,12 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
         <div className="Card-like-title">
           {likeBtn ? (
             <div className="like-btn">
-              <FaHeart color="red" onClick={handleLike} />
+              <FaHeart className="red-heart" onClick={handleLike} />
               <span>{data.CNT}</span>
             </div>
           ) : (
             <div className="like-btn">
-              <FaRegHeart onClick={handleLike} />
+              <FaRegHeart className="red-heart" onClick={handleLike} />
               <span>{data.CNT}</span>
             </div>
           )}

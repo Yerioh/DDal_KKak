@@ -102,6 +102,10 @@ const GoodsDetail = () => {
         setSum(data.prdInfo[0].PROD_PRICE)
         // 굿즈 데이터 로딩 여부
         setIsLoading(true)
+        // 굿즈 기본 색상 설정
+        if(data.prdInfo[0].PROD_CATEGORY==='clothes'){
+          setColor('#000000')
+        }
       })
   },[])
 
@@ -188,6 +192,13 @@ const GoodsDetail = () => {
   const USER_ID = useSelector((state)=>state.session.id)
   // const dispatch = useDispatch()
 
+  /** 장바구님 담기 알림 창 함수 */
+  const basketAlert = () => {
+    setBasketCheck(true)
+    const timeOutAlert = setTimeout(()=>{
+      setBasketCheck(false)
+    },3000) // 5초후 초기화
+  }
   /**장바구니에 담기위한 함수 */
   function moveItemToCart(goods_info) {
 
@@ -234,11 +245,8 @@ const GoodsDetail = () => {
     }
     // 업데이트된 장바구니 데이터를 다시 JSON 형태로 변환하여 저장
     sessionStorage.setItem('cartItem', JSON.stringify(cartItems));
-    setBasketCheck(true)
+    basketAlert()
   }
-
-
-
   return (
     <div style={{ minWidth: "710px", margin: "5% 10% ", display: 'flex', flexDirection:'column' }}>
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
@@ -344,22 +352,12 @@ const GoodsDetail = () => {
         </div>
         <br />
         <hr className='hr-style' />
-{/* 장바구니 담기 버튼 / 클릭시 세션로컬스토리지에 저장됨 */}
-       
-          { basketCheck == true ?
-          ( <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
+        {/* 장바구니 담기 버튼 / 클릭시 세션로컬스토리지에 저장됨 */}
+        <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
           <Button variant="outline-secondary" onClick={getImgData}
           style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
-        <Alert severity="success" style={{marginTop:"10px"}}> 장바구니 담기 성공!</Alert></div>)
-        :
-        (
-          <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
-        <Button variant="outline-secondary" onClick={getImgData}
-            style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button></div>)
-          }
-          {/* <Button variant="outline-secondary" onClick={getImgData}
-            style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
-          <Alert severity="success" style={{marginTop:"10px"}}> 장바구니 담기 성공!</Alert> */}
+        </div>
+        {basketCheck===true && <Alert severity="success" className='basket-alert'> 장바구니 담기 성공!</Alert>}        
       </div>
       </>
       )}

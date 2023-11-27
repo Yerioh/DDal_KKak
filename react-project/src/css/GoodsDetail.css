@@ -48,7 +48,15 @@
     height: 1px;
     border: 0;
 }
-
+.basket-alert{
+    width: 300px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+/* 굿즈 리뷰 */
 .GoodsReview-card{
     display: flex;
     justify-content: space-between;
