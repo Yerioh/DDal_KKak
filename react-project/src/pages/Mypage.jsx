@@ -10,6 +10,7 @@ import delete_user_icon from "../img/delete-user.png"
 import image_icon from "../img/image-icon.png"
 import order_icon from "../img/order-list.png"
 import user_icon from "../img/user-icon.png"
+import Orderlist from "../components/Orderlist";
 
 
 
@@ -62,6 +63,11 @@ const Mypage = () => {
     setpageState("Save_Image");
   };
 
+  //  주문 내역 컴포넌트 호출 
+  const Order_list = () => {
+    setpageState('Order_list')
+  }
+
   /**회원 탈퇴 모달창*/
   const delete_Modal = () => {
     // setdelete_user의 상태를 변경하는 메소드를 구현
@@ -82,7 +88,7 @@ const Mypage = () => {
             <span>내 저장 이미지</span>
             <img src={image_icon} alt="image_icon" />
           </div>
-          <div className="user-box">
+          <div className={`user-box ${pageState==='Order_list'? 'box-current' : null}`} onClick={ Order_list }>
             <span>주문 내역</span>
             <img src={order_icon} alt="order_icon" />
           </div>
@@ -95,6 +101,7 @@ const Mypage = () => {
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} postNumber={postNum} address={address} addressDetail={addressDetail} />}
       {pageState === "Save_Image" && <SaveImage />}
+      {pageState === "Order_list" && <Orderlist />}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
 
           </div>

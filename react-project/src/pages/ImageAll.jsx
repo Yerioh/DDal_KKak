@@ -10,14 +10,14 @@ const ImageAll = () => {
   const [imgState, setImgState] = useState(false);
   // 정렬
   const [sortImg, setSortImg] = useState("New");
-
-  const [searchWord, setSearchWord] = useState([]); // 검색
+  const [searchWord, setSearchWord] = useState(null); // 검색
 
   // 23-11-28 김형균 작성 : 검색
   const searchRef = useRef(); // 검색 입력창 Ref
   /** 검색 입력창 함수 */
   const promptSearch = () => {
-    let array = imgCard.filter((item) => {
+    //검색어 업데이트
+    let array = searchWord.filter((item) => { //검색 키워드
       return item["IMG_PROMPT"].includes(searchRef.current.value);
     });
     setImgCard(array);
@@ -27,9 +27,9 @@ const ImageAll = () => {
   useEffect(() => {
     axios.post("/imgCreate/shareImgShow", { sortImg }).then((res) => {
       let data = res.data.result;
-      console.log("이미지 모음 data", data);
       // 이미지 모음 날짜 연동 23-11-24 11:40 임휘훈
       setImgCard(data);
+      setSearchWord(data)
     });
   }, [imgState, sortImg]);
 
