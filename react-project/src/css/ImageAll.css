@@ -79,7 +79,7 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
 /* 인기순, 최신순,오래된순 Nav Container */
 .Search-Img-Nav{
     width: 100%;
-    border-bottom: 1px solid rgb(200, 200, 200);
+    border-bottom: 3px solid rgb(200, 200, 200);
     
 }
 .Search-Img-Nav > .Search-Img-box{
