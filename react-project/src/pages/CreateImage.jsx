@@ -9,9 +9,6 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { ProgressReducerActions } from "../redux/reducers/progressSlice";
 import { useNavigate } from "react-router-dom";
 import qMark from "../img/question-mark.png";
-import guideKeyboard from "../img/guide-keyboard.png";
-import guideClick from "../img/guide-click.png";
-import guideBang from "../img/guide-bang.png";
 import { socket } from "../socket";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -23,8 +20,10 @@ const CreateImage = () => {
   // 긍정 프롬프트
   const [positivePrompt, setPositivePrompt] = useState("");
   const [positiveKeyword, setPositiveKeyword] = useState([]);
+
   // 부정 프롬프트
   const [negativePrompt, setNegativePrompt] = useState("");
+
   // 출력할 사진 개수
   const [countImg, setCountImg] = useState("1");
   const [guideModalOpen, setguideModalOpen] = useState(false);
@@ -163,15 +162,15 @@ const CreateImage = () => {
           width: "15%",
           height: "10%",
           position: "absolute",
-          right: "10%",
-          zIndex: "50",
-          marginLeft: "5%",
+          right: '-1%',
+          bottom: '50%',
+          zIndex: "10",
           border: "none",
           background: "none",
         }}
       >
         <img
-          src="./images/arrow-right2.png"
+          src="./images/modalrightArrow.png"
           alt="left"
           style={{ width: "100%", objectFit: "cover" }}
         />
@@ -189,15 +188,15 @@ const CreateImage = () => {
           width: "15%",
           height: "10%",
           position: "absolute",
-          bottom: "-10%",
-          zIndex: "50",
-          marginLeft: "5%",
+          bottom: "50%",
+          zIndex: "10",
+          // marginLeft: "5%",
           border: "none",
           background: "none",
         }}
       >
         <img
-          src="./images/arrow-left2.png"
+          src="./images/modalleftArrow.png"
           alt="left"
           style={{ width: "100%", objectFit: "cover" }}
         />
@@ -233,7 +232,6 @@ const CreateImage = () => {
                 className="guide-button"
               />
             </h3>
-
             <Form.Label></Form.Label>
             <textarea
               type="text"
@@ -245,14 +243,12 @@ const CreateImage = () => {
               placeholder="긍정 프롬프트를 입력해주세요"
               spellCheck="false"
             />
-
             {/* 키워드 버튼 창 */}
             <Keyword
               setPositiveKeyword={setPositiveKeyword}
               positiveKeyword={positiveKeyword}
             />
           </div>
-
           {/* 부정 키워드 입력  */}
           <div className="negative_keyword">
             <h3> 제외 키워드</h3>
@@ -306,8 +302,7 @@ const CreateImage = () => {
           }}
         >
           <div className="guidemodal-body">
-            <h2>어떻게 만들까요?</h2>
-
+            <h2 style={{ margin: " 5% auto 0" }}>어떻게 만들까요?</h2>
             <div className="guidemodal-content">
               <Slider {...settings}>
                 <div>
@@ -316,14 +311,10 @@ const CreateImage = () => {
                       src={"./images/inputguide.png"}
                       alt=""
                       className="guidemodal-guideinfo-img"
-                      style={{ marginTop: "45%" }}
                     />
-                    <div
-                      className="guidemodal-guideinfo-info"
-                      style={{ marginTop: "30%" }}
-                    >
+                    <div className="guidemodal-guideinfo-info" >
                       <span>
-                        만들고 싶은 이미지와 관련된 단어나 문장을{' '}
+                        만들고 싶은 이미지와 관련된 단어나 문장을{" "}
                         <span className="bold">"핵심 키워드"</span>에
                         입력해주세요.
                       </span>
@@ -332,31 +323,28 @@ const CreateImage = () => {
                 </div>
                 <div className="guidemodal-guideinfo">
                   <img
-                    src={"./images/guidekeyword.png"}
+                    src={"./images/samplekeyword.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
                   />
-                  <div className="guidemodal-guideinfo-info">
+                  <div className="guidemodal-guideinfo-info " >
                     <span>
-                      어떻게 써야할지 어렵나요? 저희가{" "}
-                      <span className="bold">키워드</span>를 준비했어요.
+                      어떻게 써야할지 어렵나요?<br/>
+                      <span> 저희가{" "} <span className="bold">키워드</span>를 준비했어요.</span>
+                      <br/>키워드를 클릭! 클릭!
                     </span>
-                    <span>키워드를 클릭! 클릭!</span>
+                    
                   </div>
                 </div>
-                <div className="guidemodal-guideinfo">
+                <div className="guidemodal-guideinfo"  >
                   <img
                     src={"./images/guidenegative.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
-                    style={{ marginTop: "45%" }}
                   />
-                  <div
-                    className="guidemodal-guideinfo-info"
-                    style={{ marginTop: "35%" }}
-                  >
+                  <div className="guidemodal-guideinfo-info" >
                     <span>
-                      넣고 싶지 않은게 있나요?그렇다면{" "}
+                      넣고 싶지 않은게 있나요?{" "}<br/> 그렇다면{" "} 
                       <span className="bold">"제외 키워드"</span>에 관련 단어나
                       문장을 넣어봐요.
                     </span>
@@ -367,25 +355,26 @@ const CreateImage = () => {
                     src={"./images/DDALKKAK.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
-                    style={{ marginTop: "45%" }}
                   />
                   <div
                     className="guidemodal-guideinfo-info"
-                    style={{ marginTop: "30%" }}
+                    style={{marginTop:'15%'}}
                   >
-                    <span>만들 이미지의 수를 선택!</span>
-                    <p>
-                      마지막으로 <span className="bold">"딸-깍!"</span>
-                      {' '}<span>어때요? 참 쉽죠?</span>
-                    </p>
-                    
+                    <span>만들 이미지의 수를 선택! <br/>
+                      마지막으로 <span className="bold">"딸-깍!"</span>{" "}
+                      <span>어때요? 참 쉽죠?</span>
+                    </span>
                   </div>
                 </div>
               </Slider>
             </div>
 
             <div className="guidemodal-footer">
-              <button className="btnmy same-BTN" onClick={closeGuideModal}>
+              <button
+                className="btnmy same-BTN"
+                onClick={closeGuideModal}
+                zIndex = '5'
+              >
                 닫기
               </button>
             </div>

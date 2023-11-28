@@ -36,9 +36,7 @@
 }
 
 @media (max-width: 768px) {
-    .UserInfo{
 
-    }
     .UserInfo-elementbox {
         display: flex;
         flex-direction: column;

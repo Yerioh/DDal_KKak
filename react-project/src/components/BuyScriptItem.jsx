@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
-import Payments from './Payments';
 
 const BuyScriptItem = ({item}) => {
   return (
