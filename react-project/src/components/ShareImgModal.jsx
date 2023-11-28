@@ -30,14 +30,14 @@ const ShareImgModal = ({
                   {/* <div className="user-Prompt"> */}
 
                   <div className="title-prompt-Pos">
-                    <h4>Positive Prompt</h4>
+                    <h4>핵심 키워드</h4>
                     <div className="prompt-text">
                       <span>{ImgArray.IMG_PROMPT}</span>
                     </div>
                   </div>
                   <div className="prompt-Neg">
                     {" "}
-                    <h4>Negative Prompt</h4>
+                    <h4>제외 키워드</h4>
                     <div className="prompt-text">
                       <span>{ImgArray.IMG_NE_PROMPT}</span>
                     </div>

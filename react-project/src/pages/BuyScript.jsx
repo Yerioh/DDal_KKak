@@ -7,6 +7,9 @@ import BuyScriptItem from "../components/BuyScriptItem";
 import BuyScriptSummary from "../components/BuyScriptSummary";
 import { useSelector } from "react-redux";
 import DaumPostcode from "react-daum-postcode";
+import axios from "../axios";
+import {v4 as uuidv4} from 'uuid';
+
 
 const BuyScript = () => {
   const navigate = useNavigate();
@@ -78,6 +81,7 @@ const BuyScript = () => {
       // const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
       setBuyItem(buyItems);
     }
+
   }, []);
 
   console.log("유저아이디필터:", buyItem);
@@ -162,16 +166,19 @@ const BuyScript = () => {
     console.log(reciDeliPs,'수령인')
     buyData={
     'MEMBER_ID' :`${USER_ID}`,
-    'ORDER_IMG' :`${buyItems[0].PROD_URL}`,
+    'ORDER_DE_IMG' :`${buyItems[0].PROD_URL}`,
     'ORDER_PRICE':`${totalNum}`,
     'DELIVERY_POST':`${recipZipCode}`,
     'DELIVERY_ADDR1':`${recipAdress}`,
     'DELIVERY_ADDR2':`${recipAdressDetail}`,
     'RECIPIENT':`${reciDeliPs}`,
-    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME,PROD_URL:item.PROD_URL})
+    'ORDER_ID' : uuidv4(),
+    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME,PROD_URL:item.PROD_URL, PROD_ID:item.PROD_ID})
     )
     }
-   
+    
+    axios.post('/payment/orderGoods', {buyData})
+  
     console.log(buyData,'데이터뭉치')
     console.log(buyData.BUYITEM_SESSION,'새로운배열의세션')
   };
@@ -186,18 +193,38 @@ const BuyScript = () => {
     const { IMP } = window;
     IMP.init(process.env.REACT_APP_KEY_ID); // 가맹점 식별 코드
 
+    // 주문자 이름
+    let name = nameRef.current.value;
+    // 주문자 연락처
+    let phoneNumber = phoneNumRef.current.value;
+    // 주문자 이메일
+    let email = emailRef.current.value;
+    // 수령자 이름
+    let recip = recipRef.current.value;
+    // 수령자 연락처
+    let recipNum = recipNumRef.current.value;
+    // 수령자 주소
+    let recipAdress = recipAdressRef.current.value;
+    // 수령자 상세주소
+    let recipAdressDetail = recipAdressDetailRef.current.value;
+    // 수령자 우편번호
+    let recipZipCode = recipZipCodeRef.current.value;
+    // 수령자 배송메세지
+    let reciDeliPs = reciDeliPsRef.current.value;
+    console.log('주문', name,phoneNumber,email,totalNum)
+
     // 결제 데이터 정의하기
     const data = {
       pg: "html5_inicis.{INIpayTest}", // PG사
       pay_method: "card", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 1000, // 결제금액
-      name: "아임포트 결제 데이터 분석", // 주문명
-      buyer_name: "홍길동", // 구매자 이름
-      buyer_tel: "01012341234", // 구매자 전화번호
-      buyer_email: "example@example", // 구매자 이메일
-      buyer_addr: "신사동 661-16", // 구매자 주소
-      buyer_postcode: "06018", // 구매자 우편번호
+      amount: 100, // 결제금액
+      name: "딸깍 GOODS 구매", // 주문명
+      buyer_name: name, // 구매자 이름
+      buyer_tel: phoneNumber, // 구매자 전화번호
+      buyer_email: email, // 구매자 이메일
+      buyer_addr: `${recipAdress} ${recipAdressDetail}`, // 구매자 주소
+      buyer_postcode: recipZipCode, // 구매자 우편번호
     };
     IMP.request_pay(data, portoneCallback);
   };
@@ -205,6 +232,7 @@ const BuyScript = () => {
   /** 결제 콜백 함수 */
   const portoneCallback = (res) => {
     const { success, merchant_uid, error_msg } = res;
+    // let success = true
     if (success) {
       // 결제성공시 시행할 동작들
       alert("결제 성공");
@@ -212,7 +240,9 @@ const BuyScript = () => {
       navigate('/complete'); 
     } else {
       // 결제 실패시 시행할 동작들
-      alert("결제 실패:", error_msg);
+      alert("결제 실패:");
+      console.log('결제 실패', error_msg)
+
       navigate("/buyscript")
     }
   };
@@ -451,6 +481,7 @@ const BuyScript = () => {
         }}
       >
         <Button
+          // onClick={onClickPayment}
           onClick={onClickPayment}
           variant="outline-dark"
           className="buy-submit-btn same-BTN same-BTN:hover"

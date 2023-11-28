@@ -63,6 +63,11 @@ const Mypage = () => {
     setpageState("Save_Image");
   };
 
+  //  주문 내역 컴포넌트 호출 
+  const Order_list = () => {
+    setpageState('Order_list')
+  }
+
   /**회원 탈퇴 모달창*/
   const delete_Modal = () => {
     // setdelete_user의 상태를 변경하는 메소드를 구현

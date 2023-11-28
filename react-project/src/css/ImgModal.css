@@ -44,7 +44,8 @@
 
 
  .S-ImgInfo > .image-info{
-  height: 90%;
+    min-width: 25%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -134,7 +135,8 @@
   }
 
   .SM-btn:hover{
-    background-color: rgb(80, 77, 77);
+    background-color: #FF7E00;
+    border: #FF7E00;
     color: white;
     transition: all .10s linear;
   }
@@ -149,7 +151,8 @@
     color : rgb(80, 77, 77)
   }
   .Modal-Btn > a > button:hover{
-    background-color: rgb(80, 77, 77);
+    background-color: #FF7E00;
+    border: #FF7E00;
     color: white;
     transition: all .10s linear;
   } 
@@ -200,6 +203,7 @@
   }
   .S-ImgInfo > .image-info{
       height: auto;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -216,6 +220,7 @@
   .title-prompt-Pos{
     max-width: 240px;
     height: 50%;
+    width: 100%;
   }
   .title-prompt-Pos > .prompt-text{
     width: 100%;
@@ -225,10 +230,9 @@
   }
   /* 부정 프롬프트 부분 */
   .user-Prompt > .prompt-Neg{
-    width: 100%;
     max-width: 240px;
-    
     height: 50%;
+    width: 100%;
   }
   .user-Prompt > .prompt-Neg > .prompt-text{
     height: 85%;
