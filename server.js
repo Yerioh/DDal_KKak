@@ -31,6 +31,8 @@ const user = require('./routes/user')
 const page = require("./routes/page")
 // socketRoute
 const socketRoute = require('./routes/socketRoute')
+// 결제 라우터
+const paymentGoods = require('./routes/paymentGoods')
 
 // 정적 파일을 가져오기 위한 미들웨어
 app.use(express.static(path.join(__dirname, "react-project", "build")));
@@ -65,6 +67,8 @@ app.use('/user', user)
 app.use('/page', page)
 // socket 라우터
 app.use('/socket', socketRoute)
+// 결제 라우터
+app.use('/payment', paymentGoods)
 
 // 포트번호 설정
 app.set("port", process.env.PORT || 3001);
