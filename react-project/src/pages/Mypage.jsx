@@ -10,6 +10,7 @@ import delete_user_icon from "../img/delete-user.png"
 import image_icon from "../img/image-icon.png"
 import order_icon from "../img/order-list.png"
 import user_icon from "../img/user-icon.png"
+import BoughtScript from "../components/BoughtScript";
 
 
 
@@ -82,7 +83,7 @@ const Mypage = () => {
             <span>내 저장 이미지</span>
             <img src={image_icon} alt="image_icon" />
           </div>
-          <div className="user-box">
+          <div className={`user-box ${pageState==='BoughtScript'? 'box-current' : null}`} onClick={ BoughtScript }>
             <span>주문 내역</span>
             <img src={order_icon} alt="order_icon" />
           </div>
@@ -95,6 +96,7 @@ const Mypage = () => {
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} postNumber={postNum} address={address} addressDetail={addressDetail} />}
       {pageState === "Save_Image" && <SaveImage />}
+      {pageState === "BoughtScript" && <BoughtScript/>}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
 
           </div>

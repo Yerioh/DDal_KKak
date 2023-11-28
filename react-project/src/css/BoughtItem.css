@@ -1,0 +1,85 @@
+.BoughtItem .item-first-container {
+    width: 100%;
+    margin-top: 20px;
+    min-width: 700px;
+}
+.BoughtItem .item-second-container{
+    width: 96%;
+    height: 200px;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    margin-left: 2%;
+    display: flex;
+}
+.BoughtItem .item-second-container .first-box{
+    width: 19%;
+    height: 80%;
+    margin-top: 25px;
+    border-right: 2px solid lightgray;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.BoughtItem .item-second-container .second-box{
+    width: 54%;
+    height: 80%;
+    margin-top: 25px;
+    border-right: 2px solid lightgray;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.BoughtItem .inner-first-box{
+    width: 50%;
+    height: 100%;
+}
+.BoughtItem .inner-first-box-2{
+    height: 50%;
+    width: 100%;
+}
+.BoughtItem .img-box{
+    height: 100%;
+    object-fit: cover;
+}
+.BoughtItem .inner-text-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.BoughtItem .inner-second-box{
+    width: 100%;
+    height: 50%;
+    align-items: center;
+}
+.BoughtItem .inner-third-box{
+    width: 16%;
+    height: 80%;
+    margin-top: 25px;
+    border-right: 2px solid lightgray;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.BoughtItem .inner-third-box .inner-text-box-1{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.BoughtItem .inner-forth-box{
+    width: 14%;
+    height: 80%;
+    margin-top: 25px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
