@@ -8,6 +8,7 @@
     font-size: 30px;
     font-weight: bold;
     display: flex;
+    margin-top: 50px;
 }
 /* 장바구니 전체 체크 메뉴 */
 .basket-all-check{

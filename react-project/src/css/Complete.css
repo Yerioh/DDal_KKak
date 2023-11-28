@@ -6,6 +6,7 @@
     font-size: 30px;
     font-weight: bold;
     display: flex;
+    margin-top: 50px;
 }
 .complete .goods-title{
     display: flex;

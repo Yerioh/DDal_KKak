@@ -12,6 +12,7 @@
     font-size: 30px;
     font-weight: bold;
     display: flex;
+    margin-top: 50px;
 }
 /* 구매페이지 상품정보 박스 */
 .buyscript .buy-goods-list {
