@@ -76,12 +76,13 @@ const allDel = () => {
         sessionStorage.removeItem("buyItem");
       }
     }
+    setSum(0)
   }, []);
 
   return (
     <div style={{ margin: "0% 20%", minWidth: "780px" }}>
       <div className="basket-top-text">
-        <div className="title">장바구니</div>
+        
         <div className="subtitle">
           <p>장바구니</p> &nbsp;&nbsp;
           <p>—</p>&nbsp;&nbsp;
@@ -181,7 +182,7 @@ const allDel = () => {
           to={"/buyscript"}
           style={{ textDecoration: "none", width: "25%" }}
         >
-          <Button variant="outline-dark" className="basket-submit-btn">
+          <Button variant="outline-dark" className="basket-submit-btn same-BTN same-BTN:hover">
             주문하기
           </Button>
         </Link>

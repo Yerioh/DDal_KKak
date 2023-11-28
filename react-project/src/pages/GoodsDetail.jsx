@@ -33,7 +33,7 @@ const GoodsDetail = () => {
   // 가격을 나타내기 위한 State
   const [sum, setSum] = useState(0)
   /** 제품의 사이즈 정보및 라디오버튼 */
-  const [radioValue, setRadioValue] = useState('1');
+  const [radioValue, setRadioValue] = useState('L');
   /** 제품 색상정보 저장 state */
   const [color, setColor] = useState('')
     // 색상 명 저장 state
@@ -368,7 +368,7 @@ const GoodsDetail = () => {
         <hr className='hr-style' />
         {/* 장바구니 담기 버튼 / 클릭시 세션로컬스토리지에 저장됨 */}
         <div style={{ alignItems: "center", textAlign: "center", margin: "10px  0px 0px 0px" }}>
-          <Button variant="outline-secondary" onClick={getImgData}
+          <Button variant="outline-secondary" onClick={getImgData} className="same-BTN same-BTN:hover"
           style={{ width: "90%", height: "50px", fontSize: "25px" }}>장바구니 담기</Button>
         </div>
         {basketCheck===true && <Alert severity="success" className='basket-alert'> 장바구니 담기 성공!</Alert>}        

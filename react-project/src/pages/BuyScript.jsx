@@ -14,6 +14,7 @@ const BuyScript = () => {
   const USER_ID = useSelector((state)=>state.session.id)
   const [totalNum,setTotalNum] = useState();
   const [count, setCount]=useState();
+  const [arrSession,setArrSession]=useState([]);
   const [show, setShow] = useState(false); // true : 모달보임 / false : 모달 안보임
   const handleClose = () => {
     setShow(false);
@@ -123,18 +124,33 @@ const BuyScript = () => {
 
 
 
-
-  let buyData = {};
+  
+  let buyData = [];
+  /**DB로 정보를 보내기 위해 데이터 집합소 */
   const reftest = () => {
+    let sessionArr = []
+    const buyItems =JSON.parse(sessionStorage.getItem('buyItem'))
+    buyItems.forEach((item)=>{sessionArr.push(item)})
+    console.log(sessionArr,'세션이 들어갔을까?')
+    // 주문자 이름
     let name = nameRef.current.value;
+    // 주문자 연락처
     let phoneNumber = phoneNumRef.current.value;
+    // 주문자 이메일
     let email = emailRef.current.value;
+    // 수령자 이름
     let recip = recipRef.current.value;
+    // 수령자 연락처
     let recipNum = recipNumRef.current.value;
+    // 수령자 주소
     let recipAdress = recipAdressRef.current.value;
+    // 수령자 상세주소
     let recipAdressDetail = recipAdressDetailRef.current.value;
+    // 수령자 우편번호
     let recipZipCode = recipZipCodeRef.current.value;
+    // 수령자 배송메세지
     let reciDeliPs = reciDeliPsRef.current.value;
+
     console.log(name, "이름");
     console.log(phoneNumber, "연락처");
     console.log(email, "이메일");
@@ -146,16 +162,18 @@ const BuyScript = () => {
     console.log(reciDeliPs,'수령인')
     buyData={
     'MEMBER_ID' :`${USER_ID}`,
-    'ORDER_IMG' :`${buyItem[0]?.PROD_URL}`,
+    'ORDER_IMG' :`${buyItems[0].PROD_URL}`,
     'ORDER_PRICE':`${totalNum}`,
     'DELIVERY_POST':`${recipZipCode}`,
     'DELIVERY_ADDR1':`${recipAdress}`,
     'DELIVERY_ADDR2':`${recipAdressDetail}`,
     'RECIPIENT':`${reciDeliPs}`,
-    'ORDER_PROD_INFO':`${buyItem[0]?.PROD_NAME},${buyItem[0]?.PROD_SIZE},${buyItem[0]?.PROD_COLOR.COLOR_NAME}`,
-    'ORDER_DE_CNT':`${count}`
+    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME,PROD_URL:item.PROD_URL})
+    )
     }
+   
     console.log(buyData,'데이터뭉치')
+    console.log(buyData.BUYITEM_SESSION,'새로운배열의세션')
   };
 
  
@@ -188,10 +206,12 @@ const BuyScript = () => {
   const portoneCallback = (res) => {
     const { success, merchant_uid, error_msg } = res;
     if (success) {
+      // 결제성공시 시행할 동작들
       alert("결제 성공");
-      navigate('/complete')
-      console.log(buyData)
+      reftest()
+      navigate('/complete'); 
     } else {
+      // 결제 실패시 시행할 동작들
       alert("결제 실패:", error_msg);
       navigate("/buyscript")
     }
@@ -209,7 +229,7 @@ const BuyScript = () => {
       {/* 맨위 타이틀 텍스트 */}
       <div className="buyscript-top-text">
         <div className="title">
-          <p>주문서 작성</p>
+          <p> </p>
         </div>
         <div className="subtitle">
           <p style={{ color: "#bebebe" }}>장바구니</p>&nbsp;&nbsp;
@@ -433,11 +453,10 @@ const BuyScript = () => {
         <Button
           onClick={onClickPayment}
           variant="outline-dark"
-          className="buy-submit-btn"
+          className="buy-submit-btn same-BTN same-BTN:hover"
         >
           결제하기
         </Button>
-        <button onClick={reftest}>RefTest</button>
       </div>
     </div>
   );
