@@ -1,3 +1,5 @@
+// 2023-11-28  오전 10:20 박지훈 모듈화 진행
+
 // user 정보 라우터
 // 2023-11-14 12:45 임휘훈 작성
 
@@ -6,71 +8,35 @@ const router = express.Router();
 const axios = require("axios");
 const crypto = require('crypto')
 const hash = crypto.createHash('sha1')
+// 회원가입 및 로그인 로직 모듈
+const userModel = require('../models/userModel')
 
 // DB 연결
 const db = require("../config/database");
 let conn = db.init();
 
 // 회원가입 라우터
-router.post("/join", (req, res) => {
-  let data = req.body
-  let userId = req.body.userId; // 사용자가 입력한 ID, name 속성
-  let useremail = req.body.useremail; // 사용자가 입력한 email
-  let userPw = req.body.userPw; // 사용자가 입력한 PW
-  let checkPw = req.body.checkPw; // 비밀번호 확인
-  let userName = req.body.userName; // 사용자 이름
-  let phone = req.body.phone; // 사용자 휴대전화
-  let postNumber = req.body.postNumber; // 우편번호
-  let doro = req.body.doro; // 도로명 주소 add1
-  let detailAddress = req.body.detailAddress; // 상세주소 add2
-
-  // 회원가입 쿼리문
-  // SHA2(?, 256) : 비밀번호 256 비트 암호화
-  let joinQuery =
-    'INSERT INTO TB_MEMBER (MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_EMAIL, MEMBER_PHONE, MEMBER_POST, MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_LOGIN_TYPE, JOINED_AT) VALUES (?, SHA2(?, 256), ?, ?, ?, ?, ?, ?, "M", DATE_ADD(NOW(), INTERVAL 9 HOUR))';
-
-  // 비밀번호 확인 조건문
-  if (userPw == checkPw) {
-    // DB 연결
-    conn.connect();
-    conn.query(
-      joinQuery,
-      [userId, userPw, userName, useremail, phone, postNumber, doro, detailAddress],
-      (err, result) => {
-        if (err) {
-          console.log("회원가입 쿼리문 오류", err);
-          res.send(JSON.stringify(false));
-        } else {
-          console.log("회원가입 성공");
-          res.send(JSON.stringify(true));
-        }
-      }
-    );
-  } else {
-    console.log("비밀번호 확인 오류");
-    res.send(JSON.stringify(false));
+router.post("/join",  async (req, res) => {
+  let userData = req.body
+  const result = await userModel.userNormalJoin(userData)
+  if(result.joinResult){
+    res.json(true);
+  }
+  else{
+    res.json(false)
   }
 });
 
-// 아이디 중복 체크
-router.post("/checkId", (req, res) => {
+// 아이디 중복 체크 라우터
+router.post("/checkId", async(req, res) => {
   let id = req.body.id;
-  let query = "SELECT MEMBER_ID FROM TB_MEMBER WHERE MEMBER_ID = ?";
-  conn.connect();
-  conn.query(query, [id], (err, result) => {
-    if (err) {
-      console.log("아이디 중복체크 쿼리문 에러");
-    } else {
-      if (result.length == 0) {
-        // 아이디 조회결과 0개
-        console.log("사용할 수 있는 ID");
-        res.send(JSON.stringify(true));
-      } else {
-        console.log("이미 존재하는 ID");
-        res.send(JSON.stringify(false));
-      }
-    }
-  });
+  const result = await userModel.userIdCheck(id)
+  if(result.loginCheck){
+    res.json(true);
+  }
+  else{
+    res.json(false);
+  }
 });
 
 // 로그인 라우터
