@@ -6,7 +6,6 @@ const paymentModel = require('../models/paymentModel')
 router.post('/orderGoods', async(req,res)=>{
     let data = req.body.buyData
     paymentModel.orderGoods(data)
-    
 })
 
 

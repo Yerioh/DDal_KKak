@@ -17,7 +17,7 @@ const client = new S3Client({
 const db = require("../config/database");
 let conn = db.init();
 
-let flaskServer = 'https://aded-34-87-83-217.ngrok.io'
+let flaskServer = 'http://2b46-34-142-143-224.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달

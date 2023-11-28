@@ -8,36 +8,29 @@ const socketModel = require('../models/socketModel')
 const db = require("../config/database");
 let conn = db.init();
 
-router.post('/enQueue', async(req,res)=>{
-    let userId = req.body.id
-    let result = await socketModel.enQueue(userId)
+// 이미지 생성 페이지 접속시 대기열 불러오는 라우터
+router.post('/createList', async(req,res)=>{
+    let result = await socketModel.createList()
+    res.json({result})
 })
 
 
-
-router.post('/deQueue', (req,res)=>{
+// 이미지 생성 대기열 등록(인큐) 라우터
+router.post('/enQueue', async(req,res)=>{
     let userId = req.body.id
-    let sql = `DELETE FROM TB_WAIT WHERE MEMBER_ID = ?`
-    let selectSql = `SELECT MEMBER_ID FROM TB_WAIT ORDER BY WAIT_AT`
-    conn.connect()
-    conn.query(sql, [userId], (err,result)=>{
-        if(err){
-            console.log('이미지 생성 디큐 에러', err)
-        }
-        else{
-            console.log('이미지 생성 디큐 성공')
-            conn.query(selectSql, (err,result)=>{
-                if(err){
-                    console.log('이미지 생성 대기 리스트 select 에러')
-                }
-                else{
-                    console.log('이미지 대기 리스트 디큐 성공', result)
-                    res.json({result})
-                    
-                }
-            })
-        }
-    })
+    let result = await socketModel.enQueue(userId)
+    if(result.selectResult){
+        res.json({result : result.data})
+    }    
+})
+
+// 이미지 생성 대기열 삭제(디큐) 라우터
+router.post('/deQueue', async(req,res)=>{
+    let userId = req.body.id
+    let result = await socketModel.deQueue(userId)
+    if(result.selectResult){
+        res.json({result : result.data})
+    } 
 })
 
 

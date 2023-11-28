@@ -87,7 +87,7 @@ io.on('connection', (socket)=>{
       .then(res=>{
         let data = res.data.result
         // 대기열 모든 사용자에게 전송
-        io.emit('createList', {createList : data})
+        io.emit('createNewList', {createList : data})
       })
   })
 

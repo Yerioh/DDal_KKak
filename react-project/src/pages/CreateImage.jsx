@@ -16,6 +16,8 @@ import { socket } from "../socket";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "../axios";
+
 
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
@@ -84,7 +86,6 @@ const CreateImage = () => {
               if (data.imgData.img_data !== undefined) {
                 setImgData(data.imgData.img_data);
               }
-              setBtnHidden("");
             });
         } else {
           alert("긍정, 부정 프롬프트를 입력해주세요.");
@@ -95,10 +96,16 @@ const CreateImage = () => {
 
   // socket 연결 useEffect
   useEffect(() => {
+    axios.post('/socket/createList')
+      .then(res=>{
+        setCreateList(res.data.result)
+      })
+
+
     // 소켓 연결
     socket.connect();
     // 이미지 생성 대기열 변경
-    socket.on("createList", (data) => {
+    socket.on("createNewList", (data) => {
       setCreateList(data.createList);
     });
     return () => {};
@@ -134,7 +141,7 @@ const CreateImage = () => {
       3000
     );
     // progress bar 관련 state초기화
-    dispatch(ProgressReducerActions.resetProgress());
+    // dispatch(ProgressReducerActions.resetProgress());
   };
 
   const handleImageCountChange = (count) => {
