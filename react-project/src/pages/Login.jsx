@@ -17,7 +17,7 @@ const Login = () => {
     if(idRef.current.value === ""){
       alert("아이디를 입력해주세요.")
     }
-    else if (pwRef.current.valuet){
+    else if (pwRef.current.value === ""){
       alert("비밀번호를 입력해주세요.")
     }{
       axios.post("/user/login", {

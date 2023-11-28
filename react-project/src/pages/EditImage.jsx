@@ -155,7 +155,14 @@ function EditImage() {
                 negative: negative,
                 img_info: img_info,
                 imgName : imgName
-              });
+              }).then((res) => {
+                if(res.data.result){
+                  alert("이미지 저장 완료")
+                }
+                else{
+                  alert("이미지 저장 실패")
+                }
+              })
             },
             (err) => {
               console.log("이미지 업로드 실패", err);

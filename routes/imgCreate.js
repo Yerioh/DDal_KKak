@@ -5,6 +5,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const {DeleteObjectsCommand, S3Client} = require('@aws-sdk/client-s3')
+const imgCreateModel = require("../models/imgCreateModel")
+const imgUseModel = require("../models/imgUseModel")
+const imgCollectModel = require("../models/imgCollectModel")
 
 // S3 클라이언트 생성
 const client = new S3Client({
@@ -17,7 +20,7 @@ const client = new S3Client({
 const db = require("../config/database");
 let conn = db.init();
 
-let flaskServer = 'https://aded-34-87-83-217.ngrok.io'
+let flaskServer = 'http://c5f1-34-87-133-201.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달
@@ -63,58 +66,33 @@ router.post("/choiceImg", (req, res) => {
 // 23-11-19 22:30 임휘훈 작성 : 삭제 버튼 기능 라우터
 
 // 이미지 생성 후 DB에 고유 ID 기준으로 이미지 저장하기
-router.post("/saveImg", (req, res) => {
-  // 유저 아이디
-  // 사용된 긍정 프롬프트
-  // 사용된 부정 프롬프트
-  // 이미지 고유한 url
-  // 이미지 이름
-  let {userId, positive, negative, img_info, imgName} = req.body
-
-  let insertQuery =
-    "INSERT INTO TB_GEN_IMG (MEMBER_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, GENERATED_AT, IMG_NAME) VALUES (?, ?, ?, ?,  DATE_ADD(NOW(), INTERVAL 9 HOUR), ?)";
-  conn.connect();
-  conn.query(
-    insertQuery,
-    [userId, positive, negative, img_info, imgName],
-    (err, result) => {
-      if (err) {
-        console.log("이미지 DB 저장 쿼리문 오류", err);
-      } else {
-        console.log("이미지 DB 저장 성공");
-      }
+router.post("/saveImg", async (req, res) => {
+    // 유저 아이디
+    // 사용된 긍정 프롬프트
+    // 사용된 부정 프롬프트
+    // 이미지 고유한 url
+    // 이미지 이름
+    let {userId, positive, negative, img_info, imgName} = req.body
+    const result = await imgCreateModel.imgSave(userId, positive, negative, img_info, imgName)
+    if(result.saveResult){ // 저장 완료
+      res.json({result : true})
     }
-  );
+    else{
+      res.json({result : false})
+    }
 });
 
 // 마이페이지 => 내 저장 이미지의 이미지 불러오기
-router.post("/myimg", (req, res) => {
-  console.log("내 저장 이미지", req.body.id);
+router.post("/myimg", async (req, res) => {
   let userId = req.body.id; // 유저 아이디
-
-  let selectQuery =
-    `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE, IMG_SHARE, IMG_NAME,
-    (SELECT COUNT(*)
-       FROM TB_LIKE
-      WHERE IMG_ID = TB_GEN_IMG.IMG_ID) AS CNT
-       FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC`;
-  conn.connect();
-  conn.query(selectQuery, [userId], (err, result) => {
-    if (err) {
-      console.log("내 저장 이미지 쿼리문 오류", err);
-    } else {
-      console.log("내 저장 이미지 불러오기 성공", result);
-      res.json({ imgArray: result });
-    }
-  });
+  const result = await imgUseModel.myimg(userId)
+  res.json({imgArray : result.imgArray[0]})
 });
 
 // 내 저장이미지 선택 삭제 라우터
-router.post("/deleteImg", async(req, res) => {
-
+router.post("/deleteImg", async (req, res) => {
   let sqlImgUrl = req.body.imgUrl; // 문자열 형태로 된 이미지 ID
   let deleteS3 = req.body.deleteS3 // S3에서 삭제할 이미지 경로
-
   let sessionId = req.session.userId // 세션에 저장된 유저 ID
 
   const command = new DeleteObjectsCommand({
@@ -124,49 +102,20 @@ router.post("/deleteImg", async(req, res) => {
     }
   })
 
+  // s3 삭제
   const response = await client.send(command)
   console.log('s3 삭제 완료 : ', response)
 
-  // 삭제 쿼리
-  let deleteQuery = `DELETE FROM TB_GEN_IMG WHERE IMG_URL IN (${sqlImgUrl})`;
-  // 선택 쿼리
-  let selectQuery = `SELECT IMG_ID, IMG_PROMPT, IMG_NE_PROMPT, IMG_URL, DATE_FORMAT(GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE, IMG_SHARE, IMG_NAME,
-                    (SELECT COUNT(*)
-                       FROM TB_LIKE
-                      WHERE IMG_ID = TB_GEN_IMG.IMG_ID) AS CNT
-                       FROM TB_GEN_IMG WHERE MEMBER_ID = ? ORDER BY GENERATED_AT DESC`;
-  conn.connect();
-  conn.query(deleteQuery, (err, result) => {
-    if (err) {
-      console.log("내 저장 이미지 삭제 쿼리문 오류", err);
-    } else {
-      console.log("이미지 삭제 완료");
-      conn.query(selectQuery, [sessionId], (err, result) => {
-        if (err){
-          console.log("삭제 후 이미지 최신화 쿼리 오류", err);
-        }
-        else{
-          console.log("삭제된 후 프론트로");
-          res.json({ imgArray: result });
-        }
-      })
-    }
-  });
+  // DB 삭제
+  const result = await imgUseModel.deleteImg(sqlImgUrl, sessionId)
+  res.json({imgArray : result.imgArray[0]})
 });
 
 // 내 저장 이미지 공유 여부 설정 라우터
-router.post('/imgShare', (req,res)=>{
+router.post('/imgShare', async (req,res)=>{
   let imgId = req.body.imgId
-  let sql = `UPDATE TB_GEN_IMG SET IMG_SHARE = CASE WHEN IMG_SHARE = 'Y' THEN 'N' WHEN IMG_SHARE = 'N' THEN 'Y' ELSE IMG_SHARE END WHERE IMG_ID = ?`
-  conn.connect()
-  conn.query(sql,[imgId], (err,result)=>{
-    if(err){
-      console.log('공유 여부 변경 쿼리문 에러', err)
-    }
-    else{
-      // console.log('공유여부 변경 성공')
-    }
-  })
+  const result = await imgUseModel.imgShare(imgId)
+  res.json({imgArray : result.imgArray[0]})
 })
 
 // 이미지 더보기 페이지 이미지 출력
