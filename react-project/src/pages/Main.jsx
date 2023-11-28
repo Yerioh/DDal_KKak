@@ -13,10 +13,8 @@ const Main = () => {
   const [shareImg, setShareImg] = useState(null);
   const test_MainImage = [1, 2, 3, 4, 5, 6, 7, 8];
   const [currentIndex, setCurrentIndex] = useState(1);
-  console.log(goodsList)
   useEffect(() => {
     axios.post("/imgCreate/mainImgShow").then((res) => {
-      console.log(res.data.result);
       setShareImg(res.data.result);
     });
   }, []);

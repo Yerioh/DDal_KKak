@@ -27,7 +27,6 @@ const ImageAll = () => {
   useEffect(() => {
     axios.post("/imgCreate/shareImgShow", { sortImg }).then((res) => {
       let data = res.data.result;
-      console.log("이미지 모음 data", data);
       // 이미지 모음 날짜 연동 23-11-24 11:40 임휘훈
       setImgCard(data);
     });
