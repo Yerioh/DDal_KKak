@@ -8,6 +8,7 @@
 - axios.js
 - axiosProgress.js
 - socket.js
+- .env
 
 <br/>
 
