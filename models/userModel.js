@@ -50,7 +50,7 @@ const userNormalJoin = async (userData)=>{
   }
 }
 
-
+// 회원가입 아이디 중복체크
 const userIdCheck = async(id)=>{
   let query = "SELECT MEMBER_ID FROM TB_MEMBER WHERE MEMBER_ID = ?";
   conn.connect();
@@ -67,12 +67,49 @@ const userIdCheck = async(id)=>{
   }
   catch(err){
     console.error('아이디 체크 쿼리문 에러',err)
-  }
+  }  
+}
 
-  
+// 일반회원 로그인
+const userLogin = async(id, hash)=>{
+    // 로그인 쿼리문
+  let idQuery =
+  "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_LOGIN_TYPE FROM TB_MEMBER WHERE MEMBER_ID = ?";
+// DB 연결
+conn.connect();
+try {
+    let result = await conn.promise().query(idQuery, [id]);
+        result = result[0]       
+        // 아무것도 조회 되지 않으면
+        if (result[0].length == 0) {
+          console.log("아이디가 존재하지 않습니다.");
+          return {loginResult : 'IDError'}
+        } else {
+          if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
+            console.log(result[0].MEMBER_ID, "님 로그인 성공");
+            let userName = result[0].MEMBER_NAME;
+            let isLogin = true
+            let userId = result[0].MEMBER_ID
+            let loginType = result[0].MEMBER_LOGIN_TYPE
+            return {loginResult : "success", userName : userName, isLogin : isLogin, userId : userId, loginType : loginType}  
+    
+          } else {
+            console.log("로그인 실패");
+            return {loginResult : 'PwError'}
+          }
+        }
+      
+
+}
+catch(err){
+    console.error('일반회원 로그인 쿼리문 에러', err)
+    return {loginResult : "serverError"}
+}
+
+
 }
 
 
 
 
-module.exports = {userNormalJoin, userIdCheck}
+module.exports = {userNormalJoin, userIdCheck, userLogin}

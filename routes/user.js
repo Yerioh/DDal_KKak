@@ -40,50 +40,37 @@ router.post("/checkId", async(req, res) => {
 });
 
 // 로그인 라우터
-router.post("/login", (req, res) => {
+router.post("/login", async(req, res) => {
   let id = req.body.userId; // 입력한 아이디
   let pw = req.body.userPw; // 입력한 비밀번호
-  const hash = crypto.createHash('sha256')
+  const hash = crypto.createHash('sha256') // 비밀번호 암호화
                    .update(pw)
                    .digest('hex');
 
-  // 로그인 쿼리문
-  let idQuery =
-    "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_LOGIN_TYPE FROM TB_MEMBER WHERE MEMBER_ID = ?";
-  // DB 연결
-  conn.connect();
-  conn.query(idQuery, [id], (err, result) => {
-    if (err) {
-      console.log("로그인 쿼리문 에러");
-      return res.json({result : "serverError"})
-    } else {
-      // 아무것도 조회 되지 않으면
-      if (result.length == 0) {
-        console.log("아이디가 존재하지 않습니다.");
-        return res.json({result : "IDError"})
-      } else {
-        if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
-          console.log(result[0].MEMBER_ID, "님 로그인 성공");
-          
-          // 로그인 성공 후 사용자 세션 생성
-          let userName = result[0].MEMBER_NAME;
-          req.session.Name = userName;
-          req.session.isLogin = true;
-          req.session.userId = result[0].MEMBER_ID
-          req.session.loginType = result[0].MEMBER_LOGIN_TYPE
+  let result = await userModel.userLogin(id, hash)
+  if(result.loginResult === 'serverError'){
+    res.json({result : 'serverError'})
+  }
+  else if(result.loginResult === 'PwError'){
+    res.json({result : "PwError"})
+  }
+  else if(result.loginResult === 'success'){
+    // 로그인 성공 후 사용자 세션 생성
+    let {userName, loginType, isLogin, userId} = result
+    req.session.Name = userName;
+    req.session.isLogin = isLogin;
+    req.session.userId = userId
+    req.session.loginType = loginType
+    req.session.save(() => {
+      console.log("로그인 완료 후 페이지 이동");
+      res.json({result : "success"})
+    });
 
-          req.session.save(() => {
-            console.log("로그인 완료 후 페이지 이동");
-            return res.json({result : "success"})
-          });
 
-        } else {
-          console.log("로그인 실패");
-          return res.json({result : "PwError"})
-        }
-      }
-    }
-  });
+  }
+  else if(result.loginResult === 'IDError'){
+    res.json({result : "IDError"})
+  }
 });
 
 // 내 정보 수정란에 필요한 사용자 정보 가져오는 라우터
