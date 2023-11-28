@@ -38,7 +38,7 @@ router.get("/kakaoLogin",  async(req, res) => {
         })
         .then((response) => {          
           let userData = response.data
-          let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA('?')`
+          let selectSQL = `SELECT COUNT(MEMBER_ID) AS CNT FROM TB_MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = SHA('  ?')`
 
           conn.connect()
           // 카카오 계정으로 회원가입 여부 쿼리문
