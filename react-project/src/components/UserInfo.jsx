@@ -100,6 +100,9 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
           }
         })
       }
+      else{
+        alert('비밀번호가 올바르지 않습니다.')
+      }
 
     })
       

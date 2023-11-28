@@ -14,8 +14,7 @@ const BuyScriptSummary = ({setTotalNum}) => {
   console.log(price,'총금액')
   setSum(price)
   setTotal(price + deliverprice)
-  console.log(total)
-  setTotalNum(total)
+  setTotalNum(price + deliverprice)
   },[])
   
 
