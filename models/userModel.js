@@ -2,7 +2,7 @@
 const db = require("../config/database");
 let conn = db.init();
 
-// 일반 회원가입 
+/* 일반 회원가입 */
 const userNormalJoin = async (userData)=>{
   let data = userData
   let userId = data.userId; // 사용자가 입력한 ID, name 속성
@@ -50,7 +50,7 @@ const userNormalJoin = async (userData)=>{
   }
 }
 
-// 회원가입 아이디 중복체크
+/* 일반 회원가입 아이디 중복체크 */
 const userIdCheck = async(id)=>{
   let query = "SELECT MEMBER_ID FROM TB_MEMBER WHERE MEMBER_ID = ?";
   conn.connect();
@@ -70,46 +70,53 @@ const userIdCheck = async(id)=>{
   }  
 }
 
-// 일반회원 로그인
+/* 일반 유저 로그인 DB 함수 */
 const userLogin = async(id, hash)=>{
     // 로그인 쿼리문
   let idQuery =
   "SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_LOGIN_TYPE FROM TB_MEMBER WHERE MEMBER_ID = ?";
-// DB 연결
-conn.connect();
-try {
-    let result = await conn.promise().query(idQuery, [id]);
+    // DB 연결
+    conn.connect();
+    try {
+        let result = await conn.promise().query(idQuery, [id]);
         result = result[0]       
         // 아무것도 조회 되지 않으면
         if (result[0].length == 0) {
-          console.log("아이디가 존재하지 않습니다.");
-          return {loginResult : 'IDError'}
+        console.log("아이디가 존재하지 않습니다.");
+        return {loginResult : 'IDError'}
         } else {
-          if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
+        if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
             console.log(result[0].MEMBER_ID, "님 로그인 성공");
             let userName = result[0].MEMBER_NAME;
             let isLogin = true
             let userId = result[0].MEMBER_ID
             let loginType = result[0].MEMBER_LOGIN_TYPE
             return {loginResult : "success", userName : userName, isLogin : isLogin, userId : userId, loginType : loginType}  
-    
-          } else {
+
+        } else {
             console.log("로그인 실패");
             return {loginResult : 'PwError'}
-          }
-        }
-      
-
-}
-catch(err){
-    console.error('일반회원 로그인 쿼리문 에러', err)
-    return {loginResult : "serverError"}
+        }}
+    } catch(err){
+        console.error('일반회원 로그인 쿼리문 에러', err)
+        return {loginResult : "serverError"}
+      }
 }
 
+/* 소셜, 일반 유저 회원탈퇴 쿼리문 */
+const deleteUser =  async(userId)=>{
+    let deleteUserSQL = `DELETE FROM TB_MEMBER WHERE MEMBER_ID = ?`
+    try{
+        conn.connect()
+        let result = await conn.promise().query(deleteUserSQL, [userId])
+        console.log('회원 탈퇴 성공')
+        return {deleteResult : true}
+    } catch(err) {
+        console.error('회원탈퇴 쿼리문 에러', err)
+    }
 
 }
 
 
 
-
-module.exports = {userNormalJoin, userIdCheck, userLogin}
+module.exports = {userNormalJoin, userIdCheck, userLogin, deleteUser}
