@@ -89,10 +89,12 @@ router.post("/login", (req, res) => {
   conn.query(idQuery, [id], (err, result) => {
     if (err) {
       console.log("로그인 쿼리문 에러");
+      return res.json({result : "serverError"})
     } else {
       // 아무것도 조회 되지 않으면
       if (result.length == 0) {
         console.log("아이디가 존재하지 않습니다.");
+        return res.json({result : "IDError"})
       } else {
         if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
           console.log(result[0].MEMBER_ID, "님 로그인 성공");
@@ -106,11 +108,12 @@ router.post("/login", (req, res) => {
 
           req.session.save(() => {
             console.log("로그인 완료 후 페이지 이동");
-            res.send(JSON.stringify(true))
+            return res.json({result : "success"})
           });
 
         } else {
           console.log("로그인 실패");
+          return res.json({result : "PwError"})
         }
       }
     }

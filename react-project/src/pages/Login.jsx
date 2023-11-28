@@ -14,15 +14,30 @@ const Login = () => {
 
   /** 로그인 버튼 함수 */
   const login_btn = () => {
-    axios.post("/user/login", {
-      userId : idRef.current.value, // 아이디
-      userPw : pwRef.current.value // 비밀번호
-    }).then((res) => {
-      console.log(res.data);
-      if(res.data == true){
-        window.location.href = "/"
-      }
-    })
+    if(idRef.current.value === ""){
+      alert("아이디를 입력해주세요.")
+    }
+    else if (pwRef.current.value){
+      alert("비밀번호를 입력해주세요.")
+    }{
+      axios.post("/user/login", {
+        userId : idRef.current.value, // 아이디
+        userPw : pwRef.current.value // 비밀번호
+      }).then((res) => {
+        if(res.data.result == "success"){
+          window.location.href = "/"
+        }
+        else if (res.data.result == "serverError"){
+          alert("서버가 불안정합니다. 잠시 후 다시 시도해 주세요.")
+        }
+        else if (res.data.result == "IDError"){
+          alert("존재하지 않는 ID 입니다.")
+        }
+        else if (res.data.result == "PwError"){
+          alert("비밀번호가 올바르지 않습니다.")
+        }
+      })
+    }
   }
 
   /** Enter 함수 */
@@ -74,11 +89,11 @@ const Login = () => {
 
             <Form.Group className="mb-3 email-input" controlId="formGroupEmail">
               {/* <Form.Label>Email address</Form.Label> */}
-              <Form.Control type="email" placeholder="Enter email" ref={idRef} />
+              <Form.Control type="email" placeholder="Enter ID" ref={idRef} />
             </Form.Group>
             <Form.Group className="mb-3 email-input" controlId="formGroupPassword">
               {/* <Form.Label>Password</Form.Label> */}
-              <Form.Control type="password" placeholder="Password" ref={pwRef} onKeyDown={enter} />
+              <Form.Control type="password" placeholder="Enter Password" ref={pwRef} onKeyDown={enter} />
             </Form.Group>
 
             <Form.Group className="mb-3">
