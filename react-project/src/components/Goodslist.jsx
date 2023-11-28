@@ -58,7 +58,7 @@ const Goodslist = () => {
         <div className="Goodslist-Container">
           <div className="GL-text-box">
             <h2>굿즈 상품</h2>
-            <span>나만의 커스텀 굿즈를 만들어 보세요</span>
+            <span>나만의 커스텀 굿즈를 만들어 보세요.</span>
           </div>
           <div className="Goodslist-navbar">
             {/* udivseState에 누르는 버튼에 따라 카테고리명이 업데이트됨 */}

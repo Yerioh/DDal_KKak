@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../css/ImageAll.css";
-import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap";
+import { Container, Row, Form } from "react-bootstrap";
 import SearchCard from "../components/SearchCard";
 import axios from "../axios";
 
@@ -10,7 +10,19 @@ const ImageAll = () => {
   const [imgState, setImgState] = useState(false);
   // 정렬
   const [sortImg, setSortImg] = useState("New");
-  const [boldText, setBoldText] = useState("");
+
+  const [searchWord, setSearchWord] = useState([]); // 검색
+
+  // 23-11-28 김형균 작성 : 검색
+  const searchRef = useRef(); // 검색 입력창 Ref
+  /** 검색 입력창 함수 */
+  const promptSearch = () => {
+    let array = imgCard.filter((item) => {
+      return item["IMG_PROMPT"].includes(searchRef.current.value);
+    });
+    setImgCard(array);
+  };
+
   // 공유 이미지 데이터 가져오기
   useEffect(() => {
     axios.post("/imgCreate/shareImgShow", { sortImg }).then((res) => {
@@ -44,10 +56,15 @@ const ImageAll = () => {
         <Row className="input-box mt-5">
           <div className="mb-3 input-keyword-box">
             <Form.Control
-              placeholder="찾고싶은 이미지"
+              placeholder="찾고싶은 이미지 키워드"
               className="search_Keyword"
+              ref={searchRef}
             ></Form.Control>
-            <button variant="outline-secondary" id="button-addon2">
+            <button
+              variant="outline-secondary"
+              id="button-addon2"
+              onClick={promptSearch}
+            >
               <img src="./images/search_img1.png" alt="" />
             </button>
           </div>
@@ -55,13 +72,21 @@ const ImageAll = () => {
         <div className="Search-Img-Nav">
           <div className="Search-Img-box">
             <span
-              className={`event-text-${sortImg === "New" ? "New" : null}`} onClick={date_Order}>
+              className={`event-text-${sortImg === "New" ? "New" : null}`}
+              onClick={date_Order}
+            >
               최신순
             </span>
-            <span className={`event-text-${sortImg === "Old" ? "Old" : null}`} onClick={old_Order}>
+            <span
+              className={`event-text-${sortImg === "Old" ? "Old" : null}`}
+              onClick={old_Order}
+            >
               오래된순
             </span>
-            <span className={`event-text-${sortImg === "Best" ? "Best" : null}`} onClick={like_order}>
+            <span
+              className={`event-text-${sortImg === "Best" ? "Best" : null}`}
+              onClick={like_order}
+            >
               인기순
             </span>
           </div>
