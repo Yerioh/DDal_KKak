@@ -17,7 +17,7 @@ const ImageAll = () => {
   const searchRef = useRef(); // 검색 입력창 Ref
   /** 검색 입력창 함수 */
   const promptSearch = () => {
-    let array = imgCard.filter((item) => {
+    let array = imgCard.filter((item) => { //검색 키워드
       return item["IMG_PROMPT"].includes(searchRef.current.value);
     });
     setImgCard(array);
