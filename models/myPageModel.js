@@ -33,7 +33,7 @@ const updateInfo = async({userID, userPw, userEmail, userPhone, postNum, addr1, 
     return {updateResult:true}
   }
   catch(err){
-    console.log('내 정보 수정 쿼리문 에러', err)
+    console.error('내 정보 수정 쿼리문 에러', err)
     return {updateResult:false}
   }
   

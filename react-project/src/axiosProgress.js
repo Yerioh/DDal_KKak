@@ -47,7 +47,7 @@ instance.interceptors.request.use((config)=>{
     return config
 },
 (err)=>{
-    console.log('요청 에러 발생')
+    console.error('요청 에러 발생')
     store.dispatch(ProgressReducerActions.resetProgress())
     return Promise.reject(err)
 })
@@ -67,7 +67,7 @@ instance.interceptors.response.use((response)=>{
     return response
 },
 (err)=>{
-    console.log('응답 에러 발생',err)
+    console.error('응답 에러 발생',err)
     store.dispatch(ProgressReducerActions.resetProgress())
     return Promise.reject(err)
 })

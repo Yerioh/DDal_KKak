@@ -26,7 +26,6 @@ let flaskServer = 'http://c5f1-34-87-133-201.ngrok.io'
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달
 router.post('/getUrl', (req,res)=>{
-  console.log('Flask 서버 실행', req.body.url)
   flaskServer = req.body.url
 })
 
@@ -44,7 +43,6 @@ router.post("/stable", (req, res) => {
     })
     .then((response) => {
       let imgData = response.data;
-      // console.log(imgData);
       res.json({ imgData });
     })
     .catch((error) => {
@@ -105,7 +103,6 @@ router.post("/deleteImg", async (req, res) => {
 
   // s3 삭제
   const response = await client.send(command)
-  console.log('s3 삭제 완료 : ', response)
 
   // DB 삭제
   const result = await imgUseModel.deleteImg(sqlImgUrl, sessionId)

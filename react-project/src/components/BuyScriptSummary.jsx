@@ -11,7 +11,6 @@ const BuyScriptSummary = ({setTotalNum}) => {
   for(let i=0 ; i<parseInt(buyItems?.length);i++){
     price = price + parseInt(buyItems[i]?.PRICE_SUM)
   }
-  console.log(price,'총금액')
   setSum(price)
   setTotal(price + deliverprice)
   setTotalNum(price + deliverprice)

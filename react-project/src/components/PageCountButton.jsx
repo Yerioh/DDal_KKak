@@ -3,7 +3,6 @@ const PageCountButton = ({ handleImageCountChange }) => {
   const handleCountChange = (e) => {
     const count = parseInt(e.target.value);
     handleImageCountChange(count);
-    console.log(count);
   };
   return (
     <div className="pagecountbutton">

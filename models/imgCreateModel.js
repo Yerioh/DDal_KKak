@@ -17,7 +17,6 @@ const imgSave = async (userId, positive, negative, img_info, imgName) => {
           insertQuery,
           [userId, positive, negative, img_info, imgName]);
         if (result) {
-            console.log("이미지 DB 저장 성공");
             return {saveResult : true}
         }
     }

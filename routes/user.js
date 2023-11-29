@@ -66,7 +66,6 @@ router.post("/login", async(req, res) => {
     req.session.userId = userId
     req.session.loginType = loginType
     req.session.save(() => {
-      console.log("로그인 완료 후 페이지 이동");
       res.json({result : "success"})
     });
   }

@@ -28,15 +28,12 @@ const userNormalJoin = async (userData)=>{
           joinQuery,
           [userId, userPw, userName, useremail, phone, postNumber, doro, detailAddress]);
         if(result){
-            console.log("회원가입 성공");
             return {joinResult : true}
         }
         else{
-            console.log("회원가입 실패");
             return {joinResult : false}
         }
       } else {
-        console.log("비밀번호 확인 오류");
         return {joinResult : false}
       }
   }
@@ -57,11 +54,9 @@ const userIdCheck = async(id)=>{
   try{
     const result = await conn.promise().query(query, [id])
     if (result[0].length == 0) {
-        // 아이디 조회결과 0개
-        console.log("사용할 수 있는 ID");
+        // 아이디 조회결과 0개 사용가능
         return {loginCheck : true}
-    } else {
-        console.log("이미 존재하는 ID");
+    } else { // 이미 존재하는 아이디
         return {loginCheck : false}
     }      
   }
@@ -82,11 +77,9 @@ const userLogin = async(id, hash)=>{
         result = result[0]       
         // 아무것도 조회 되지 않으면
         if (result[0].length == 0) {
-        console.log("아이디가 존재하지 않습니다.");
         return {loginResult : 'IDError'}
         } else {
         if (result[0].MEMBER_ID == id && result[0].MEMBER_PW == hash) {
-            console.log(result[0].MEMBER_ID, "님 로그인 성공");
             let userName = result[0].MEMBER_NAME;
             let isLogin = true
             let userId = result[0].MEMBER_ID
@@ -94,7 +87,6 @@ const userLogin = async(id, hash)=>{
             return {loginResult : "success", userName : userName, isLogin : isLogin, userId : userId, loginType : loginType}  
 
         } else {
-            console.log("로그인 실패");
             return {loginResult : 'PwError'}
         }}
     } catch(err){
@@ -109,7 +101,6 @@ const deleteUser =  async(userId)=>{
     try{
         conn.connect()
         let result = await conn.promise().query(deleteUserSQL, [userId])
-        console.log('회원 탈퇴 성공')
         return {deleteResult : true}
     } catch(err) {
         console.error('회원탈퇴 쿼리문 에러', err)

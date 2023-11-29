@@ -21,7 +21,6 @@ router.post("/goods", async (req, res) => {
 router.post('/goodProduct', async (req,res)=>{
     let data = req.body.prodId
     const result = await goodsModel.goodProduct(data)
-    console.log("함수 실행 후", result.prdInfo);
     res.json({
         prdInfo:result.prdInfo,
         prdColor:result.prdColor,

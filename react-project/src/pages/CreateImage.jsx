@@ -74,7 +74,6 @@ const CreateImage = () => {
             })
             .then((res) => {
               let data = res.data;
-              console.log("생성된 이미지", data);
               // axios 통신 중, 에러 발생 시
               if (data.createError) {
                 dispatch(ProgressReducerActions.resetProgress());
@@ -114,7 +113,6 @@ const CreateImage = () => {
   // 이미지 생성 버튼 클릭
   const createImg = () => {
     // 사용자 아이디 전송해서 대기열에 추가
-    console.log("딸깍 버튼");
     socket.emit("createClick", { id: userId });
   };
 
@@ -127,7 +125,6 @@ const CreateImage = () => {
     setCreating(false);
     socket.emit("deQueue", { id: userId });
     // socket.disconnect();
-    console.log("Navigating with imageCount:", countImg);
     setTimeout(
       navigate("/image-result", {
         state: {
@@ -150,7 +147,6 @@ const CreateImage = () => {
   // progressBar 100%, 로딩 완료시 이미지 생성 결과 사이트로 이동
   useEffect(() => {
     if (progress === 100 && !isLoading) {
-      console.log("이미지 생성 완료");
       // 이미지 생성 결과 사이트로 이동
       goToResultPage();
     }

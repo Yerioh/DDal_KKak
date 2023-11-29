@@ -122,7 +122,6 @@ const GoodsDetail = () => {
      const fnOptionsIfNeededFoundInDocs = {};
      const imageData = getImgDataRef.current(fnOptionsIfNeededFoundInDocs);
      const base64 = imageData.imageData.imageBase64
-     console.log('이미지데이터',base64);
 
     // base64 이미지 데이터에서 데이터URI 스키마부분 제거 (data:[<미디어타입>];base64)
     const base64Data = new Buffer.from(
@@ -152,11 +151,10 @@ const GoodsDetail = () => {
     const promise = upload.promise();
     promise.then(
       () => {
-        console.log("이미지 업로드 성공");
         moveItemToCart(goods_info)
       },
       (err) => {
-        console.log("이미지 업로드 실패", err);
+        console.error("이미지 업로드 실패", err);
       }
     );
    }
@@ -209,9 +207,6 @@ const GoodsDetail = () => {
   /**장바구니에 담기위한 함수 */
   function moveItemToCart(goods_info) {
     
-  
-    console.log('색상이름',prd_color_filter[0].COLOR_NAME)
-    console.log('12312312',goods_info)
     //세션 로컬스토리지에 넣기 위해 데이터를 모으는 과정
     let newCartItem = {
       'USER_ID' : `${userId}`, 
@@ -245,7 +240,6 @@ const GoodsDetail = () => {
           // 중복되는 물건ID를 가진 새로운 데이터
           cartItems.push(newCartItem);
         } else if (cartItems[i].PROD_UUID === cartItems[parseInt(cartItems.length) - 1].PROD_UUID) {
-          console.log("중복되는 아이템이 없습니다.")
           cartItems.push(newCartItem);
         }
       }

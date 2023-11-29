@@ -6,7 +6,6 @@ import PRD_SIZE from "../data/prd_size.json";
 import PRD_INFO from "../data/product_info.json";
 
 const Basketitems = ({ items, index, sessionCheck, session }) => {
-  console.log(items);
   // 제품수량 변경을 위한 State
   const [count, setCount] = useState(parseInt(items.PROD_COUNT));
   // 합계가격 State
@@ -44,7 +43,6 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
   /** 수량조절버튼 조작을 위한 간단한 함수들 */
   // 빼기
   const subtract = () => {
-    console.log("-");
     if (count > 0) {
       setCount(count - 1);
     } else {
@@ -162,12 +160,10 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
       if (JSON.parse(sessionStorage.getItem("buyItem")) == null) {
         let buyItems = [];
         sessionStorage.setItem("buyItem", JSON.stringify(buyItems));
-        console.log("여기는 비어있을때 true");
       } else if (JSON.parse(sessionStorage.getItem("buyItem")) !== null) {
         let buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
         buyItems.pop(items.PROD_UUID);
         sessionStorage.setItem("buyItem", JSON.stringify(buyItems));
-        console.log("여기는 목록이있을때 true");
       }
       sessionCheck(!session)
     } else if (checked === false) {
@@ -179,7 +175,6 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
         let buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
         buyItems.push(pushBuyItem);
         sessionStorage.setItem("buyItem", JSON.stringify(buyItems));
-        console.log("여기는 목록이있을때 false");
       }
       sessionCheck(!session)
     }
@@ -188,19 +183,13 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
 
   useEffect(() => {
     if (count == items.PROD_COUNT && size == items.PROD_SIZE) {
-      console.log("추가할 값 없음");
     } else {
       changeItemToCart();
-      console.log(
-        JSON.parse(sessionStorage.getItem("buyItem")),
-        "주문세션상태"
-      );
       if (
         (checked == true &&
           JSON.parse(sessionStorage.getItem("buyItem")) == null) ||
         []
       ) {
-        console.log("주문세션 업데이트 필요없음");
       } else if (checked == false) {
         changebuyItem();
       }

@@ -61,7 +61,6 @@ const GoodsEdit = ({imgData, getImgDataRef}) => {
     align: "left",
     fontStyle: "normal",
     onFontChange: (newFontFamily, reRenderCanvasFn) => {
-      console.log("선택된폰트", newFontFamily, reRenderCanvasFn);
     },
   };
   // 이미지 에디터 번역 객체
