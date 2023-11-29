@@ -104,6 +104,13 @@
     }
 }
 
+.GoodsDetail .toogle-btn {
+    border:1px solid lightgray;
+    color: white;
+    background-color: #FF7E00;
+    font-weight: bold;
+}
+
 /* 이미지 에디터 css 수정용 */
 #root > div > div > div:nth-child(2) > div.GoodsDetail > div:nth-child(1) > div > div > div.sc-21g986-0.eYjqr.FIE_topbar > div.sc-21g986-5.bUKiDG.FIE_topbar-buttons-wrapper > div.sc-m9ezm7-0.iFLsae.FIE_topbar-save-wrapper > button{
     display: none;
@@ -132,5 +139,7 @@
     height: 28px;
     border: none;
     border-radius: 14px;
-    background-color: whitesmoke;
+    background-color: #FF7E00;
+    color: white;
+    font-size: 18px;
 }

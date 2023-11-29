@@ -333,6 +333,13 @@ const GoodsDetail = () => {
                   value={item.SIZE_NAME}
                   checked={radioValue === item.SIZE_NAME}
                   onChange={(e) => setRadioValue(e.currentTarget.value)}
+                  style={{
+                    backgroundColor: radioValue === item.SIZE_NAME ? '#FF7E00' : 'white',
+                    color: radioValue === item.SIZE_NAME ? 'white' : '#453f3f',
+                    fontWeight:"bold",
+                    border:"1px solid lightgray"
+                    // 다른 스타일 속성들도 필요한 경우 여기에 추가할 수 있습니다.
+                  }}
                 >
                   {item.SIZE_NAME}
                 </ToggleButton>
@@ -345,9 +352,9 @@ const GoodsDetail = () => {
  {/* 제품수량 조절을 위해 버튼과 숫자 */}
           <h5 style={{ float: "left", fontWeight: "bold" }}>수량</h5>
           <div className="count-felx" style={{ float: "right", display: "flex", alignItems: "center" }}>
-            <Button className='count-btn' variant="outline-secondary" onClick={subtract} >-</Button>
+            <Button className='count-btn same-BTN same-BTN:hover' variant="outline-secondary" onClick={subtract} >-</Button>
             <h6 >{count}</h6>
-            <Button className='count-btn' variant="outline-secondary" onClick={addtion}>+</Button>
+            <Button className='count-btn same-BTN same-BTN:hover' variant="outline-secondary" onClick={addtion}>+</Button>
           </div>
         </div>
         <br />
