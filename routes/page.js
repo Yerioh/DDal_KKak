@@ -9,7 +9,7 @@ const goodsModel = require("../models/goodsModel")
 const db = require("../config/database");
 let conn = db.init();
 
-
+// 23-11-28 모듈화 임휘훈 작성
 // 굿즈 페이지의 굿즈 정보 불러오는 라우터
 router.post("/goods", async (req, res) => {
     const result = await goodsModel.goods()

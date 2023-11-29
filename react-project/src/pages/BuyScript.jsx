@@ -116,6 +116,7 @@ const BuyScript = () => {
   useEffect(()=>{
     let num = 0;
     let buyItems = JSON.parse(sessionStorage.getItem('buyItem'))
+    console.log("뭐임 이거", buyItems);
     for(let i=0 ; i<parseInt(buyItems?.length);i++){
       num = num + parseInt(buyItems[i]?.PROD_COUNT)
     }
@@ -200,7 +201,7 @@ const BuyScript = () => {
       pg: "html5_inicis.{INIpayTest}", // PG사
       pay_method: "card", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 100, // 결제금액
+      amount: totalNum, // 결제금액 totalNum
       name: "딸깍 GOODS 구매", // 주문명
       buyer_name: name, // 구매자 이름
       buyer_tel: phoneNumber, // 구매자 전화번호
@@ -213,8 +214,8 @@ const BuyScript = () => {
 
   /** 결제 콜백 함수 */
   const portoneCallback = (res) => {
-    const { success, merchant_uid, error_msg } = res;
-    // let success = true
+    // const { success, merchant_uid, error_msg } = res;
+    let success = true
     if (success) {
       // 결제성공시 시행할 동작들
       alert("결제 성공");
@@ -223,8 +224,7 @@ const BuyScript = () => {
     } else {
       // 결제 실패시 시행할 동작들
       alert("결제 실패:");
-      console.error('결제 실패', error_msg)
-
+      // console.error('결제 실패', error_msg)
       navigate("/buyscript")
     }
   };
@@ -463,8 +463,8 @@ const BuyScript = () => {
         }}
       >
         <Button
+          onClick={portoneCallback}
           // onClick={onClickPayment}
-          onClick={onClickPayment}
           variant="outline-dark"
           className="buy-submit-btn same-BTN same-BTN:hover"
         >

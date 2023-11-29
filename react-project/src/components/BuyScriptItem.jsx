@@ -50,7 +50,7 @@ const BuyScriptItem = ({item}) => {
     <div className='vtline' ></div>
     <div className='summary-price'>
         {/* 수량에 맞추어 합계금액 */}
-        {item?.PRICE_SUM}
+        {(item?.PRICE_SUM).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
     </div>
 </div>
   )

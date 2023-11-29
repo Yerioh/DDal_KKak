@@ -1,3 +1,4 @@
+// 2023-11-28 박지훈 모듈화 진행
 // DB 연결
 const db = require("../config/database");
 let conn = db.init();

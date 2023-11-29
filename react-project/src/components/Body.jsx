@@ -72,8 +72,6 @@ const Body = () => {
     return isLogin? <Complete/> : <Navigate to={"/login"}/>
   }
 
-
-
   return (
     <div className="Web-Container">
       <Header/>
@@ -99,11 +97,11 @@ const Body = () => {
         {/* 굿즈 상세 페이지 */}
         <Route path="/goodsdetail/:PROD_ID" element={<PrivateRouteGoodsDetail/>}/>
         {/* 장바구니 */}
-        <Route path="/basket" element={<PrivateRouteBasket/>}/>
+        <Route path="/basket" element={<Basket/>}/>
         {/* 주문서작성 */}
-        <Route path="/buyscript" element={<PrivateRouteBuyScript/>}/>
+        <Route path="/buyscript" element={<BuyScript/>}/>
         {/* 주문완료 */}
-        <Route path='/complete' element={<PrivateRouteComplete/>}/>
+        <Route path='/complete' element={<Complete/>}/>
         </Routes>
       <Footer />
     </div>

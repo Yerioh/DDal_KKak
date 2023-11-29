@@ -101,7 +101,7 @@ const Mypage = () => {
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} postNumber={postNum} address={address} addressDetail={addressDetail} />}
       {pageState === "Save_Image" && <SaveImage />}
-      {pageState === "BoughtScript" && <BoughtScript/>}
+      {pageState === "BoughtScript" && <BoughtScript id={id}/>}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
 
           </div>

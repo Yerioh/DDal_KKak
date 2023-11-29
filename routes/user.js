@@ -90,6 +90,15 @@ router.post("/mypage", async(req, res) => {
     addr_2 : addr_2})  
 })
 
+// 마이페이지 주문내역 라우터
+// 23-11-29 임휘훈 작성
+router.post("/order", async (req, res) => {
+  let userId = req.body.userId.id
+
+  let result = await myPageModel.order(userId)
+  res.json({goods : result.goods[0]})
+})
+
 // 회원 정보 수정 라우터
 // 23-11-28 오후 14:15 박지훈 수정(DB 쿼리문 모듈화)
 router.post("/updateInfo", async(req, res) => {

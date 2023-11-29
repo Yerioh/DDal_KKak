@@ -1,35 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css/BoughtItem.css'
 
-const BoughtItem = () => {
+
+const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_de_cnt, order_detail_price}) => {
+
   return (
     <div className='BoughtItem item-first-container'>
             <div className='item-second-container'>
                 <div className='first-box' >
                     <div>
-                        2023/11/28 17:04:10
+                        {order_at}
                     </div>
                 </div>
                 <div className='second-box' >
                     <div className='inner-first-box' >
-                        <img className='img-box' style={{ widows: "100%"}} src="./images/GM2_누끼.png" alt="" />
+                        <img className='img-box' style={{ widows: "100%"}} src={order_de_img} alt="" />
                     </div>
                     <div className='inner-first-box' >
                         <div className='inner-first-box-2' >
                             <div className='inner-text-box' >
-                                맨투맨
+                                {prod_name}
                             </div>
                         </div>
                         <div className='inner-second-box' >
                             <div className='inner-text-box' >
-                                XL / 블루
+                                {order_prod_info}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='inner-third-box' >
-                    <div className='inner-text-box-1' >1개</div>
-                    <div className='inner-text-box-1' >10,000원</div>
+                    <div className='inner-text-box-1' >{order_de_cnt}</div>
+                    <div className='inner-text-box-1' >{
+                    order_detail_price
+                    .toString()
+                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</div>
                 </div>
                 <div className='inner-forth-box' >
                     물품제작중

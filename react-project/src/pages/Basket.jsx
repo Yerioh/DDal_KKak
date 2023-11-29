@@ -51,6 +51,7 @@ const allDel = () => {
     let price = 0
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
     if( buyItems == null || buyItems.length == 0){
+      setSum(price)
     }else if(buyItems !== null){
       for(let i=0 ; i<buyItems.length;i++){
         price = price+parseInt(buyItems[i].PRICE_SUM)
@@ -153,7 +154,7 @@ const allDel = () => {
             {sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
           </div>
           <div className="vtline"></div>
-          <div style={{ width: "20%" }}>1500원</div>
+          <div style={{ width: "20%" }}>1,500원</div>
           <div className="vtline"></div>
           <div style={{ width: "20%" }}>
             {(sum + 1500)
