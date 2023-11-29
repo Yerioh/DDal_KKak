@@ -39,37 +39,37 @@ const Body = () => {
 
   /** 이미지 편집페이지의 PrivateRoute 함수 */
   const PrivateRouteEditImage = () => {
-    return isChoice? <EditImage/> : <Navigate to={"/login"}/>
+    return isLogin? <EditImage/> : <Navigate to={"/login"}/>
   }
 
   /** 이미지 모음 페이지의 PrivateRoute 함수 */
   const PrivateRouteImageAll = () => {
-    return isChoice? <ImageAll/> : <Navigate to={"/login"}/>
+    return isLogin? <ImageAll/> : <Navigate to={"/login"}/>
   }
 
   /** 굿즈 상품 페이지의 PrivateRoute 함수 */
   const PrivateRouteGoodslist = () => {
-    return isChoice? <Goodslist/> : <Navigate to={"/login"}/>
+    return isLogin? <Goodslist/> : <Navigate to={"/login"}/>
   }
   
   /** 굿즈 상품 상세 페이지의 PrivateRoute 함수 */
   const PrivateRouteGoodsDetail = () => {
-    return isChoice? <GoodsDetail/> : <Navigate to={"/login"}/>
+    return isLogin? <GoodsDetail/> : <Navigate to={"/login"}/>
   }
 
   /** 장바구니 페이지의 PrivateRoute 함수 */
   const PrivateRouteBasket = () => {
-    return isChoice? <Basket/> : <Navigate to={"/login"}/>
+    return isLogin? <Basket/> : <Navigate to={"/login"}/>
   }
 
   /** 주문서 작성 페이지의 PrivateRoute 함수 */
   const PrivateRouteBuyScript= () => {
-    return isChoice? <BuyScript/> : <Navigate to={"/login"}/>
+    return isLogin? <BuyScript/> : <Navigate to={"/login"}/>
   }
 
   /** 주문완료 페이지의 PrivateRoute 함수 */
   const PrivateRouteComplete = () => {
-    return isChoice? <Complete/> : <Navigate to={"/login"}/>
+    return isLogin? <Complete/> : <Navigate to={"/login"}/>
   }
 
 
