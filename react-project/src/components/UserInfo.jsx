@@ -59,7 +59,6 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
       }
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
-    console.log(data);
     setIsOpenPost(false);
     handleClose();
     postNumRef.current.value = data.zonecode; // 우편번호
@@ -83,7 +82,6 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
       let currentPw = C_pwRef.current.value // 현재 비밀번호 입력값 (SHA2로 256비트 암호화 해야함)
       currentPw = SHA256(currentPw).toString(); // 현재 비밀번호 입력값 암호화
       if(userPw === currentPw && changePw === checkPw){ // 현재 비밀번호 정확 & 변경할 비밀번호, 확인 일치하는지
-        console.log("업데이트 준비 완료");
         axios.post("user/updateInfo", {
           userID : id,
           userPw : changePw,

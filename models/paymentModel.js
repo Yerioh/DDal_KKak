@@ -9,10 +9,8 @@ const orderGoods = async({MEMBER_ID, ORDER_PRICE, DELIVERY_POST, DELIVERY_ADDR1,
     VALUES (?,?,?,?,?)`
     try{
         let orderResult = await conn.promise().query(insertOrderSql, [ORDER_ID, MEMBER_ID, ORDER_PRICE, DELIVERY_POST, DELIVERY_ADDR1, DELIVERY_ADDR2, RECIPIENT])
-        console.log('주문 내역 INSERT 성공')
         for (const item of BUYITEM_SESSION){
             let orderDetailResult = await conn.promise().query(insertOrderDetailSql, [ORDER_ID, item.PROD_ID, item.PROD_COUNT, `${item.PROD_SIZE}/${item.COLOR_NAME}`,item.PROD_URL])
-            console.log('주문 상세 내역 INSERT 성공')
         }        
     }
     catch(err){

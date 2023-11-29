@@ -50,7 +50,6 @@ const Join = () => {
             setPwText("");
             pw2TextRef.current.style = "color:gray";
             setPw2Text("※ 사용가능한 비밀번호 입니다.");
-            console.log("회원가입 라우터로 이동");
             axios
               .post("/user/join", {
                 userId: idRef.current.value, // 아이디
@@ -88,7 +87,6 @@ const Join = () => {
   // 23-11-23 임휘훈 작성 : 아이디 비밀번호 유효성 검사 (정규식)
   /**중복체크 함수*/
   const checkId = () => {
-    console.log("사용자 입력 아이디");
 
     // 데이터 전송
     if (idRef.current.value !== "") {
@@ -194,7 +192,6 @@ const Join = () => {
       }
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
-    console.log(data);
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
     setIsOpenPost(false);

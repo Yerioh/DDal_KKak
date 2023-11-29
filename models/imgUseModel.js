@@ -50,10 +50,8 @@ const deleteImg = async (sqlImgUrl, sessionId) => {
     try{
         conn.connect();
         const deleteResult = await conn.promise().query(deleteQuery)
-            console.log("이미지 삭제 완료");
             try{
                 const result = await conn.promise().query(selectQuery, [sessionId])
-                console.log("삭제된 후 프론트로");
                 return {imgArray : result}
             }
             catch(err){

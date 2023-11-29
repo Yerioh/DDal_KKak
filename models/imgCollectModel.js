@@ -64,7 +64,6 @@ const likeClick = async (userId, imgId) => {
         if(data === 0){ // 좋아요 등록
             try{
                 const insertResult = await conn.promise().query(sqlInsert, [userId, imgId])
-                console.log("좋아요 등록 성공");
                 return {likeCheck:true}
             }
             catch(err){
@@ -74,7 +73,6 @@ const likeClick = async (userId, imgId) => {
         else if(data === 1){ // 좋아요 해제
             try{
                 const deleteResult = await conn.promise().query(sqlDelete, [userId, imgId])
-                console.log("좋아요 등록 해제");
                 return {likeCheck:true}
             }
             catch(err){
@@ -96,7 +94,6 @@ const likeCheck = async (userId, imgId) => {
     try{
         conn.connect()
         const result = await conn.promise().query(sqlSelect, [userId, imgId])
-        // console.log("likecheck", result[0][0].CNT);
         let data = result[0][0].CNT
         if(data === 0){ // 좋아요 체크 안되어있으면
             return {likeCheck : false}

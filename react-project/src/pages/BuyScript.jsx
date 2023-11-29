@@ -61,7 +61,6 @@ const BuyScript = () => {
       }
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
-    console.log(data);
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
     setIsOpenPost(false);
@@ -84,7 +83,6 @@ const BuyScript = () => {
 
   }, []);
 
-  console.log("유저아이디필터:", buyItem);
 
   // 주문자 이름
   const nameRef = useRef();
@@ -121,9 +119,7 @@ const BuyScript = () => {
     for(let i=0 ; i<parseInt(buyItems?.length);i++){
       num = num + parseInt(buyItems[i]?.PROD_COUNT)
     }
-    console.log(num,'총개수')
     setCount(num)
-    console.log(count,'총개수')
     },[])
 
 
@@ -135,7 +131,6 @@ const BuyScript = () => {
     let sessionArr = []
     const buyItems =JSON.parse(sessionStorage.getItem('buyItem'))
     buyItems.forEach((item)=>{sessionArr.push(item)})
-    console.log(sessionArr,'세션이 들어갔을까?')
     // 주문자 이름
     let name = nameRef.current.value;
     // 주문자 연락처
@@ -155,15 +150,6 @@ const BuyScript = () => {
     // 수령자 배송메세지
     let reciDeliPs = reciDeliPsRef.current.value;
 
-    console.log(name, "이름");
-    console.log(phoneNumber, "연락처");
-    console.log(email, "이메일");
-    console.log(recip,'수령인')
-    console.log(recipNum,'수령인연락처')
-    console.log(recipAdress,'수령인주소')
-    console.log(recipAdressDetail,'수령인상세주소')
-    console.log(recipZipCode,'수령인우편번호')
-    console.log(reciDeliPs,'수령인')
     buyData={
     'MEMBER_ID' :`${USER_ID}`,
     'ORDER_DE_IMG' :`${buyItems[0].PROD_URL}`,
@@ -176,11 +162,8 @@ const BuyScript = () => {
     'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME,PROD_URL:item.PROD_URL, PROD_ID:item.PROD_ID})
     )
     }
-    
+
     axios.post('/payment/orderGoods', {buyData})
-  
-    console.log(buyData,'데이터뭉치')
-    console.log(buyData.BUYITEM_SESSION,'새로운배열의세션')
   };
 
  
@@ -211,7 +194,6 @@ const BuyScript = () => {
     let recipZipCode = recipZipCodeRef.current.value;
     // 수령자 배송메세지
     let reciDeliPs = reciDeliPsRef.current.value;
-    console.log('주문', name,phoneNumber,email,totalNum)
 
     // 결제 데이터 정의하기
     const data = {
@@ -241,7 +223,7 @@ const BuyScript = () => {
     } else {
       // 결제 실패시 시행할 동작들
       alert("결제 실패:");
-      console.log('결제 실패', error_msg)
+      console.error('결제 실패', error_msg)
 
       navigate("/buyscript")
     }

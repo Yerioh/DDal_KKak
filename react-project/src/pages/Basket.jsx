@@ -51,7 +51,6 @@ const allDel = () => {
     let price = 0
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
     if( buyItems == null || buyItems.length == 0){
-      console.log('주문세션이 비어있음')
     }else if(buyItems !== null){
       for(let i=0 ; i<buyItems.length;i++){
         price = price+parseInt(buyItems[i].PRICE_SUM)
@@ -63,16 +62,12 @@ const allDel = () => {
 
   /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
   useEffect(() => {
-    console.log(cartItem, "장바구니페이지 처음 랜더링");
     if (JSON.parse(sessionStorage.getItem("cartItem")) == null) {
-      console.log("장바구니에 아이템이 없음");
     } else {
       const storedCartItems = JSON.parse(sessionStorage.getItem("cartItem"));
       setCartItem(storedCartItems);
       if (JSON.parse(sessionStorage.getItem("buyItem")) === null) {
-        console.log("구매목록초기화Already");
       } else {
-        console.log("구매목록 초기화");
         sessionStorage.removeItem("buyItem");
       }
     }

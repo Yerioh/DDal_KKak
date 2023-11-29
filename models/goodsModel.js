@@ -16,15 +16,16 @@ const goods = async () => {
     }
 }
 
+/** 굿즈 디테일 정보 가져오는 함수 */
 const goodProduct = async (data) => {
     let selectQuery1 = 'SELECT * FROM TB_PRODUCT WHERE PROD_ID = ?'
     let selectQuery2 = 'SELECT * FROM TB_PRODUCT_COLOR WHERE PROD_ID = ?'
     let selectQuery3 = 'SELECT A.*, B.COLOR_CODE FROM TB_PRODUCT_IMG A INNER JOIN TB_PRODUCT_COLOR B ON(A.COLOR_ID = B.COLOR_ID) WHERE A.PROD_ID = ? ORDER BY PROD_IMG'
     let selectQuery4 = 'SELECT * FROM TB_PRODUCT_SIZE WHERE PROD_ID = ?'
-    let prdInfo = ''
-    let prdColor = ''
-    let prdImg = ''
-    let prdSize = ''
+    let prdInfo = '' // 굿즈 정보
+    let prdColor = '' // 굿즈 색깔
+    let prdImg = '' // 굿즈 이미지
+    let prdSize = '' // 굿즈 사이즈
 
     try{
         conn.connect()

@@ -47,7 +47,6 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
     let color = e.target.colorThema.value;
     let logo = e.target.logoThema.value;
     let style = e.target.styleThema.value;
-    console.log("스타일테마", style);
    if(color!==''){
     keywordArray.push(color)
    }

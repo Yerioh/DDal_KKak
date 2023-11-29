@@ -43,7 +43,6 @@ const Login = () => {
   /** Enter 함수 */
   const enter = (e) => {
     if(e.key === "Enter"){
-      console.log("엔터 활성화");
       login_btn()
     }
   }
