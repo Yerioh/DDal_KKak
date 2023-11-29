@@ -16,6 +16,28 @@ const Complete = () => {
   let seconds = today.getSeconds();  // 초
   let times = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
 
+  const completeDel = () => {
+    const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
+    const cartItems = JSON.parse(sessionStorage.getItem("cartItem"))
+    if (buyItems.length == cartItems.length) {
+        sessionStorage.clear()
+    } else if (buyItems !== cartItems.length) {
+        for (let i = 0; i < parseInt(buyItems.length); i++) {
+            for (let j = 0; j < parseInt(cartItems.length); j++) {
+                if (buyItems[i].PROD_UUID == cartItems[j].PROD_UUID) {
+                    cartItems.splice(j, 1);
+                }
+            }
+            sessionStorage.setItem("cartItem", JSON.stringify(cartItems));
+            sessionStorage.removeItem("buyItem");
+        }
+    }
+};
+
+useEffect(() => {
+    completeDel()
+}, [])
+
     return (
         <div className='complete' style={{ margin: "0% 20%" ,minWidth:"800px"}}>
 
