@@ -8,7 +8,6 @@
     height: 200px;
     border-top: 2px solid lightgray;
     border-bottom: 2px solid lightgray;
-    margin-left: 2%;
     display: flex;
 }
 .BoughtItem .item-second-container .first-box{
