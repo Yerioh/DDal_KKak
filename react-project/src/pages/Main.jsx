@@ -7,7 +7,7 @@ import "../css/Main.css";
 import ImageAllCard from "../components/ImageAllCard";
 import e from "cors";
 import axios from "../axios";
-import goodsList from '../data/custumGoods.json'
+import goodsList from "../data/custumGoods.json";
 
 const Main = () => {
   const [shareImg, setShareImg] = useState(null);
@@ -26,12 +26,12 @@ const Main = () => {
       items: 4,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 773 },
       items: 4,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 4,
+      breakpoint: { max: 772, min: 464 },
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -94,10 +94,10 @@ const Main = () => {
             </div>
             <br />
             <span className="long-text">
-            딸깍에서 당신만을 위한, 세상에 단 하나뿐인 이미지를 만들어보세요.
+              딸깍에서 당신만을 위한, 세상에 단 하나뿐인 이미지를 만들어보세요.
             </span>
           </div>
-         
+
           <Link to="/image-create">
             <button className="Main-Btn">이미지 생성하러 가기! 딸~깍</button>
             {/*  */}
@@ -158,6 +158,21 @@ const Main = () => {
           ) : (
             <h2>로딩</h2>
           )}
+        </div>
+        <div className="Main-Meadia">
+          <span className="medium-media">
+            딸깍에서 당신만을 위한, 세상에 단 하나뿐인 이미지를 만들어보세요.
+          </span>
+          <span className="small-media">
+            딸깍에서 당신만을 위한,
+          </span>
+          <span className="small-media">
+           세상에 단 하나뿐인 이미지를 만들어보세요.
+          </span>
+          <Link to="/image-create">
+            <button className="Main-Btn">Create Image</button>
+            {/*  */}
+          </Link>
         </div>
       </div>
     </div>
