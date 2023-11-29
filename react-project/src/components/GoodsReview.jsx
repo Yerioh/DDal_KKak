@@ -1,6 +1,5 @@
 import React from "react";
 import "../css/GoodsDetail.css";
-import image from "../img/image-editor/image-edit-gallery1.png";
 import ReviewStar from "./ReviewStar";
 
 const GoodsReview = () => {
@@ -20,7 +19,7 @@ const GoodsReview = () => {
         {/* 구매한 상품의 이미지 */}
         <div className="GoodsReview-goodsinfoImg">
           <img
-            src={image} 
+            src={"/"} 
             style={{ width: "10%", objectFit: "cover", marginRight: "10px" }}
             alt=""
           />
@@ -34,7 +33,7 @@ const GoodsReview = () => {
       <div className="GoodsReview-img">
         {/* 사용자 착의샷, 안올리면 공백으로 표현 */}
         <img
-          src={image}
+          src={"/"}
           style={{ width: "25%", objectFit: "cover" }}
           alt=""
         ></img>
