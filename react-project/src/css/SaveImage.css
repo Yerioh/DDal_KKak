@@ -234,7 +234,10 @@ input[type="checkbox"]:checked + .check_label {
     flex-wrap: wrap;
     margin : 10px 60px 20px 60px;
 }
-    
+    .SImage-Card{
+        width: 200px;
+        height: auto;
+    }
 
 
     .check-box > button{

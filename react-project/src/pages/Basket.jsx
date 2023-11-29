@@ -96,7 +96,7 @@ const allDel = () => {
       <div className="basket-all-check">
         <div className="inner-box">
         <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>allDel()}>
-          <p className="basket-top-check">전체삭제</p>
+          <p className="basket-top-check" >전체삭제</p>
           </button>
           <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>delChoice()}>
             <div
