@@ -21,8 +21,13 @@ const Basket = () => {
 
 /** 장바구니 모든 아이템 삭제 */
 const allDel = () => {
+  if (window.confirm("정말 삭제합니까?")) {
     sessionStorage.clear()
+    alert("삭제되었습니다.");
     window.location.replace("/basket");
+  } else {
+    alert("취소합니다.");
+  } 
 }
 
 
@@ -39,7 +44,7 @@ const allDel = () => {
       for (let i = 0; i < parseInt(buyItems.length); i++) {
         for (let j = 0; j < parseInt(cartItems.length); j++) {
           if (buyItems[i].PROD_UUID==cartItems[j].PROD_UUID) {
-            cartItems.pop(buyItems[i].PROD_UUID);
+            cartItems.splice(j,1);
           }
         }
       }
