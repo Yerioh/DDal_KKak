@@ -160,7 +160,7 @@ const BuyScript = () => {
     'DELIVERY_ADDR2':`${recipAdressDetail}`,
     'RECIPIENT':`${reciDeliPs}`,
     'ORDER_ID' : uuidv4(),
-    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME,PROD_URL:item.PROD_URL, PROD_ID:item.PROD_ID})
+    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME, PROD_URL:item.PROD_URL, PROD_ID:item.PROD_ID, PRICE_SUM : item.PRICE_SUM})
     )
     }
 
