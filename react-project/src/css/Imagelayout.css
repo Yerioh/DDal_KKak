@@ -1,7 +1,4 @@
 
-
-
-
 /* 생성페이지 몸통 */
 .creImg_body {
   display: flex;
@@ -308,6 +305,8 @@
   .keywordModal{
     width:50%
   }
+
+  
 }
 
 @media (max-width: 375px)  {
@@ -317,11 +316,18 @@
   .creImg_body {
     padding: 0 0;
   }
+  .guidemodal-body{
+    width:20%
+  }
   .guidemodal-guideinfo-img{
     width: 100%
   }
   .guidemodal-guideinfo-info{
     font-size:small
+  }
+  .keywordModal{
+    min-width:250px;
+    height:100%
   }
 }
 

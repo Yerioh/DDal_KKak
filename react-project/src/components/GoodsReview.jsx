@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/GoodsDetail.css";
-import ReviewStar from "./ReviewStar";
-
+import Rating from "@mui/material/Rating";
 const GoodsReview = () => {
-
+  const [value, setValue] = useState(4.5)
+  // 별점 값 위한 useState 추가 23-11-29
+  
   return (
     // 굿즈 리뷰 카드
     <div className="GoodsReview-card">
       <div className="GoodsReview-cardbody">
         <p>
-          <ReviewStar initialRating={5} editable= {false}/>
+          <Rating id="star"
+            classes={{color:'yellow'}}
+            name="simple-controlled"
+            value={value} // 평점
+            precision={0.5} // 별 반개 출력
+            readOnly={true} // 읽기 전용
+            size="large"
+          />
           {/* initalRaitng: 초기값, DB에서 받아올 값, editable = false면 수정 불가능  */}
         </p>
         {/* 이름  날짜 */}
@@ -19,7 +27,7 @@ const GoodsReview = () => {
         {/* 구매한 상품의 이미지 */}
         <div className="GoodsReview-goodsinfoImg">
           <img
-            src={"/"} 
+            src={"/"}
             style={{ width: "10%", objectFit: "cover", marginRight: "10px" }}
             alt=""
           />
