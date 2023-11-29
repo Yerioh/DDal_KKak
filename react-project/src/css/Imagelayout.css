@@ -1,20 +1,6 @@
-@media (max-width: 1024px) {
-  .creImg_body {
-    margin-top: 10%;
-  }
-}
 
-@media (max-width: 375px) and (max-width: 1023px) {
-  .imgtopbody {
-    padding: 5%;
-  }
-  .creImg_body {
-    padding: 0 0;
-  }
-}
 
-@media (max-width: 320px) {
-}
+
 
 /* 생성페이지 몸통 */
 .creImg_body {
@@ -149,12 +135,12 @@
 /* 가이드 모달창 */
 .guidemodal-body {
   background-color: #ffffff;
-  width: 40%;
-  height: 70%;
+  width: 30%;
   padding: 10px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  min-width : 350px;
 }
 
 .guidemodal-content {
@@ -173,7 +159,8 @@
 }
 
 .guidemodal-guideinfo-img {
-  width:500px;
+  width:80%;
+  height: 10%;
   margin: auto;
   box-sizing: cover;
 }
@@ -181,7 +168,7 @@
   width: 90%;
   padding: 5%;
   font-size: x-large;
-  white-space: pre-wrap;
+  /* white-space: pre-wrap; */
   margin: 0 auto;
 }
 .guidemodal-guideinfo-info .bold {
@@ -302,3 +289,45 @@
 .hidden {
   display: none;
 }
+
+
+@media( max-width: 280px) {
+  .prompt-input{
+    width: 80%;
+  }
+  .creImg_body{
+    width:100%
+  }
+  .imgtopbody {
+    padding: 5%;
+    min-width:280px;
+  }
+  .same-BTN {
+    font-size : 12px;
+  }
+  .keywordModal{
+    width:50%
+  }
+}
+
+@media (max-width: 375px)  {
+  .imgtopbody {
+    padding: 5%;
+  }
+  .creImg_body {
+    padding: 0 0;
+  }
+  .guidemodal-guideinfo-img{
+    width: 100%
+  }
+  .guidemodal-guideinfo-info{
+    font-size:small
+  }
+}
+
+@media (max-width: 1024px) {
+  .creImg_body {
+    margin-top: 10%;
+  }
+}
+

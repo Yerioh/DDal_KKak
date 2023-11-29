@@ -162,11 +162,11 @@ const CreateImage = () => {
         style={{
           display: "block",
           background: "red",
-          width: "15%",
-          height: "10%",
+          width: "35px",
+          height: "6%",
           position: "absolute",
           right: '-1%',
-          bottom: '50%',
+          bottom: '53%',
           zIndex: "10",
           border: "none",
           background: "none",
@@ -188,10 +188,10 @@ const CreateImage = () => {
         type="button"
         style={{
           display: "block",
-          width: "15%",
+          width: "33px",
           height: "10%",
           position: "absolute",
-          bottom: "50%",
+          bottom: "50.5%",
           zIndex: "10",
           // marginLeft: "5%",
           border: "none",
@@ -217,6 +217,7 @@ const CreateImage = () => {
     nextArrow: <NextArrow />, // 화살표 버튼을 커스텀해서 사용
     prevArrow: <PrevArrow />,
   };
+
 
   return (
     // 이미지 생성페이지 전체
@@ -308,34 +309,33 @@ const CreateImage = () => {
             <h2 style={{ margin: " 5% auto 0" }}>어떻게 만들까요?</h2>
             <div className="guidemodal-content">
               <Slider {...settings}>
-                <div>
+                
                   <div className="guidemodal-guideinfo">
                     <img
                       src={"./images/inputguide.png"}
                       alt=""
                       className="guidemodal-guideinfo-img"
+                      
+                    
                     />
                     <div className="guidemodal-guideinfo-info" >
-                      <span>
-                        만들고 싶은 이미지와 관련된 단어나 문장을{" "}
-                        <span className="bold">"핵심 키워드"</span>에
-                        입력해주세요.
-                      </span>
+                      <span>  만들고 싶은 이미지와 관련된 단어나 문장을{" "}</span>
+                      <span className="bold">"핵심 키워드"에</span> <span>  입력해주세요.</span>
                     </div>
-                  </div>
+                  
                 </div>
                 <div className="guidemodal-guideinfo">
                   <img
                     src={"./images/samplekeyword.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
+                  
                   />
-                  <div className="guidemodal-guideinfo-info " >
-                    <span>
-                      어떻게 써야할지 어렵나요?<br/>
-                      <span> 저희가{" "} <span className="bold">키워드</span>를 준비했어요.</span>
-                      <br/>키워드를 클릭! 클릭!
-                    </span>
+                  <div className="guidemodal-guideinfo-info" style={{marginTop:'2%'}}>
+                    <span>어떻게 써야할지 어렵나요?</span><br></br>
+                    <span> 저희가 </span> <span className="bold">키워드</span> <span>를 준비했어요.</span>
+                    <p>키워드를 클릭! 클릭!</p>
+                    
                     
                   </div>
                 </div>
@@ -344,10 +344,11 @@ const CreateImage = () => {
                     src={"./images/guidenegative.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
+                    
                   />
-                  <div className="guidemodal-guideinfo-info" >
+                  <div className="guidemodal-guideinfo-info" style={{marginTop:'2%'}} >
                     <span>
-                      넣고 싶지 않은게 있나요?{" "}<br/> 그렇다면{" "} 
+                      넣고 싶지 않은게 있나요?<br/> 그렇다면{" "} 
                       <span className="bold">"제외 키워드"</span>에 관련 단어나
                       문장을 넣어봐요.
                     </span>
@@ -358,10 +359,10 @@ const CreateImage = () => {
                     src={"./images/DDALKKAK.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
+                    
                   />
                   <div
                     className="guidemodal-guideinfo-info"
-                    style={{marginTop:'15%'}}
                   >
                     <span>만들 이미지의 수를 선택! <br/>
                       마지막으로 <span className="bold">"딸-깍!"</span>{" "}
