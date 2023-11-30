@@ -17,6 +17,7 @@ const GoodsReview = () => {
             precision={0.5} // 별 반개 출력
             readOnly={true} // 읽기 전용
             size="large"
+            className="yellow-star"
           />
           {/* initalRaitng: 초기값, DB에서 받아올 값, editable = false면 수정 불가능  */}
         </p>
