@@ -195,6 +195,7 @@
     margin-left: 3%;
     border-radius: 5%;
     background-color: whitesmoke;
+    border: 1px solid black;
 }
 .Main-Meadia{
     display: none;

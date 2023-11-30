@@ -316,7 +316,7 @@ const GoodsDetail = () => {
             <div
               style={{
                 backgroundColor: "white",
-                width: "35%",
+                // width: "35%",
                 padding: "0px 20px",
               }}
             >
