@@ -283,6 +283,7 @@ const CreateImage = () => {
               maxCompleted={100}
               height={"38px"}
               borderRadius={"5px"}
+              bgColor="#FF7E00"
             />
             {/* <Link to='/image-edit'> */}
             <button
