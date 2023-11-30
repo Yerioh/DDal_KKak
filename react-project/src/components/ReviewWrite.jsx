@@ -18,24 +18,22 @@ const ReviewWrite = ({
   const textRef = useRef()
   let reviewData = [];
 
-
-
-
-  const submitTest = () => {
+  const submitTest = (e) => {
+    e.preverntDefault()
     reviewData = {
       // 별점
-      rating : `${rating}`,
+      rating: `${rating}`,
       // 리뷰 텍스트
-      reviewText : `${textRef.current.value}`,
+      reviewText: `${textRef.current.value}`,
       // 상품 ID
-      prodId : prodId,
+      prodId: prodId,
       // 상품 IMG
-      img : img,
+      img: img,
       // 유저 ID
-      userId : userId.id      
+      userId: userId.id
     }
     axios.post('/page/reviewInsert', reviewData)
-      .then(res=>{
+      .then(res => {
         alert('리뷰가 등록되었습니다.')
         openModalHandler()
       })
@@ -60,16 +58,18 @@ const ReviewWrite = ({
 
   useEffect(() => {
     speech(rating)
+    if (textRef.current) {
+      textRef.current.focus();
+    }
   }, [])
 
   return (
-    <div className="ReviewWrite">
-      
+    <div className="ReviewWrite"  onClick={(e) => { e.stopPropagation() }} style={{cursor:"default"}}>
+
       {isOpen ? (
-        <div className="modal-backdrop">
+        <div className="modal-backdrop" >
           {/* 모달창 전체 크기 div */}
           <div className="modal-container"
-            onClick={(e) => e.stopPropagation()}
           >
             {/* 모달창 제목 */}
             <div className="modal-title"
@@ -144,7 +144,7 @@ const ReviewWrite = ({
                   여러분의 의견을 알려주세요.
                 </div>
                 <textarea
-                className="modal-goods-textarea"
+                  className="modal-goods-textarea"
                   name="reviewText"
                   id="review"
                   cols="80"
@@ -155,12 +155,6 @@ const ReviewWrite = ({
             </div>
             {/* 이미지 업로드 */}
             <div style={{ height: "10%" }}>
-              {/* <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-                Upload file
-                
-                <VisuallyHidd
-                enInput type="file" />
-              </Button> */}
               <div style={{ height: "22px", fontSize: "20px", margin: "0px 0px 5px 0px" }}>
                 리뷰이미지업로드
               </div>
@@ -183,9 +177,9 @@ const ReviewWrite = ({
               </button>
               <button
                 className="modal-goods-close-btn SM-btn"
-                onClick={() => {
-                  openModalHandler();
-                }}
+                onClick={
+                  openModalHandler
+                }
               >
                 닫기
               </button>
