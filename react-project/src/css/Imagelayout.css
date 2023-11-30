@@ -305,6 +305,9 @@
   .keywordModal{
     width:50%
   }
+  .showKeywordCheckbox{
+    width: 85px;
+  }
 
   
 }
@@ -314,10 +317,11 @@
     padding: 5%;
   }
   .creImg_body {
-    padding: 0 0;
+    width: 100%;
   }
   .guidemodal-body{
-    width:20%
+    width:20%;
+    min-width: 280px;
   }
   .guidemodal-guideinfo-img{
     width: 100%
@@ -327,13 +331,21 @@
   }
   .keywordModal{
     min-width:250px;
-    height:100%
+    height:90%;
+  }
+  .modal-backdrop{
+    width: none;
   }
 }
 
 @media (max-width: 1024px) {
   .creImg_body {
     margin-top: 10%;
+  }
+  .keywordModal-checkbox{
+    display: flex;
+    justify-content: cetner;
+    gap : 15px;
   }
 }
 

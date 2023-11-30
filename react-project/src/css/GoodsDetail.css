@@ -79,6 +79,9 @@
 
 }
 
+.StarRating > .yellow-star{
+    filter:invert(83%) sepia(39%) saturate(1336%) hue-rotate(355deg) brightness(98%) contrast(109%);
+}
 .GoodsReview-goodsinfo{
     display: flex;
     flex-direction: column;
@@ -149,3 +152,7 @@
 }
 
 
+.StarRating{
+    display: flex;
+    justify-content:  space-between;
+}
