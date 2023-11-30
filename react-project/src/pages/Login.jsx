@@ -19,12 +19,13 @@ const Login = () => {
     }
     else if (pwRef.current.value === ""){
       alert("비밀번호를 입력해주세요.")
-    }{
+    }
       axios.post("/user/login", {
         userId : idRef.current.value, // 아이디
         userPw : pwRef.current.value // 비밀번호
       }).then((res) => {
         if(res.data.result === "success"){
+          localStorage.setItem('isLogin', true);
           window.location.href = "/"
         }
         else if (res.data.result === "serverError"){
@@ -37,7 +38,6 @@ const Login = () => {
           alert("비밀번호가 올바르지 않습니다.")
         }
       })
-    }
   }
 
   /** Enter 함수 */

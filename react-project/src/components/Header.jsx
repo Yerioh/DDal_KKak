@@ -26,6 +26,7 @@ const Header = () => {
   const logoutClick = () => {
     axios.post("/user/Logout").then((res) => {
       setChangeHeader(res.data.isLogin);
+      localStorage.setItem('isLogin', false);
       window.location.href = "/";
     });
   };

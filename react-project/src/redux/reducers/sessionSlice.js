@@ -5,7 +5,7 @@ export const sessionSlice = createSlice({
     name : "session",
     initialState : {
         name : null,
-        isLogin : false,
+        isLogin : false, // 로그인 상태
         loginType : null,
         id : null
     },
@@ -24,6 +24,9 @@ export const sessionSlice = createSlice({
         },
         sessionID : (state, action) => { // 회원 ID
             state.id = action.payload
+        },
+        loginStatus : (state) => {
+            return state.isLogin
         }
     }
 })
@@ -34,3 +37,4 @@ export const SessionReducerActions = sessionSlice.actions
 
 // store.js에서 접근할 수 있도록 내보내기
 export default sessionSlice.reducer
+

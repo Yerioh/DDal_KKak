@@ -50,7 +50,6 @@ const order = async (userId) => {
   try{
     conn.connect()
     let result = await conn.promise().query(selectQuery, [userId])
-    console.log("select 결과 필요한것만 가져와서 date 포맷팅 필요", result[0]);
     return {goods : result}
   }
   catch(err){
