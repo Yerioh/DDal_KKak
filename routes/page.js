@@ -37,6 +37,16 @@ router.post('/review', async (req, res) => {
     res.json({reviewArr : result.reviewArray[0]})
 })
 
+// 23-11-30 박지훈 작성
+// 굿즈 리뷰 작성 router
+router.post('/reviewInsert', async(req,res)=>{
+    let data = req.body
+    const result = await goodsModel.reviewInsert(data)
+    if(result.resultInsert){
+        res.json(true)
+    }
+})
+
 
 
 

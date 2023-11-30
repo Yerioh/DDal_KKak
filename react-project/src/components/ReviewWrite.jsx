@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../css/ReviewWrite.css";
 import Rating from '@mui/material/Rating';
+import axios from '../axios'
 
 
 
@@ -8,24 +9,36 @@ import Rating from '@mui/material/Rating';
 const ReviewWrite = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
+  prodId, // 상품 ID
+  img, // 상품 IMG
+  userId // 유저 ID
 }) => {
   const [rating, setRating] = useState(0);
   const [ratingSpeech, setRatingSpeech] = useState('')
-  const textRef = useRef('')
+  const textRef = useRef()
   let reviewData = [];
 
 
 
 
   const submitTest = () => {
-
-    const uploadImage = document.getElementById("file").files;
     reviewData = {
-      'uploadImage': `${uploadImage[0].name}`,
-      'rating': `${rating}`,
-      'reviewText': `${textRef.current.value}`
+      // 별점
+      rating : `${rating}`,
+      // 리뷰 텍스트
+      reviewText : `${textRef.current.value}`,
+      // 상품 ID
+      prodId : prodId,
+      // 상품 IMG
+      img : img,
+      // 유저 ID
+      userId : userId.id      
     }
-    console.log(reviewData)
+    axios.post('/page/reviewInsert', reviewData)
+      .then(res=>{
+        alert('리뷰가 등록되었습니다.')
+        openModalHandler()
+      })
 
   }
   const speech = (newValue) => {
@@ -80,7 +93,7 @@ const ReviewWrite = ({
                     style={{
                       widows: "100%"
                     }}
-                    src="./images/GM2_누끼.png"
+                    src={img}
                     alt=""
                   />
                 </div>

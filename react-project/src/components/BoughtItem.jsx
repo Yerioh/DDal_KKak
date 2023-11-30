@@ -3,7 +3,7 @@ import ReviewWrite from './ReviewWrite.jsx'
 import '../css/BoughtItem.css'
 
 
-const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_de_cnt, order_detail_price}) => {
+const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_de_cnt, order_detail_price, prod_id, userId}) => {
     const [isOpen, setIsOpen] = useState(false); // 모달 상태 State
     const [deliverState, setDeliverState] = useState(true)
 
@@ -59,6 +59,9 @@ const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_d
                                 <ReviewWrite
                                     isOpen={isOpen}
                                     openModalHandler={openModalHandler}
+                                    prodId = {prod_id}
+                                    img = {order_de_img}
+                                    userId = {userId}
                                 />
                             )}
                         </button>

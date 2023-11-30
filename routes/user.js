@@ -13,9 +13,6 @@ const hash = crypto.createHash('sha1')
 const userModel = require('../models/userModel')
 const myPageModel = require('../models/myPageModel')
 
-// DB 연결
-const db = require("../config/database");
-let conn = db.init();
 
 // 회원가입 라우터
 // 23-11-28 오후 14:15 박지훈 수정(DB 쿼리문 모듈화)

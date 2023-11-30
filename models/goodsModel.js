@@ -85,4 +85,19 @@ const review = async (data) => {
     }
 }
 
-module.exports = {goods, goodProduct, review}
+/* 리뷰 저장 함수 */
+const reviewInsert = async({userId, prodId, reviewText, img, rating})=>{
+    let sql = `INSERT INTO TB_REVIEW (MEMBER_ID, PROD_ID, REVIEW_CONTENT, REVIEW_IMG, REVIEW_RATINGS, REVIEWED_AT) 
+    VALUES (?,?,?,?,?, DATE_ADD(NOW(), INTERVAL 9 HOUR));`
+    conn.connect()
+    try{
+        const result = await conn.promise().query(sql, [userId, prodId, reviewText, img, rating])
+        console.log('리뷰 저장 성공')
+        return {resultInsert : true}
+    }
+    catch(err){
+        console.error('리뷰 저장 에러', err)
+    }
+}
+
+module.exports = {goods, goodProduct, review, reviewInsert}

@@ -4,10 +4,6 @@ const router = express.Router();
 const axios = require("axios");
 const socketModel = require('../models/socketModel')
 
-// DB 연결
-const db = require("../config/database");
-let conn = db.init();
-
 // 이미지 생성 페이지 접속시 대기열 불러오는 라우터
 router.post('/createList', async(req,res)=>{
     let result = await socketModel.createList()
@@ -28,6 +24,7 @@ router.post('/enQueue', async(req,res)=>{
 router.post('/deQueue', async(req,res)=>{
     let userId = req.body.id
     let result = await socketModel.deQueue(userId)
+    console.log('머냐', result)
     if(result.selectResult){
         res.json({result : result.data})
     } 
