@@ -27,8 +27,7 @@ const Body = () => {
 
   /** 프라이빗 라우터 함수 */
   const PrivateRoute = ({ element: Element }) => {
-    console.log("isLogin", isLogin, Element);
-    return isLogin ? Element : <Navigate to="/login" />;
+    return localStorage.getItem("isLogin") === 'true' ? Element : <Navigate to="/login" />;
   };
 
   return (
