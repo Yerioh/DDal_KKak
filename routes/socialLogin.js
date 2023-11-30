@@ -4,10 +4,6 @@ const router = express.Router();
 const axios = require("axios");
 const socialLoginModel = require('../models/socialLoginModel')
 
-// DB 연결
-const db = require("../config/database");
-let conn = db.init();
-
 // 카카오 ------------------------------------------------------------------------------------
 // 2023-11-13 오후 14:30 박지훈 작성
 router.get("/kakaoLogin",  async(req, res) => {

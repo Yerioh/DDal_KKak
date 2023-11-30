@@ -5,11 +5,6 @@ const router = express.Router();
 const axios = require("axios");
 const goodsModel = require("../models/goodsModel")
 
-// DB 연결
-const db = require("../config/database");
-let conn = db.init();
-
-
 // 굿즈 페이지의 굿즈 정보 불러오는 라우터
 router.post("/goods", async (req, res) => {
     const result = await goodsModel.goods()
