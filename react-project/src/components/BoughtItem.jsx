@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReviewWrite from './ReviewWrite.jsx'
 import '../css/BoughtItem.css'
 
 
 const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_de_cnt, order_detail_price}) => {
+    const [isOpen, setIsOpen] = useState(false); // 모달 상태 State
+    const [deliverState, setDeliverState] = useState(true)
 
+
+    /**모달 열고 닫는 상태 함수*/
+    const openModalHandler = (index) => {
+        // isOpen의 상태를 변경하는 메소드를 구현
+        // !false -> !true -> !false
+        setIsOpen((prevIsOpen) => !prevIsOpen);
+    };
   return (
     <div className='BoughtItem item-first-container'>
             <div className='item-second-container'>
@@ -36,9 +46,30 @@ const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_d
                     .toString()
                     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</div>
                 </div>
-                <div className='inner-forth-box' >
-                    물품제작중
-                </div>
+                {deliverState == true ?
+                    <div className='inner-forth-box' style={{flexWrap:"wrap"}}>
+                        <div style={{width:"100%",height:"50%"}}>
+                        배송완료
+                        
+                        </div>
+                        <div  style={{width:"100%",height:"50%"}} >
+                        <button className='SM-btn' style={{width:"90px"}} onClick={() => { openModalHandler(); }}>
+                            리뷰쓰기
+                            {isOpen && (
+                                <ReviewWrite
+                                    isOpen={isOpen}
+                                    openModalHandler={openModalHandler}
+                                />
+                            )}
+                        </button>
+                        </div>
+                    </div>
+
+                    :
+                    <div className='inner-forth-box' >
+                        물품제작중
+                    </div>
+                }
             </div>
         </div>
   )
