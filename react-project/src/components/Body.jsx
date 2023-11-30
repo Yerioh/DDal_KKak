@@ -19,7 +19,7 @@ import Complete from "../pages/Complete";
 import { useEffect } from "react";
 
 const Body = () => {
-  // // 23-11-30 16:30 임휘훈 작성 Private Route
+  // // 23-11-30 16:35 임휘훈 작성 Private Route
   const dispatch = useDispatch();
   const isLogin = useSelector(
     (state) => state.session.isLogin && localStorage.getItem("isLogin")
