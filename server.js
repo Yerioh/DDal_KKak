@@ -16,9 +16,7 @@ const {Server} = require('socket.io')
 const server = createServer(app)
 const io = new Server(server)
 
-axios.default.defaults.baseURL = 'http://localhost:3001'
-
-const createNameSpace = io.of('/image-create')
+axios.default.defaults.baseURL = process.env.BASE_URL
 
 
 // Flask 서버 라우터
@@ -39,7 +37,6 @@ app.use(express.static(path.join(__dirname, "react-project", "build")));
 
 
 // Node / Flask 연동
-// https://seonzeroticket.notion.site/Node-Flask-45ded686130d4f6d9097e2d05f41832c?pvs=4
 const corOptions = {
   origin: "*",
   credential: true,

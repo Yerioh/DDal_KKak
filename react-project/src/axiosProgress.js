@@ -5,8 +5,7 @@ import {ProgressReducerActions} from './redux/reducers/progressSlice'
 
 // axios 인스턴스 생성
 const instance = axios.create({
-    // baseURL : "http://121.66.158.211:3001/"
-    baseURL : "http://localhost:3001"
+    baseURL : process.env.REACT_APP_BASE_URL
 });
 
 // 3초 내로 응답이 오지 않는다면 timeout이 발생하지 않는다.
@@ -47,7 +46,7 @@ instance.interceptors.request.use((config)=>{
     return config
 },
 (err)=>{
-    console.error('요청 에러 발생')
+    console.log('요청 에러 발생')
     store.dispatch(ProgressReducerActions.resetProgress())
     return Promise.reject(err)
 })
@@ -67,7 +66,7 @@ instance.interceptors.response.use((response)=>{
     return response
 },
 (err)=>{
-    console.error('응답 에러 발생',err)
+    console.log('응답 에러 발생',err)
     store.dispatch(ProgressReducerActions.resetProgress())
     return Promise.reject(err)
 })

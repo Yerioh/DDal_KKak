@@ -9,6 +9,8 @@
 - axiosProgress.js
 - socket.js
 - .env
+- s3 cors
+- api redirect uri
 
 <br/>
 
