@@ -19,21 +19,17 @@ import Complete from "../pages/Complete";
 import { useEffect } from "react";
 
 const Body = () => {
-  // // 23-11-29 10:22 임휘훈 작성 Private Route
-  const dispatch = useDispatch()
-  const isLogin = useSelector((state) => state.session.isLogin && localStorage.getItem('isLogin')); // redux에 저장된 로그인 유무
-  
+  // // 23-11-30 16:30 임휘훈 작성 Private Route
+  const dispatch = useDispatch();
+  const isLogin = useSelector(
+    (state) => state.session.isLogin && localStorage.getItem("isLogin")
+  ); // redux에 저장된 로그인 유무
+
   /** 프라이빗 라우터 함수 */
   const PrivateRoute = ({ element: Element }) => {
     console.log("isLogin", isLogin, Element);
     return isLogin ? Element : <Navigate to="/login" />;
   };
-  
-  useEffect(() => {
-    if(isLogin){
-      
-    }
-  }, [])
 
   return (
     <div className="Web-Container">
