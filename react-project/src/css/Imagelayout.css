@@ -8,6 +8,10 @@
   padding: 50px 0;
 }
 
+.creImg_body h3{
+  font-weight: bold;
+}
+
 .imgtopbody {
   display: flex;
   justify-content: center;

@@ -62,7 +62,9 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.5) 0px 
     justify-content: center;
     align-items: center;
 }
-
+.Card-date-title>.card-title{
+    font-weight: bold;
+}
 .Card-box > .search-Card .img-card .Card-div .card-body{
     border-top: 1px solid rgb(200, 200, 200);
     display: flex;
