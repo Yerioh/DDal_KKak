@@ -9,7 +9,7 @@ const ReviewWrite = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
 }) => {
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(0);
   const [ratingSpeech, setRatingSpeech] = useState('')
   const textRef = useRef('')
   let reviewData = [];
@@ -32,13 +32,13 @@ const ReviewWrite = ({
     if (newValue === null) {
       setRating('1')
       setRatingSpeech('별로에요')
-    } else if (newValue === 1) {
+    } else if (newValue >= 0.5) {
       setRatingSpeech('별로에요')
-    } else if (newValue === 2) {
+    } else if (newValue >= 1.5) {
       setRatingSpeech('보통이에요')
-    } else if (newValue === 3) {
+    } else if (newValue >= 2.5) {
       setRatingSpeech('쓸만해요')
-    } else if (newValue === 4) {
+    } else if (newValue >= 4.5) {
       setRatingSpeech('좋아요')
     } else if (newValue === 5) {
       setRatingSpeech('훌륭해요')

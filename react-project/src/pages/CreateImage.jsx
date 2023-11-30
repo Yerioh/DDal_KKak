@@ -244,7 +244,7 @@ const CreateImage = () => {
               value={positivePrompt} // 적용되는 키워드
               onChange={(e) => setPositivePrompt(e.target.value)}
               id="inputPrompt" // 입력 값으로 사용될 state
-              placeholder="긍정 프롬프트를 입력해주세요"
+              placeholder="핵심 키워드를 입력해주세요."
               spellCheck="false"
             />
             {/* 키워드 버튼 창 */}
@@ -263,7 +263,7 @@ const CreateImage = () => {
               id="exceptPrompt" // 제외되는 키워드 입력창
               value={negativePrompt} // 적용되는 키워드
               onChange={(e) => setNegativePrompt(e.target.value)}
-              placeholder="부정 프롬프트를 입력해주세요"
+              placeholder="제외 키워드를 입력해주세요."
             />
           </div>
 
