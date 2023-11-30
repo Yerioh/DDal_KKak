@@ -112,6 +112,7 @@
     margin-right: 5%;
     font-weight: bold;
     gap : 3px;
+    padding-bottom: 3px;
   }
 
   .App-Nav{
