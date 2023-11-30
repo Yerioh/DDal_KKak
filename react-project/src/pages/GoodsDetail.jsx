@@ -41,17 +41,26 @@ const GoodsDetail = () => {
   const [basketCheck, setBasketCheck] = useState(false);
   // 리뷰 데이터 배열 State
   const [reviewArr, setReviewArr] = useState([])
+  // 평균 별점 값을 위한 State
+  const [value, setValue] = useState(0)
 
-  useEffect(() => {
+  // 상품 리뷰 개수, 평점 데이터 불러오기
+  useEffect(() => { 
     axios.post("/page/review", {prod_id : PROD_ID})
     .then((res) => {
+      let data = res.data.reviewArr
       console.log(res.data.reviewArr);
-      setReviewArr(res.data.reviewArr)
+      setReviewArr(data)
+      let newArr = res.data.reviewArr.map((item)=>Number(item.REVIEW_RATINGS))
+      let sum = 0
+      newArr.forEach((data)=>{
+        sum += data
+      })
+      setTimeout(setValue(sum/data.length), 2000)
+
     })
   }, [PROD_ID])
 
-  // 평균 별점 값을 위한 State
-  const [value, setValue] = useState(4.5)
 
   // 해당페이지의 상품 ID
   let prd_id = PROD_ID;
@@ -332,7 +341,7 @@ const GoodsDetail = () => {
                   <h5 style={{ fontWeight: "bold" }}>리뷰</h5>
                 </div>
                 <div style={{ float: "right" }}>
-                  <h5>0000개</h5>
+                  <h5>{reviewArr.length}개</h5>
                 </div>
               </div>
               <br />
