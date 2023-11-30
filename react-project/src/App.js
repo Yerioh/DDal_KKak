@@ -23,6 +23,9 @@ function App() {
           dispatch(SessionReducerActions.login()) // 로그인 
           localStorage.setItem('isLogin', true);
         }
+        else{
+          localStorage.setItem('isLogin', false);
+        }
       })
   },[])
 

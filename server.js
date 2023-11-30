@@ -111,5 +111,5 @@ app.get("*", (req, res) => {
 });
 
 server.listen(app.get("port"), () => {
-  console.log("http://localhost:3001 port waiting...");
+  console.log("DDal_KKAK_SERVER port waiting...");
 });
