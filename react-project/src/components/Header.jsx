@@ -6,6 +6,7 @@ import "../css/Header.css";
 import { IoMdMenu } from "react-icons/io";
 import logo from "../img/image-editor/image-edit-gallery2.png";
 import { Link } from "react-router-dom";
+import { TiThMenu } from "react-icons/ti";
 const Header = () => {
   // 23-11-14 10:20 임휘훈 작성 useEffect, session, redux, Private Route
   const name = useSelector((state) => state.session.name); // redux에 저장된 회원 이름
@@ -75,7 +76,7 @@ const Header = () => {
             )}
           </div>
           <span className="burger" onClick={() => setHeaderMenu(!headerMenu)}>
-            <IoMdMenu />
+            <TiThMenu />
           </span>
         </div>
       </div>
