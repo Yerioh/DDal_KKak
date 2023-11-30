@@ -156,7 +156,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
                       <input
                         className="keyWord-button"
                         type="radio"
-                        value=",WordMark"
+                        value=",Emblem Logo"
                         name="logoThema"
                         defaultChecked={keywordLabel[1]==='엠블렘 로고'}
                       ></input>
