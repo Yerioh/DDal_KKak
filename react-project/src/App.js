@@ -21,6 +21,7 @@ function App() {
           dispatch(SessionReducerActions.sessionLoginType(res.data.loginType)) // 세션에 저장된 로그인타입으로 변경
           dispatch(SessionReducerActions.sessionID(res.data.userId)) // 세션에 저장된 로그인타입으로 변경
           dispatch(SessionReducerActions.login()) // 로그인 
+          localStorage.setItem('isLogin', true);
         }
       })
   },[])

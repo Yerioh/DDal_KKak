@@ -92,7 +92,6 @@ const reviewInsert = async({userId, prodId, reviewText, img, rating})=>{
     conn.connect()
     try{
         const result = await conn.promise().query(sql, [userId, prodId, reviewText, img, rating])
-        console.log('리뷰 저장 성공')
         return {resultInsert : true}
     }
     catch(err){
