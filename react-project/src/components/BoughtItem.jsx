@@ -9,7 +9,7 @@ const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_d
 
 
     /**모달 열고 닫는 상태 함수*/
-    const openModalHandler = (index) => {
+    const openModalHandler = () => {
         // isOpen의 상태를 변경하는 메소드를 구현
         // !false -> !true -> !false
         setIsOpen((prevIsOpen) => !prevIsOpen);
@@ -55,7 +55,8 @@ const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_d
                         <div  style={{width:"100%",height:"50%"}} >
                         <button className='SM-btn' style={{width:"90px"}} onClick={() => { openModalHandler(); }}>
                             리뷰쓰기
-                            {isOpen && (
+                        </button>
+                        {isOpen && (
                                 <ReviewWrite
                                     isOpen={isOpen}
                                     openModalHandler={openModalHandler}
@@ -64,7 +65,6 @@ const BoughtItem = ({order_at, order_de_img, prod_name, order_prod_info, order_d
                                     userId = {userId}
                                 />
                             )}
-                        </button>
                         </div>
                     </div>
 
