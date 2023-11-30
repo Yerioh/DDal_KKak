@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import { Chip } from "@mui/material";
 
 const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {

@@ -19,7 +19,7 @@
 }
 .Header-box{
   /* footer와 헤더 색 동일 */
-  height: 50px;
+  height: 70px;
 }
 
 /* 로고 헤더요소 박스 */
@@ -98,7 +98,7 @@
   }
   .Header-box{
     display: flex;
-    height: 40px;
+    height: 60px;
     
   }
   .Header-ele{
@@ -111,6 +111,14 @@
     align-items: end;
     margin-right: 5%;
     font-weight: bold;
+    gap : 3px;
+  }
+
+  .App-Nav{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 3px;
   }
   /* App 햄버거 메뉴 */
   .burger{

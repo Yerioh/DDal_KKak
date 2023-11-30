@@ -35,15 +35,15 @@ const allDel = () => {
   const delChoice = () => {
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
     const cartItems = JSON.parse(sessionStorage.getItem("cartItem"))
-    if (buyItems == null || buyItems.length == 0) {
+    if (buyItems === null || buyItems.length == 0) {
       alert("장바구니 물건을 선택해주세요");
-    } else if(buyItems.length == cartItem.length){
+    } else if(buyItems.length === cartItem.length){
         sessionStorage.clear()
         window.location.replace("/basket");
     }else if (buyItems.length > 0) {
       for (let i = 0; i < parseInt(buyItems.length); i++) {
         for (let j = 0; j < parseInt(cartItems.length); j++) {
-          if (buyItems[i].PROD_UUID==cartItems[j].PROD_UUID) {
+          if (buyItems[i].PROD_UUID===cartItems[j].PROD_UUID) {
             cartItems.splice(j,1);
           }
         }
@@ -55,7 +55,7 @@ const allDel = () => {
   useEffect(()=>{
     let price = 0
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
-    if( buyItems == null || buyItems.length == 0){
+    if( buyItems === null || buyItems.length == 0){
       setSum(price)
     }else if(buyItems !== null){
       for(let i=0 ; i<buyItems.length;i++){
@@ -68,7 +68,7 @@ const allDel = () => {
 
   /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
   useEffect(() => {
-    if (JSON.parse(sessionStorage.getItem("cartItem")) == null) {
+    if (JSON.parse(sessionStorage.getItem("cartItem")) === null) {
     } else {
       const storedCartItems = JSON.parse(sessionStorage.getItem("cartItem"));
       setCartItem(storedCartItems);
@@ -96,7 +96,7 @@ const allDel = () => {
       <div className="basket-all-check">
         <div className="inner-box">
         <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>allDel()}>
-          <p className="basket-top-check">전체삭제</p>
+          <p className="basket-top-check" >전체삭제</p>
           </button>
           <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>delChoice()}>
             <div

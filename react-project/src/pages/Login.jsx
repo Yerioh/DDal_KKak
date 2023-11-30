@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, ListGroup, Form, Container } from "react-bootstrap";
+import { Button, ListGroup, Form, Container } from "react-bootstrap";
 import google from "../img/google-icon.png";
 import naver from "../img/naver-icon.jpg";
 import kakao from "../img/kakao-icon.png";
@@ -24,16 +24,16 @@ const Login = () => {
         userId : idRef.current.value, // 아이디
         userPw : pwRef.current.value // 비밀번호
       }).then((res) => {
-        if(res.data.result == "success"){
+        if(res.data.result === "success"){
           window.location.href = "/"
         }
-        else if (res.data.result == "serverError"){
+        else if (res.data.result === "serverError"){
           alert("서버가 불안정합니다. 잠시 후 다시 시도해 주세요.")
         }
-        else if (res.data.result == "IDError"){
+        else if (res.data.result === "IDError"){
           alert("존재하지 않는 ID 입니다.")
         }
-        else if (res.data.result == "PwError"){
+        else if (res.data.result === "PwError"){
           alert("비밀번호가 올바르지 않습니다.")
         }
       })

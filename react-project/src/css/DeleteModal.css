@@ -19,7 +19,7 @@
   .delete-Modal-try{
     background-color: white;
     width: 60%;
-    height: 30%;
+    height: 27%;
     min-width: 450px;
     min-height: 250px;
     padding: 20px;
@@ -72,3 +72,14 @@
     transition: all .10s linear;
   }
 
+@media(max-width:456px){
+  .delete-Modal{
+    min-width: auto;
+    min-height: 290px
+  }
+  .delete-Modal-try{
+    height: 50%;
+    min-height: 280px;
+    min-width: auto;
+  }
+}

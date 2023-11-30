@@ -70,11 +70,18 @@
     width:90%;
 }
 
+.GoodsReview-cardbody > p > .yellow-star{
+    filter:invert(83%) sepia(39%) saturate(1336%) hue-rotate(355deg) brightness(98%) contrast(109%);
+}
+
 .GoodsReview-goodsinfoImg{
     display: flex;
 
 }
 
+.StarRating > .yellow-star{
+    filter:invert(83%) sepia(39%) saturate(1336%) hue-rotate(355deg) brightness(98%) contrast(109%);
+}
 .GoodsReview-goodsinfo{
     display: flex;
     flex-direction: column;
@@ -142,4 +149,10 @@
     background-color: #FF7E00;
     color: white;
     font-size: 18px;
+}
+
+
+.StarRating{
+    display: flex;
+    justify-content:  space-between;
 }
