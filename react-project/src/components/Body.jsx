@@ -24,7 +24,7 @@ const Body = () => {
 
   /** mypage의 PrivateRoute 함수 */
   const PrivateRouteMypage = () => {
-    return isLogin? <Mypage/> : <Navigate to={"/login"}/>
+    return isLogin ? <Mypage/> : <Navigate to={"/login"}/>
   }
 
   /** 이미지 생성페이지의 PrivateRoute 함수 */
