@@ -19,7 +19,7 @@ const BoughtScript = (id) => {
   return (
     <div className="BS-first-container">
       <div className="title">
-        <h3>구매내역</h3>
+        <h3>주문 내역</h3>
       </div>
 
       <div className="title-box">
@@ -32,7 +32,7 @@ const BoughtScript = (id) => {
         <div className="subtitle-text" style={{ width: "16%" }}>
           개수 / 금액
         </div>
-        <div className="subtitle-text" style={{ width: "14%" }}>
+        <div className="subtitle-text" style={{ width: "14%",  borderRight:"none"}}>
           배송상태
         </div>
       </div>
