@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import FilerobotImageEditor, {
   TABS,
   TOOLS,
@@ -62,7 +61,6 @@ function EditImage() {
     align: "left",
     fontStyle: "normal",
     onFontChange: (newFontFamily, reRenderCanvasFn) => {
-      console.log("선택된폰트", newFontFamily, reRenderCanvasFn);
     },
   };
   // 이미지 에디터 번역 객체
@@ -105,7 +103,6 @@ function EditImage() {
   }
   // 23-11-21 임휘훈 작성 : 페이지 갱신 및 이탈 감지
   window.onbeforeunload = () => {
-    console.log("window.onbeforeunload 시작");
     return "이동?"
   }
   
@@ -148,7 +145,6 @@ function EditImage() {
           const promise = upload.promise();
           promise.then(
             () => {
-              console.log("이미지 업로드 성공");
               axios.post("/imgCreate/saveImg", {
                 userId: userId,
                 positive: positive,
@@ -165,7 +161,7 @@ function EditImage() {
               })
             },
             (err) => {
-              console.log("이미지 업로드 실패", err);
+              console.error("이미지 업로드 실패", err);
             }
           );
         }}

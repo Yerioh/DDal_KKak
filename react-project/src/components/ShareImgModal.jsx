@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Switch from "@mui/material/Switch";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 
 const ShareImgModal = ({

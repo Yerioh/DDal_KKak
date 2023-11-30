@@ -23,7 +23,6 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
       axios.post("/imgCreate/likeClick", { id: useId, imgId: data.IMG_ID })
         .then(res=>{
           // 좋아요 클릭 시 img data 재 요청
-          console.log(res.data.likeCheck)
           if(res.data.likeCheck){
             setImgState(!imgState)
           }

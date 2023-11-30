@@ -33,12 +33,30 @@ const updateInfo = async({userID, userPw, userEmail, userPhone, postNum, addr1, 
     return {updateResult:true}
   }
   catch(err){
-    console.log('내 정보 수정 쿼리문 에러', err)
+    console.error('내 정보 수정 쿼리문 에러', err)
     return {updateResult:false}
   }
-  
+}
+
+// 23-11-29 임휘훈 작성
+// DATE_FORMAT(GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE
+/** 주문내역 불러오기 함수 */
+const order = async (userId) => {
+  let selectQuery = `SELECT DATE_FORMAT(ORDER_AT, '%Y-%m-%d %H:%i:%S') AS ORDER_AT, ORDER_DE_IMG, PROD_NAME, ORDER_PROD_INFO, ORDER_DE_CNT, ORDER_DETAIL_PRICE, PROD_ID
+                       FROM TB_ORDER AS A INNER JOIN TB_ORDER_DETAIL AS B
+                         ON A.ORDER_ID = B.ORDER_ID
+                      WHERE A.MEMBER_ID = ?
+                   ORDER BY A.ORDER_AT`
+  try{
+    conn.connect()
+    let result = await conn.promise().query(selectQuery, [userId])
+    console.log("select 결과 필요한것만 가져와서 date 포맷팅 필요", result[0]);
+    return {goods : result}
+  }
+  catch(err){
+    console.error("주문내역 불러오기 select 쿼리 에러", err);
+  }
 }
 
 
-
-module.exports = {mypage,updateInfo}
+module.exports = {mypage, updateInfo, order}

@@ -103,7 +103,7 @@ io.on('connection', (socket)=>{
   })
 
   io.on('disconnecting', ()=>{
-    console.log('이미지 생성 종료')
+    // 이미지 생성 종료
   })
 })
 

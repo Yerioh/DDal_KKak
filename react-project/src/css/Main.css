@@ -123,6 +123,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
 }
 
 .goods-text-btn{
@@ -132,10 +133,6 @@
 .image-Slide-btn{
     flex: flex;
     align-items: center;
-}
-
-.Slide-box{
-    gap: 30px;
 }
 
 .Slide-box > .goods-Slide{
@@ -193,14 +190,149 @@
 .allCard{
    width: 100%;
 }
-.image-Slide >.react-multi-carousel-list > .react-multi-carousel-track > .react-multi-carousel-item > .allCard > img{
-    width: 95%;
-    margin-left: 3%;
-    border-radius: 5%;
-}
-.goods-Slide >.react-multi-carousel-list > .react-multi-carousel-track > .react-multi-carousel-item > .allCard > img{
+.react-multi-carousel-item > .allCard > img{
     width: 95%;
     margin-left: 3%;
     border-radius: 5%;
     background-color: whitesmoke;
+}
+.Main-Meadia{
+    display: none;
+}
+
+@media(max-width : 1400px) and (min-width : 772px){
+    .Main-text-img {
+        background-color: #f5f5f5;
+        height:50%;
+        min-height: 685px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .Main-Image{
+        display: none;
+    }
+    .Slide-box {
+        max-width: 950px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+}
+@media(max-width : 772px) and (min-width : 426px){
+    .Main-text-img{
+        display: none;
+    }
+    .Main-Container{
+        display: flex;
+        align-content: center;
+    }
+
+    .Slide-box {
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+    .Slide-box > .image-Slide{
+        gap: 0px;
+    }
+
+    .react-multi-carousel-item{
+        max-width: 190px;
+     }
+    .image-Slide-btn{
+        width: 100%;
+    }
+
+    .image-Slide-btn > .Main-Slide-text {
+        font-size: 15px;
+    }
+    .goods-text-btn > .Main-Slide-text {
+        font-size: 15px;
+    }
+    /* 더보기 버튼 */
+    .moreShow {
+        height: 30px;
+        font-size: 13px;
+    }
+    .Slide-box > .goods-Slide{
+        gap: 0px;
+        border-bottom: 3px solid rgb(200, 200, 200);
+        padding-bottom: 5%;
+    }
+
+    .Main-Meadia{
+        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        max-width: 420px;
+    }
+    .medium-media{
+        display: block;
+    }
+    .small-media{
+        display: none;
+    }
+}
+@media(max-width :425px){
+    .Main-Container{
+        min-width: 350px;
+    }
+    .Main-text-img{
+        display: none;
+    }
+
+    .Slide-box {
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+    .Slide-box > .image-Slide{
+        gap: 0px;
+    }
+
+    .react-multi-carousel-item{
+        max-width: 190px;
+     }
+    .image-Slide-btn{
+        width: 100%;
+    }
+
+    .image-Slide-btn > .Main-Slide-text {
+        font-size: 15px;
+    }
+    .goods-text-btn > .Main-Slide-text {
+        font-size: 15px;
+    }
+    /* 더보기 버튼 */
+    .moreShow {
+        height: 30px;
+        font-size: 13px;
+    }
+    .Slide-box > .goods-Slide{
+        gap: 0px;
+        border-bottom: 3px solid rgb(200, 200, 200);
+        padding-bottom: 5%;
+    }
+    .medium-media{
+        display: none;
+    }
+    .small-media{
+        display: block;
+    }
+    .Main-Meadia{
+      
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      
+    }
 }

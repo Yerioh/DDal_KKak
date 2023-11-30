@@ -64,8 +64,8 @@ const Mypage = () => {
   };
 
   //  주문 내역 컴포넌트 호출 
-  const Order_list = () => {
-    setpageState('Order_list')
+  const Order_List = () => {
+    setpageState("BoughtScript")
   }
 
   /**회원 탈퇴 모달창*/
@@ -88,7 +88,7 @@ const Mypage = () => {
             <span>내 저장 이미지</span>
             <img src={image_icon} alt="image_icon" />
           </div>
-          <div className={`user-box ${pageState==='BoughtScript'? 'box-current' : null}`} onClick={ BoughtScript }>
+          <div className={`user-box ${pageState==='BoughtScript'? 'box-current' : null}`} onClick={ Order_List }>
             <span>주문 내역</span>
             <img src={order_icon} alt="order_icon" />
           </div>
@@ -101,7 +101,7 @@ const Mypage = () => {
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} postNumber={postNum} address={address} addressDetail={addressDetail} />}
       {pageState === "Save_Image" && <SaveImage />}
-      {pageState === "BoughtScript" && <BoughtScript/>}
+      {pageState === "BoughtScript" && <BoughtScript id={id}/>}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
 
           </div>

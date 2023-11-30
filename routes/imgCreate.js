@@ -17,12 +17,15 @@ const client = new S3Client({
   secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY
 })
 
-let flaskServer = 'http://c5f1-34-87-133-201.ngrok.io'
+// DB 연결
+const db = require("../config/database");
+let conn = db.init();
+
+let flaskServer = 'http://ecea-34-139-230-216.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달
 router.post('/getUrl', (req,res)=>{
-  console.log('Flask 서버 실행', req.body.url)
   flaskServer = req.body.url
 })
 
@@ -40,7 +43,6 @@ router.post("/stable", (req, res) => {
     })
     .then((response) => {
       let imgData = response.data;
-      // console.log(imgData);
       res.json({ imgData });
     })
     .catch((error) => {
@@ -60,8 +62,7 @@ router.post("/choiceImg", (req, res) => {
     });
 });
 
-// 23-11-19 22:30 임휘훈 작성 : 삭제 버튼 기능 라우터
-
+// 23-11-28 모듈화 임휘훈 작성
 // 이미지 생성 후 DB에 고유 ID 기준으로 이미지 저장하기
 router.post("/saveImg", async (req, res) => {
     // 유저 아이디
@@ -79,6 +80,7 @@ router.post("/saveImg", async (req, res) => {
     }
 });
 
+// 23-11-28 모듈화 임휘훈 작성
 // 마이페이지 => 내 저장 이미지의 이미지 불러오기
 router.post("/myimg", async (req, res) => {
   let userId = req.body.id; // 유저 아이디
@@ -86,6 +88,7 @@ router.post("/myimg", async (req, res) => {
   res.json({imgArray : result.imgArray[0]})
 });
 
+// 23-11-28 모듈화 임휘훈 작성
 // 내 저장이미지 선택 삭제 라우터
 router.post("/deleteImg", async (req, res) => {
   let sqlImgUrl = req.body.imgUrl; // 문자열 형태로 된 이미지 ID
@@ -101,20 +104,21 @@ router.post("/deleteImg", async (req, res) => {
 
   // s3 삭제
   const response = await client.send(command)
-  console.log('s3 삭제 완료 : ', response)
 
   // DB 삭제
   const result = await imgUseModel.deleteImg(sqlImgUrl, sessionId)
   res.json({imgArray : result.imgArray[0]})
 });
 
+// 23-11-28 모듈화 임휘훈 작성
 // 내 저장 이미지 공유 여부 설정 라우터
 router.post('/imgShare', async (req,res)=>{
   let imgId = req.body.imgId
   const result = await imgUseModel.imgShare(imgId)
-  res.json({imgArray : result.imgArray[0]})
+
 })
 
+// 23-11-28 모듈화 임휘훈 작성
 // 이미지 더보기 페이지 이미지 출력
 router.post('/shareImgShow', async (req,res)=>{
   let data = req.body.sortImg
@@ -122,12 +126,14 @@ router.post('/shareImgShow', async (req,res)=>{
   res.json({result : result.imgArray[0]})
 })
 
+// 23-11-28 모듈화 임휘훈 작성
 // 메인 페이지 공유 이미지 좋아요 순 상위 10개 데이터
 router.post('/mainImgShow', async (req,res)=>{
     const result = await imgCollectModel.mainImgShow()
     res.json({result : result.imgArray[0]})
 })
 
+// 23-11-28 모듈화 임휘훈 작성
 // 이미지 좋아요 클릭, 클릭 해제 라우터
 router.post('/likeClick', async (req,res)=>{
   let userId = req.body.id
@@ -138,6 +144,7 @@ router.post('/likeClick', async (req,res)=>{
   }
 })
 
+// 23-11-28 모듈화 임휘훈 작성
 // 이미지 좋아요 클릭 여부 확인 라우터
 router.post('/likeCheck', async (req,res)=>{
   let userId = req.body.id

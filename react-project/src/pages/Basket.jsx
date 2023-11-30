@@ -21,8 +21,13 @@ const Basket = () => {
 
 /** 장바구니 모든 아이템 삭제 */
 const allDel = () => {
+  if (window.confirm("정말 삭제합니까?")) {
     sessionStorage.clear()
+    alert("삭제되었습니다.");
     window.location.replace("/basket");
+  } else {
+    alert("취소합니다.");
+  } 
 }
 
 
@@ -30,16 +35,16 @@ const allDel = () => {
   const delChoice = () => {
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
     const cartItems = JSON.parse(sessionStorage.getItem("cartItem"))
-    if (buyItems == null || buyItems.length == 0) {
+    if (buyItems === null || buyItems.length == 0) {
       alert("장바구니 물건을 선택해주세요");
-    } else if(buyItems.length == cartItem.length){
+    } else if(buyItems.length === cartItem.length){
         sessionStorage.clear()
         window.location.replace("/basket");
     }else if (buyItems.length > 0) {
       for (let i = 0; i < parseInt(buyItems.length); i++) {
         for (let j = 0; j < parseInt(cartItems.length); j++) {
-          if (buyItems[i].PROD_UUID==cartItems[j].PROD_UUID) {
-            cartItems.pop(buyItems[i].PROD_UUID);
+          if (buyItems[i].PROD_UUID===cartItems[j].PROD_UUID) {
+            cartItems.splice(j,1);
           }
         }
       }
@@ -50,8 +55,8 @@ const allDel = () => {
   useEffect(()=>{
     let price = 0
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
-    if( buyItems == null || buyItems.length == 0){
-      console.log('주문세션이 비어있음')
+    if( buyItems === null || buyItems.length == 0){
+      setSum(price)
     }else if(buyItems !== null){
       for(let i=0 ; i<buyItems.length;i++){
         price = price+parseInt(buyItems[i].PRICE_SUM)
@@ -63,16 +68,12 @@ const allDel = () => {
 
   /** 세션 로컬스토리지에 있는 데이터를 불러와 State에 저장 그리고 확인할 console */
   useEffect(() => {
-    console.log(cartItem, "장바구니페이지 처음 랜더링");
-    if (JSON.parse(sessionStorage.getItem("cartItem")) == null) {
-      console.log("장바구니에 아이템이 없음");
+    if (JSON.parse(sessionStorage.getItem("cartItem")) === null) {
     } else {
       const storedCartItems = JSON.parse(sessionStorage.getItem("cartItem"));
       setCartItem(storedCartItems);
       if (JSON.parse(sessionStorage.getItem("buyItem")) === null) {
-        console.log("구매목록초기화Already");
       } else {
-        console.log("구매목록 초기화");
         sessionStorage.removeItem("buyItem");
       }
     }
@@ -95,7 +96,7 @@ const allDel = () => {
       <div className="basket-all-check">
         <div className="inner-box">
         <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>allDel()}>
-          <p className="basket-top-check">전체삭제</p>
+          <p className="basket-top-check" >전체삭제</p>
           </button>
           <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>delChoice()}>
             <div
@@ -158,7 +159,7 @@ const allDel = () => {
             {sum.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
           </div>
           <div className="vtline"></div>
-          <div style={{ width: "20%" }}>1500원</div>
+          <div style={{ width: "20%" }}>1,500원</div>
           <div className="vtline"></div>
           <div style={{ width: "20%" }}>
             {(sum + 1500)

@@ -1,0 +1,85 @@
+.ReviewWrite .modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ReviewWrite .modal-container{
+  background-color: white;
+  min-width: 730px;
+  width: 800px;
+  height: 650px;
+  min-height: 650px;
+  padding: 20px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.ReviewWrite .modal-title{
+  width: 100%;
+  height: 5%;
+  margin: 0px 0px 15px 0px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.ReviewWrite .modal-goods-info{
+  width: 100%;
+  height: 18%;
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+}
+.ReviewWrite .modal-goods-info-1{
+  height: 100%;
+  width: 18%;
+}
+.ReviewWrite .modal-goods-info-2{
+  height: 100%;
+  height: 100%;
+  margin: 10px 20px 20px 20px;
+}
+.ReviewWrite .modal-goods-info-img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.ReviewWrite .modal-goods-info-3 {
+  height: 50%;
+  width: 100%;
+  text-align: left;
+  margin-left: 15px;
+}
+.ReviewWrite .modal-goods-textarea{
+  height: 100px;
+  resize: none;
+  margin: 5px 5px;
+}
+.ReviewWrite .modal-goods-btnArea{
+  width: 92%;
+  display: flex;
+  height: 10%;
+  justify-content: right;
+  align-items: center;
+}
+.ReviewWrite .modal-goods-save-btn{
+  height: 70%;
+  width: 15%;
+  margin: 0px 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.ReviewWrite .modal-goods-close-btn{
+  height: 70%;
+  width: 10%;
+  margin: 0px 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.ReviewWrite .rating-star{
+  filter:invert(83%) sepia(39%) saturate(1336%) hue-rotate(355deg) brightness(98%) contrast(109%);
+}

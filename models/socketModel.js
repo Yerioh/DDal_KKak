@@ -1,3 +1,4 @@
+// 2023-11-28 박지훈 모듈화 진행
 // DB 연결
 const db = require("../config/database");
 let conn = db.init();
@@ -24,14 +25,12 @@ const enQueue = async(userId)=>{
     conn.connect()
     try{
         let result = await conn.promise().query(insertSql, [userId])
-        console.log('이미지 생성 인큐 성공')
         try{
             let selectResult = await conn.promise().query(selectSql)          
-            console.log('이미지 대기 리스트 인큐 성공')
             return {selectResult : true, data : selectResult[0]}
         }
         catch(err){
-            console.log('이미지 생성 대기 리스트 select 에러', err)
+            console.error('이미지 생성 대기 리스트 select 에러', err)
         }       
     }
     catch(err){
@@ -46,7 +45,6 @@ const deQueue = async(userId)=>{
     try{
         conn.connect()
         let result = await conn.promise().query(sql, [userId])
-        console.log('이미지 생성 디큐 성공')
         let selectResult = await conn.promise().query(selectSql)
         return {selectResult : true, data : selectResult[0]}
     }

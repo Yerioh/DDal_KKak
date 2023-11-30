@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/BuyScript.css";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
-import Post from "../components/Post";
 import BuyScriptItem from "../components/BuyScriptItem";
 import BuyScriptSummary from "../components/BuyScriptSummary";
 import { useSelector } from "react-redux";
@@ -61,7 +60,6 @@ const BuyScript = () => {
       }
       fullAddr += extraAddr !== "" ? ` (${extraAddr})` : "";
     }
-    console.log(data);
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
     setIsOpenPost(false);
@@ -74,7 +72,7 @@ const BuyScript = () => {
 
   useEffect(() => {
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"))
-    if ( buyItems == null || buyItems.length == 0)  {
+    if ( buyItems === null || buyItems.length == 0)  {
       alert("구매할 아이템을 선택해주세요");
       navigate("/basket");
     } else if ( buyItems !== null ) {
@@ -84,7 +82,6 @@ const BuyScript = () => {
 
   }, []);
 
-  console.log("유저아이디필터:", buyItem);
 
   // 주문자 이름
   const nameRef = useRef();
@@ -118,12 +115,11 @@ const BuyScript = () => {
   useEffect(()=>{
     let num = 0;
     let buyItems = JSON.parse(sessionStorage.getItem('buyItem'))
+    console.log("뭐임 이거", buyItems);
     for(let i=0 ; i<parseInt(buyItems?.length);i++){
       num = num + parseInt(buyItems[i]?.PROD_COUNT)
     }
-    console.log(num,'총개수')
     setCount(num)
-    console.log(count,'총개수')
     },[])
 
 
@@ -135,7 +131,6 @@ const BuyScript = () => {
     let sessionArr = []
     const buyItems =JSON.parse(sessionStorage.getItem('buyItem'))
     buyItems.forEach((item)=>{sessionArr.push(item)})
-    console.log(sessionArr,'세션이 들어갔을까?')
     // 주문자 이름
     let name = nameRef.current.value;
     // 주문자 연락처
@@ -155,15 +150,6 @@ const BuyScript = () => {
     // 수령자 배송메세지
     let reciDeliPs = reciDeliPsRef.current.value;
 
-    console.log(name, "이름");
-    console.log(phoneNumber, "연락처");
-    console.log(email, "이메일");
-    console.log(recip,'수령인')
-    console.log(recipNum,'수령인연락처')
-    console.log(recipAdress,'수령인주소')
-    console.log(recipAdressDetail,'수령인상세주소')
-    console.log(recipZipCode,'수령인우편번호')
-    console.log(reciDeliPs,'수령인')
     buyData={
     'MEMBER_ID' :`${USER_ID}`,
     'ORDER_DE_IMG' :`${buyItems[0].PROD_URL}`,
@@ -173,14 +159,11 @@ const BuyScript = () => {
     'DELIVERY_ADDR2':`${recipAdressDetail}`,
     'RECIPIENT':`${reciDeliPs}`,
     'ORDER_ID' : uuidv4(),
-    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME,PROD_URL:item.PROD_URL, PROD_ID:item.PROD_ID})
+    'BUYITEM_SESSION':sessionArr.map((item)=>({PROD_COUNT: item.PROD_COUNT, PROD_NAME :item.PROD_NAME , PROD_SIZE:item.PROD_SIZE , COLOR_NAME:item.PROD_COLOR.COLOR_NAME, PROD_URL:item.PROD_URL, PROD_ID:item.PROD_ID, PRICE_SUM : item.PRICE_SUM})
     )
     }
-    
+
     axios.post('/payment/orderGoods', {buyData})
-  
-    console.log(buyData,'데이터뭉치')
-    console.log(buyData.BUYITEM_SESSION,'새로운배열의세션')
   };
 
  
@@ -211,14 +194,13 @@ const BuyScript = () => {
     let recipZipCode = recipZipCodeRef.current.value;
     // 수령자 배송메세지
     let reciDeliPs = reciDeliPsRef.current.value;
-    console.log('주문', name,phoneNumber,email,totalNum)
 
     // 결제 데이터 정의하기
     const data = {
       pg: "html5_inicis.{INIpayTest}", // PG사
       pay_method: "card", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 100, // 결제금액
+      amount: totalNum, // 결제금액 totalNum
       name: "딸깍 GOODS 구매", // 주문명
       buyer_name: name, // 구매자 이름
       buyer_tel: phoneNumber, // 구매자 전화번호
@@ -231,8 +213,8 @@ const BuyScript = () => {
 
   /** 결제 콜백 함수 */
   const portoneCallback = (res) => {
-    const { success, merchant_uid, error_msg } = res;
-    // let success = true
+    // const { success, merchant_uid, error_msg } = res;
+    let success = true
     if (success) {
       // 결제성공시 시행할 동작들
       alert("결제 성공");
@@ -241,8 +223,7 @@ const BuyScript = () => {
     } else {
       // 결제 실패시 시행할 동작들
       alert("결제 실패:");
-      console.log('결제 실패', error_msg)
-
+      // console.error('결제 실패', error_msg)
       navigate("/buyscript")
     }
   };
@@ -481,8 +462,8 @@ const BuyScript = () => {
         }}
       >
         <Button
+          onClick={portoneCallback}
           // onClick={onClickPayment}
-          onClick={onClickPayment}
           variant="outline-dark"
           className="buy-submit-btn same-BTN same-BTN:hover"
         >

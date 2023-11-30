@@ -58,16 +58,13 @@ const ResultImage = () => {
   // 이미지 선택
   const choiceImg = (e) => {
     let check = e.target.id;
-    console.log("이미지 선택");
     setImgClick([check]);
     setSelectedImage(check);
-    console.log(check);
   };
 
   // 이미지 선택 버튼
   const choiceImgBtn = () => {
     if (imgClick.length > 0) {
-      console.log("이미지 선택 완료", imgClick);
       axios.post("/imgCreate/choiceImg", imgClick).then((response) => {
         if (response.data.choiceImg) {
           navi(`/image-edit/?img=${imgClick[0]}`, {

@@ -1,3 +1,4 @@
+// 2023-11-28 박지훈 모듈화 진행
 // DB 연결
 const db = require("../config/database");
 let conn = db.init();
@@ -16,15 +17,13 @@ const socialLogin = async(userData, loginType)=>{
             if(selectResult[0][0].CNT == 0){
             const joinResult = await conn.promise().query(joinSQL, [userData.id, userData.id, loginType, userData.properties.nickname])
                 if(err){
-                console.log(`${loginType} 회원가입 쿼리문 에러 발생`,err)
+                console.error(`${loginType} 회원가입 쿼리문 에러 발생`,err)
                 }
                 else{
-                console.log(`${loginType} 회원가입 성공`)
                 return {socialResult : true}
                 }
             }
             else{
-            console.log('이미 가입되어있는 계정 : 바로 로그인')
                 return {socialResult : true}
             }
         }
@@ -38,15 +37,13 @@ const socialLogin = async(userData, loginType)=>{
             if(selectResult[0][0].CNT == 0){
             const joinResult = await conn.promise().query(joinSQL, [userData.id, userData.id, userData.email, loginType, userData.name])
                 if(err){
-                console.log(`${loginType} 회원가입 쿼리문 에러 발생`,err)
+                console.error(`${loginType} 회원가입 쿼리문 에러 발생`,err)
                 }
                 else{
-                console.log(`${loginType} 회원가입 성공`)
                 return {socialResult : true}
                 }
             }
             else{
-            console.log('이미 가입되어있는 계정 : 바로 로그인')
                 return {socialResult : true}
             }
         }
@@ -60,15 +57,13 @@ const socialLogin = async(userData, loginType)=>{
             if(selectResult[0][0].CNT == 0){
             const joinResult = await conn.promise().query(joinSQL, [userData.id, userData.id, userData.email, userData.mobile.replace(/-/g,''), 'N', userData.name])
                 if(err){
-                console.log(`${loginType} 회원가입 쿼리문 에러 발생`,err)
+                console.error(`${loginType} 회원가입 쿼리문 에러 발생`,err)
                 }
                 else{
-                console.log(`${loginType} 회원가입 성공`)
                 return {socialResult : true}
                 }
             }
             else{
-            console.log('이미 가입되어있는 계정 : 바로 로그인')
                 return {socialResult : true}
             }
         }

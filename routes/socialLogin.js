@@ -52,7 +52,7 @@ router.get("/kakaoLogin",  async(req, res) => {
           res.redirect('/')
         }
         else{
-          console.log('에러발생')
+          console.error('카카오 소셜 에러 발생')
         }
 });
 
@@ -97,7 +97,7 @@ router.get('/googleLogin', async(req,res)=>{
       res.redirect('/')
     }
     else{
-      console.log('에러발생')
+      console.error('구글 소셜 로그인 에러 발생')
     }
 })
 
@@ -148,7 +148,7 @@ router.get('/naverLogin', async(req,res)=>{
           res.redirect('/')
         }
         else{
-          console.log('소셜 로그인 에러 발생')
+          console.error('네이버 소셜 로그인 에러 발생')
         }
       
 })
