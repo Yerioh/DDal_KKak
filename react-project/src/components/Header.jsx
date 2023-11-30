@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import basket from "../img/basket.png";
 import axios from "../axios";
 import "../css/Header.css";
-import { IoMdMenu } from "react-icons/io";
 import logo from "../img/image-editor/image-edit-gallery2.png";
 import { Link } from "react-router-dom";
 import { TiThMenu } from "react-icons/ti";

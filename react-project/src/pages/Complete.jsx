@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import '../css/Complete.css'
-import BuyScriptItem from '../components/BuyScriptItem'
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/esm/Button';
 
@@ -19,12 +18,12 @@ const Complete = () => {
   const completeDel = () => {
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
     const cartItems = JSON.parse(sessionStorage.getItem("cartItem"))
-    if (buyItems.length == cartItems.length) {
+    if (buyItems.length === cartItems.length) {
         sessionStorage.clear()
     } else if (buyItems !== cartItems.length) {
         for (let i = 0; i < parseInt(buyItems.length); i++) {
             for (let j = 0; j < parseInt(cartItems.length); j++) {
-                if (buyItems[i].PROD_UUID == cartItems[j].PROD_UUID) {
+                if (buyItems[i].PROD_UUID === cartItems[j].PROD_UUID) {
                     cartItems.splice(j, 1);
                 }
             }

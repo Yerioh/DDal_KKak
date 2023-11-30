@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import axios from "../axios";
 import "../css/DeleteModal.css";
-import { useNavigate } from "react-router-dom";
 
 const DeleteModal = ({
   delete_user, // 모달창 활성화 state

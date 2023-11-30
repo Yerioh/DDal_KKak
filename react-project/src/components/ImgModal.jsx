@@ -1,13 +1,11 @@
-import React, { createElement, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../css/ImgModal.css";
-import { Link } from "react-router-dom";
 import axios from "../axios";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import Switch from "@mui/material/Switch";
 import { FaHeart } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
-import session from "express-session";
 import { useSelector } from "react-redux";
 // 회원탈퇴 모달, 이미지 상세정보 모달
 const ImgModal = ({

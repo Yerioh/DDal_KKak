@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/BuyScript.css";
 import { Button, Form, Modal, Row, Col } from "react-bootstrap";
-import Post from "../components/Post";
 import BuyScriptItem from "../components/BuyScriptItem";
 import BuyScriptSummary from "../components/BuyScriptSummary";
 import { useSelector } from "react-redux";
@@ -73,7 +72,7 @@ const BuyScript = () => {
 
   useEffect(() => {
     const buyItems = JSON.parse(sessionStorage.getItem("buyItem"))
-    if ( buyItems == null || buyItems.length == 0)  {
+    if ( buyItems === null || buyItems.length == 0)  {
       alert("구매할 아이템을 선택해주세요");
       navigate("/basket");
     } else if ( buyItems !== null ) {

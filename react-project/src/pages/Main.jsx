@@ -5,7 +5,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router-dom";
 import "../css/Main.css";
 import ImageAllCard from "../components/ImageAllCard";
-import e from "cors";
 import axios from "../axios";
 import goodsList from "../data/custumGoods.json";
 
