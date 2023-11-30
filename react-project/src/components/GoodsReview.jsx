@@ -49,7 +49,7 @@ const GoodsReview = ({reviewData}) => {
         {/* 사용자 착의샷, 안올리면 공백으로 표현 */}
         <img
           src={reviewData?.REVIEW_IMG}
-          style={{ width: "25%", objectFit: "cover" }}
+          style={{ objectFit: "cover" }}
           alt=""
         ></img>
       </div>

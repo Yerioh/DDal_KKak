@@ -69,7 +69,9 @@
     margin: 0 auto;
     width:90%;
 }
-
+.GoodsReview-cardbody{
+    width: 75%;
+}
 .GoodsReview-cardbody > p > .yellow-star{
     filter:invert(83%) sepia(39%) saturate(1336%) hue-rotate(355deg) brightness(98%) contrast(109%);
 }
@@ -90,7 +92,10 @@
 .GoodsReview-img{
     display: flex;
     justify-content: flex-end;
-
+}
+.GoodsReview-img> img{
+    max-width: 250px;
+    
 }
 
 .RatingBox{
