@@ -17,7 +17,7 @@ router.post("/goods", async (req, res) => {
 })
 
 // 231122 오전 10:00 박지훈 작성
-// 굿즈 상세페이지 데이터
+// 굿즈 상세 페이지 데이터
 router.post('/goodProduct', async (req,res)=>{
     let data = req.body.prodId
     const result = await goodsModel.goodProduct(data)
@@ -27,6 +27,14 @@ router.post('/goodProduct', async (req,res)=>{
         prdImg:result.prdImg,
         prdSize:result.prdSize
     })
+})
+
+// 23-11-29 임휘훈 작성
+// 굿즈 상세 페이지 리뷰
+router.post('/review', async (req, res) => {
+    let data = req.body.prod_id
+    const result = await goodsModel.review(data)
+    res.json({reviewArr : result.reviewArray[0]})
 })
 
 

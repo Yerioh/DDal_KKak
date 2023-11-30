@@ -30,10 +30,10 @@ const imgShare = async (imgId) => {
                 WHERE IMG_ID = ?`
     try{
         conn.connect()
-        const result = await conn.promise.query(sql, [imgId])
-        return {imgArray : result}
+        const result = await conn.promise().query(sql, [imgId])
+        return {imgArray : true}
     }
-    catch{
+    catch(err){
         console.error('공유 여부 변경 쿼리문 에러', err);
     }
 }

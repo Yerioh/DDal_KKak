@@ -42,7 +42,16 @@ const GoodsDetail = () => {
   const {PROD_ID} = useParams();
   // 장바구니 추가체크를 위한 State
   const [basketCheck, setBasketCheck] = useState(false);
+  // 리뷰 데이터 배열 State
+  const [reviewArr, setReviewArr] = useState([])
 
+  useEffect(() => {
+    axios.post("/page/review", {prod_id : PROD_ID})
+    .then((res) => {
+      console.log(res.data.reviewArr);
+      setReviewArr(res.data.reviewArr)
+    })
+  }, [PROD_ID])
 
 
   // 해당페이지의 상품 ID
@@ -253,8 +262,6 @@ const GoodsDetail = () => {
     basketAlert()
   }
 
-
-  
   return (
     <div style={{ minWidth: "710px", margin: "5% 10% ", display: 'flex', flexDirection:'column' }}>
     <div className="GoodsDetail" style={{ minWidth: "710px", height: "650px", margin: "50px 10% ", display: "flex" }}>
@@ -291,13 +298,12 @@ const GoodsDetail = () => {
             <h5 style={{ fontWeight: "bold" }}>별점</h5>
           </div>
 {/* 평균평점을 표시해주는 별기능 평균 평균데이터와 연동합니다. */}
-        <div><AvgStarRating/></div> 
+        {/* <div><AvgStarRating/></div>  */}
           <div style={{ float: "right" }}>
             <h5>0.0점</h5>
           </div>
         </div>
         <br />
-        <hr className='hr-style' />
         <div style={{ textAlign: "center", margin: "10px" }}>
   {/* map 함수로 DB에 있는 색상에 맞게 버튼 및 색상 이름 넣기*/}
           <h5 style={{ fontWeight: "bold" }}>색상</h5>
@@ -314,7 +320,7 @@ const GoodsDetail = () => {
                 )
             })}
           </div>
-          <hr className='hr-style' />
+          <br></br>
         </div>
         <div style={{ textAlign: "center", margin: "10px" }}>
 {/* 사이즈 라디오 버튼으로 */}
@@ -382,7 +388,9 @@ const GoodsDetail = () => {
       <hr></hr>
       <h3>딸깍의 상품 리뷰!</h3>
       <div className='GoodsDetail-Reviewdbody' style={{minWidth: "710px", borderRadius:'5px', padding:'20px'}}>
-      <GoodsReview/>
+        {reviewArr?.map((reviewData) => (
+          <GoodsReview reviewData={reviewData}/>
+        ))}
       </div>
     </div>
   </div>

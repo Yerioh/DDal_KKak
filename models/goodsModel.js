@@ -63,6 +63,26 @@ const goodProduct = async (data) => {
         console.error('굿즈 상세페이지 select1 에러', err);
     }
 }
+// DATE_FORMAT(A.REVIEWED_AT, '%Y-%m-%d %H:%i) AS DATE
+/** 리뷰 데이터 라우터 함수 */
+const review = async (data) => {
+    let selectSql = `SELECT A.MEMBER_ID,
+                              A.PROD_ID,
+                       A.REVIEW_CONTENT,
+                           A.REVIEW_IMG,
+                       A.REVIEW_RATINGS,
+                       DATE_FORMAT(A.REVIEWED_AT, '%Y-%m-%d %H:%i') AS DATE,
+                    (SELECT MEMBER_NAME FROM TB_MEMBER WHERE MEMBER_ID = A.MEMBER_ID) AS MEMBER_NAME
+                       FROM TB_REVIEW A
+                      WHERE PROD_ID = ?`
+    try{
+        conn.connect()
+        let result = await conn.promise().query(selectSql, [data])
+        return {reviewArray : result}
+    }
+    catch(err){
+        console.error("리뷰 데이터 select 쿼리 에러", err);
+    }
+}
 
-
-module.exports = {goods, goodProduct}
+module.exports = {goods, goodProduct, review}

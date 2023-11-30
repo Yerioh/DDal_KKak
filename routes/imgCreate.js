@@ -21,7 +21,7 @@ const client = new S3Client({
 const db = require("../config/database");
 let conn = db.init();
 
-let flaskServer = 'http://c5f1-34-87-133-201.ngrok.io'
+let flaskServer = 'http://ecea-34-139-230-216.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기
 // Colab에서 Flask 서버가 켜지면 공개 IP로 접근하여 ngrok 주소 전달
@@ -115,7 +115,7 @@ router.post("/deleteImg", async (req, res) => {
 router.post('/imgShare', async (req,res)=>{
   let imgId = req.body.imgId
   const result = await imgUseModel.imgShare(imgId)
-  res.json({imgArray : result.imgArray[0]})
+
 })
 
 // 23-11-28 모듈화 임휘훈 작성
