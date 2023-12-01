@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import COLOR from "../data/prd_color.json";
 import PRD_SIZE from "../data/prd_size.json";
-import PRD_INFO from "../data/product_info.json";
 
 const Basketitems = ({ items, index, sessionCheck, session }) => {
   // 제품수량 변경을 위한 State
@@ -20,15 +19,9 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
   // 개수와 합계가격을 위해 별도로 변수선언
   let price = items.PROD_PRICE;
 
-  // 부모 컴포넌트로부터 받은 isChecked prop이 변경될 때마다 checked 상태를 업데이트합니다.
-  // useEffect(() => {
-  //     setChecked(!checked);
-  // }, [checked]);
-
   // 체크박스 변경 핸들러
   const handleCheckboxChange = () => {
-    setChecked(!checked); // 체크 상태를 토글합니다.
-    // 부모 컴포넌트에 변경 사항을 알립니다.
+    setChecked(!checked); // 체크 상태
     GoToBuyItems(); // 체크된 경우에만 goToBuyItems 호출
   };
 
@@ -39,9 +32,8 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
   const prd_size_filter = PRD_SIZE.filter(
     (item) => item.PROD_ID === items.PROD_ID
   );
-  // const prd_info_filter = PRD_INFO.filter(item => item.PROD_ID === items.PROD_ID)
+
   /** 수량조절버튼 조작을 위한 간단한 함수들 */
-  // 빼기
   const subtract = () => {
     if (count > 0) {
       setCount(count - 1);
@@ -53,6 +45,7 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
   const addtion = () => {
     setCount(count + 1);
   };
+
   //버튼을 누를때 useEffect 실행
   useEffect(() => {
     if (count == 0) {
@@ -64,8 +57,8 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
   }, [count]);
 
   /** 굿즈 사이즈 수정 */
-  //  select 구문에서 수정될 값을 받아 size State 에 넣어주는 구문
   const sizeChange = (e) => {
+    //  select 구문에서 수정될 값을 받아 size State 에 넣어주는 구문
     setSize(e.target.value);
   };
 
@@ -89,11 +82,10 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
       PROD_URL: `${items.PROD_URL}`,
     };
 
-    // 로컬 스토리지에있는 정보를 일단 가져온다.
+    // 로컬 스토리지 정보
     let cartItems = JSON.parse(sessionStorage.getItem("cartItem"));
 
     // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
-
     if (cartItems[index]?.PROD_UUID === changeCartItem.PROD_UUID) {
       // 수정된 객체로 변경
       cartItems[index] = changeCartItem;
@@ -123,9 +115,9 @@ const Basketitems = ({ items, index, sessionCheck, session }) => {
       PROD_URL: `${items.PROD_URL}`,
     };
 
-    // 로컬 스토리지에있는 정보를 일단 가져온다.
+    // 로컬 스토리지에 정보
     let buyItems = JSON.parse(sessionStorage.getItem("buyItem"));
-
+    
     // 중복된 물건이 있을경우 물건ID 를 기준으로 검색후 삭제 그리고 다시추가
     for (let i = 0; i < parseInt(buyItems.length); i++)
       if (buyItems[i].PROD_UUID === changeBuyItem.PROD_UUID) {

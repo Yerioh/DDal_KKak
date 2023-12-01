@@ -3,9 +3,6 @@ import "../css/ReviewWrite.css";
 import Rating from '@mui/material/Rating';
 import axios from '../axios'
 
-
-
-
 const ReviewWrite = ({
   isOpen, // 이미지 상세 모달 state
   openModalHandler, // 이미지 상세 모달 함수
@@ -81,7 +78,6 @@ const ReviewWrite = ({
               style={{
                 width: "100%",
                 height: "18%",
-                // backgroundColor: "lightgoldenrodyellow",
                 display: "flex",
                 fontSize: "20px",
                 fontWeight: "bold"

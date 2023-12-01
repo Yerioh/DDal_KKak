@@ -22,7 +22,6 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
     },
     logo: {
       ",Logo Icon, Signature Logo": "아이콘 로고",
-      // ",Typography": "타이포그래피",
       ",Vector logo, Vector Art, Vector graphics, Adobe illustrator":
         "벡터 로고",
       ",Emblem Logo": "엠블렘 로고",
@@ -269,7 +268,7 @@ const Keyword = ({ setPositiveKeyword, positiveKeyword }) => {
         </div>
       )}
     </div>
-  ); // 여기에 닫는 소괄호 추가
+  );
 };
 
 export default Keyword;

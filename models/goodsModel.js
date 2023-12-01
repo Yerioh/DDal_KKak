@@ -63,7 +63,6 @@ const goodProduct = async (data) => {
         console.error('굿즈 상세페이지 select1 에러', err);
     }
 }
-// DATE_FORMAT(A.REVIEWED_AT, '%Y-%m-%d %H:%i) AS DATE
 /** 리뷰 데이터 라우터 함수 */
 const review = async (data) => {
     let selectSql = `SELECT A.MEMBER_ID,

@@ -101,7 +101,6 @@ const GoodsDetail = () => {
   let [price, setPrice] = useState(0);
   /** 의류 앞뒤 확인 위한 state */
   const [isFront, setIsFront] = useState("front");
-  const [sizeData, setSizeData] = useState(null);
 
   // 23-11-23 오전 09:40 박지훈 수정
   // 데이터베이스에서 PROD_ID로 상품 데이터 가져오기
@@ -181,11 +180,6 @@ const GoodsDetail = () => {
     isFront === "front" ? setIsFront("back") : setIsFront("front");
   };
 
-  //제품수량 감소 함수
-  // const prd_info_filter = prd_info.filter(item => item.PROD_ID === prd_id)
-  // const prd_color_filter = prd_color.filter(item => item.PROD_ID === prd_id)
-  // const prd_size_filter = prd_size.filter(item => item.PROD_ID === prd_id)
-
   //수량 마이너스 버튼 간단함수
   const subtract = () => {
     if (count > 1) {
@@ -207,8 +201,6 @@ const GoodsDetail = () => {
       setSum(price * count);
     }
   }, [count]);
-
-  // const dispatch = useDispatch()
 
   /** 장바구님 담기 알림 창 함수 */
   const basketAlert = () => {
@@ -259,7 +251,6 @@ const GoodsDetail = () => {
           cartItems.push(newCartItem);
         }
       }
-      // cartItems.push(newCartItem);
     } else {
       // 새 배열 생성
       cartItems = [newCartItem];
@@ -291,7 +282,6 @@ const GoodsDetail = () => {
           <h1>굿즈 로딩중</h1>
         ) : (
           <>
-            {/* 이미지 편집 공간 filerobot 들어올 공간 로고 이미지의 경우 선택후 편집까지 끝난 이미지 들어옴-구현미정 */}
             <div
               style={{
                 backgroundColor: "green",
@@ -325,7 +315,6 @@ const GoodsDetail = () => {
             <div
               style={{
                 backgroundColor: "white",
-                // width: "35%",
                 padding: "0px 20px",
               }}
             >

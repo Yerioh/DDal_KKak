@@ -17,10 +17,6 @@ const client = new S3Client({
   secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY
 })
 
-// DB 연결
-const db = require("../config/database");
-let conn = db.init();
-
 let flaskServer = 'http://ecea-34-139-230-216.ngrok.io'
 
 // Flask ngrok 서버 주소 가져오기

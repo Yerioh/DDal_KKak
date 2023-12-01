@@ -5,7 +5,6 @@ const Orderlist = () => {
   return (
     <div className='Orderlist_body'>
         <Basketitems/>
-        
     </div>
   )
 }

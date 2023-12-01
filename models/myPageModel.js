@@ -39,7 +39,6 @@ const updateInfo = async({userID, userPw, userEmail, userPhone, postNum, addr1, 
 }
 
 // 23-11-29 임휘훈 작성
-// DATE_FORMAT(GENERATED_AT, '%Y-%m-%d %H:%i:%S') AS DATE
 /** 주문내역 불러오기 함수 */
 const order = async (userId) => {
   let selectQuery = `SELECT DATE_FORMAT(ORDER_AT, '%Y-%m-%d %H:%i:%S') AS ORDER_AT, ORDER_DE_IMG, PROD_NAME, ORDER_PROD_INFO, ORDER_DE_CNT, ORDER_DETAIL_PRICE, PROD_ID

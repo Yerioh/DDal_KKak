@@ -11,7 +11,7 @@ const DeleteModal = ({
   const inputRef = useRef();
 
   // 23-11-14 오후 16:00 박지훈 작성
-  //회원탈퇴함수
+  /** 회원탈퇴 함수 */
   const Drop_user = (e) => {
     e.preventDefault();
     if (inputRef.current.value === "이해했습니다.") {

@@ -3,7 +3,6 @@
 const db = require("../config/database");
 let conn = db.init();
 
-
 /* 이미지 생성 페이지 대기열 불러오기 */
 const createList = async()=>{
     let selectSql = 'SELECT WAIT_ID AS CNT FROM TB_WAIT;'

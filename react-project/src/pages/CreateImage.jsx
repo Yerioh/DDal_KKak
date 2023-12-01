@@ -15,7 +15,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "../axios";
 
-
 // CreateImage 컴포넌트 정의
 const CreateImage = () => {
   // 23-11-15 오후 17:00 박지훈 작성
@@ -53,8 +52,6 @@ const CreateImage = () => {
   const [createList, setCreateList] = useState([]);
   // 이미지 생성 상태 state
   const [creating, setCreating] = useState(false);
-
-  const [isConnected, setIsConnected] = useState(socket.connected);
 
   // 이미지 대기 리스트 최신화
   useEffect(() => {
@@ -99,7 +96,6 @@ const CreateImage = () => {
         setCreateList(res.data.result)
       })
 
-
     // 소켓 연결
     socket.connect();
     // 이미지 생성 대기열 변경
@@ -136,8 +132,6 @@ const CreateImage = () => {
       }),
       3000
     );
-    // progress bar 관련 state초기화
-    // dispatch(ProgressReducerActions.resetProgress());
   };
 
   const handleImageCountChange = (count) => {
@@ -193,7 +187,6 @@ const CreateImage = () => {
           position: "absolute",
           bottom: "50.5%",
           zIndex: "10",
-          // marginLeft: "5%",
           border: "none",
           background: "none",
         }}
@@ -285,14 +278,12 @@ const CreateImage = () => {
               borderRadius={"5px"}
               bgColor="#FF7E00"
             />
-            {/* <Link to='/image-edit'> */}
             <button
               className={`creImg_gotobutton same-BTN btn ${btnHidden}`}
               onClick={createImg}
             >
               딸-깍!
             </button>
-            {/* </Link> */}
           </div>
         </div>
       </div>
@@ -316,14 +307,11 @@ const CreateImage = () => {
                       src={"./images/inputguide.png"}
                       alt=""
                       className="guidemodal-guideinfo-img"
-                      
-                    
                     />
                     <div className="guidemodal-guideinfo-info" >
                       <span>  만들고 싶은 이미지와 관련된 단어나 문장을{" "}</span>
                       <span className="bold">"핵심 키워드"에</span> <span>  입력해주세요.</span>
                     </div>
-                  
                 </div>
                 <div className="guidemodal-guideinfo">
                   <img
@@ -336,8 +324,6 @@ const CreateImage = () => {
                     <span>어떻게 써야할지 어렵나요?</span><br></br>
                     <span> 저희가 </span> <span className="bold">키워드</span> <span>를 준비했어요.</span>
                     <p>키워드를 클릭! 클릭!</p>
-                    
-                    
                   </div>
                 </div>
                 <div className="guidemodal-guideinfo"  >
@@ -345,7 +331,6 @@ const CreateImage = () => {
                     src={"./images/guidenegative.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
-                    
                   />
                   <div className="guidemodal-guideinfo-info" style={{marginTop:'2%'}} >
                     <span>
@@ -360,7 +345,6 @@ const CreateImage = () => {
                     src={"./images/DDALKKAK.png"}
                     alt=""
                     className="guidemodal-guideinfo-img"
-                    
                   />
                   <div
                     className="guidemodal-guideinfo-info"
@@ -373,7 +357,6 @@ const CreateImage = () => {
                 </div>
               </Slider>
             </div>
-
             <div className="guidemodal-footer">
               <button
                 className="btnmy same-BTN"

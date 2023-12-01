@@ -9,25 +9,19 @@ import DaumPostcode from "react-daum-postcode";
 import axios from "../axios";
 import {v4 as uuidv4} from 'uuid';
 
-
 const BuyScript = () => {
   const navigate = useNavigate();
   const [buyItem, setBuyItem] = useState([]);
   const USER_ID = useSelector((state)=>state.session.id)
   const [totalNum,setTotalNum] = useState();
   const [count, setCount]=useState();
-  const [arrSession,setArrSession]=useState([]);
   const [show, setShow] = useState(false); // true : 모달보임 / false : 모달 안보임
   const handleClose = () => {
     setShow(false);
     recipAdressDetailRef.current.focus();
   };
   const handleShow = () => setShow(true);
-  const [text, setText] = useState("");
-  const [pwText, setPwText] = useState("");
-  const [pw2Text, setPw2Text] = useState("");
 
-  const userId = useSelector((state) => state.session.id);
   const [address, setAddress] = useState(""); // 주소
   const [addressDetail, setAddressDetail] = useState(""); // 상세주소
 
@@ -82,7 +76,6 @@ const BuyScript = () => {
 
   }, []);
 
-
   // 주문자 이름
   const nameRef = useRef();
 
@@ -109,9 +102,6 @@ const BuyScript = () => {
   // 수령인 배송메모
   const reciDeliPsRef = useRef();
 
- 
-
-
   useEffect(()=>{
     let num = 0;
     let buyItems = JSON.parse(sessionStorage.getItem('buyItem'))
@@ -122,25 +112,13 @@ const BuyScript = () => {
     setCount(num)
     },[])
 
-
-
-  
   let buyData = [];
   /**DB로 정보를 보내기 위해 데이터 집합소 */
   const reftest = () => {
     let sessionArr = []
     const buyItems =JSON.parse(sessionStorage.getItem('buyItem'))
     buyItems.forEach((item)=>{sessionArr.push(item)})
-    // 주문자 이름
-    let name = nameRef.current.value;
-    // 주문자 연락처
-    let phoneNumber = phoneNumRef.current.value;
-    // 주문자 이메일
-    let email = emailRef.current.value;
-    // 수령자 이름
-    let recip = recipRef.current.value;
-    // 수령자 연락처
-    let recipNum = recipNumRef.current.value;
+
     // 수령자 주소
     let recipAdress = recipAdressRef.current.value;
     // 수령자 상세주소
@@ -165,11 +143,6 @@ const BuyScript = () => {
 
     axios.post('/payment/orderGoods', {buyData})
   };
-
- 
-    
-  
-
 
   /** 결제 창 호출 함수 */
   const onClickPayment = () => {
@@ -463,7 +436,6 @@ const BuyScript = () => {
       >
         <Button
           onClick={portoneCallback}
-          // onClick={onClickPayment}
           variant="outline-dark"
           className="buy-submit-btn same-BTN same-BTN:hover"
         >

@@ -67,7 +67,6 @@ const ImgModal = ({
               <div className="image-info">
               <div className="user-Prompt">
                   <h3>{ImgArray[index].IMG_NAME}</h3>
-                  {/* <div className="user-Prompt"> */}
 
                   <div className="title-prompt-Pos">
                     <h4>핵심 키워드</h4>

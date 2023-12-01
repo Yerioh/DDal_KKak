@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/GoodsDetail.css";
 import Rating from "@mui/material/Rating";
-import axios from "../axios";
+
 const GoodsReview = ({reviewData}) => {
   const [value, setValue] = useState(4.5)
   // 별점 값 위한 useState 추가 23-11-29
@@ -33,16 +33,6 @@ const GoodsReview = ({reviewData}) => {
         <p>{reviewData?.REVIEW_CONTENT}</p>
         {/* 구매한 상품의 이미지 */}
         <div className="GoodsReview-goodsinfoImg">
-          {/* <img
-            src={reviewData.REVIEW_IMG} 
-            style={{ width: "10%", objectFit: "cover", marginRight: "10px" }}
-            alt=""
-          /> */}
-          {/* 구매한 상품명, 사이즈 */}
-          {/* <div className="GoodsReview-goodsinfo">
-            티셔츠 색상
-            <div className="GoodsReview-goodsSize">XL</div>
-          </div> */}
         </div>
       </div>
       <div className="GoodsReview-img">

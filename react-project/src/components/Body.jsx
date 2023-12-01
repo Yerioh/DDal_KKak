@@ -16,14 +16,9 @@ import Main from "../pages/Main";
 import ImageAll from "../pages/ImageAll";
 import BuyScript from "../pages/BuyScript";
 import Complete from "../pages/Complete";
-import { useEffect } from "react";
 
 const Body = () => {
   // // 23-11-30 16:35 임휘훈 작성 Private Route
-  const dispatch = useDispatch();
-  const isLogin = useSelector(
-    (state) => state.session.isLogin && localStorage.getItem("isLogin")
-  ); // redux에 저장된 로그인 유무
 
   /** 프라이빗 라우터 함수 */
   const PrivateRoute = ({ element: Element }) => {

@@ -71,7 +71,6 @@ const Mypage = () => {
   /**회원 탈퇴 모달창*/
   const delete_Modal = () => {
     // setdelete_user의 상태를 변경하는 메소드를 구현
-    // !false -> !true -> !false
     setdelete_user(!delete_user);
   };
 
@@ -97,14 +96,12 @@ const Mypage = () => {
             <img onClick={delete_Modal} className="delete-icon-img" src={delete_user_icon} alt="delete_user_icon" />
           </div>
         </div>
-        
       </div>
       {pageState === "user_info" && <UserInfo userName ={name} loginType={loginType} id={id} email={email} phone={phone} postNumber={postNum} address={address} addressDetail={addressDetail} />}
       {pageState === "Save_Image" && <SaveImage />}
       {pageState === "BoughtScript" && <BoughtScript id={id}/>}
       <DeleteModal delete_user={delete_user} delete_Modal={delete_Modal}/>
-
-          </div>
+    </div>
   );
 };
 

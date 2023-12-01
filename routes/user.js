@@ -7,7 +7,6 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const crypto = require('crypto')
-const hash = crypto.createHash('sha1')
 
 // 회원가입 및 로그인 로직 모듈
 const userModel = require('../models/userModel')
@@ -109,7 +108,6 @@ router.post("/updateInfo", async(req, res) => {
 })
 
 // 23-11-14 오전 10:00 박지훈 작성
-
 // 페이지 로딩 시 Session 데이터 요청
 router.post('/getUserInfo', (req,res)=>{
   if (req.session.isLogin){

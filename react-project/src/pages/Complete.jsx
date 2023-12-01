@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/esm/Button';
 
 const Complete = () => {
 
-     // 오늘 날짜 추가를 위한 변수선언들
+  // 오늘 날짜 추가를 위한 변수선언들
   let today = new Date();
   let year = today.getFullYear(); // 년도
   let month = today.getMonth() + 1;  // 월
@@ -39,7 +39,6 @@ useEffect(() => {
 
     return (
         <div className='complete' style={{ margin: "0% 20%" ,minWidth:"800px"}}>
-
             {/* 주문완료 페이지 가장 위 텍스트 */}
             <div className='top-text'>
                 <div className='title'>

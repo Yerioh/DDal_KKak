@@ -77,7 +77,6 @@ const SaveImage = () => {
   useEffect(() => {
     axios.post("/imgCreate/myimg", { id: userId }).then((res) => {
       setImgArray(res.data.imgArray);
-      // setImgArray([{ IMG_URL : '114662496405123443827/edit_img/da6ff7c1-ae6d-d43a-86ec-9d2390cc8f11.png'}])
     });
     // 임휘훈 작성 끝
     const currentObserver = observer.current;
@@ -210,7 +209,6 @@ const SaveImage = () => {
       </div>
 
       <div className="S-Ibox">
-        {/* imgArray */}
         {imgArray.map((image, index) => (
           // <div className="">
           <div className="SImage-Card me-4" key={index}>

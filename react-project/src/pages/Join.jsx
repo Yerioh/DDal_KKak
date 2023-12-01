@@ -87,7 +87,6 @@ const Join = () => {
   // 23-11-23 임휘훈 작성 : 아이디 비밀번호 유효성 검사 (정규식)
   /**중복체크 함수*/
   const checkId = () => {
-
     // 데이터 전송
     if (idRef.current.value !== "") {
       if(idRef.current.value.length >= 5 && 
@@ -197,9 +196,7 @@ const Join = () => {
     setIsOpenPost(false);
     handleClose();
     postNum.current.value = data.zonecode; // 우편번호
-    // postNum.current.disabled = true; //우편번호 입력창 비활성화
     userAdd.current.value = fullAddr;
-    // userAdd.current.disabled = true;
   };
 
   return (
@@ -232,7 +229,6 @@ const Join = () => {
                 </Col>
               </Row>
             </Form.Group>
-
             <div className="d-grid gap mb-3">
               <span ref={spanRef}> {text}</span>
             </div>
@@ -362,7 +358,6 @@ const Join = () => {
             <div className="d-grid gap mb-5">
               <Button
                 className="Button-search same-BTN"
-           
                 type="submit"
                 onClick={join_btn}
               >

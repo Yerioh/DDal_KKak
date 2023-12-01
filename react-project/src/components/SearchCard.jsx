@@ -5,14 +5,15 @@ import ShareImgModal from "./ShareImgModal";
 import "../css/ImageAll.css";
 import { useSelector } from "react-redux";
 import axios from "../axios";
-const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
+
+const SearchCard = ({ data, imgState, setImgState }) => {
   // 사용자 아이디
   const useId = useSelector((state) => state.session.id);
   const isLogin = useSelector((state) => state.session.isLogin);
   const [likeBtn, setLikeBtn] = useState(false); //좋아요 활성화
   const [shareModal, setShareModal] = useState(false); // 이미지 상세 모달
-
   const [likeCnt, setLikeCnt] = useState(data.CNT);
+
   // 좋아요 색깔 변환 함수
   const handleLike = () => {
     if (isLogin) {
@@ -41,7 +42,6 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
       });
   }, [data]);
 
-  
   // 이미지 상세 모달 제어
   const handleShareImg = () => {
     setShareModal((prevshareModal) => !prevshareModal);
@@ -54,10 +54,6 @@ const SearchCard = ({ data, index, imgState, setImgState, sortImg }) => {
         onClick={handleShareImg}
       />
       <Card.Body>
-        {/* 
-          <span>{data.DATE}</span>
-          <span>{data.MEMBER_NAME} 님</span>
-        </div> */}
         <div className="Card-date-title">
           <Card.Title>{data.IMG_NAME}</Card.Title>
           <span>{data.MEMBER_NAME} 님</span>

@@ -16,9 +16,6 @@ const Basket = () => {
   // 현재 로그인된 아이디에 해당하는 세션만 걸러내기
   const UserIdFilter = cartItem.filter((item) => item.USER_ID === USER_ID);
 
-  
- 
-
 /** 장바구니 모든 아이템 삭제 */
 const allDel = () => {
   if (window.confirm("정말 삭제합니까?")) {
@@ -29,7 +26,6 @@ const allDel = () => {
     alert("취소합니다.");
   } 
 }
-
 
 /** 체크선택된 아이템들 지우기 */
   const delChoice = () => {
@@ -92,7 +88,7 @@ const allDel = () => {
           <p style={{ color: "#bebebe" }}>주문완료</p>
         </div>
       </div>
-      {/* 장바구니의 전체선택님 하나하나 선택되는 기능 구현 예정 */}
+
       <div className="basket-all-check">
         <div className="inner-box">
         <button style={{ border: "none", backgroundColor: "whitesmoke" }} onClick={()=>allDel()}>
@@ -137,7 +133,6 @@ const allDel = () => {
           );
         })}
       </div>
-      {/* 모든 상품의 가격 총 금액 기능 - 구현예정 (아직 구현 안됨) */}
       <div
         className="basket-goods-summary"
         style={{ padding: "15px 0px", fontSize: "20px" }}
@@ -169,8 +164,6 @@ const allDel = () => {
           </div>
         </div>
       </div>
-
-      {/* 주문하기 버튼을 누를 시 주문서 작성 페이지로 체크된 제품만 정보가 넘어감*/}
       <div
         style={{
           width: "100%",

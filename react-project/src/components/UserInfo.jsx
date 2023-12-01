@@ -77,10 +77,10 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
       let addr2 = addDetailRef.current.value // 입력한 상세주소 (DB로 감)
       let changePw = pwRef.current.value // 변경할 비밀번호 (DB로 감)
       let checkPw = pw2Ref.current.value // 변경할 비밀번호 확인
-
       let userPw = res.data.user_pw // DB에서 온 비밀번호 (암호화 됨)
       let currentPw = C_pwRef.current.value // 현재 비밀번호 입력값 (SHA2로 256비트 암호화 해야함)
       currentPw = SHA256(currentPw).toString(); // 현재 비밀번호 입력값 암호화
+
       if(userPw === currentPw && changePw === checkPw){ // 현재 비밀번호 정확 & 변경할 비밀번호, 확인 일치하는지
         axios.post("user/updateInfo", {
           userID : id,
@@ -101,11 +101,7 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
       else{
         alert('비밀번호가 올바르지 않습니다.')
       }
-
     })
-      
-
-    
   };
 
   // 23-11-14 14:20 임휘훈 작성
@@ -210,7 +206,6 @@ const UserInfo = ({ userName, loginType, id, email, phone, postNumber, address, 
                   <Modal.Footer>
                     <Button
                       className="Button same-BTN"
-               
                       onClick={handleClose}
                     >
                       닫기

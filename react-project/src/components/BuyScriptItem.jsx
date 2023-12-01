@@ -17,7 +17,6 @@ const BuyScriptItem = ({item}) => {
     <div className='vtline' ></div>
     <div className='second-box'>
         <div style={{ width: "40%" }}>
-            {/* <img className='img-box' src="./images/GM4_누끼.png" alt="" /> */}
             <Card.Img variant="top" src={item?.PROD_URL} style={{width:"auto",height:"auto",maxWidth:"200px",maxHeight:"200px"}}/>
         </div>
         <div className='txt-info' style={{ width: "60%" }}>
